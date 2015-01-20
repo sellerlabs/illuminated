@@ -1,0 +1,19 @@
+{
+    "name": "chromabits/laravel-helpers",
+    "description": "Some Laravel 5 helpers",
+    "require": {
+        "laravel/framework": "~5.0"
+    },
+    "authors": [
+        {
+            "name": "Eduardo Trujillo",
+            "email": "ed@chromabits.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Chromabits\\Illuminated\\": "src/Chromabits/Illuminated"
+        }
+    },
+    "minimum-stability": "dev"
+}
