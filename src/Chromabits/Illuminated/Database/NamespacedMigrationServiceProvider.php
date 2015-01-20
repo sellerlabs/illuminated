@@ -26,7 +26,7 @@ class NamespacedMigrationServiceProvider extends MigrationServiceProvider
         {
             $repository = $app['migration.repository'];
 
-            $namespace = $app['config']->get('database.migrations.namespace', '');
+            $namespace = $app['config']->get('database.migrator.namespace', '');
 
             return new NamespacedMigrator($repository, $app['db'], $app['files'], $namespace);
         });
