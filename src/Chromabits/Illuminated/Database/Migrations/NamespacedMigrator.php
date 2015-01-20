@@ -39,7 +39,7 @@ class NamespacedMigrator extends Migrator
     ) {
         parent::__construct($repository, $resolver, $files);
 
-        $this->$namespace = $namespace;
+        $this->namespace = $namespace;
     }
 
     /**
