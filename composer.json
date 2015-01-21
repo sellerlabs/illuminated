@@ -2,7 +2,9 @@
     "name": "chromabits/laravel-helpers",
     "description": "Some Laravel 5 helpers",
     "require": {
-        "laravel/framework": "~5.0"
+        "laravel/framework": "~5.0",
+        "tijsverkoyen/css-to-inline-styles": "~1.5",
+        "chromabits/nucleus": "dev-master"
     },
     "authors": [
         {
@@ -15,5 +17,13 @@
             "Chromabits\\Illuminated\\": "src/Chromabits/Illuminated"
         }
     },
-    "minimum-stability": "dev"
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Chromabits\\Illuminated\\": "tests/Chromabits/Illuminated"
+        }
+    },
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpunit/phpunit": "~4.6@dev"
+    }
 }
