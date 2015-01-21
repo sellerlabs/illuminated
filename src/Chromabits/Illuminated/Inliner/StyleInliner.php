@@ -62,6 +62,8 @@ class StyleInliner implements StyleInlinerContract
         }
 
         $this->internalInliner = new CssToInlineStyles();
+
+        $this->configure();
     }
 
     /**
@@ -143,12 +145,12 @@ class StyleInliner implements StyleInlinerContract
      */
     protected function configure()
     {
-        $this->internalInliner->setCleanup($this->options['inliner.options.cleanup']);
+        $this->internalInliner->setCleanup($this->options['cleanup']);
 
-        $this->internalInliner->setUseInlineStylesBlock($this->options['inliner.options.use_inline_styles_block']);
+        $this->internalInliner->setUseInlineStylesBlock($this->options['use_inline_styles_block']);
 
-        $this->internalInliner->setStripOriginalStyleTags($this->options['inliner.options.strip_original_tags']);
+        $this->internalInliner->setStripOriginalStyleTags($this->options['strip_original_tags']);
 
-        $this->internalInliner->setExcludeMediaQueries($this->options['inliner.options.exclude_media_queries']);
+        $this->internalInliner->setExcludeMediaQueries($this->options['exclude_media_queries']);
     }
 }
