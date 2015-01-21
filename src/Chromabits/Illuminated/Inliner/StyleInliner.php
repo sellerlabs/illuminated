@@ -2,6 +2,7 @@
 
 namespace Chromabits\Illuminated\Inliner;
 
+use Chromabits\Illuminated\Contracts\Inliner\StyleInliner as StyleInlinerContract;
 use Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException;
 use Illuminate\Contracts\View\View;
 use Symfony\Component\Finder\Finder;
@@ -17,7 +18,7 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
  *
  * @package Chromabits\Illuminated\Inliner
  */
-class StyleInliner
+class StyleInliner implements StyleInlinerContract
 {
     /**
      * Internal inliner

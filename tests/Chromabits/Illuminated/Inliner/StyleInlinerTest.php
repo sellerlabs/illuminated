@@ -4,6 +4,7 @@ namespace Tests\Chromabits\Illuminated\Inliner;
 
 use Chromabits\Illuminated\Inliner\StyleInliner;
 use Chromabits\Nucleus\Testing\TestCase;
+use Mockery;
 
 /**
  * Class StyleInlinerTest
@@ -40,6 +41,19 @@ class StyleInlinerTest extends TestCase
         $inliner = new StyleInliner([__DIR__ . '/../../../resources/']);
 
         $output = $inliner->inline('<p class="my-style-one">Hi</p>', 'testing');
+
+        $this->assertTrue(false !== strpos($output, "style=\"font-size: 43px;\""));
+    }
+
+    public function testInlineWithView()
+    {
+        $mock = Mockery::mock('Illuminate\Contracts\View\View');
+
+        $mock->shouldReceive('render')->andReturn('<p class="my-style-one">Hi</p>');
+
+        $inliner = new StyleInliner([__DIR__ . '/../../../resources/']);
+
+        $output = $inliner->inline($mock, 'testing');
 
         $this->assertTrue(false !== strpos($output, "style=\"font-size: 43px;\""));
     }
