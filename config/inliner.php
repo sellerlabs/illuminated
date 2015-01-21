@@ -8,7 +8,9 @@ return [
         /**
          * Where to look for stylesheet files when running the inliner
          */
-        'stylesheets' => base_path('resources/css/mail')
+        'stylesheets' => [
+            base_path('resources/css/mail')
+        ]
     ],
 
     /**
