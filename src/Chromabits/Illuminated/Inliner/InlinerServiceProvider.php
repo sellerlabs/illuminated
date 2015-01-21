@@ -32,4 +32,16 @@ class InlinerServiceProvider extends ServiceProvider
             );
         });
     }
+
+    /**
+     * Return provide services in an array
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [
+            'Chromabits\Illuminated\Contracts\Inliner\StyleInliner'
+        ];
+    }
 }

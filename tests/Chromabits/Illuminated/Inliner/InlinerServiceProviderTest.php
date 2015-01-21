@@ -56,4 +56,11 @@ class InlinerServiceProviderTest extends TestCase
             $this->app->make('Chromabits\Illuminated\Contracts\Inliner\StyleInliner')
             );
     }
+
+    public function testProvides()
+    {
+        $provider = new InlinerServiceProvider($this->app);
+
+        $this->assertInternalType('array', $provider->provides());
+    }
 }
