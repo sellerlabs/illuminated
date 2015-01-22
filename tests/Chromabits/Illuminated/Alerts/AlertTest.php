@@ -1,7 +1,8 @@
 <?php
 
-namespace Chromabits\Illuminated\Alerts;
+namespace Tests\Chromabits\Illuminated\Alerts;
 
+use Chromabits\Illuminated\Alerts\Alert;
 use Chromabits\Nucleus\Testing\TestCase;
 use Chromabits\Nucleus\Testing\Traits\ConstructorTesterTrait;
 

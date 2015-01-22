@@ -1,12 +1,10 @@
 <?php
 
-namespace Chromabits\Illuminated\Alerts;
+namespace Tests\Chromabits\Illuminated\Alerts;
 
-use Chromabits\Nucleus\Testing\TestCase;
+use Chromabits\Illuminated\Alerts\AlertManager;
 use Chromabits\Nucleus\Testing\Traits\ConstructorTesterTrait;
-use Tests\Chromabits\Illuminated\Alerts\MocksViewsTrait;
 use Tests\Chromabits\Support\LaravelTestCase;
-use Illuminate\View\View;
 
 /**
  * Class AlertManagerTest
@@ -20,7 +18,7 @@ class AlertManagerTest extends LaravelTestCase
 
     protected $constructorTypes = [
         'Chromabits\Illuminated\Alerts\AlertManager',
-        'Chromabits\Illuminated\Contracts\Alert\AlertManager'
+        'Chromabits\Illuminated\Contracts\Alerts\AlertManager'
     ];
 
     protected function make()

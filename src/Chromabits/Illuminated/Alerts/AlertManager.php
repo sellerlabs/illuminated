@@ -7,7 +7,12 @@ use Illuminate\Session\Store;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
-class AlertManager implements \Chromabits\Illuminated\Contracts\Alert\AlertManager
+/**
+ * Class AlertManager
+ *
+ * @package Chromabits\Illuminated\Alerts
+ */
+class AlertManager implements \Chromabits\Illuminated\Contracts\Alerts\AlertManager
 {
     /**
      * Session
@@ -59,7 +64,7 @@ class AlertManager implements \Chromabits\Illuminated\Contracts\Alert\AlertManag
         $alert->setContent($content);
         $alert->setType($type);
         $alert->setTitle($title);
-        $alert->setType($view);
+        $alert->setView($view);
 
         $collection = $this->prepareAndGet();
 
@@ -172,10 +177,12 @@ class AlertManager implements \Chromabits\Illuminated\Contracts\Alert\AlertManag
      */
     public function allAndRender()
     {
-        $all = $this->popAll();
+        $all = $this->all();
 
-        return array_map(function ($alert) {
-            return $alert->render($this->view);
-        }, $all);
+        return array_reduce($all, function ($carry, $alert) {
+            $carry .= $alert->render($this->view);
+
+            return $carry;
+        });
     }
 }

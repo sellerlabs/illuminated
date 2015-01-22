@@ -1,6 +1,6 @@
 <?php
 
-namespace Chromabits\Illuminated\Contracts\Alert;
+namespace Chromabits\Illuminated\Contracts\Alerts;
 
 use Chromabits\Illuminated\Alerts\Alert;
 use Illuminate\Contracts\Validation\Validator;
@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 /**
  * Interface AlertManager
  *
- * @package Chromabits\Illuminated\Contracts\Alert
+ * @package Chromabits\Illuminated\Contracts\Alerts
  */
 interface AlertManager
 {

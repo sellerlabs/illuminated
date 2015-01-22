@@ -27,7 +27,7 @@ class AlertServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('Chromabits\Illuminated\Contracts\Alert\AlertManager', function ($app) {
+        $this->app->singleton('Chromabits\Illuminated\Contracts\Alerts\AlertManager', function ($app) {
             return new AlertManager(
                 $app['session.store'],
                 view(config('alerts.view', 'alerts.alert'))
@@ -42,20 +42,14 @@ class AlertServiceProvider extends ServiceProvider
     {
         $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
 
-        $blade->extend(function ($view) {
-            $alerts = app('Chromabits\Illuminated\Contracts\Alert\AlertManager')->allAndRender();
+        $blade->extend(function ($view, $compiler) {
+            $pattern = $compiler->createPlainMatcher('allalerts');
 
-            // If there are no alerts, then we don't do anything
-            if (count($alerts) < 1) {
-                return;
-            }
-
-            // Combine all the array entries into a single massive string
-            $content = array_reduce($alerts, function ($carry, $alert) {
-                return $carry . "\n" . $alert;
-            });
-
-            return preg_replace('/(\s*)@allalerts(\s*)/', '$1' . $content . '$2', $view);
+            return preg_replace(
+                $pattern,
+                '$1<?php echo app(\'Chromabits\Illuminated\Contracts\Alerts\AlertManager\')->allAndRender(); ?>$2',
+                $view
+            );
         });
     }
 
@@ -67,7 +61,7 @@ class AlertServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'Chromabits\Illuminated\Contracts\Alert\AlertManager'
+            'Chromabits\Illuminated\Contracts\Alerts\AlertManager'
         ];
     }
 }

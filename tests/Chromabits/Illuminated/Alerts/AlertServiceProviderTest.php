@@ -18,7 +18,7 @@ class AlertServiceProviderTest extends LaravelTestCase
 
         $provider->register();
 
-        $this->assertTrue($this->app->bound('Chromabits\Illuminated\Contracts\Alert\AlertManager'));
+        $this->assertTrue($this->app->bound('Chromabits\Illuminated\Contracts\Alerts\AlertManager'));
     }
 
     public function testProvides()

@@ -181,7 +181,8 @@ class Alert implements Arrayable
         return [
             'title' => $this->title,
             'content' => $this->renderContent(),
-            'type' => $this->type
+            'type' => $this->type,
+            'internal_view' => $this->view
         ];
     }
 
@@ -195,7 +196,7 @@ class Alert implements Arrayable
      */
     protected function renderContent()
     {
-        if (!is_null($this->view)) {
+        if (!is_null($this->view) || $this->view != '') {
             return view(
                 $this->view,
                 [
