@@ -4,7 +4,9 @@ namespace Chromabits\Illuminated\Inliner;
 
 use Chromabits\Illuminated\Contracts\Inliner\StyleInliner as StyleInlinerContract;
 use Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException;
+use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\View\View;
+use Illuminate\Mail\Message;
 use Symfony\Component\Finder\Finder;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
@@ -152,5 +154,24 @@ class StyleInliner implements StyleInlinerContract
         $this->internalInliner->setStripOriginalStyleTags($this->options['strip_original_tags']);
 
         $this->internalInliner->setExcludeMediaQueries($this->options['exclude_media_queries']);
+    }
+
+    /**
+     * Inline the content and then send it over the mailer
+     *
+     * @param \Illuminate\Contracts\Mail\Mailer $mailer
+     * @param $content
+     * @param $name
+     * @param callable $callback
+     */
+    public function inlineAndSend(Mailer $mailer, $content, $name, callable $callback)
+    {
+        $content = $this->inline($content, $name);
+
+        $mailer->send(['raw' => ''], [], function (Message $message) use ($content, $callback) {
+            $message->getSwiftMessage()->setBody($content, 'text/html');
+
+            $callback($message);
+        });
     }
 }

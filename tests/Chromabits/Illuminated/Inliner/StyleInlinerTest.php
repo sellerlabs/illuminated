@@ -57,4 +57,25 @@ class StyleInlinerTest extends TestCase
 
         $this->assertTrue(false !== strpos($output, "style=\"font-size: 43px;\""));
     }
+
+    public function testInlineAndSend()
+    {
+        $mock = Mockery::mock('Illuminate\Contracts\View\View');
+        $mock->shouldReceive('render')->andReturn('<p class="my-style-one">Hi</p>');
+
+        $mailer = Mockery::mock('Illuminate\Contracts\Mail\Mailer');
+        $mailer->shouldReceive('send');
+
+        $inliner = new StyleInliner([__DIR__ . '/../../../resources/']);
+
+        $inliner->inlineAndSend($mailer, $mock, 'testing', function ($message) {
+
+        });
+
+        $mailer->shouldHaveReceived('send', [
+            Mockery::type('array'),
+            [],
+            Mockery::type('callable')
+        ]);
+    }
 }

@@ -84,15 +84,16 @@ key to point to a directory where there is a `ink.css` file.
 ```php
 public function getShowEmail(StyleInliner $inliner, Mailer $mailer)
     {
-        $body = $inliner->inline(view('mail.signup.verification'), 'ink');
+        $body = $inliner->inlineAndSend(
+            $mailer,
+            view('mail.signup.verification'),
+            'ink',
+            function (Message $message) {
+                $message->to('ed+contact@chromabits.com', 'Ed')->subject('Welcome!');
 
-        $mailer->send(['raw' =>  ''], [], function (Message $message) use ($body) {
-            $message->to('ed+contact@chromabits.com', 'Ed')->subject('Welcome!');
-
-            $message->from('no-reply@myapp.com', 'MyApp Account');
-
-            $message->getSwiftMessage()->setBody($body, 'text/html');
-        });
+                $message->from('no-reply@myapp.com', 'MyApp Account');
+            }
+        );
         
         // Other stuff
     }
