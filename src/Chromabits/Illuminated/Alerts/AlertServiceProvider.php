@@ -43,6 +43,12 @@ class AlertServiceProvider extends ServiceProvider
         $this->app['blade']->extend(function ($view) {
             $alerts = app('Chromabits\Illuminated\Contracts\Alert\AlertManager')->allAndRender();
 
+            // If there are no alerts, then we don't do anything
+            if (count($alerts) < 1) {
+                return;
+            }
+
+            // Combine all the array entries into a single massive string
             $content = array_reduce($alerts, function ($carry, $alert) {
                 return $carry . "\n" . $alert;
             });
