@@ -18,7 +18,7 @@ inliner service is capable of inlining a specified CSS file into a view.
 
 ## Setup
 
-Each service in this package should be loadable as using the corresponding
+Each service in this package should be loadable by using the corresponding
 service provider. This is easily done by adding the provider to your app.php:
 
 ```php
@@ -72,3 +72,31 @@ The exception to the method provided above is the **NamespacedMigrator** which n
      ];
  }
  ```
+
+## Usage
+
+### Inliner Service
+
+Here is an example of the inliner service in a controller method. In
+this example with have set the `inliner.paths.stylesheets` configuration
+key to point to a directory where there is a `ink.css` file.
+
+```php
+public function getShowEmail(StyleInliner $inliner, Mailer $mailer)
+    {
+        $body = $inliner->inline(view('mail.signup.verification'), 'ink');
+
+        $mailer->send(['raw' =>  ''], [], function (Message $message) use ($body) {
+            $message->to('ed+contact@chromabits.com', 'Ed')->subject('Welcome!');
+
+            $message->from('no-reply@myapp.com', 'MyApp Account');
+
+            $message->getSwiftMessage()->setBody($body, 'text/html');
+        });
+        
+        // Other stuff
+    }
+```
+
+For more questions about the configuration file, take a look at `config/inliner.php`
+for an example.
