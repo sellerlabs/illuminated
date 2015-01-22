@@ -40,7 +40,9 @@ class AlertServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app['blade.compiler']->extend(function ($view) {
+        $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
+
+        $blade->extend(function ($view) {
             $alerts = app('Chromabits\Illuminated\Contracts\Alert\AlertManager')->allAndRender();
 
             // If there are no alerts, then we don't do anything
