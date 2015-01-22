@@ -18,7 +18,7 @@ class AlertServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $defer = true;
+    protected $defer = false;
 
     /**
      * Register the service provider.
@@ -35,6 +35,27 @@ class AlertServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * Register blade extension
+     */
+    public function boot()
+    {
+        $this->app['blade']->extend(function ($view) {
+            $alerts = app('Chromabits\Illuminated\Contracts\Alert\AlertManager')->allAndRender();
+
+            $content = array_reduce($alerts, function ($carry, $alert) {
+                return $carry . "\n" . $alert;
+            });
+
+            return preg_replace('/(\s*)@allalerts(\s*)/', '$1' . $content . '$2', $view);
+        });
+    }
+
+    /**
+     * Returns an array with the name of the services provided
+     *
+     * @return array
+     */
     public function provides()
     {
         return [
