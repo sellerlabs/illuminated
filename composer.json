@@ -19,7 +19,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Chromabits\\Illuminated\\": "tests/Chromabits/Illuminated"
+            "Tests\\Chromabits\\Illuminated\\": "tests/Chromabits/Illuminated",
+            "Tests\\Chromabits\\Support\\": "tests/Chromabits/Support"
         }
     },
     "minimum-stability": "dev",
