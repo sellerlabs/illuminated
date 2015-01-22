@@ -2,6 +2,8 @@
 
 namespace Chromabits\Illuminated\Contracts\Inliner;
 
+use Illuminate\Contracts\Mail\Mailer;
+
 /**
  * Interface StyleInliner
  *
@@ -29,4 +31,14 @@ interface StyleInliner
      * @throws \TijsVerkoyen\CssToInlineStyles\Exception
      */
     public function inline($content, $stylesheet, $extension = '.css', $xhtml = false);
+
+    /**
+     * Inline the content and then send it over the mailer
+     *
+     * @param \Illuminate\Contracts\Mail\Mailer $mailer
+     * @param $content
+     * @param $name
+     * @param callable $callback
+     */
+    public function inlineAndSend(Mailer $mailer, $content, $name, callable $callback);
 }
