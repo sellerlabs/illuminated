@@ -8,6 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 /**
  * Interface AlertManager
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Contracts\Alerts
  */
 interface AlertManager

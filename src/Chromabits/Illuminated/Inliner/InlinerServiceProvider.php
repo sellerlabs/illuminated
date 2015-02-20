@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Class InlinerServiceProvider
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Inliner
  */
 class InlinerServiceProvider extends ServiceProvider

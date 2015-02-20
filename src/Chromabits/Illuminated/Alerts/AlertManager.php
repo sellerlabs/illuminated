@@ -6,13 +6,17 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Session\Store;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
+use Chromabits\Illuminated\Contracts\Alerts\AlertManager as ManagerContract;
 
 /**
  * Class AlertManager
  *
+ * A service for handling the display of alerts through an application
+ *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Alerts
  */
-class AlertManager implements \Chromabits\Illuminated\Contracts\Alerts\AlertManager
+class AlertManager implements ManagerContract
 {
     /**
      * Session
@@ -57,8 +61,12 @@ class AlertManager implements \Chromabits\Illuminated\Contracts\Alerts\AlertMana
      * @param string|null $title
      * @param string|null $view
      */
-    public function push($content, $type = Alert::TYPE_NEUTRAL, $title = null, $view = null)
-    {
+    public function push(
+        $content,
+        $type = Alert::TYPE_NEUTRAL,
+        $title = null,
+        $view = null
+    ) {
         $alert = new Alert();
 
         $alert->setContent($content);
@@ -97,9 +105,12 @@ class AlertManager implements \Chromabits\Illuminated\Contracts\Alerts\AlertMana
      * @param null $title
      * @param null $view
      */
-    public function pushValidation(Validator $validator, $title = null, $view = null)
-    {
-        $messages = $validator->getMessageBag();
+    public function pushValidation(
+        Validator $validator,
+        $title = null,
+        $view = null
+    ) {
+        $messages = $validator->getMessageBag()->all();
 
         $this->push($messages, Alert::TYPE_VALIDATION, $title, $view);
     }

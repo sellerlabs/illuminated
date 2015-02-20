@@ -10,6 +10,7 @@ use Illuminate\Console\Command;
  * Base migration command with support for configurable
  * migration repository path
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Console\Migrations
  */
 abstract class BaseCommand extends Command

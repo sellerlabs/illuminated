@@ -7,6 +7,7 @@ use Illuminate\Database\Migrations\Migrator;
 /**
  * Class StatusCommand
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Illuminate\Database\Console\Migrations
  */
 class StatusCommand extends BaseCommand
@@ -33,11 +34,9 @@ class StatusCommand extends BaseCommand
     protected $migrator;
 
     /**
-     * Create a new migration rollback command instance.
+     * Construct an instance of a StatusCommand
      *
      * @param  \Illuminate\Database\Migrations\Migrator $migrator
-     *
-     * @return \Illuminate\Database\Console\Migrations\StatusCommand
      */
     public function __construct(Migrator $migrator)
     {
@@ -62,7 +61,12 @@ class StatusCommand extends BaseCommand
         $migrations = [];
 
         foreach ($this->getAllMigrationFiles() as $migration) {
-            $migrations[] = in_array($migration, $ran) ? ['<info>✔</info>', $migration] : ['<fg=red>✗</fg=red>', $migration];
+            if (in_array($migration, $ran)) {
+                $migrations[] = ['<info>✔</info>', $migration];
+            } else {
+                $migrations[] = ['<fg=red>✗</fg=red>', $migration];
+            }
+
         }
 
         if (count($migrations) > 0) {

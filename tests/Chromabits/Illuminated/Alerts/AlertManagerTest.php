@@ -9,6 +9,7 @@ use Tests\Chromabits\Support\LaravelTestCase;
 /**
  * Class AlertManagerTest
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Alerts
  */
 class AlertManagerTest extends LaravelTestCase

@@ -10,6 +10,7 @@ use Illuminate\View\View;
  *
  * Represents an alert message
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Alerts
  */
 class Alert implements Arrayable

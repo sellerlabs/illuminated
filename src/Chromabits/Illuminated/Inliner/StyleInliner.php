@@ -2,7 +2,7 @@
 
 namespace Chromabits\Illuminated\Inliner;
 
-use Chromabits\Illuminated\Contracts\Inliner\StyleInliner as StyleInlinerContract;
+use Chromabits\Illuminated\Contracts\Inliner\StyleInliner as InlinerContract;
 use Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\View\View;
@@ -18,9 +18,10 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
  * contents of an email since many services strip style blocks
  * from emails.
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Inliner
  */
-class StyleInliner implements StyleInlinerContract
+class StyleInliner implements InlinerContract
 {
     /**
      * Internal inliner
@@ -82,8 +83,12 @@ class StyleInliner implements StyleInlinerContract
      * @throws \Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException
      * @throws \TijsVerkoyen\CssToInlineStyles\Exception
      */
-    public function inline($content, $stylesheet, $extension = '.css', $xhtml = false)
-    {
+    public function inline(
+        $content,
+        $stylesheet,
+        $extension = '.css',
+        $xhtml = false
+    ) {
         // If the content is a Laravel view, then we will render it first
         if ($content instanceof View) {
             $content = $content->render();
@@ -93,7 +98,9 @@ class StyleInliner implements StyleInlinerContract
         $this->internalInliner->setHTML($content);
 
         // Resolve the stylesheet and set it as the CSS of the inliner
-        $this->internalInliner->setCSS($this->resolveStylesheet($stylesheet, $extension)->getContents());
+        $this->internalInliner->setCSS(
+            $this->resolveStylesheet($stylesheet, $extension)->getContents()
+        );
 
         // Inline the styles into style blocks
         $result = $this->internalInliner->convert($xhtml);
@@ -119,7 +126,6 @@ class StyleInliner implements StyleInlinerContract
 
         $files = $finder
             ->files()
-            //->depth(1)
             ->in($this->stylesheetPaths)
             ->name($name . $extension);
 
@@ -149,11 +155,15 @@ class StyleInliner implements StyleInlinerContract
     {
         $this->internalInliner->setCleanup($this->options['cleanup']);
 
-        $this->internalInliner->setUseInlineStylesBlock($this->options['use_inline_styles_block']);
-
-        $this->internalInliner->setStripOriginalStyleTags($this->options['strip_original_tags']);
-
-        $this->internalInliner->setExcludeMediaQueries($this->options['exclude_media_queries']);
+        $this->internalInliner->setUseInlineStylesBlock(
+            $this->options['use_inline_styles_block']
+        );
+        $this->internalInliner->setStripOriginalStyleTags(
+            $this->options['strip_original_tags']
+        );
+        $this->internalInliner->setExcludeMediaQueries(
+            $this->options['exclude_media_queries']
+        );
     }
 
     /**
@@ -164,14 +174,21 @@ class StyleInliner implements StyleInlinerContract
      * @param $name
      * @param callable $callback
      */
-    public function inlineAndSend(Mailer $mailer, $content, $name, callable $callback)
-    {
+    public function inlineAndSend(
+        Mailer $mailer,
+        $content, $name,
+        callable $callback
+    ) {
         $content = $this->inline($content, $name);
 
-        $mailer->send(['raw' => ''], [], function (Message $message) use ($content, $callback) {
-            $message->getSwiftMessage()->setBody($content, 'text/html');
+        $mailer->send(
+            ['raw' => ''],
+            [],
+            function (Message $message) use ($content, $callback) {
+                $message->getSwiftMessage()->setBody($content, 'text/html');
 
-            $callback($message);
-        });
+                $callback($message);
+            }
+        );
     }
 }

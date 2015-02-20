@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
  *
  * Registers the alert manager service into the container
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Alerts
  */
 class AlertServiceProvider extends ServiceProvider
@@ -27,12 +28,15 @@ class AlertServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('Chromabits\Illuminated\Contracts\Alerts\AlertManager', function ($app) {
-            return new AlertManager(
-                $app['session.store'],
-                view(config('alerts.view', 'alerts.alert'))
-            );
-        });
+        $this->app->singleton(
+            'Chromabits\Illuminated\Contracts\Alerts\AlertManager',
+            function ($app) {
+                return new AlertManager(
+                    $app['session.store'],
+                    view(config('alerts.view', 'alerts.alert'))
+                );
+            }
+        );
     }
 
     /**
@@ -40,14 +44,18 @@ class AlertServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
+        $blade = $this->app['view']
+            ->getEngineResolver()
+            ->resolve('blade')
+            ->getCompiler();
 
         $blade->extend(function ($view, $compiler) {
             $pattern = $compiler->createPlainMatcher('allalerts');
 
             return preg_replace(
                 $pattern,
-                '$1<?php echo app(\'Chromabits\Illuminated\Contracts\Alerts\AlertManager\')->allAndRender(); ?>$2',
+                '$1<?php echo app(\'Chromabits\Illuminated\Contracts\Alerts'
+                 . '\AlertManager\')->allAndRender(); ?>$2',
                 $view
             );
         });

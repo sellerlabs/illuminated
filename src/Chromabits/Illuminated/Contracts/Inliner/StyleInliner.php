@@ -12,6 +12,7 @@ use Illuminate\Contracts\Mail\Mailer;
  * contents of an email since many services strip style blocks
  * from emails.
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Contracts\Inliner
  */
 interface StyleInliner
@@ -30,7 +31,12 @@ interface StyleInliner
      * @throws \Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException
      * @throws \TijsVerkoyen\CssToInlineStyles\Exception
      */
-    public function inline($content, $stylesheet, $extension = '.css', $xhtml = false);
+    public function inline(
+        $content,
+        $stylesheet,
+        $extension = '.css',
+        $xhtml = false
+    );
 
     /**
      * Inline the content and then send it over the mailer
@@ -40,5 +46,10 @@ interface StyleInliner
      * @param $name
      * @param callable $callback
      */
-    public function inlineAndSend(Mailer $mailer, $content, $name, callable $callback);
+    public function inlineAndSend(
+        Mailer $mailer,
+        $content,
+        $name,
+        callable $callback
+    );
 }

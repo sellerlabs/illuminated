@@ -10,6 +10,7 @@ use Exception;
  * Thrown when the inliner is unable to locate a stylesheet
  * based on the provided information
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Inliner\Exceptions
  */
 class StylesheetNotFoundException extends Exception

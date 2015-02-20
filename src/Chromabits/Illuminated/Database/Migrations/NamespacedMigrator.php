@@ -12,6 +12,7 @@ use Illuminate\Filesystem\Filesystem;
  *
  * A migrator that supports namespaces
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Migrations
  */
 class NamespacedMigrator extends Migrator
