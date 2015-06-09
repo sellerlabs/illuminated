@@ -4,15 +4,15 @@ namespace Tests\Chromabits\Illuminated\Alerts;
 
 use Chromabits\Illuminated\Alerts\AlertManager;
 use Chromabits\Nucleus\Testing\Traits\ConstructorTesterTrait;
-use Tests\Chromabits\Support\LaravelTestCase;
+use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class AlertManagerTest
+ * Class AlertManagerTestInternal
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Alerts
  */
-class AlertManagerTest extends LaravelTestCase
+class AlertManagerTestInternal extends HelpersTestCase
 {
     use ConstructorTesterTrait;
     use MocksViewsTrait;
@@ -24,6 +24,9 @@ class AlertManagerTest extends LaravelTestCase
 
     protected function make()
     {
-        return new AlertManager($this->app['session.store'], $this->createMockView());
+        return new AlertManager(
+            $this->app['session.store'],
+            $this->createMockView()
+        );
     }
 }

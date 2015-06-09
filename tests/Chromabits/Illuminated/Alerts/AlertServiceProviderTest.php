@@ -3,14 +3,14 @@
 namespace Tests\Chromabits\Illuminated\Alerts;
 
 use Chromabits\Illuminated\Alerts\AlertServiceProvider;
-use Tests\Chromabits\Support\LaravelTestCase;
+use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class AlertServiceProviderTest
+ * Class AlertServiceProviderTestInternal
  *
  * @package Tests\Chromabits\Illuminated\Alerts
  */
-class AlertServiceProviderTest extends LaravelTestCase
+class AlertServiceProviderTestInternal extends HelpersTestCase
 {
     public function testRegister()
     {

@@ -15,6 +15,9 @@ displaying alerts to users of your application.
 - **CSS Inliner Service**: Write your email templates using blade and
 do not worry about whether or not they will display correctly. The
 inliner service is capable of inlining a specified CSS file into a view.
+- **Route Mapper Interface**: A simple interface for defining class versions
+of the `routes.php` file. TestCase included.
+- **Model Test Case**: Utilities for testing models.
 
 ## Setup
 

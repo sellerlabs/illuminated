@@ -7,11 +7,12 @@ use Illuminate\Foundation\Application;
 use Chromabits\Nucleus\Testing\TestCase;
 
 /**
- * Class LaravelTestCase
+ * Class HelpersTestCase
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Tests\Support
  */
-class LaravelTestCase extends TestCase
+class HelpersTestCase extends TestCase
 {
     /**
      * @var Application
@@ -29,7 +30,7 @@ class LaravelTestCase extends TestCase
     }
 
     /**
-     * Create an barebone Laravel application
+     * Create an barebones Laravel application
      */
     protected function createApplication()
     {
