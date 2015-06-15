@@ -2,7 +2,7 @@
 
 namespace Chromabits\Illuminated\Testing;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Chromabits\Nucleus\Testing\TestCase;
 use Mockery;
 
 /**
@@ -13,8 +13,10 @@ use Mockery;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Testing
  */
-abstract class LaravelTestCase extends BaseTestCase
+abstract class LaravelTestCase extends TestCase
 {
+    use ApplicationTrait, AssertionsTrait;
+
     /**
      * Creates the application.
      *
@@ -30,7 +32,9 @@ abstract class LaravelTestCase extends BaseTestCase
      */
     public function setUp()
     {
-        BaseTestCase::setUp();
+        if (!$this->app) {
+            $this->refreshApplication();
+        }
 
         $this->app->make('artisan')->call('migrate');
     }
@@ -57,7 +61,9 @@ abstract class LaravelTestCase extends BaseTestCase
      */
     public function tearDown()
     {
-        BaseTestCase::tearDown();
+        if ($this->app) {
+            $this->app->flush();
+        }
 
         Mockery::close();
     }
