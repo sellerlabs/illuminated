@@ -24,7 +24,7 @@ abstract class LaravelTestCase extends TestCase
      */
     public function createApplication()
     {
-        return require SAGE_BASE_PATH . '/bootstrap/start.php';
+        return require HELPERS_BASE_PATH . '/bootstrap/start.php';
     }
 
     /**

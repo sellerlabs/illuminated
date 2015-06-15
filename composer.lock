@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b96d178b5f0cfa229283f49b19860a57",
+    "hash": "dc61ec6a4995a40a8b0aea0f401112e2",
     "packages": [
         {
             "name": "chromabits/nucleus",
