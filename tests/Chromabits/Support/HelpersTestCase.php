@@ -3,16 +3,19 @@
 namespace Tests\Chromabits\Support;
 
 use Illuminate\Config\Repository;
+use Illuminate\Database\DatabaseServiceProvider;
+use Illuminate\Database\MigrationServiceProvider;
 use Illuminate\Foundation\Application;
 use Chromabits\Nucleus\Testing\TestCase;
+use PDO;
 
 /**
  * Class HelpersTestCase
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Chromabits\Tests\Support
+ * @package Tests\Chromabits\Support
  */
-class HelpersTestCase extends TestCase
+abstract class HelpersTestCase extends TestCase
 {
     /**
      * @var Application
@@ -38,13 +41,29 @@ class HelpersTestCase extends TestCase
 
         $this->app->instance('config', new Repository([]));
 
+        $this->app['config']->set('session.driver', 'array');
+        $this->app['config']->set('database', [
+            'fetch' => PDO::FETCH_CLASS,
+            'default' => 'sqlite',
+            'connections' => [
+                'sqlite' => [
+                    'driver' => 'sqlite',
+                    'database' => ':memory:',
+                    'prefix' => '',
+                ],
+            ],
+            'migrations' => 'migrations',
+        ]);
+
         $this->app['config']->set('app', [
             'providers' => [
                 'Illuminate\Filesystem\FilesystemServiceProvider',
                 'Illuminate\Foundation\Providers\FoundationServiceProvider',
                 'Illuminate\Pipeline\PipelineServiceProvider',
                 'Illuminate\Session\SessionServiceProvider',
-                'Illuminate\View\ViewServiceProvider'
+                'Illuminate\View\ViewServiceProvider',
+                DatabaseServiceProvider::class,
+                MigrationServiceProvider::class
             ]
         ]);
 

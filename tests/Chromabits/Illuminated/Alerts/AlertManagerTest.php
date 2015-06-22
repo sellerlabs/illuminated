@@ -10,7 +10,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * Class AlertManagerTestInternal
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Chromabits\Illuminated\Alerts
+ * @package Tests\Chromabits\Illuminated\Alerts
  */
 class AlertManagerTestInternal extends HelpersTestCase
 {

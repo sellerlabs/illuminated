@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
  * Class MigrateCommand
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Illuminate\Database\Console\Migrations
+ * @package Chromabits\Illuminated\Database\Console\Migrations
  */
 class MigrateCommand extends BaseCommand
 {

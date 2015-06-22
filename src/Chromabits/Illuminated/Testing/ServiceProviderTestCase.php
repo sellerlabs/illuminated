@@ -54,7 +54,8 @@ abstract class ServiceProviderTestCase extends TestCase
 
         foreach ($this->shouldBeBound as $abstract) {
             $this->assertTrue(
-                $this->mockApp->bound($abstract)
+                $this->mockApp->bound($abstract),
+                $abstract . 'should be bound.'
             );
         }
     }

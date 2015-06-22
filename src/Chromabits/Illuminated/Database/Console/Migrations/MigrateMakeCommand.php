@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
  * Class MigrateMakeCommand
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Illuminate\Database\Console\Migrations
+ * @package Chromabits\Illuminated\Database\Console\Migrations
  */
 class MigrateMakeCommand extends BaseCommand
 {
@@ -62,9 +62,10 @@ class MigrateMakeCommand extends BaseCommand
      */
     public function fire()
     {
-        // It's possible for the developer to specify the tables to modify in this
-        // schema operation. The developer may also specify if this table needs
-        // to be freshly created so we can create the appropriate migrations.
+        // It's possible for the developer to specify the tables to modify in
+        // this schema operation. The developer may also specify if this table
+        // needs to be freshly created so we can create the appropriate
+        // migrations.
         $name = $this->input->getArgument('name');
 
         $table = $this->input->getOption('table');
@@ -75,9 +76,10 @@ class MigrateMakeCommand extends BaseCommand
             $table = $create;
         }
 
-        // Now we are ready to write the migration out to disk. Once we've written
-        // the migration out, we will dump-autoload for the entire framework to
-        // make sure that the migrations are registered by the class loaders.
+        // Now we are ready to write the migration out to disk. Once we've
+        // written the migration out, we will dump-autoload for the entire
+        // framework to make sure that the migrations are registered by the
+        // class loaders.
         $this->writeMigration($name, $table, $create);
 
         $this->composer->dumpAutoloads();
@@ -96,7 +98,10 @@ class MigrateMakeCommand extends BaseCommand
     {
         $path = $this->getMigrationPath();
 
-        $file = pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
+        $file = pathinfo(
+            $this->creator->create($name, $path, $table, $create),
+            PATHINFO_FILENAME
+        );
 
         $this->line("<info>Created Migration:</info> $file");
     }
@@ -121,9 +126,19 @@ class MigrateMakeCommand extends BaseCommand
     protected function getOptions()
     {
         return [
-            ['create', null, InputOption::VALUE_OPTIONAL, 'The table to be created.'],
+            [
+                'create',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'The table to be created.'
+            ],
 
-            ['table', null, InputOption::VALUE_OPTIONAL, 'The table to migrate.'],
+            [
+                'table',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'The table to migrate.'
+            ],
         ];
     }
 }

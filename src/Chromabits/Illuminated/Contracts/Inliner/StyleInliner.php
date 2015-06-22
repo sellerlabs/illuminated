@@ -2,6 +2,7 @@
 
 namespace Chromabits\Illuminated\Contracts\Inliner;
 
+use Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException;
 use Illuminate\Contracts\Mail\Mailer;
 
 /**
@@ -28,7 +29,7 @@ interface StyleInliner
      * @param bool $xhtml Whether or not to use XHTML for rendering
      *
      * @return string
-     * @throws \Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException
+     * @throws StylesheetNotFoundException
      * @throws \TijsVerkoyen\CssToInlineStyles\Exception
      */
     public function inline(

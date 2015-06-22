@@ -8,7 +8,7 @@ use Illuminate\Database\Migrations\Migrator;
  * Class StatusCommand
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Illuminate\Database\Console\Migrations
+ * @package Chromabits\Illuminated\Database\Console\Migrations
  */
 class StatusCommand extends BaseCommand
 {
@@ -47,13 +47,13 @@ class StatusCommand extends BaseCommand
 
     /**
      * Execute the console command.
-     *
-     * @return void
      */
     public function fire()
     {
         if (!$this->migrator->repositoryExists()) {
-            return $this->error('No migrations found.');
+            $this->error('No migrations found.');
+
+            return;
         }
 
         $ran = $this->migrator->getRepository()->getRan();

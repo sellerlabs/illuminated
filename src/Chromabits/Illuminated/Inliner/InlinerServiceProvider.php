@@ -2,6 +2,7 @@
 
 namespace Chromabits\Illuminated\Inliner;
 
+use Chromabits\Illuminated\Contracts\Inliner\StyleInliner as InlinerContract;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -26,12 +27,15 @@ class InlinerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('Chromabits\Illuminated\Contracts\Inliner\StyleInliner', function ($app) {
-            return new StyleInliner(
-                $app['config']['inliner.paths.stylesheets'],
-                $app['config']['inliner.options']
-            );
-        });
+        $this->app->bind(
+            InlinerContract::class,
+            function ($app) {
+                return new StyleInliner(
+                    $app['config']['inliner.paths.stylesheets'],
+                    $app['config']['inliner.options']
+                );
+            }
+        );
     }
 
     /**
@@ -42,7 +46,7 @@ class InlinerServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'Chromabits\Illuminated\Contracts\Inliner\StyleInliner'
+            InlinerContract::class,
         ];
     }
 }

@@ -80,7 +80,7 @@ class StyleInliner implements InlinerContract
      * @param bool $xhtml Whether or not to use XHTML for rendering
      *
      * @return string
-     * @throws \Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException
+     * @throws StylesheetNotFoundException
      * @throws \TijsVerkoyen\CssToInlineStyles\Exception
      */
     public function inline(
@@ -118,7 +118,7 @@ class StyleInliner implements InlinerContract
      * @param string $extension
      *
      * @return mixed
-     * @throws \Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException
+     * @throws StylesheetNotFoundException
      */
     protected function resolveStylesheet($name, $extension = '.css')
     {

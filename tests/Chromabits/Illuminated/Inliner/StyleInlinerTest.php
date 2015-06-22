@@ -9,6 +9,7 @@ use Mockery;
 /**
  * Class StyleInlinerTest
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Inliner
  */
 class StyleInlinerTest extends TestCase

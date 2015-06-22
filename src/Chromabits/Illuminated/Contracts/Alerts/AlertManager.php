@@ -24,7 +24,12 @@ interface AlertManager
      * @param string|null $title
      * @param string|null $view
      */
-    public function push($content, $type = Alert::TYPE_NEUTRAL, $title = null, $view = null);
+    public function push(
+        $content,
+        $type = Alert::TYPE_NEUTRAL,
+        $title = null,
+        $view = null
+    );
 
     /**
      * Creates an alert from the result of validator

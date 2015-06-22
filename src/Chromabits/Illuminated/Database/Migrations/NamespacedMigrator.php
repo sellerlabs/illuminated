@@ -3,6 +3,7 @@
 namespace Chromabits\Illuminated\Database\Migrations;
 
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
+use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\Filesystem;
@@ -27,8 +28,8 @@ class NamespacedMigrator extends Migrator
     /**
      * Construct an instance of a NamespacedMigrator
      *
-     * @param \Illuminate\Database\Migrations\MigrationRepositoryInterface $repository
-     * @param \Illuminate\Database\ConnectionResolverInterface $resolver
+     * @param MigrationRepositoryInterface $repository
+     * @param ConnectionResolverInterface $resolver
      * @param \Illuminate\Filesystem\Filesystem $files
      * @param string $namespace
      */

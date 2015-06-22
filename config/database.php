@@ -9,5 +9,5 @@ return [
         'path' => base_path('app/Database/Migrations'),
 
         'namespace' => 'App\Database\Migrations'
-    ]
+    ],
 ];
