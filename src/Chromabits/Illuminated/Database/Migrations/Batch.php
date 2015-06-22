@@ -104,7 +104,7 @@ abstract class Batch
         $aliases = $this->getAliases();
 
         foreach ($this->getMigrations() as $migration) {
-            if ($migration instanceof static) {
+            if ($migration instanceof Batch) {
                 $aliases = array_merge(
                     $aliases,
                     $migration->getExpandedAliases()
