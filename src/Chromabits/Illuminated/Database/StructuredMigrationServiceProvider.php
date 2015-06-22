@@ -2,6 +2,9 @@
 
 namespace Chromabits\Illuminated\Database;
 
+use Chromabits\Illuminated\Database\Commands\StructuredInstallCommand;
+use Chromabits\Illuminated\Database\Commands\StructuredMigrateCommand;
+use Chromabits\Illuminated\Database\Commands\StructuredStatusCommand;
 use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
 use Chromabits\Illuminated\Database\Migrations\Batch;
 use Chromabits\Illuminated\Database\Migrations\StructuredMigrator;
@@ -35,6 +38,12 @@ class StructuredMigrationServiceProvider extends ServiceProvider
                 );
             }
         );
+
+        $this->commands([
+            StructuredInstallCommand::class,
+            StructuredMigrateCommand::class,
+            StructuredStatusCommand::class,
+        ]);
     }
 
     /**
