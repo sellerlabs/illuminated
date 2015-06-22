@@ -52,9 +52,18 @@ abstract class Batch
         $migrations = $this->getMigrations();
 
         foreach ($migrations as $key => $value) {
-            if (!is_int($key) || !is_string($value)) {
+            if (!is_int($key)) {
                 throw new InvalidArgumentException(
-                    'Migration: ' . $value . ' has an invalid key format'
+                    'Migration: ' . (string) $value . ' has an invalid key'
+                        . ' format. Only use integer keys.'
+                );
+            }
+
+            if (!is_string($value) && !($value instanceof Batch)) {
+                throw new InvalidArgumentException(
+                    'Migration: ' . (string) $value . ' has an invalid value'
+                        . ' format. Allowed values: string or an instance of'
+                        . ' another Batch class.'
                 );
             }
         }
