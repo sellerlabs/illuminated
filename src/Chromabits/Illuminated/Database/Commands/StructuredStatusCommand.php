@@ -2,8 +2,8 @@
 
 namespace Chromabits\Illuminated\Database\Commands;
 
+use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
 use Chromabits\Illuminated\Database\Migrations\Batch;
-use Chromabits\Illuminated\Database\Migrations\StructuredMigrator;
 use Illuminate\Console\Command;
 
 /**
@@ -31,7 +31,7 @@ class StructuredStatusCommand extends Command
     /**
      * The migrator instance.
      *
-     * @var StructuredMigrator
+     * @var StructuredMigratorInterface
      */
     protected $migrator;
 
@@ -43,11 +43,11 @@ class StructuredStatusCommand extends Command
     /**
      * Construct an instance of a StatusCommand
      *
-     * @param StructuredMigrator $migrator
+     * @param StructuredMigratorInterface $migrator
      * @param Batch $batch
      */
     public function __construct(
-        StructuredMigrator $migrator,
+        StructuredMigratorInterface $migrator,
         Batch $batch
     ) {
         parent::__construct();

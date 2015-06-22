@@ -2,9 +2,10 @@
 
 namespace Chromabits\Illuminated\Database\Commands;
 
-use Chromabits\Illuminated\Database\Migrations\StructuredMigrator;
+use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class StructuredMigrateCommand
@@ -33,16 +34,16 @@ class StructuredMigrateCommand extends Command
     /**
      * The migrator instance.
      *
-     * @var StructuredMigrator
+     * @var StructuredMigratorInterface
      */
     protected $migrator;
 
     /**
      * Construct an instance of a MigrateCommand
      *
-     * @param StructuredMigrator $migrator
+     * @param StructuredMigratorInterface $migrator
      */
-    public function __construct(StructuredMigrator $migrator)
+    public function __construct(StructuredMigratorInterface $migrator)
     {
         parent::__construct();
 
