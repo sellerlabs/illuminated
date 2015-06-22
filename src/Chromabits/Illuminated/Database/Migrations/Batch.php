@@ -70,7 +70,7 @@ abstract class Batch
         $result = [];
 
         foreach ($this->getMigrations() as $migration) {
-            if ($migration instanceof static) {
+            if ($migration instanceof Batch) {
                 $result = array_merge($result, $migration->getExpanded());
 
                 continue;
