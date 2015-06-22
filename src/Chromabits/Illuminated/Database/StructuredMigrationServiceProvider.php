@@ -6,9 +6,7 @@ use Chromabits\Illuminated\Database\Commands\StructuredInstallCommand;
 use Chromabits\Illuminated\Database\Commands\StructuredMigrateCommand;
 use Chromabits\Illuminated\Database\Commands\StructuredStatusCommand;
 use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
-use Chromabits\Illuminated\Database\Migrations\Batch;
 use Chromabits\Illuminated\Database\Migrations\StructuredMigrator;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -28,15 +26,20 @@ class StructuredMigrationServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Here, we unfortunately have to add some bindings that are not added
+        // by Laravel itself.
         $this->app->bind(
+            'Illuminate\Database\Migrations\MigrationRepositoryInterface',
+            'migration.repository'
+        );
+        $this->app->bind(
+            'Illuminate\Database\ConnectionResolverInterface',
+            'db'
+        );
+
+        $this->app->singleton(
             StructuredMigratorInterface::class,
-            function (Application $app) {
-                return new StructuredMigrator(
-                    $app->make('migration.repository'),
-                    $app->make('db'),
-                    $app->make(Batch::class)
-                );
-            }
+            StructuredMigrator::class
         );
 
         $this->commands([
