@@ -99,7 +99,7 @@ class StructuredMigrateCommand extends Command
         if (!$this->migrator->repositoryExists()) {
             $options = ['--database' => $this->input->getOption('database')];
 
-            $this->call('migrate:install', $options);
+            $this->call('structured:install', $options);
         }
     }
 

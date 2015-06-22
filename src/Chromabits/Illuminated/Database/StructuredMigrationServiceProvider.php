@@ -3,7 +3,9 @@
 namespace Chromabits\Illuminated\Database;
 
 use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
+use Chromabits\Illuminated\Database\Migrations\Batch;
 use Chromabits\Illuminated\Database\Migrations\StructuredMigrator;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -25,7 +27,13 @@ class StructuredMigrationServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             StructuredMigratorInterface::class,
-            StructuredMigrator::class
+            function (Application $app) {
+                return new StructuredMigrator(
+                    $app->make('migration.repository'),
+                    $app->make('db'),
+                    $app->make(Batch::class)
+                );
+            }
         );
     }
 
