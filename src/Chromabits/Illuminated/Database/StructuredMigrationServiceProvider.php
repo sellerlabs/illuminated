@@ -4,6 +4,7 @@ namespace Chromabits\Illuminated\Database;
 
 use Chromabits\Illuminated\Database\Commands\StructuredInstallCommand;
 use Chromabits\Illuminated\Database\Commands\StructuredMigrateCommand;
+use Chromabits\Illuminated\Database\Commands\StructuredRollbackCommand;
 use Chromabits\Illuminated\Database\Commands\StructuredStatusCommand;
 use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
 use Chromabits\Illuminated\Database\Interfaces\StructuredStatusInterface;
@@ -53,6 +54,7 @@ class StructuredMigrationServiceProvider extends ServiceProvider
             StructuredInstallCommand::class,
             StructuredMigrateCommand::class,
             StructuredStatusCommand::class,
+            StructuredRollbackCommand::class,
         ]);
     }
 
