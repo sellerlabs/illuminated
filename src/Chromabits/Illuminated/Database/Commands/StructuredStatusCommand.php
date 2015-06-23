@@ -66,7 +66,7 @@ class StructuredStatusCommand extends Command
         }
 
         foreach ($report->getUnknown() as $migration) {
-            $rows[] = ['<warning>☁︎ Unknown</warning>', $migration];
+            $rows[] = ['<comment>☁︎ Unknown</comment>', $migration];
         }
 
         if (count($rows) > 0) {
