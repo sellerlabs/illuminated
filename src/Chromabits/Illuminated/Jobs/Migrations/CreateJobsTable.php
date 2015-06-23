@@ -3,6 +3,7 @@
 namespace Chromabits\Illuminated\Jobs\Migrations;
 
 use Chromabits\Illuminated\Database\Migrations\BaseMigration;
+use Chromabits\Illuminated\Database\Migrations\TableMigration;
 use Illuminate\Database\Schema\Blueprint;
 use Chromabits\Illuminated\Jobs\JobState;
 
@@ -14,44 +15,36 @@ use Chromabits\Illuminated\Jobs\JobState;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Migrations
  */
-class CreateJobsTable extends BaseMigration
+class CreateJobsTable extends TableMigration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        $this->builder->create('jobs', function (Blueprint $table) {
-            $table->increments('id');
-
-            $table->string('task');
-            $table->text('data')->nullable();
-            $table->string('state')->default(JobState::IDLE);
-            $table->text('message')->nullable();
-
-            $table->boolean('schedulable')->default(false);
-
-            $table->integer('attempts')->default(0);
-            $table->integer('retries')->default(0);
-
-            $table->timestamp('started_at')->nullable();
-            $table->timestamp('completed_at')->nullable();
-            $table->timestamp('expires_at')->nullable();
-            $table->timestamp('run_at')->nullable();
-
-            $table->timestamps();
-        });
-    }
+    protected $name = 'illuminated_jobs';
 
     /**
-     * Reverse the migrations.
+     * Create the table schema.
      *
-     * @return void
+     * @param Blueprint $table
+     *
+     * @return mixed
      */
-    public function down()
+    protected function create(Blueprint $table)
     {
-        $this->builder->drop('jobs');
+        $table->increments('id');
+
+        $table->string('task');
+        $table->text('data')->nullable();
+        $table->string('state')->default(JobState::IDLE);
+        $table->text('message')->nullable();
+
+        $table->boolean('schedulable')->default(false);
+
+        $table->integer('attempts')->default(0);
+        $table->integer('retries')->default(0);
+
+        $table->timestamp('started_at')->nullable();
+        $table->timestamp('completed_at')->nullable();
+        $table->timestamp('expires_at')->nullable();
+        $table->timestamp('run_at')->nullable();
+
+        $table->timestamps();
     }
 }

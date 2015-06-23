@@ -46,6 +46,13 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     /**
+     * Name of the table of the model.
+     *
+     * @var string
+     */
+    protected $table = 'illuminated_jobs';
+
+    /**
      * List of properties that should be treated as dates.
      *
      * @var array
