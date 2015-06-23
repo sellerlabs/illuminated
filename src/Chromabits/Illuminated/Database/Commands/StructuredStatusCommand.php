@@ -66,11 +66,17 @@ class StructuredStatusCommand extends Command
         }
 
         foreach ($report->getUnknown() as $migration) {
-            $rows[] = ['<comment>☹︎ Unknown</comment>', $migration];
+            $rows[] = ['<comment>☹︎ Exotic</comment>', $migration];
         }
 
         if (count($rows) > 0) {
             $this->table(['Status', 'Migration'], $rows);
+
+            if (count($report->getUnknown()) > 0) {
+                $this->line('<comment>Warning: Some "exotic" (unknown)'
+                    . ' migrations were detected. Check your batch classes'
+                    . '</comment>');
+            }
         } else {
             $this->error('No migrations found');
         }
