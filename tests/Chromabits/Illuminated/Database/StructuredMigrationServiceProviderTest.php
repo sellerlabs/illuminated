@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Chromabits\Illuminated\Database;
+namespace Tests\Chromabits\Illuminated\Database;
 
 use Chromabits\Illuminated\Database\StructuredMigrationServiceProvider;
 use Chromabits\Illuminated\Testing\ServiceProviderTestCase;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Application;
  * Class StructuredMigrationServiceProviderTest
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Test\Chromabits\Illuminated\Database
+ * @package Tests\Chromabits\Illuminated\Database
  */
 class StructuredMigrationServiceProviderTest extends ServiceProviderTestCase
 {

@@ -2,8 +2,7 @@
 
 namespace Chromabits\Illuminated\Database\Commands;
 
-use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
-use Chromabits\Illuminated\Database\Migrations\Batch;
+use Chromabits\Illuminated\Database\Interfaces\StructuredStatusInterface;
 use Illuminate\Console\Command;
 
 /**
@@ -29,31 +28,22 @@ class StructuredStatusCommand extends Command
     protected $description = 'Show a list of migrations up/down';
 
     /**
-     * The migrator instance.
+     * Implementation of the structured migration status service.
      *
-     * @var StructuredMigratorInterface
+     * @var StructuredStatusInterface
      */
-    protected $migrator;
-
-    /**
-     * @var Batch
-     */
-    protected $batch;
+    protected $status;
 
     /**
      * Construct an instance of a StatusCommand
      *
-     * @param StructuredMigratorInterface $migrator
-     * @param Batch $batch
+     * @param StructuredStatusInterface $status
      */
-    public function __construct(
-        StructuredMigratorInterface $migrator,
-        Batch $batch
-    ) {
+    public function __construct(StructuredStatusInterface $status)
+    {
         parent::__construct();
 
-        $this->migrator = $migrator;
-        $this->batch = $batch;
+        $this->status = $status;
     }
 
     /**
@@ -61,27 +51,26 @@ class StructuredStatusCommand extends Command
      */
     public function fire()
     {
-        if (!$this->migrator->repositoryExists()) {
-            $this->error('No migrations found.');
+        $report = $this->status->generateReport();
 
-            return;
-        }
+        $ran = $report->getRan();
 
-        $ran = $this->migrator->getRepository()->getRan();
+        $rows = [];
 
-        $migrations = [];
-
-        foreach ($this->batch->getExpanded() as $migration) {
+        foreach ($report->getMigrations() as $migration) {
             if (in_array($migration, $ran)) {
-                $migrations[] = ['<info>✔</info>', $migration];
+                $rows[] = ['<info>✔ Yes</info>', $migration];
             } else {
-                $migrations[] = ['<fg=red>✗</fg=red>', $migration];
+                $rows[] = ['<fg=red>✗ No</fg=red>', $migration];
             }
-
         }
 
-        if (count($migrations) > 0) {
-            $this->table(['Ran?', 'Migration'], $migrations);
+        foreach ($report->getUnknown() as $migration) {
+            $rows[] = ['<warning>☁︎ Unknown</warning>', $migration];
+        }
+
+        if (count($rows) > 0) {
+            $this->table(['Status', 'Migration'], $rows);
         } else {
             $this->error('No migrations found');
         }
