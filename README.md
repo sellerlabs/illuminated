@@ -4,20 +4,25 @@ This is a collection of some utility classes and components that I use
 on my Laravel 5 projects. Some of them are experimental and might not
 be finished or tested.
 
-## Contents
+## Components
 
-- **Namespaced Migrator**: A modified Laravel 5 database migrator with
-the capability of loading migrations that are namespaced. This should
-helping making your code more PSR-2 compliant, however, at the moment
-filenames are still not PSR-2 compliant. (NAMESPACE ALL THE THINGS!!)
+- [**Database**](https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Database/README.md):
+    - Structured Migrator
+    - Namespaced Migrator
+    - Utility migration classes
 - **Alerts Service (WIP)**: A more formal interface for flashing and
 displaying alerts to users of your application.
-- **CSS Inliner Service**: Write your email templates using blade and
+- [**CSS Inliner Service**]((https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Inliner/README.md)): Write your email templates using blade and
 do not worry about whether or not they will display correctly. The
 inliner service is capable of inlining a specified CSS file into a view.
 - **Route Mapper Interface**: A simple interface for defining class versions
 of the `routes.php` file. TestCase included.
-- **Model Test Case**: Utilities for testing models.
+- **Jobs (WIP)**: A job scheduling and management framework.
+- [**Testing**](https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Testing/README.md):
+    - LaravelTestCase
+    - ModelTestCase
+    - RouteMapperTestCase
+    - ServiceProviderTestCase 
 
 ## Setup
 
@@ -34,69 +39,4 @@ return [
 ];
 ```
 
-The exception to the method provided above is the **NamespacedMigrator** which needs a
- custom replacement of **ConsoleSupportServiceProvider**. An example of how
- you could write one for your app is included below:
- 
- ```php
- <?php
- 
- namespace App\Providers;
- 
- use Illuminate\Support\AggregateServiceProvider;
- 
- /**
-  * Class ConsoleSupportServiceProvider
-  *
-  * @package App\Providers
-  */
- class ConsoleSupportServiceProvider extends AggregateServiceProvider
- {
-     /**
-      * Indicates if loading of the provider is deferred.
-      *
-      * @var bool
-      */
-     protected $defer = true;
-     /**
-      * The provider class names.
-      *
-      * @var array
-      */
-     protected $providers = [
-         'Illuminate\Auth\GeneratorServiceProvider',
-         'Illuminate\Console\ScheduleServiceProvider',
-         'Chromabits\Illuminated\Database\NamespacedMigrationServiceProvider',
-         'Illuminate\Database\SeedServiceProvider',
-         'Illuminate\Foundation\Providers\ComposerServiceProvider',
-         'Illuminate\Queue\ConsoleServiceProvider',
-         'Illuminate\Routing\GeneratorServiceProvider',
-         'Illuminate\Session\CommandsServiceProvider',
-     ];
- }
- ```
-
-## Usage
-
-### Inliner Service
-
-Here is an example of the inliner service in a controller method. In
-this example with have set the `inliner.paths.stylesheets` configuration
-key to point to a directory where there is a `ink.css` file.
-
-```php
-public function getShowEmail(StyleInliner $inliner, Mailer $mailer)
-    {
-        $inliner->inlineAndSend($mailer, view('mail.signup.verification'), 'ink', function (Message $message) {
-                $message->to('ed+contact@chromabits.com', 'Ed')->subject('Welcome!');
-
-                $message->from('no-reply@myapp.com', 'MyApp Account');
-            }
-        );
-        
-        // Other stuff
-    }
-```
-
-For more questions about the configuration file, take a look at `config/inliner.php`
-for an example.
+Some modules might have specific exceptions or additional instructions. Make sure to read the corresponding README file.
