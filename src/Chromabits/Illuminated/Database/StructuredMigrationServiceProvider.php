@@ -6,7 +6,9 @@ use Chromabits\Illuminated\Database\Commands\StructuredInstallCommand;
 use Chromabits\Illuminated\Database\Commands\StructuredMigrateCommand;
 use Chromabits\Illuminated\Database\Commands\StructuredStatusCommand;
 use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
+use Chromabits\Illuminated\Database\Interfaces\StructuredStatusInterface;
 use Chromabits\Illuminated\Database\Migrations\StructuredMigrator;
+use Chromabits\Illuminated\Database\Migrations\StructuredStatus;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -42,6 +44,11 @@ class StructuredMigrationServiceProvider extends ServiceProvider
             StructuredMigrator::class
         );
 
+        $this->app->bind(
+            StructuredStatusInterface::class,
+            StructuredStatus::class
+        );
+
         $this->commands([
             StructuredInstallCommand::class,
             StructuredMigrateCommand::class,
@@ -58,6 +65,7 @@ class StructuredMigrationServiceProvider extends ServiceProvider
     {
         return [
             StructuredMigratorInterface::class,
+            StructuredStatusInterface::class,
         ];
     }
 }

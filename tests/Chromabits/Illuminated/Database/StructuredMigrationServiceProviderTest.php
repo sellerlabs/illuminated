@@ -2,6 +2,8 @@
 
 namespace Tests\Chromabits\Illuminated\Database;
 
+use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
+use Chromabits\Illuminated\Database\Interfaces\StructuredStatusInterface;
 use Chromabits\Illuminated\Database\StructuredMigrationServiceProvider;
 use Chromabits\Illuminated\Testing\ServiceProviderTestCase;
 use Illuminate\Foundation\Application;
@@ -14,6 +16,11 @@ use Illuminate\Foundation\Application;
  */
 class StructuredMigrationServiceProviderTest extends ServiceProviderTestCase
 {
+    protected $shouldBeBound = [
+        StructuredMigratorInterface::class,
+        StructuredStatusInterface::class,
+    ];
+
     /**
      * Make an instance of the service provider being tested
      *
