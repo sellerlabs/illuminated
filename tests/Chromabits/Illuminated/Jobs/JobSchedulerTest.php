@@ -3,11 +3,14 @@
 namespace Tests\Chromabits\Illuminated\Jobs;
 
 use Carbon\Carbon;
+use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobScheduler;
 use Chromabits\Illuminated\Jobs\JobState;
+use Chromabits\Illuminated\Jobs\JobTag;
 use Chromabits\Nucleus\Testing\Impersonator;
 use InvalidArgumentException;
+use Mockery\MockInterface;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
@@ -131,5 +134,86 @@ class JobSchedulerTest extends HelpersTestCase
         $scheduler->cancel($job);
 
         $this->assertEquals(JobState::CANCELLED, $job->state);
+    }
+
+    public function testPushCopy()
+    {
+        $impersonator = new Impersonator();
+
+        $job = new Job();
+        $job->task = 'test.test';
+        $job->state = JobState::CANCELLED;
+
+        $tomorrow = Carbon::tomorrow();
+        $nextWeek = Carbon::today()->addDays(7);
+
+        $impersonator->mock(
+            JobFactoryInterface::class,
+            function (MockInterface $mock) use ($job) {
+                $mock->shouldReceive('duplicate')->once()->with($job)
+                    ->andReturn($job);
+            }
+        );
+
+        /** @var JobScheduler $scheduler */
+        $scheduler = $impersonator->make(JobScheduler::class);
+
+        $result = $scheduler->pushCopy($job, $tomorrow, $nextWeek);
+
+        $this->assertInstanceOf(Job::class, $result);
+        $this->assertEquals(JobState::SCHEDULED, $result->state);
+        $this->assertEquals($tomorrow, $result->run_at);
+        $this->assertEquals($nextWeek, $result->expires_at);
+    }
+
+    public function testTag()
+    {
+        $impersonator = new Impersonator();
+
+        /** @var JobScheduler $scheduler */
+        $scheduler = $impersonator->make(JobScheduler::class);
+
+        $job = new Job();
+        $job->task = 'test.test';
+        $job->state = JobState::SCHEDULED;
+        $job->save();
+
+        $result = $scheduler->tag($job, 'wow');
+
+        $this->assertInstanceOf(JobTag::class, $result);
+
+        $result = $scheduler->tag($job, 'wow');
+
+        $this->assertInstanceOf(JobTag::class, $result);
+    }
+
+    public function testFindByTag()
+    {
+        $impersonator = new Impersonator();
+
+        /** @var JobScheduler $scheduler */
+        $scheduler = $impersonator->make(JobScheduler::class);
+
+        $job = new Job();
+        $job->task = 'test.test';
+        $job->state = JobState::SCHEDULED;
+        $job->save();
+
+        $this->assertEquals(0, $scheduler->findByTag('wow')->count());
+
+        $scheduler->tag($job, 'wow');
+        $scheduler->tag($job, 'omg');
+        $scheduler->tag($job, 'wow');
+
+        $this->assertEquals(1, $scheduler->findByTag('wow')->count());
+        $this->assertEquals(1, $scheduler->findByTag('omg')->count());
+
+        $job->state = JobState::CANCELLED;
+        $job->save();
+
+        $this->assertEquals(0, $scheduler->findByTag('wow')->count());
+        $this->assertEquals(0, $scheduler->findByTag('omg')->count());
+        $this->assertEquals(1, $scheduler->findByTag('wow', false)->count());
+        $this->assertEquals(1, $scheduler->findByTag('omg', false)->count());
     }
 }

@@ -3,7 +3,7 @@
 namespace Chromabits\Illuminated\Jobs;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Chromabits\Illuminated\Database\Articulate\Model;
 
 /**
  * Class Job

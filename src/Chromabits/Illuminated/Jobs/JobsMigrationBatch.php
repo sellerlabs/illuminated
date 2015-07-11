@@ -4,6 +4,7 @@ namespace Chromabits\Illuminated\Jobs;
 
 use Chromabits\Illuminated\Database\Migrations\Batch;
 use Chromabits\Illuminated\Jobs\Migrations\CreateJobsTable;
+use Chromabits\Illuminated\Jobs\Migrations\CreateJobTagsTable;
 
 /**
  * Class JobsMigrationBatch
@@ -26,6 +27,7 @@ class JobsMigrationBatch extends Batch
     {
         return [
             CreateJobsTable::class,
+            CreateJobTagsTable::class,
         ];
     }
 }

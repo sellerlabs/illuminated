@@ -24,4 +24,17 @@ interface JobFactoryInterface
      * @return Job
      */
     public function make($task, $data = '{}', $retries = 0);
+
+    /**
+     * Copies basic parameters of a job into a new one:
+     *
+     * - Task
+     * - Data
+     * - Retries
+     *
+     * @param Job $baseJob
+     *
+     * @return Job
+     */
+    public function duplicate(Job $baseJob);
 }

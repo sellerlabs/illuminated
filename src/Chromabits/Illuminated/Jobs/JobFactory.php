@@ -53,6 +53,29 @@ class JobFactory implements JobFactoryInterface
     }
 
     /**
+     * Copies basic parameters of a job into a new one:
+     *
+     * - Task
+     * - Data
+     * - Retries
+     *
+     * @param Job $baseJob
+     *
+     * @return Job
+     */
+    public function duplicate(Job $baseJob)
+    {
+        $job = new Job();
+
+        $job->state = JobState::IDLE;
+        $job->task = $baseJob->task;
+        $job->retries = $baseJob->retries;
+        $job->data = $baseJob->data;
+
+        return $job;
+    }
+
+    /**
      * Check if a string is valid JSON.
      *
      * @param $string

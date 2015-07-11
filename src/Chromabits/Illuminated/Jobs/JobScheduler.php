@@ -3,6 +3,7 @@
 namespace Chromabits\Illuminated\Jobs;
 
 use Carbon\Carbon;
+use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;
@@ -27,13 +28,24 @@ class JobScheduler implements JobSchedulerInterface
     protected $jobs;
 
     /**
+     * Implementation of the job factory.
+     *
+     * @var JobFactoryInterface
+     */
+    protected $factory;
+
+    /**
      * Construct an instance of a JobScheduler.
      *
      * @param JobRepositoryInterface $jobs
+     * @param JobFactoryInterface $factory
      */
-    public function __construct(JobRepositoryInterface $jobs)
-    {
+    public function __construct(
+        JobRepositoryInterface $jobs,
+        JobFactoryInterface $factory
+    ) {
         $this->jobs = $jobs;
+        $this->factory = $factory;
     }
 
     /**
@@ -41,6 +53,8 @@ class JobScheduler implements JobSchedulerInterface
      *
      * @param Job $job
      * @param Carbon $runAt
+     *
+     * @return Job
      */
     public function push(Job $job, Carbon $runAt)
     {
@@ -55,6 +69,74 @@ class JobScheduler implements JobSchedulerInterface
         $job->state = JobState::SCHEDULED;
 
         $job->save();
+
+        return $job;
+    }
+
+    /**
+     * Apply a tag to an existing job.
+     *
+     * @param Job $job
+     * @param $tag
+     *
+     * @return JobTag|\Illuminate\Database\Eloquent\Model|null|static
+     */
+    public function tag(Job $job, $tag)
+    {
+        $existing = JobTag::query()
+            ->where([
+                'job_id' => $job->id,
+                'name' => $tag,
+            ])
+            ->first();
+
+        if (is_null($existing)) {
+            $newTag = new JobTag();
+
+            $newTag->job_id = $job->id;
+            $newTag->name = $tag;
+
+            $newTag->save();
+
+            return $newTag;
+        }
+
+        return $existing;
+    }
+
+    /**
+     * Find jobs by a tag.
+     *
+     * @param $tag
+     * @param bool|true $activeOnly
+     * @param int $take
+     *
+     * @return mixed
+     */
+    public function findByTag($tag, $activeOnly = true, $take = 20)
+    {
+        $jobsTable = Job::resolveTable();
+        $jobTagsTable = JobTag::resolveTable();
+
+        $query = Job::query()
+            ->leftJoin(
+                $jobTagsTable->getName(),
+                $jobsTable->field('id'),
+                '=',
+                $jobTagsTable->field('job_id')
+            )
+            ->where($jobTagsTable->field('name'), $tag)
+            ->take($take);
+
+        if ($activeOnly) {
+            $query->whereIn($jobsTable->field('state'), [
+                JobState::SCHEDULED,
+                JobState::RUNNING,
+                JobState::QUEUED,
+            ]);
+        }
+
+        return $query->get([$jobsTable->getName() . '.*']);
     }
 
     /**
@@ -78,6 +160,32 @@ class JobScheduler implements JobSchedulerInterface
             ->orderBy('run_at', 'asc')
             ->take($take)
             ->get();
+    }
+
+    /**
+     * Creates a partial copy of the provided job and then schedules it at the
+     * specified time.
+     *
+     * With this, jobs can reschedule themselves to run again at some point in
+     * the future. Recurring tasks such as billing are a perfect example of
+     * this.
+     *
+     * @param Job $baseJob
+     * @param Carbon $runAt
+     * @param Carbon $expiresAt
+     *
+     * @return Job
+     */
+    public function pushCopy(
+        Job $baseJob,
+        Carbon $runAt,
+        Carbon $expiresAt
+    ) {
+        $job = $this->factory->duplicate($baseJob);
+
+        $job->expires_at = $expiresAt;
+
+        return $this->push($job, $runAt);
     }
 
     /**

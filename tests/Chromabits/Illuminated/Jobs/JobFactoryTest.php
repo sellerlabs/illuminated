@@ -4,6 +4,7 @@ namespace Tests\Chromabits\Illuminated\Jobs;
 
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobFactory;
+use Chromabits\Illuminated\Jobs\JobState;
 use InvalidArgumentException;
 use Tests\Chromabits\Support\HelpersTestCase;
 
@@ -53,5 +54,20 @@ class JobFactoryTest extends HelpersTestCase
 
         $this->assertInstanceOf(Job::class, $job);
         $this->assertEquals('{}', $job->data);
+    }
+
+    public function testDuplicate()
+    {
+        $factory = new JobFactory();
+
+        $job = $factory->make('test.test', ['wow' => 'such task'], 7);
+        $job->state = JobState::COMPLETE;
+
+        $newJob = $factory->duplicate($job);
+
+        $this->assertEquals(JobState::IDLE, $newJob->state);
+        $this->assertEquals('test.test', $newJob->task);
+        $this->assertEquals(json_encode(['wow' => 'such task']), $newJob->data);
+        $this->assertEquals(7, $newJob->retries);
     }
 }
