@@ -11,6 +11,7 @@
 
 namespace Chromabits\Illuminated\Jobs;
 
+use Chromabits\Illuminated\Jobs\Commands\EnqueueDaemonCommand;
 use Chromabits\Illuminated\Jobs\Commands\EnqueueScheduledCommand;
 use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
@@ -45,6 +46,7 @@ class JobsServiceProvider extends ServiceProvider
 
         $this->commands([
             EnqueueScheduledCommand::class,
+            EnqueueDaemonCommand::class,
         ]);
     }
 
