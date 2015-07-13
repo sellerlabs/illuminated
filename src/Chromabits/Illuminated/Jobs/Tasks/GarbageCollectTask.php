@@ -85,7 +85,7 @@ class GarbageCollectTask extends BaseTask
         if ($repeatIn > -1) {
             $scheduler->pushCopy(
                 $job,
-                $now->addMinutes($repeatIn),
+                $now->addMinutes(max($repeatIn, 1)),
                 $now->addMinutes($job->get('expiresAfter', 1440))
             );
         }
