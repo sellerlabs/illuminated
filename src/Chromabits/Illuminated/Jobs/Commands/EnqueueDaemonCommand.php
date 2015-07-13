@@ -64,7 +64,9 @@ class EnqueueDaemonCommand extends Command implements SelfHandling
 
             sleep((int) $this->option('sleep'));
 
-            $this->callAsync();
+            if ($this->callAsync() === false) {
+                return;
+            }
         }
     }
 
@@ -84,12 +86,13 @@ class EnqueueDaemonCommand extends Command implements SelfHandling
             case 0:
                 // Child process
                 $this->call('jobs:enqueue', [
-                    'take' => $this->option('take'),
+                    '--take' => $this->option('take'),
                 ]);
-                break;
+                return false;
             default:
                 // Parent process
                 $this->line('Ran enqueue');
+                return true;
         }
     }
 }
