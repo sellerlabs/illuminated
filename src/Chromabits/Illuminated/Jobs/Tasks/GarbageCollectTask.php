@@ -60,12 +60,11 @@ class GarbageCollectTask extends BaseTask
                 ]
             );
 
-        $now = Carbon::now();
         $repeatIn = $job->get('repeatIn', -1);
 
         // How far back to look
         $days = $job->get('days', 30);
-        $jobs->where('created_at', '<', $now->subDays($days));
+        $jobs->where('created_at', '<', Carbon::now()->subDays($days));
 
         $job->append('Removing jobs from ' . $days . ' days ago');
 
@@ -85,8 +84,8 @@ class GarbageCollectTask extends BaseTask
         if ($repeatIn > -1) {
             $scheduler->pushCopy(
                 $job,
-                $now->addMinutes(max($repeatIn, 1)),
-                $now->addMinutes($job->get('expiresAfter', 1440))
+                Carbon::now()->addMinutes(max($repeatIn, 1)),
+                Carbon::now()->addMinutes($job->get('expiresAfter', 1440))
             );
         }
     }
