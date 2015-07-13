@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Database\Console\Migrations;
 
 use Illuminate\Database\Migrations\Migrator;
@@ -66,7 +75,6 @@ class StatusCommand extends BaseCommand
             } else {
                 $migrations[] = ['<fg=red>✗</fg=red>', $migration];
             }
-
         }
 
         if (count($migrations) > 0) {

@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Alerts;
 
+use Chromabits\Illuminated\Contracts\Alerts\AlertManager as ManagerContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Session\Store;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Chromabits\Illuminated\Contracts\Alerts\AlertManager as ManagerContract;
 
 /**
  * Class AlertManager

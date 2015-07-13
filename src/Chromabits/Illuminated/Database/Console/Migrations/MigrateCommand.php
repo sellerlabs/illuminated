@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Database\Console\Migrations;
 
 use Illuminate\Console\ConfirmableTrait;
@@ -116,25 +125,25 @@ class MigrateCommand extends BaseCommand
             [
                 'database',
                 null,
-                InputOption::VALUE_OPTIONAL, 'The database connection to use.'
+                InputOption::VALUE_OPTIONAL, 'The database connection to use.',
             ],
             [
                 'force',
                 null,
                 InputOption::VALUE_NONE,
-                'Force the operation to run when in production.'
+                'Force the operation to run when in production.',
             ],
             [
                 'pretend',
                 null,
                 InputOption::VALUE_NONE,
-                'Dump the SQL queries that would be run.'
+                'Dump the SQL queries that would be run.',
             ],
             [
                 'seed',
                 null,
                 InputOption::VALUE_NONE,
-                'Indicates if the seed task should be re-run.'
+                'Indicates if the seed task should be re-run.',
             ],
         ];
     }

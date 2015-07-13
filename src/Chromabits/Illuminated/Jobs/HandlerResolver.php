@@ -1,13 +1,22 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Jobs;
 
-use Illuminate\Config\Repository;
-use Illuminate\Container\BindingResolutionException;
-use Illuminate\Foundation\Application;
 use Chromabits\Illuminated\Jobs\Exceptions\UnresolvableException;
 use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
 use Chromabits\Illuminated\Jobs\Tasks\BaseTask;
+use Illuminate\Config\Repository;
+use Illuminate\Container\BindingResolutionException;
+use Illuminate\Foundation\Application;
 
 /**
  * Class HandlerResolver

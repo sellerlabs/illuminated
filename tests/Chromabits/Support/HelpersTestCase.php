@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Tests\Chromabits\Support;
 
+use Chromabits\Nucleus\Testing\TestCase;
 use Illuminate\Config\Repository;
 use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Database\MigrationServiceProvider;
 use Illuminate\Foundation\Application;
-use Chromabits\Nucleus\Testing\TestCase;
 use PDO;
 
 /**
@@ -63,8 +72,8 @@ abstract class HelpersTestCase extends TestCase
                 'Illuminate\Session\SessionServiceProvider',
                 'Illuminate\View\ViewServiceProvider',
                 DatabaseServiceProvider::class,
-                MigrationServiceProvider::class
-            ]
+                MigrationServiceProvider::class,
+            ],
         ]);
 
         $this->app->registerConfiguredProviders();

@@ -1,4 +1,15 @@
-<?php namespace Chromabits\Illuminated\Testing;
+<?php
+
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
+namespace Chromabits\Illuminated\Testing;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -58,6 +69,7 @@ trait AssertionsTrait
     {
         if (is_array($key)) {
             $this->assertViewHasAll($key);
+
             return;
         }
 
@@ -65,6 +77,7 @@ trait AssertionsTrait
             || !$this->response->original instanceof View
         ) {
             PHPUnit::assertTrue(false, 'The response was not a view.');
+
             return;
         }
         if (is_null($value)) {
@@ -111,6 +124,7 @@ trait AssertionsTrait
                 false,
                 'The response was not a view.'
             );
+
             return;
         }
 
@@ -172,6 +186,7 @@ trait AssertionsTrait
     {
         if (is_array($key)) {
             $this->assertSessionHasAll($key);
+
             return;
         }
 

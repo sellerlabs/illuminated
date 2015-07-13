@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Jobs;
 
 use Chromabits\Illuminated\Jobs\Commands\EnqueueScheduledCommand;
@@ -8,7 +17,6 @@ use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Illuminate\Support\ServiceProvider;
-use Tests\Chromabits\Illuminated\Jobs\Commands\EnqueueScheduledCommandTest;
 
 /**
  * Class JobsServiceProvider

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Database\Migrations;
 
 use InvalidArgumentException;
@@ -55,15 +64,15 @@ abstract class Batch
             if (!is_int($key)) {
                 throw new InvalidArgumentException(
                     'Migration: ' . (string) $value . ' has an invalid key'
-                        . ' format. Only use integer keys.'
+                    . ' format. Only use integer keys.'
                 );
             }
 
             if (!is_string($value) && !($value instanceof Batch)) {
                 throw new InvalidArgumentException(
                     'Migration: ' . (string) $value . ' has an invalid value'
-                        . ' format. Allowed values: string or an instance of'
-                        . ' another Batch class.'
+                    . ' format. Allowed values: string or an instance of'
+                    . ' another Batch class.'
                 );
             }
         }

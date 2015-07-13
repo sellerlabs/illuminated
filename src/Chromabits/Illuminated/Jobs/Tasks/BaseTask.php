@@ -1,7 +1,17 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Jobs\Tasks;
 
+use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
 
 /**
@@ -29,8 +39,11 @@ abstract class BaseTask
      * runner.
      *
      * @param Job $job
+     * @param JobSchedulerInterface $scheduler
+     *
+     * @return
      */
-    abstract public function fire(Job $job);
+    abstract public function fire(Job $job, JobSchedulerInterface $scheduler);
 
     /**
      * Get a simple array mapping accepted data keys with a description for

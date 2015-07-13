@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Database\Console\Migrations;
 
 use Illuminate\Database\Migrations\MigrationCreator;
@@ -130,14 +139,14 @@ class MigrateMakeCommand extends BaseCommand
                 'create',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'The table to be created.'
+                'The table to be created.',
             ],
 
             [
                 'table',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'The table to migrate.'
+                'The table to migrate.',
             ],
         ];
     }

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 return [
     /**
      * Paths
@@ -9,8 +18,8 @@ return [
          * Where to look for stylesheet files when running the inliner
          */
         'stylesheets' => [
-            base_path('resources/css/mail')
-        ]
+            base_path('resources/css/mail'),
+        ],
     ],
 
     /**
@@ -36,6 +45,6 @@ return [
         /**
          * Exclude media queries from being inlined
          */
-        'exclude_media_queries' => false
-    ]
+        'exclude_media_queries' => false,
+    ],
 ];

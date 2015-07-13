@@ -1,16 +1,26 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Jobs\Commands;
 
+use Chromabits\Illuminated\Jobs\Exceptions\UnresolvableException;
+use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
+use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
+use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Queue\Jobs\Job as LaravelJob;
-use Chromabits\Illuminated\Jobs\Exceptions\UnresolvableException;
-use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
-use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
 
 /**
  * Class RunTaskCommand
@@ -35,19 +45,29 @@ class RunTaskCommand extends Command implements SelfHandling, ShouldBeQueued
     protected $resolver;
 
     /**
+     * Implementation of the job scheduler
+     *
+     * @var JobSchedulerInterface
+     */
+    protected $scheduler;
+
+    /**
      * Construct an instance of a RunTaskCommand.
      *
      * Note: Parent constructor call is explicitly avoided.
      *
      * @param JobRepositoryInterface $jobs
      * @param HandlerResolverInterface $resolver
+     * @param JobSchedulerInterface $scheduler
      */
     public function __construct(
         JobRepositoryInterface $jobs,
-        HandlerResolverInterface $resolver
+        HandlerResolverInterface $resolver,
+        JobSchedulerInterface $scheduler
     ) {
         $this->jobs = $jobs;
         $this->resolver = $resolver;
+        $this->scheduler = $scheduler;
     }
 
     /**
@@ -76,7 +96,7 @@ class RunTaskCommand extends Command implements SelfHandling, ShouldBeQueued
 
             // Execute the handler
             $this->jobs->started($job, "Task handler started.\n");
-            $handler->fire($job);
+            $handler->fire($job, $this->scheduler);
 
             $this->jobs->complete($job);
         } catch (ModelNotFoundException $e) {

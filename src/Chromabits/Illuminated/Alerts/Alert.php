@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Alerts;
 
 use Illuminate\Contracts\Support\Arrayable;
@@ -183,7 +192,7 @@ class Alert implements Arrayable
             'title' => $this->title,
             'content' => $this->renderContent(),
             'type' => $this->type,
-            'internal_view' => $this->view
+            'internal_view' => $this->view,
         ];
     }
 
@@ -203,7 +212,7 @@ class Alert implements Arrayable
                 [
                     'title' => $this->title,
                     'content' => $this->content,
-                    'type' => $this->type
+                    'type' => $this->type,
                 ]
             )->render();
         }

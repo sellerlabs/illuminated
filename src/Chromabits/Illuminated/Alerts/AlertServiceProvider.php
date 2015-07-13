@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Alerts;
 
 use Illuminate\Support\ServiceProvider;
@@ -55,7 +64,7 @@ class AlertServiceProvider extends ServiceProvider
             return preg_replace(
                 $pattern,
                 '$1<?php echo app(\'Chromabits\Illuminated\Contracts\Alerts'
-                 . '\AlertManager\')->allAndRender(); ?>$2',
+                . '\AlertManager\')->allAndRender(); ?>$2',
                 $view
             );
         });
@@ -69,7 +78,7 @@ class AlertServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'Chromabits\Illuminated\Contracts\Alerts\AlertManager'
+            'Chromabits\Illuminated\Contracts\Alerts\AlertManager',
         ];
     }
 }

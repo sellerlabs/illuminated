@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Tests\Chromabits\Illuminated\Inliner;
 
 use Chromabits\Illuminated\Inliner\StyleInliner;
@@ -20,11 +29,11 @@ class StyleInlinerTest extends TestCase
             'cleanup' => false,
             'use_inline_styles_block' => false,
             'strip_original_tags' => false,
-            'exclude_media_queries' => false
+            'exclude_media_queries' => false,
         ]);
 
         $this->assertInstanceOf([
-            'Chromabits\Illuminated\Inliner\StyleInliner'
+            'Chromabits\Illuminated\Inliner\StyleInliner',
         ], $inliner);
     }
 
@@ -33,7 +42,7 @@ class StyleInlinerTest extends TestCase
         $inliner = new StyleInliner(['some/path']);
 
         $this->assertInstanceOf([
-            'Chromabits\Illuminated\Inliner\StyleInliner'
+            'Chromabits\Illuminated\Inliner\StyleInliner',
         ], $inliner);
     }
 
@@ -76,7 +85,7 @@ class StyleInlinerTest extends TestCase
         $mailer->shouldHaveReceived('send', [
             Mockery::type('array'),
             [],
-            Mockery::type('callable')
+            Mockery::type('callable'),
         ]);
     }
 }

@@ -1,11 +1,21 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Tests\Chromabits\Illuminated\Jobs\Commands;
 
 use Chromabits\Illuminated\Jobs\Commands\RunTaskCommand;
 use Chromabits\Illuminated\Jobs\Exceptions\UnresolvableException;
 use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
+use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobState;
 use Chromabits\Illuminated\Jobs\Tasks\BaseTask;
@@ -49,7 +59,10 @@ class RunTaskCommandTest extends HelpersTestCase
         $job->state = JobState::QUEUED;
 
         $handler = m::mock(BaseTask::class);
-        $handler->shouldReceive('fire')->with($job)->atLeast()->once();
+        $handler->shouldReceive('fire')->with(
+            $job,
+            m::type(JobSchedulerInterface::class)
+        )->atLeast()->once();
 
         $impersonator = new Impersonator();
 
@@ -195,8 +208,10 @@ class RunTaskCommandTest extends HelpersTestCase
         $job->save();
 
         $handler = m::mock(BaseTask::class);
-        $handler->shouldReceive('fire')->with($job)->atLeast()->once()
-            ->andThrow('Exception');
+        $handler->shouldReceive('fire')->with(
+            $job,
+            m::type(JobSchedulerInterface::class)
+        )->atLeast()->once()->andThrow('Exception');
 
         $impersonator = new Impersonator();
 

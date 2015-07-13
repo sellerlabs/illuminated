@@ -1,11 +1,19 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Jobs\Migrations;
 
-use Chromabits\Illuminated\Database\Migrations\BaseMigration;
 use Chromabits\Illuminated\Database\Migrations\TableMigration;
-use Illuminate\Database\Schema\Blueprint;
 use Chromabits\Illuminated\Jobs\JobState;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class CreateJobsTable

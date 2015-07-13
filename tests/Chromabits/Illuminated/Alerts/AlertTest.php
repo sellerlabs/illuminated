@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Tests\Chromabits\Illuminated\Alerts;
 
 use Chromabits\Illuminated\Alerts\Alert;
@@ -16,7 +25,7 @@ class AlertTest extends TestCase
     use ConstructorTesterTrait;
 
     protected $constructorTypes = [
-        'Chromabits\Illuminated\Alerts\Alert'
+        'Chromabits\Illuminated\Alerts\Alert',
     ];
 
     protected function make()

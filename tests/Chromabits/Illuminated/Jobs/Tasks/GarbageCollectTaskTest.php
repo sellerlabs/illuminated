@@ -1,11 +1,22 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Tests\Chromabits\Illuminated\Jobs\Tasks;
 
 use Carbon\Carbon;
+use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobState;
 use Chromabits\Illuminated\Jobs\Tasks\GarbageCollectTask;
+use Mockery as m;
 use Tests\Chromabits\Illuminated\Jobs\JobsDatabaseTrait;
 
 /**
@@ -63,7 +74,7 @@ class GarbageCollectTaskTest extends TaskTestCase
         $gcJob->created_at = Carbon::now()->subDays(1);
         $gcJob->save();
 
-        $task->fire($gcJob);
+        $task->fire($gcJob, m::mock(JobSchedulerInterface::class));
 
         $this->assertNotNull(Job::find($job->id));
         $this->assertNull(Job::find($job2->id));

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Inliner;
 
 use Chromabits\Illuminated\Contracts\Inliner\StyleInliner as InlinerContract;
@@ -60,7 +69,7 @@ class StyleInliner implements InlinerContract
                 'cleanup' => false,
                 'use_inline_styles_block' => false,
                 'strip_original_tags' => false,
-                'exclude_media_queries' => false
+                'exclude_media_queries' => false,
             ];
         }
 
@@ -130,7 +139,7 @@ class StyleInliner implements InlinerContract
             ->name($name . $extension);
 
         if (iterator_count($files) < 1) {
-            throw new StylesheetNotFoundException;
+            throw new StylesheetNotFoundException();
         }
 
         $iterator = $files->getIterator();

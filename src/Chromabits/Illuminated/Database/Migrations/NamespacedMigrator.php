@@ -1,9 +1,18 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Database\Migrations;
 
-use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\ConnectionResolverInterface;
+use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\Filesystem;
@@ -47,7 +56,8 @@ class NamespacedMigrator extends Migrator
     /**
      * Resolve a migration instance from a file.
      *
-     * @param  string  $file
+     * @param  string $file
+     *
      * @return object
      */
     public function resolve($file)
@@ -62,6 +72,6 @@ class NamespacedMigrator extends Migrator
             $class = trim($this->namespace, "\\") . '\\' . $class;
         }
 
-        return new $class;
+        return new $class();
     }
 }

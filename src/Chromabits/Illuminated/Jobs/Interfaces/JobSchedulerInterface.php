@@ -1,10 +1,20 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Jobs\Interfaces;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Chromabits\Illuminated\Jobs\Job;
+use Chromabits\Illuminated\Jobs\JobTag;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Interface JobSchedulerInterface
@@ -43,4 +53,41 @@ interface JobSchedulerInterface
      * @param Job $job
      */
     public function cancel(Job $job);
+
+    /**
+     * Apply a tag to an existing job.
+     *
+     * @param Job $job
+     * @param $tag
+     *
+     * @return JobTag|\Illuminate\Database\Eloquent\Model|null|static
+     */
+    public function tag(Job $job, $tag);
+
+    /**
+     * Find jobs by a tag.
+     *
+     * @param $tag
+     * @param bool|true $activeOnly
+     * @param int $take
+     *
+     * @return mixed
+     */
+    public function findByTag($tag, $activeOnly = true, $take = 20);
+
+    /**
+     * Creates a partial copy of the provided job and then schedules it at the
+     * specified time.
+     *
+     * With this, jobs can reschedule themselves to run again at some point in
+     * the future. Recurring tasks such as billing are a perfect example of
+     * this.
+     *
+     * @param Job $baseJob
+     * @param Carbon $runAt
+     * @param Carbon $expiresAt
+     *
+     * @return Job
+     */
+    public function pushCopy(Job $baseJob, Carbon $runAt, Carbon $expiresAt);
 }
