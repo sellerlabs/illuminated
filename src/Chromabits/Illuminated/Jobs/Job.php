@@ -13,6 +13,7 @@ namespace Chromabits\Illuminated\Jobs;
 
 use Carbon\Carbon;
 use Chromabits\Illuminated\Database\Articulate\Model;
+use Chromabits\Illuminated\Database\Articulate\Table;
 
 /**
  * Class Job
@@ -199,7 +200,14 @@ class Job extends Model
      */
     public function append($message)
     {
-        $this->message .= $message . "\n";
+        $newMessage = $this->message . $message . "\n";
+
+        if (Table::fits($newMessage, Table::TYPE_TEXT)) {
+            $this->message = $newMessage;
+        } else {
+            $this->message = mb_strcut(mb_strlen($message), 0)
+                . $message . "\n";
+        }
 
         $this->save();
     }

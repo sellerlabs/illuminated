@@ -21,10 +21,13 @@ class AddQueueColumns extends BaseMigration
      */
     public function up()
     {
-        $this->builder->table(Job::resolveTable(), function (Blueprint $table) {
-            $table->string('queue_connection')->nullable();
-            $table->string('queue_name')->nullable();
-        });
+        $this->builder->table(
+            Job::resolveTable()->getName(),
+            function (Blueprint $table) {
+                $table->string('queue_connection')->nullable();
+                $table->string('queue_name')->nullable();
+            }
+        );
     }
 
     /**
@@ -34,10 +37,13 @@ class AddQueueColumns extends BaseMigration
      */
     public function down()
     {
-        $this->builder->table(Job::resolveTable(), function (Blueprint $table) {
-            if (!$this->isSqlite()) {
-                $table->dropColumn(['queue_connection', 'queue_name']);
+        $this->builder->table(
+            Job::resolveTable()->getName(),
+            function (Blueprint $table) {
+                if (!$this->isSqlite()) {
+                    $table->dropColumn(['queue_connection', 'queue_name']);
+                }
             }
-        });
+        );
     }
 }

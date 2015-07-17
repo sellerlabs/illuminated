@@ -14,6 +14,7 @@ namespace Tests\Chromabits\Illuminated\Jobs;
 use Carbon\Carbon;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobState;
+use Chromabits\Nucleus\Support\Str;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
@@ -172,5 +173,14 @@ class JobTest extends HelpersTestCase
 
         $job->append('doge');
         $this->assertEquals("lol\nomg\ndoge\n", $job->message);
+
+        $huge = Str::quickRandom(200000);
+
+        $job->append($huge);
+        $job->append($huge);
+        $job->append('doge');
+
+        $this->assertFalse(starts_with($job->message, "lol\nomg\ndoge\n"));
+        $this->assertTrue(ends_with($job->message, "doge\n"));
     }
 }
