@@ -11,6 +11,7 @@
 
 namespace Chromabits\Illuminated\Jobs;
 
+use Chromabits\Illuminated\Database\Articulate\Table;
 use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
 use InvalidArgumentException;
 
@@ -54,6 +55,11 @@ class JobFactory implements JobFactoryInterface
         // Check if the input is valid JSON.
         if (!$this->isJson($data)) {
             throw new InvalidArgumentException('Data is not valid JSON.');
+        }
+
+        // Check if the data will fit inside a job record.
+        if (!Table::fits($data, Table::TYPE_TEXT)) {
+            throw new InvalidArgumentException('Data is too large for a job.');
         }
 
         $job->data = $data;

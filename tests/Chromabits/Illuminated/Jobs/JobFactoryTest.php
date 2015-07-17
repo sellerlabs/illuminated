@@ -14,6 +14,7 @@ namespace Tests\Chromabits\Illuminated\Jobs;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobFactory;
 use Chromabits\Illuminated\Jobs\JobState;
+use Chromabits\Nucleus\Support\Str;
 use InvalidArgumentException;
 use Tests\Chromabits\Support\HelpersTestCase;
 
@@ -43,6 +44,16 @@ class JobFactoryTest extends HelpersTestCase
         $this->setExpectedException(InvalidArgumentException::class);
 
         $factory->make('test.test', '{wow:"such task"};', 7);
+    }
+
+    public function testMakeWithHugeJson()
+    {
+        $factory = new JobFactory();
+        $huge = Str::random(2 ** 16);
+
+        $this->setExpectedException(InvalidArgumentException::class);
+
+        $factory->make('test.test', ['huge' => $huge], 7);
     }
 
     public function testMakeWithArray()

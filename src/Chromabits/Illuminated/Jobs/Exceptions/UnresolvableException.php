@@ -11,7 +11,7 @@
 
 namespace Chromabits\Illuminated\Jobs\Exceptions;
 
-use Exception;
+use Chromabits\Nucleus\Exceptions\CoreException;
 
 /**
  * Class UnresolvableException
@@ -21,7 +21,7 @@ use Exception;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Exceptions
  */
-class UnresolvableException extends Exception
+class UnresolvableException extends CoreException
 {
     //
 }

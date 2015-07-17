@@ -21,7 +21,7 @@ use Illuminate\Database\Schema\Builder;
  * @author Benjamin Kovach <benjamin@roundsphere.com>
  * @package Chromabits\Illuminated\Database\Migrations
  */
-class BaseMigration extends Migration
+abstract class BaseMigration extends Migration
 {
     /**
      * @var Builder
@@ -55,4 +55,18 @@ class BaseMigration extends Migration
     {
         return ($this->db->getConfig('driver') == 'sqlite');
     }
+
+    /**
+     * Run migrations up.
+     *
+     * @return mixed
+     */
+    abstract public function up();
+
+    /**
+     * Rollback changes performed by this migration.
+     *
+     * @return mixed
+     */
+    abstract public function down();
 }

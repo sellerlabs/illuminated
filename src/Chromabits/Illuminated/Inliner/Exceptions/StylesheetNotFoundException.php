@@ -11,7 +11,7 @@
 
 namespace Chromabits\Illuminated\Inliner\Exceptions;
 
-use Exception;
+use Chromabits\Nucleus\Exceptions\CoreException;
 
 /**
  * Class StylesheetNotFoundException
@@ -22,7 +22,7 @@ use Exception;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Inliner\Exceptions
  */
-class StylesheetNotFoundException extends Exception
+class StylesheetNotFoundException extends CoreException
 {
     //
 }
