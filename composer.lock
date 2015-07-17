@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "chromabits/nucleus",
-            "version": "v0.2.3",
+            "version": "v0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/etcinit/nucleus.git",
-                "reference": "049d68894ee759f3c7854690c7ddb9ce8d3f5a9c"
+                "reference": "7c640203963b0485489cd9b432f0b7cfaf2c5c2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/etcinit/nucleus/zipball/049d68894ee759f3c7854690c7ddb9ce8d3f5a9c",
-                "reference": "049d68894ee759f3c7854690c7ddb9ce8d3f5a9c",
+                "url": "https://api.github.com/repos/etcinit/nucleus/zipball/7c640203963b0485489cd9b432f0b7cfaf2c5c2c",
+                "reference": "7c640203963b0485489cd9b432f0b7cfaf2c5c2c",
                 "shasum": ""
             },
             "require": {
@@ -31,7 +31,10 @@
             "autoload": {
                 "psr-4": {
                     "Chromabits\\Nucleus\\": "src/Chromabits/Nucleus"
-                }
+                },
+                "files": [
+                    "src/Chromabits/Nucleus/Support/globals.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -44,7 +47,7 @@
                 }
             ],
             "description": "Some core PHP utilities",
-            "time": "2015-07-17 06:20:19"
+            "time": "2015-07-17 18:05:56"
         },
         {
             "name": "classpreloader/classpreloader",
