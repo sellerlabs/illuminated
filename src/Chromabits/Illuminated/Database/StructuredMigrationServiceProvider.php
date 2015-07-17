@@ -19,7 +19,7 @@ use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
 use Chromabits\Illuminated\Database\Interfaces\StructuredStatusInterface;
 use Chromabits\Illuminated\Database\Migrations\StructuredMigrator;
 use Chromabits\Illuminated\Database\Migrations\StructuredStatus;
-use Illuminate\Support\ServiceProvider;
+use Chromabits\Illuminated\Support\ServiceProvider;
 
 /**
  * Class StructuredMigrationServiceProvider

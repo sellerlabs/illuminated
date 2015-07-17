@@ -12,7 +12,7 @@
 namespace Chromabits\Illuminated\Inliner;
 
 use Chromabits\Illuminated\Contracts\Inliner\StyleInliner as InlinerContract;
-use Illuminate\Support\ServiceProvider;
+use Chromabits\Illuminated\Support\ServiceProvider;
 
 /**
  * Class InlinerServiceProvider

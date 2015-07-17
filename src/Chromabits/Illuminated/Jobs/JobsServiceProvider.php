@@ -17,7 +17,7 @@ use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
-use Illuminate\Support\ServiceProvider;
+use Chromabits\Illuminated\Support\ServiceProvider;
 
 /**
  * Class JobsServiceProvider

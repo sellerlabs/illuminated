@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Laravel Helpers package
+ */
+
 namespace Chromabits\Illuminated\Jobs\Commands;
 
 use Illuminate\Console\Command;
@@ -79,8 +88,7 @@ class EnqueueDaemonCommand extends Command implements SelfHandling
     {
         $pid = pcntl_fork();
 
-        switch($pid)
-        {
+        switch ($pid) {
             case -1:
                 throw new \Exception('Could not fork');
             case 0:
@@ -88,10 +96,12 @@ class EnqueueDaemonCommand extends Command implements SelfHandling
                 $this->call('jobs:enqueue', [
                     '--take' => $this->option('take'),
                 ]);
+
                 return false;
             default:
                 // Parent process
                 $this->line('Ran enqueue');
+
                 return true;
         }
     }

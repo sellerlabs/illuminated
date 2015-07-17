@@ -11,7 +11,7 @@
 
 namespace Chromabits\Illuminated\Alerts;
 
-use Illuminate\Support\ServiceProvider;
+use Chromabits\Illuminated\Support\ServiceProvider;
 
 /**
  * Class AlertServiceProvider

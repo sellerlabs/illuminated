@@ -76,5 +76,11 @@ abstract class ServiceProviderTestCase extends TestCase
         $result = $instance->provides();
 
         $this->assertInternalType(PrimitiveType::COLLECTION, $result);
+
+        if ($instance->isDeferred()) {
+            foreach ($this->shouldBeBound as $abstract) {
+                $this->assertTrue(in_array($abstract, $result));
+            }
+        }
     }
 }
