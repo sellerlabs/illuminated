@@ -72,7 +72,7 @@ class HandlerResolver implements HandlerResolverInterface
      */
     protected function getMap()
     {
-        return $this->config->get('tasks.map', []);
+        return $this->config->get('jobs.map', []);
     }
 
     /**
