@@ -9,25 +9,30 @@
  * This file is part of the Illuminated package
  */
 
-namespace Tests\Chromabits\Illuminated\Database;
+namespace Chromabits\Illuminated\Style;
 
-use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
-use Chromabits\Illuminated\Database\Interfaces\StructuredStatusInterface;
-use Chromabits\Illuminated\Database\StructuredMigrationServiceProvider;
 use Chromabits\Illuminated\Testing\ServiceProviderTestCase;
+use Chromabits\Standards\Console\CleanCommand;
+use Chromabits\Standards\Console\FixCommand;
+use Chromabits\Standards\Console\FormatCommand;
+use Chromabits\Standards\Console\InitCommand;
+use Chromabits\Standards\Console\ValidateCommand;
 use Illuminate\Foundation\Application;
 
 /**
- * Class StructuredMigrationServiceProviderTest
+ * Class StyleServiceProviderTest
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Tests\Chromabits\Illuminated\Database
+ * @package Chromabits\Illuminated\Style
  */
-class StructuredMigrationServiceProviderTest extends ServiceProviderTestCase
+class StyleServiceProviderTest extends ServiceProviderTestCase
 {
-    protected $shouldBeBound = [
-        StructuredMigratorInterface::class,
-        StructuredStatusInterface::class,
+    protected $commands = [
+        InitCommand::class,
+        FixCommand::class,
+        FormatCommand::class,
+        CleanCommand::class,
+        ValidateCommand::class,
     ];
 
     /**
@@ -39,6 +44,6 @@ class StructuredMigrationServiceProviderTest extends ServiceProviderTestCase
      */
     public function make(Application $app)
     {
-        return new StructuredMigrationServiceProvider($app);
+        return new StyleServiceProvider($app);
     }
 }

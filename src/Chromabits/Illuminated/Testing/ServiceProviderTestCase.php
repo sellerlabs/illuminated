@@ -1,19 +1,22 @@
 <?php
 
 /**
- * Copyright 2015, Eduardo Trujillo
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * This file is part of the Laravel Helpers package
+ * This file is part of the Illuminated package
  */
 
 namespace Chromabits\Illuminated\Testing;
 
 use Chromabits\Nucleus\Support\PrimitiveType;
 use Chromabits\Nucleus\Testing\TestCase;
+use Illuminate\Console\Application as ConsoleApplication;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Foundation\Application;
+use Mockery as m;
 
 /**
  * Class ServiceProviderTestCase
@@ -26,11 +29,38 @@ use Illuminate\Foundation\Application;
 abstract class ServiceProviderTestCase extends TestCase
 {
     /**
-     * List of abstracts that should be bound
+     * List of abstracts that should be bound.
      *
      * @var array
      */
     protected $shouldBeBound = [];
+
+    /**
+     * List of commands that should be registered by the provider.
+     *
+     * @var array
+     */
+    protected $commands = [];
+
+    /**
+     * Get list of abstracts that should be bound.
+     *
+     * @return array
+     */
+    protected function getExpectedBindings()
+    {
+        return $this->shouldBeBound;
+    }
+
+    /**
+     * Get list of commands that should be registered by the provider.
+     *
+     * @return array
+     */
+    protected function getCommands()
+    {
+        return $this->commands;
+    }
 
     /**
      * Construct an instance of a ServiceProviderTestCase
@@ -61,12 +91,42 @@ abstract class ServiceProviderTestCase extends TestCase
 
         $instance->register();
 
-        foreach ($this->shouldBeBound as $abstract) {
+        foreach ($this->getExpectedBindings() as $abstract) {
             $this->assertTrue(
                 $this->mockApp->bound($abstract),
                 $abstract . 'should be bound.'
             );
         }
+    }
+
+    public function testRegisterCommands()
+    {
+        if (count($this->getCommands()) == 0) {
+            return;
+        }
+
+        $app = new Application();
+
+        $provider = $this->make($app);
+        $provider->register();
+
+        $recordedCommands = [];
+        $artisan = m::mock(ConsoleApplication::class);
+        $artisan->shouldReceive('resolveCommands')
+            ->with(m::on(function ($input) use (&$recordedCommands) {
+                $recordedCommands = $input;
+
+                return is_array($input);
+            }))
+            ->once();
+
+        /** @var Dispatcher $events */
+        $events = $app['events'];
+        $events->fire('artisan.start', [
+            'artisan' => $artisan,
+        ]);
+
+        $this->assertEquals($this->getCommands(), $recordedCommands);
     }
 
     public function testProvides()
@@ -78,7 +138,7 @@ abstract class ServiceProviderTestCase extends TestCase
         $this->assertInternalType(PrimitiveType::COLLECTION, $result);
 
         if ($instance->isDeferred()) {
-            foreach ($this->shouldBeBound as $abstract) {
+            foreach ($this->getExpectedBindings() as $abstract) {
                 $this->assertTrue(in_array($abstract, $result));
             }
         }
