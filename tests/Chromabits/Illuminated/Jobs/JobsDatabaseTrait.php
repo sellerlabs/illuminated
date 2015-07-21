@@ -13,6 +13,7 @@ namespace Tests\Chromabits\Illuminated\Jobs;
 
 use Chromabits\Illuminated\Database\Migrations\StructuredMigrator;
 use Chromabits\Illuminated\Jobs\JobsMigrationBatch;
+use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 
 /**
  * Trait JobsDatabaseTrait
@@ -22,13 +23,18 @@ use Chromabits\Illuminated\Jobs\JobsMigrationBatch;
  */
 trait JobsDatabaseTrait
 {
+    /**
+     * @var DatabaseMigrationRepository
+     */
+    protected $migrationsRepository;
+
     public function migrateJobsDatabase()
     {
-        $repository = $this->app->make('migration.repository');
-        $repository->createRepository();
+        $this->migrationsRepository = $this->app->make('migration.repository');
+        $this->migrationsRepository->createRepository();
 
         $migrator = new StructuredMigrator(
-            $repository,
+            $this->migrationsRepository,
             $this->app->make('db'),
             new JobsMigrationBatch()
         );

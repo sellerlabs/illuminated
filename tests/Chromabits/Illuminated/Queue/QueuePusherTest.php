@@ -51,4 +51,22 @@ class QueuePusherTest extends HelpersTestCase
         $pusher = $imp->make(QueuePusher::class);
         $pusher->push($job, $data, 'dogemq', $queueName);
     }
+
+    public function testPushWithDefault()
+    {
+        $imp = new Impersonator();
+
+        $job = 'Omg\Doge\LaunchCommand';
+        $data = [
+            'omg' => 'whyyoudothis.jpg',
+        ];
+
+        $queue = m::mock(QueueManager::class);
+        $queue->shouldReceive('push')->with($job, $data, 'no no i stay')
+            ->once();
+        $imp->provide($queue);
+
+        $pusher = $imp->make(QueuePusher::class);
+        $pusher->push($job, $data, null, 'no no i stay');
+    }
 }

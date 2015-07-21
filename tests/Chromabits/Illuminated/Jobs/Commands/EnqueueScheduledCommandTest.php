@@ -125,4 +125,56 @@ class EnqueueScheduledCommandTest extends HelpersTestCase
         $command->setLaravel($this->app);
         $command->run($input, $output);
     }
+
+    public function testFireWithCustomQueue()
+    {
+        $job = new Job();
+
+        $job->state = JobState::SCHEDULED;
+        $job->run_at = Carbon::now()->subMinute();
+        $job->queue_connection = 'dogemq';
+        $job->queue_name = 'food';
+
+        $impersonator = new Impersonator();
+
+        $impersonator->mock(
+            JobSchedulerInterface::class,
+            function (MockInterface $mock) use ($job) {
+                $mock->shouldReceive('findReady')->atLeast()->once()
+                    ->andReturn(new Collection([$job]));
+            }
+        );
+
+        $impersonator->mock(
+            Repository::class,
+            function (MockInterface $mock) {
+                $mock->shouldReceive('get')->with('jobs.queue.connection')
+                    ->andReturn('nopemq')->once();
+                $mock->shouldReceive('get')->with('jobs.queue.id')
+                    ->andReturn('fakejobs')->once();
+            }
+        );
+
+        $impersonator->mock(
+            QueuePusherInterface::class,
+            function (MockInterface $mock) {
+                $mock->shouldReceive('push')->atLeast()->once()
+                    ->with(
+                        m::type('string'),
+                        m::type('array'),
+                        'dogemq',
+                        'food'
+                    );
+            }
+        );
+
+        /** @var EnqueueScheduledCommand $command */
+        $command = $impersonator->make(EnqueueScheduledCommand::class);
+
+        $input = new StringInput('--take=25');
+        $output = new NullOutput();
+
+        $command->setLaravel($this->app);
+        $command->run($input, $output);
+    }
 }

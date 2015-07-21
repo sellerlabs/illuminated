@@ -42,6 +42,9 @@ class JobTest extends HelpersTestCase
 
         $this->assertTrue($job->ready());
 
+        $job->state = JobState::COMPLETE;
+        $this->assertFalse($job->ready());
+
         $job->state = JobState::SCHEDULED;
         $job->run_at = Carbon::yesterday();
 
