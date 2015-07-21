@@ -1,8 +1,8 @@
-# laravel-helpers
+# [illuminated](http://phabricator.chromabits.com/diffusion/LLMNTD/)
 
-This is a collection of some utility classes and components that I use
-on my Laravel 5 projects. Some of them are experimental and might not
-be finished or tested.
+A collection of Laravel 5 utilities and components. Ranging from stable, experimental to even controversial.
+
+These are being used extensively by [@etcinit](https://github.com/etcinit) and  [@sellerlabs](https://github.com/sellerlabs).
 
 ## Components
 
