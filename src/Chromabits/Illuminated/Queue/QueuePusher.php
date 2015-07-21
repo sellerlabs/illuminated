@@ -54,8 +54,12 @@ class QueuePusher implements QueuePusherInterface
      *
      * @return mixed
      */
-    public function push($job, array $data, $connection, $queue = null)
+    public function push($job, array $data, $connection = null, $queue = null)
     {
+        if ($connection == null) {
+            return $this->manager->push($job, $data, $queue);
+        }
+
         $connection = $this->manager->connection($connection);
 
         return $connection->push($job, $data, $queue);

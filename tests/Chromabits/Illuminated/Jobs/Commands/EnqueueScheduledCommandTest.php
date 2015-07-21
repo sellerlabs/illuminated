@@ -16,9 +16,10 @@ use Chromabits\Illuminated\Jobs\Commands\EnqueueScheduledCommand;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobState;
+use Chromabits\Illuminated\Queue\Interfaces\QueuePusherInterface;
 use Chromabits\Nucleus\Testing\Impersonator;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Queue\QueueManager;
 use Mockery as m;
 use Mockery\MockInterface;
 use Symfony\Component\Console\Input\StringInput;
@@ -68,10 +69,50 @@ class EnqueueScheduledCommandTest extends HelpersTestCase
         );
 
         $impersonator->mock(
-            QueueManager::class,
+            Repository::class,
+            function (MockInterface $mock) {
+                $mock->shouldReceive('get')->with('jobs.queue.connection')
+                    ->andReturnNull()->once();
+                $mock->shouldReceive('get')->with('jobs.queue.id')
+                    ->andReturnNull()->once();
+            }
+        );
+
+        $impersonator->mock(
+            QueuePusherInterface::class,
             function (MockInterface $mock) {
                 $mock->shouldReceive('push')->atLeast()->once()
-                    ->with(m::type('string'), m::type('array'));
+                    ->with(m::type('string'), m::type('array'), null, null);
+            }
+        );
+
+        /** @var EnqueueScheduledCommand $command */
+        $command = $impersonator->make(EnqueueScheduledCommand::class);
+
+        $input = new StringInput('--take=25');
+        $output = new NullOutput();
+
+        $command->setLaravel($this->app);
+        $command->run($input, $output);
+    }
+
+    public function testFireWithNone()
+    {
+        $impersonator = new Impersonator();
+
+        $impersonator->mock(
+            JobSchedulerInterface::class,
+            function (MockInterface $mock) {
+                $mock->shouldReceive('findReady')->atLeast()->once()
+                    ->andReturn(new Collection([]));
+            }
+        );
+
+        $impersonator->mock(
+            QueuePusherInterface::class,
+            function (MockInterface $mock) {
+                $mock->shouldReceive('push')->never()
+                    ->with(m::type('string'), m::type('array'), null, null);
             }
         );
 

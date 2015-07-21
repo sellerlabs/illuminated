@@ -43,6 +43,8 @@ use Chromabits\Illuminated\Database\Articulate\Table;
  * @property bool schedulable
  * @property int attempts
  * @property int retries
+ * @property string queue_connection
+ * @property string queue_name
  * @property Carbon started_at
  * @property Carbon completed_at
  * @property Carbon expires_at

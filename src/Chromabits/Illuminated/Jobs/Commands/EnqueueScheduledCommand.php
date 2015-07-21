@@ -12,8 +12,11 @@
 namespace Chromabits\Illuminated\Jobs\Commands;
 
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
+use Chromabits\Illuminated\Jobs\Job;
+use Chromabits\Illuminated\Queue\Interfaces\QueuePusherInterface;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Queue\QueueManager;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -47,21 +50,32 @@ class EnqueueScheduledCommand extends Command implements SelfHandling
     protected $scheduler;
 
     /**
-     * Implementation of the queue manager.
+     * Implementation of the config repository.
      *
-     * @var QueueManager
+     * @var Repository
      */
-    protected $queue;
+    protected $config;
+
+    /**
+     * Implementation of the queue pusher.
+     *
+     * @var QueuePusherInterface
+     */
+    protected $pusher;
 
     /**
      * Construct an instance of a EnqueueScheduledCommand.
      *
      * @param JobSchedulerInterface $scheduler
-     * @param QueueManager $queue
+     * @param QueuePusherInterface $pusher
+     * @param Repository $config
+     *
+     * @internal param QueueManager $queue
      */
     public function __construct(
         JobSchedulerInterface $scheduler,
-        QueueManager $queue
+        QueuePusherInterface $pusher,
+        Repository $config
     ) {
         parent::__construct();
 
@@ -74,7 +88,8 @@ class EnqueueScheduledCommand extends Command implements SelfHandling
         );
 
         $this->scheduler = $scheduler;
-        $this->queue = $queue;
+        $this->pusher = $pusher;
+        $this->config = $config;
     }
 
     /**
@@ -92,10 +107,19 @@ class EnqueueScheduledCommand extends Command implements SelfHandling
             return;
         }
 
+        $defaultConnection = $this->config->get('jobs.queue.connection');
+        $defaultQueue = $this->config->get('jobs.queue.id');
+
+        /** @var Job $job */
         foreach ($ready as $job) {
-            $this->queue->push(RunTaskCommand::class, [
-                'job_id' => $job->id,
-            ]);
+            $this->pusher->push(
+                RunTaskCommand::class,
+                [
+                    'job_id' => $job->id,
+                ],
+                coalesce($job->queue_connection, $defaultConnection),
+                coalesce($job->queue_name, $defaultQueue)
+            );
 
             $this->line('Queued Job ID: ' . $job->id . ' ' . $job->task);
         }
