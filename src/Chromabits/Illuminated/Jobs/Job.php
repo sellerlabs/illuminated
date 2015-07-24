@@ -16,7 +16,7 @@ use Chromabits\Illuminated\Database\Articulate\Model;
 use Chromabits\Illuminated\Database\Articulate\Table;
 
 /**
- * Class Job
+ * Class Job.
  *
  * A Job object represents a task that needs to be or has been performed by the
  * application. While strongly related to an queue item, a job may exist outside
@@ -185,8 +185,8 @@ class Job extends Model
      *
      * The key can be in dot format.
      *
-     * @param $key
-     * @param $default
+     * @param string $key
+     * @param mixed $default
      *
      * @return mixed
      */
@@ -198,7 +198,7 @@ class Job extends Model
     /**
      * Append a line to this jobs' message.
      *
-     * @param $message
+     * @param string $message
      */
     public function append($message)
     {

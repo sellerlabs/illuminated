@@ -19,7 +19,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Str;
 
 /**
- * Class RouteMapperTestCase
+ * Class RouteMapperTestCase.
  *
  * This test case attempts to efficiently find common errors in RouteMapper
  * classes and route definitions.

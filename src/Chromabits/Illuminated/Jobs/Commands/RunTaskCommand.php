@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Queue\Jobs\Job as LaravelJob;
 
 /**
- * Class RunTaskCommand
+ * Class RunTaskCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Commands
@@ -45,7 +45,7 @@ class RunTaskCommand extends Command implements SelfHandling, ShouldBeQueued
     protected $resolver;
 
     /**
-     * Implementation of the job scheduler
+     * Implementation of the job scheduler.
      *
      * @var JobSchedulerInterface
      */
@@ -74,7 +74,7 @@ class RunTaskCommand extends Command implements SelfHandling, ShouldBeQueued
      * Handle the queue job.
      *
      * @param LaravelJob $laravelJob
-     * @param $data
+     * @param mixed $data
      */
     public function fire(LaravelJob $laravelJob, $data)
     {

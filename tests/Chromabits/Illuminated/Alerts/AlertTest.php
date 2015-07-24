@@ -16,9 +16,10 @@ use Chromabits\Nucleus\Testing\TestCase;
 use Chromabits\Nucleus\Testing\Traits\ConstructorTesterTrait;
 
 /**
- * Class AlertTest
+ * Class AlertTest.
  *
- * @package Chromabits\Illuminated\Alerts
+ * @author Eduardo Trujillo <ed@chromabits.com>
+ * @package Tests\Chromabits\Illuminated\Alerts
  */
 class AlertTest extends TestCase
 {
@@ -28,6 +29,11 @@ class AlertTest extends TestCase
         'Chromabits\Illuminated\Alerts\Alert',
     ];
 
+    /**
+     * Make an instance of an Alert.
+     *
+     * @return Alert
+     */
     protected function make()
     {
         return new Alert();

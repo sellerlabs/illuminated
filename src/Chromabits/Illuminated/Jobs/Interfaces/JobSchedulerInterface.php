@@ -17,7 +17,7 @@ use Chromabits\Illuminated\Jobs\JobTag;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Interface JobSchedulerInterface
+ * Interface JobSchedulerInterface.
  *
  * Handles job scheduling, cancelling, tracking.
  *
@@ -58,17 +58,17 @@ interface JobSchedulerInterface
      * Apply a tag to an existing job.
      *
      * @param Job $job
-     * @param $tag
+     * @param string $tag
      *
-     * @return JobTag|\Illuminate\Database\Eloquent\Model|null|static
+     * @return JobTag|null
      */
     public function tag(Job $job, $tag);
 
     /**
      * Find jobs by a tag.
      *
-     * @param $tag
-     * @param bool|true $activeOnly
+     * @param string $tag
+     * @param bool $activeOnly
      * @param int $take
      *
      * @return mixed

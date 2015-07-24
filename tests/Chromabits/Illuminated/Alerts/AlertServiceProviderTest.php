@@ -15,8 +15,9 @@ use Chromabits\Illuminated\Alerts\AlertServiceProvider;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class AlertServiceProviderTestInternal
+ * Class AlertServiceProviderTestInternal.
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Alerts
  */
 class AlertServiceProviderTestInternal extends HelpersTestCase
@@ -27,7 +28,11 @@ class AlertServiceProviderTestInternal extends HelpersTestCase
 
         $provider->register();
 
-        $this->assertTrue($this->app->bound('Chromabits\Illuminated\Contracts\Alerts\AlertManager'));
+        $this->assertTrue(
+            $this->app->bound(
+                'Chromabits\Illuminated\Contracts\Alerts\AlertManager'
+            )
+        );
     }
 
     public function testProvides()

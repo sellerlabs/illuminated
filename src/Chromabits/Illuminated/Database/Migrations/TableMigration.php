@@ -15,7 +15,7 @@ use Exception;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class TableMigration
+ * Class TableMigration.
  *
  * A base migration for migrations that simply create/drop a table. Applications
  * usually have one or more of this kind. This base class simply reduces the

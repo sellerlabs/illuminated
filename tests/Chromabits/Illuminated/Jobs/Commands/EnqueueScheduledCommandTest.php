@@ -28,7 +28,7 @@ use Tests\Chromabits\Illuminated\Jobs\JobsDatabaseTrait;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class EnqueueScheduledCommandTest
+ * Class EnqueueScheduledCommandTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs\Commands
@@ -37,6 +37,9 @@ class EnqueueScheduledCommandTest extends HelpersTestCase
 {
     use JobsDatabaseTrait;
 
+    /**
+     * Setup the test.
+     */
     protected function setUp()
     {
         parent::setUp();

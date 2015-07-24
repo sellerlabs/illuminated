@@ -16,7 +16,7 @@ use Chromabits\Illuminated\Jobs\JobState;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateJobsTable
+ * Class CreateJobsTable.
  *
  * Creates the jobs table for the job management package.
  *

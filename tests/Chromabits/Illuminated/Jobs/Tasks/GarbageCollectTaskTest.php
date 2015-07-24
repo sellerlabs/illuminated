@@ -20,7 +20,7 @@ use Mockery as m;
 use Tests\Chromabits\Illuminated\Jobs\JobsDatabaseTrait;
 
 /**
- * Class GarbageCollectTaskTest
+ * Class GarbageCollectTaskTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs\Tasks
@@ -29,6 +29,9 @@ class GarbageCollectTaskTest extends TaskTestCase
 {
     use JobsDatabaseTrait;
 
+    /**
+     * Setup the test.
+     */
     protected function setUp()
     {
         parent::setUp();

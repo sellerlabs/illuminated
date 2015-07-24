@@ -15,7 +15,7 @@ use Chromabits\Illuminated\Database\Migrations\StatusReport;
 use Chromabits\Nucleus\Testing\TestCase;
 
 /**
- * Class StatusReportTest
+ * Class StatusReportTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Database\Migrations

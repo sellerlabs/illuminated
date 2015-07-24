@@ -15,7 +15,7 @@ use Chromabits\Illuminated\Database\Interfaces\StructuredStatusInterface;
 use Illuminate\Console\Command;
 
 /**
- * Class StructuredStatusCommand
+ * Class StructuredStatusCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Commands
@@ -44,7 +44,7 @@ class StructuredStatusCommand extends Command
     protected $status;
 
     /**
-     * Construct an instance of a StatusCommand
+     * Construct an instance of a StatusCommand.
      *
      * @param StructuredStatusInterface $status
      */

@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Database\Commands;
 use Illuminate\Database\Console\Migrations\InstallCommand;
 
 /**
- * Class StructuredInstallCommand
+ * Class StructuredInstallCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Commands

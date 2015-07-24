@@ -12,12 +12,14 @@
 namespace Chromabits\Illuminated\Testing;
 
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 /**
- * Class ApplicationTrait
+ * Class ApplicationTrait.
  *
  * @author Laravel/Lumen
  * @author Eduardo Trujillo <ed@chromabits.com>
@@ -49,7 +51,6 @@ trait ApplicationTrait
     /**
      * Refresh the application instance.
      *
-     * @return void
      */
     protected function refreshApplication()
     {
@@ -68,7 +69,7 @@ trait ApplicationTrait
      * @param  array $server
      * @param  string $content
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function call(
         $method,
@@ -107,7 +108,7 @@ trait ApplicationTrait
      * @param  array $server
      * @param  string $content
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function callSecure(
         $method,
@@ -145,7 +146,7 @@ trait ApplicationTrait
      * @param  array $server
      * @param  string $content
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function route(
         $method,
@@ -177,7 +178,6 @@ trait ApplicationTrait
      *
      * @param  array $data
      *
-     * @return void
      */
     public function session(array $data)
     {
@@ -190,7 +190,6 @@ trait ApplicationTrait
     /**
      * Flush all of the current session data.
      *
-     * @return void
      */
     public function flushSession()
     {
@@ -201,7 +200,6 @@ trait ApplicationTrait
     /**
      * Start the session for the application.
      *
-     * @return void
      */
     protected function startSession()
     {
@@ -213,10 +211,9 @@ trait ApplicationTrait
     /**
      * Set the currently logged in user for the application.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
+     * @param  Authenticatable $user
      * @param  string $driver
      *
-     * @return void
      */
     public function be(UserContract $user, $driver = null)
     {
@@ -228,7 +225,6 @@ trait ApplicationTrait
      *
      * @param  string $class
      *
-     * @return void
      */
     public function seed($class = 'DatabaseSeeder')
     {

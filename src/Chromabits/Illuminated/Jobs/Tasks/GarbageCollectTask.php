@@ -18,7 +18,7 @@ use Chromabits\Illuminated\Jobs\JobState;
 use Chromabits\Nucleus\Support\PrimitiveType;
 
 /**
- * Class GarbageCollectTask
+ * Class GarbageCollectTask.
  *
  * Performs garbage collection tasks for the jobs table to make sure everything
  * runs smoothly over time:

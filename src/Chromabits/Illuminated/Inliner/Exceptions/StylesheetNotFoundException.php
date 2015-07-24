@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Inliner\Exceptions;
 use Chromabits\Nucleus\Exceptions\CoreException;
 
 /**
- * Class StylesheetNotFoundException
+ * Class StylesheetNotFoundException.
  *
  * Thrown when the inliner is unable to locate a stylesheet
  * based on the provided information

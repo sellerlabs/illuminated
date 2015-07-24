@@ -12,10 +12,11 @@
 namespace Chromabits\Illuminated\Support;
 
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 /**
- * Class ServiceProvider
+ * Class ServiceProvider.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Support
@@ -27,11 +28,11 @@ abstract class ServiceProvider extends BaseServiceProvider
     /**
      * Create a new service provider instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param Application $app
      *
      * @throws LackOfCoffeeException
      */
-    public function __construct($app)
+    public function __construct(Application $app)
     {
         parent::__construct($app);
 
@@ -45,8 +46,8 @@ abstract class ServiceProvider extends BaseServiceProvider
     /**
      * Get the services provided by the provider.
      *
-     * @return array
      * @throws LackOfCoffeeException
+     * @return array
      */
     public function provides()
     {

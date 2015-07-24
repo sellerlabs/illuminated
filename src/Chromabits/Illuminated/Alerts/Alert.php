@@ -15,7 +15,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\View\View;
 
 /**
- * Class Alert
+ * Class Alert.
  *
  * Represents an alert message
  *
@@ -32,7 +32,7 @@ class Alert implements Arrayable
     const TYPE_VALIDATION = 'validation';
 
     /**
-     * Title
+     * Title.
      *
      * Usually displayed before the content, and describing
      * the nature of the alert
@@ -42,7 +42,7 @@ class Alert implements Arrayable
     protected $title;
 
     /**
-     * Content
+     * Content.
      *
      * For the top-level alert view, this field will be made available
      * along others as part of that view's data context.
@@ -56,7 +56,7 @@ class Alert implements Arrayable
     protected $content;
 
     /**
-     * Internal view name
+     * Internal view name.
      *
      * An internal view can pre-render the content variable before it is
      * passed onto the top-level alert-view. This useful for having
@@ -73,7 +73,7 @@ class Alert implements Arrayable
     protected $view;
 
     /**
-     * Type
+     * Type.
      *
      * A simple string describing the nature of the alert message. Views
      * can use this field to alter the color or icons of the alert
@@ -86,7 +86,7 @@ class Alert implements Arrayable
     protected $type;
 
     /**
-     * Construct an instance of an Alert
+     * Construct an instance of an Alert.
      */
     public function __construct()
     {
@@ -98,7 +98,7 @@ class Alert implements Arrayable
     }
 
     /**
-     * Get the title of the alert
+     * Get the title of the alert.
      *
      * @return string|null
      */
@@ -108,7 +108,7 @@ class Alert implements Arrayable
     }
 
     /**
-     * Set or clear the title of the alert
+     * Set or clear the title of the alert.
      *
      * @param string|null $title
      */
@@ -118,7 +118,7 @@ class Alert implements Arrayable
     }
 
     /**
-     * Get the content of the alert
+     * Get the content of the alert.
      *
      * @return string|null
      */
@@ -128,7 +128,7 @@ class Alert implements Arrayable
     }
 
     /**
-     * Set the content of the alert
+     * Set the content of the alert.
      *
      * @param string|null $content
      */
@@ -138,7 +138,7 @@ class Alert implements Arrayable
     }
 
     /**
-     * Get the type of the alert
+     * Get the type of the alert.
      *
      * @return string
      */
@@ -148,7 +148,7 @@ class Alert implements Arrayable
     }
 
     /**
-     * Set the type of the alert
+     * Set the type of the alert.
      *
      * @param string $type
      */
@@ -158,11 +158,11 @@ class Alert implements Arrayable
     }
 
     /**
-     * Set an optional view to pre-render the content field
+     * Set an optional view to pre-render the content field.
      *
      * @see view
      *
-     * @param $name
+     * @param string $name
      */
     public function setView($name)
     {
@@ -170,9 +170,9 @@ class Alert implements Arrayable
     }
 
     /**
-     * Render the alert
+     * Render the alert.
      *
-     * @param \Illuminate\View\View $view
+     * @param View $view
      *
      * @return string
      */
@@ -197,7 +197,7 @@ class Alert implements Arrayable
     }
 
     /**
-     * Pre-process the content field
+     * Pre-process the content field.
      *
      * If the alert has an internal view, it will use it to render the
      * content property.

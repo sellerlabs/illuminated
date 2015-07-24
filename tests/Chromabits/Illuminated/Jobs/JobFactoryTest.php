@@ -19,7 +19,7 @@ use InvalidArgumentException;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class JobFactoryTest
+ * Class JobFactoryTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs

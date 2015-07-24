@@ -17,9 +17,10 @@ use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Testing\ServiceProviderTestCase;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
 
 /**
- * Class JobsServiceProviderTest
+ * Class JobsServiceProviderTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs
@@ -34,11 +35,11 @@ class JobsServiceProviderTest extends ServiceProviderTestCase
     ];
 
     /**
-     * Make an instance of the service provider being tested
+     * Make an instance of the service provider being tested.
      *
      * @param Application $app
      *
-     * @return \Illuminate\Support\ServiceProvider
+     * @return ServiceProvider
      */
     public function make(Application $app)
     {

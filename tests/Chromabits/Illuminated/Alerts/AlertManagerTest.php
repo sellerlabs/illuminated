@@ -16,7 +16,7 @@ use Chromabits\Nucleus\Testing\Traits\ConstructorTesterTrait;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class AlertManagerTestInternal
+ * Class AlertManagerTestInternal.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Alerts
@@ -31,6 +31,11 @@ class AlertManagerTestInternal extends HelpersTestCase
         'Chromabits\Illuminated\Contracts\Alerts\AlertManager',
     ];
 
+    /**
+     * Make an instance of an AlertManager.
+     *
+     * @return AlertManager
+     */
     protected function make()
     {
         return new AlertManager(

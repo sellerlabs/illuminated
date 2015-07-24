@@ -11,8 +11,11 @@
 
 namespace Chromabits\Illuminated\Database\Interfaces;
 
+use Illuminate\Database\Connection;
+use Illuminate\Database\Migrations\MigrationRepositoryInterface;
+
 /**
- * Interface StructuredMigratorInterface
+ * Interface StructuredMigratorInterface.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Interfaces
@@ -24,7 +27,6 @@ interface StructuredMigratorInterface
      *
      * @param bool $pretend
      *
-     * @return void
      */
     public function run($pretend = false);
 
@@ -34,7 +36,6 @@ interface StructuredMigratorInterface
      * @param  array $migrations
      * @param  bool $pretend
      *
-     * @return void
      */
     public function runMigrationList($migrations, $pretend = false);
 
@@ -68,7 +69,7 @@ interface StructuredMigratorInterface
      *
      * @param string $connection
      *
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      */
     public function resolveConnection($connection);
 
@@ -77,14 +78,13 @@ interface StructuredMigratorInterface
      *
      * @param string $name
      *
-     * @return void
      */
     public function setConnection($name);
 
     /**
      * Get the migration repository instance.
      *
-     * @return \Illuminate\Database\Migrations\MigrationRepositoryInterface
+     * @return MigrationRepositoryInterface
      */
     public function getRepository();
 

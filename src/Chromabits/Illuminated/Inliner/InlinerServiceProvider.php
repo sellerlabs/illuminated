@@ -15,7 +15,7 @@ use Chromabits\Illuminated\Contracts\Inliner\StyleInliner as InlinerContract;
 use Chromabits\Illuminated\Support\ServiceProvider;
 
 /**
- * Class InlinerServiceProvider
+ * Class InlinerServiceProvider.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Inliner
@@ -32,7 +32,6 @@ class InlinerServiceProvider extends ServiceProvider
     /**
      * Register the service provider.
      *
-     * @return void
      */
     public function register()
     {
@@ -48,7 +47,7 @@ class InlinerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Return provide services in an array
+     * Return provide services in an array.
      *
      * @return array
      */

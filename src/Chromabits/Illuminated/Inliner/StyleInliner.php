@@ -20,7 +20,7 @@ use Symfony\Component\Finder\Finder;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 /**
- * Class StyleInliner
+ * Class StyleInliner.
  *
  * Converts CSS/HTML file combinations into a single string
  * of HTML with inlined styles, which is useful for rendering the
@@ -33,28 +33,28 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 class StyleInliner implements InlinerContract
 {
     /**
-     * Internal inliner
+     * Internal inliner.
      *
      * @var CssToInlineStyles
      */
     protected $internalInliner;
 
     /**
-     * Options
+     * Options.
      *
      * @var array
      */
     protected $options;
 
     /**
-     * Array of directories where we can locate stylesheets
+     * Array of directories where we can locate stylesheets.
      *
      * @var array
      */
     protected $stylesheetPaths;
 
     /**
-     * Construct an instance of a StyleInliner
+     * Construct an instance of a StyleInliner.
      *
      * @param array $stylesheets
      * @param array $options
@@ -79,18 +79,18 @@ class StyleInliner implements InlinerContract
     }
 
     /**
-     * Inline CSS stylesheet into a HTML string or Laravel view
+     * Inline CSS stylesheet into a HTML string or Laravel view.
      *
      * If a Laravel view is provided, the view will be rendered
      *
-     * @param string|\Illuminate\Contracts\View\View $content
+     * @param string|View $content
      * @param string $stylesheet Name of the stylesheet file
      * @param string $extension Extension of the stylesheet file
      * @param bool $xhtml Whether or not to use XHTML for rendering
      *
-     * @return string
      * @throws StylesheetNotFoundException
      * @throws \TijsVerkoyen\CssToInlineStyles\Exception
+     * @return string
      */
     public function inline(
         $content,
@@ -121,13 +121,13 @@ class StyleInliner implements InlinerContract
     }
 
     /**
-     * Attempt to resolve the file path of a stylesheet using its name
+     * Attempt to resolve the file path of a stylesheet using its name.
      *
-     * @param $name
+     * @param string $name
      * @param string $extension
      *
-     * @return mixed
      * @throws StylesheetNotFoundException
+     * @return mixed
      */
     protected function resolveStylesheet($name, $extension = '.css')
     {
@@ -149,7 +149,7 @@ class StyleInliner implements InlinerContract
     }
 
     /**
-     * Reset the internal inliner object
+     * Reset the internal inliner object.
      */
     protected function cleanup()
     {
@@ -158,7 +158,7 @@ class StyleInliner implements InlinerContract
     }
 
     /**
-     * Configure the internal inliner
+     * Configure the internal inliner.
      */
     protected function configure()
     {
@@ -176,11 +176,11 @@ class StyleInliner implements InlinerContract
     }
 
     /**
-     * Inline the content and then send it over the mailer
+     * Inline the content and then send it over the mailer.
      *
-     * @param \Illuminate\Contracts\Mail\Mailer $mailer
-     * @param $content
-     * @param $name
+     * @param Mailer $mailer
+     * @param mixed $content
+     * @param string $name
      * @param callable $callback
      */
     public function inlineAndSend(

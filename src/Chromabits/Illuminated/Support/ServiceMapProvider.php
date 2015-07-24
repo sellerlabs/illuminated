@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Support;
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
 
 /**
- * Class ServiceMapProvider
+ * Class ServiceMapProvider.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Support
@@ -31,8 +31,8 @@ abstract class ServiceMapProvider extends ServiceProvider
      * Keys are expected to be abstract strings, and value scan be a string or
      * any other valid concrete type.
      *
-     * @return array
      * @throws LackOfCoffeeException
+     * @return array
      */
     protected function getServiceMap()
     {
@@ -57,7 +57,6 @@ abstract class ServiceMapProvider extends ServiceProvider
     /**
      * Register the service provider.
      *
-     * @return void
      */
     public function register()
     {
@@ -71,8 +70,8 @@ abstract class ServiceMapProvider extends ServiceProvider
     /**
      * Get list of services provided.
      *
-     * @return array
      * @throws LackOfCoffeeException
+     * @return array
      */
     public function provides()
     {

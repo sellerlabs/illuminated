@@ -20,7 +20,7 @@ use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Support\ServiceProvider;
 
 /**
- * Class JobsServiceProvider
+ * Class JobsServiceProvider.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs
@@ -32,7 +32,6 @@ class JobsServiceProvider extends ServiceProvider
     /**
      * Register the service provider.
      *
-     * @return void
      */
     public function register()
     {

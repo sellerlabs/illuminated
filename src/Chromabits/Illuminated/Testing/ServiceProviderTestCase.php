@@ -16,10 +16,11 @@ use Chromabits\Nucleus\Testing\TestCase;
 use Illuminate\Console\Application as ConsoleApplication;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
 use Mockery as m;
 
 /**
- * Class ServiceProviderTestCase
+ * Class ServiceProviderTestCase.
  *
  * A base class for tests testing service providers.
  *
@@ -63,7 +64,7 @@ abstract class ServiceProviderTestCase extends TestCase
     }
 
     /**
-     * Construct an instance of a ServiceProviderTestCase
+     * Construct an instance of a ServiceProviderTestCase.
      *
      * @param null $name
      * @param array $data
@@ -77,11 +78,11 @@ abstract class ServiceProviderTestCase extends TestCase
     }
 
     /**
-     * Make an instance of the service provider being tested
+     * Make an instance of the service provider being tested.
      *
      * @param Application $app
      *
-     * @return \Illuminate\Support\ServiceProvider
+     * @return ServiceProvider
      */
     abstract public function make(Application $app);
 

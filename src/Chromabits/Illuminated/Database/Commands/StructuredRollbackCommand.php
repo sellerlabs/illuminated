@@ -16,7 +16,7 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Console\Migrations\RollbackCommand;
 
 /**
- * Class StructuredRollbackCommand
+ * Class StructuredRollbackCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Commands

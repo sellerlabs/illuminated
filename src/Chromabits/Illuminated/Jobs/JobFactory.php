@@ -16,7 +16,7 @@ use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
 use InvalidArgumentException;
 
 /**
- * Class JobFactory
+ * Class JobFactory.
  *
  * Build jobs. Saves the middle class. Kisses babies.
  *
@@ -28,7 +28,7 @@ class JobFactory implements JobFactoryInterface
     /**
      * Build a job.
      *
-     * @param $task
+     * @param string $task
      * @param string $data
      * @param int $retries
      *
@@ -68,7 +68,7 @@ class JobFactory implements JobFactoryInterface
     }
 
     /**
-     * Copies basic parameters of a job into a new one:
+     * Copies basic parameters of a job into a new one:.
      *
      * - Task
      * - Data
@@ -93,7 +93,7 @@ class JobFactory implements JobFactoryInterface
     /**
      * Check if a string is valid JSON.
      *
-     * @param $string
+     * @param string $string
      *
      * @return bool
      */

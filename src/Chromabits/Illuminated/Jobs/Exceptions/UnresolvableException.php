@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Jobs\Exceptions;
 use Chromabits\Nucleus\Exceptions\CoreException;
 
 /**
- * Class UnresolvableException
+ * Class UnresolvableException.
  *
  * Thrown when a task handler cannot be resolved.
  *

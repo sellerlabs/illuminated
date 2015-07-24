@@ -13,9 +13,10 @@ namespace Chromabits\Illuminated\Contracts\Inliner;
 
 use Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException;
 use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Contracts\View\View;
 
 /**
- * Interface StyleInliner
+ * Interface StyleInliner.
  *
  * Converts CSS/HTML file combinations into a single string
  * of HTML with inlined styles, which is useful for rendering the
@@ -28,18 +29,18 @@ use Illuminate\Contracts\Mail\Mailer;
 interface StyleInliner
 {
     /**
-     * Inline CSS stylesheet into a HTML string or Laravel view
+     * Inline CSS stylesheet into a HTML string or Laravel view.
      *
      * If a Laravel view is provided, the view will be rendered
      *
-     * @param string|\Illuminate\Contracts\View\View $content
+     * @param string|View $content
      * @param string $stylesheet Name of the stylesheet file
      * @param string $extension Extension of the stylesheet file
      * @param bool $xhtml Whether or not to use XHTML for rendering
      *
-     * @return string
      * @throws StylesheetNotFoundException
      * @throws \TijsVerkoyen\CssToInlineStyles\Exception
+     * @return string
      */
     public function inline(
         $content,
@@ -49,11 +50,11 @@ interface StyleInliner
     );
 
     /**
-     * Inline the content and then send it over the mailer
+     * Inline the content and then send it over the mailer.
      *
-     * @param \Illuminate\Contracts\Mail\Mailer $mailer
-     * @param $content
-     * @param $name
+     * @param Mailer $mailer
+     * @param mixed $content
+     * @param string $name
      * @param callable $callback
      */
     public function inlineAndSend(

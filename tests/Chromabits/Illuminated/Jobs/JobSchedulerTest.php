@@ -23,7 +23,7 @@ use Mockery\MockInterface;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class JobSchedulerTest
+ * Class JobSchedulerTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs
@@ -32,6 +32,9 @@ class JobSchedulerTest extends HelpersTestCase
 {
     use JobsDatabaseTrait;
 
+    /**
+     * Setup the test.
+     */
     protected function setUp()
     {
         parent::setUp();

@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Database\Interfaces;
 use Chromabits\Illuminated\Database\Migrations\StatusReport;
 
 /**
- * Interface StructuredStatusInterface
+ * Interface StructuredStatusInterface.
  *
  * Provides status information about migrations in general. Specifically which
  * ones have been ran, are defined, need to be ran, and are unknown to the

@@ -12,7 +12,7 @@
 namespace Chromabits\Illuminated\Database\Migrations;
 
 /**
- * Class StatusReport
+ * Class StatusReport.
  *
  * Computes a report on the status of migrations based on which migrations are
  * known/defined and which ones have been ran.
@@ -53,8 +53,8 @@ class StatusReport
     /**
      * Construct an instance of a StatusReport.
      *
-     * @param $migrations
-     * @param $ran
+     * @param array $migrations
+     * @param array $ran
      */
     public function __construct($migrations, $ran)
     {
@@ -65,7 +65,7 @@ class StatusReport
     }
 
     /**
-     * Categorize migrations
+     * Categorize migrations.
      */
     protected function categorize()
     {

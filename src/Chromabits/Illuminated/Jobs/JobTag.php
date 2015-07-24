@@ -13,9 +13,10 @@ namespace Chromabits\Illuminated\Jobs;
 
 use Carbon\Carbon;
 use Chromabits\Illuminated\Database\Articulate\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class JobTag
+ * Class JobTag.
  *
  * A simple string tag for a job. Useful for keeping track of multiple jobs
  * that belong to the same process.
@@ -46,7 +47,7 @@ class JobTag extends Model
     /**
      * Every tag is attached to a job.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function job()
     {

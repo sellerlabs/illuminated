@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * Class ModelTestCase
+ * Class ModelTestCase.
  *
  * A test case with utilities for asserting the behavior of models.
  *
@@ -35,9 +35,9 @@ abstract class ModelTestCase extends LaravelTestCase
     /**
      * Assert the the model defines a HasOne relationship.
      *
-     * @param $model
-     * @param $property
-     * @param $other
+     * @param Model $model
+     * @param string $property
+     * @param string $other
      */
     protected function assertHasOne($model, $property, $other)
     {
@@ -53,9 +53,9 @@ abstract class ModelTestCase extends LaravelTestCase
     /**
      * Assert the the model defines a HasMany relationship.
      *
-     * @param $model
-     * @param $property
-     * @param $other
+     * @param Model $model
+     * @param string $property
+     * @param string $other
      */
     protected function assertHasMany($model, $property, $other)
     {
@@ -71,9 +71,9 @@ abstract class ModelTestCase extends LaravelTestCase
     /**
      * Assert the the model defines a BelongsTo relationship.
      *
-     * @param $model
-     * @param $property
-     * @param $other
+     * @param Model $model
+     * @param string $property
+     * @param string $other
      */
     protected function assertBelongsTo($model, $property, $other)
     {
@@ -89,9 +89,9 @@ abstract class ModelTestCase extends LaravelTestCase
     /**
      * Assert the the model defines a BelongsToMany relationship.
      *
-     * @param $model
-     * @param $property
-     * @param $other
+     * @param Model $model
+     * @param string $property
+     * @param string $other
      */
     protected function assertBelongsToMany($model, $property, $other)
     {

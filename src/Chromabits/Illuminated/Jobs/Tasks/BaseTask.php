@@ -15,7 +15,7 @@ use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
 
 /**
- * Class BaseTask
+ * Class BaseTask.
  *
  * A base class for a task.
  *

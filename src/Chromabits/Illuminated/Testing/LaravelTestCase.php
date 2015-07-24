@@ -13,9 +13,10 @@ namespace Chromabits\Illuminated\Testing;
 
 use Chromabits\Nucleus\Testing\TestCase;
 use Mockery;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * Class LaravelTestCase
+ * Class LaravelTestCase.
  *
  * Base test case for all Laravel unit tests.
  *
@@ -29,7 +30,7 @@ abstract class LaravelTestCase extends TestCase
     /**
      * Creates the application.
      *
-     * @return \Symfony\Component\HttpKernel\HttpKernelInterface
+     * @return HttpKernelInterface
      */
     public function createApplication()
     {
@@ -37,7 +38,7 @@ abstract class LaravelTestCase extends TestCase
     }
 
     /**
-     * Setup the testing environment
+     * Setup the testing environment.
      */
     public function setUp()
     {
@@ -52,7 +53,7 @@ abstract class LaravelTestCase extends TestCase
      * Assert that an object has all attributes in an array.
      *
      * @param array $attributes
-     * @param $object
+     * @param mixed $object
      * @param string $message
      */
     public function assertObjectHasAttributes(
@@ -66,7 +67,7 @@ abstract class LaravelTestCase extends TestCase
     }
 
     /**
-     * Tear down tests
+     * Tear down tests.
      */
     public function tearDown()
     {

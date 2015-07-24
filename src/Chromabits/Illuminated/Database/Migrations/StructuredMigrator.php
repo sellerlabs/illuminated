@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,11 +12,12 @@
 namespace Chromabits\Illuminated\Database\Migrations;
 
 use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
+use Illuminate\Database\Connection;
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 
 /**
- * Class StructuredMigrator
+ * Class StructuredMigrator.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Migrations
@@ -80,7 +81,6 @@ class StructuredMigrator implements StructuredMigratorInterface
      *
      * @param bool $pretend
      *
-     * @return void
      */
     public function run($pretend = false)
     {
@@ -106,7 +106,6 @@ class StructuredMigrator implements StructuredMigratorInterface
      * @param  array $migrations
      * @param  bool $pretend
      *
-     * @return void
      */
     public function runMigrationList($migrations, $pretend = false)
     {
@@ -138,7 +137,6 @@ class StructuredMigrator implements StructuredMigratorInterface
      * @param int $batch
      * @param bool $pretend
      *
-     * @return void
      */
     protected function runUp($name, $batch, $pretend)
     {
@@ -205,7 +203,6 @@ class StructuredMigrator implements StructuredMigratorInterface
      * @param object $migration
      * @param bool $pretend
      *
-     * @return void
      */
     protected function runDown($migration, $pretend)
     {
@@ -240,7 +237,6 @@ class StructuredMigrator implements StructuredMigratorInterface
      * @param object $migration
      * @param string $method
      *
-     * @return void
      */
     protected function pretendToRun($migration, $method)
     {
@@ -293,7 +289,6 @@ class StructuredMigrator implements StructuredMigratorInterface
      *
      * @param string $message
      *
-     * @return void
      */
     protected function note($message)
     {
@@ -315,7 +310,7 @@ class StructuredMigrator implements StructuredMigratorInterface
      *
      * @param string $connection
      *
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      */
     public function resolveConnection($connection)
     {
@@ -327,7 +322,6 @@ class StructuredMigrator implements StructuredMigratorInterface
      *
      * @param string $name
      *
-     * @return void
      */
     public function setConnection($name)
     {
@@ -343,7 +337,7 @@ class StructuredMigrator implements StructuredMigratorInterface
     /**
      * Get the migration repository instance.
      *
-     * @return \Illuminate\Database\Migrations\MigrationRepositoryInterface
+     * @return MigrationRepositoryInterface
      */
     public function getRepository()
     {

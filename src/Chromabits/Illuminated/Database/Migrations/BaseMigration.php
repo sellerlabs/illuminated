@@ -16,7 +16,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Builder;
 
 /**
- * Class BaseMigration
+ * Class BaseMigration.
  *
  * @author Benjamin Kovach <benjamin@roundsphere.com>
  * @package Chromabits\Illuminated\Database\Migrations
@@ -36,7 +36,7 @@ abstract class BaseMigration extends Migration
     protected $db;
 
     /**
-     * Construct an instance of a BaseMigration
+     * Construct an instance of a BaseMigration.
      */
     public function __construct()
     {

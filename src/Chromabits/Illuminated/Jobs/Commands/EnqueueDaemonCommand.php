@@ -16,7 +16,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class EnqueueDaemonCommand
+ * Class EnqueueDaemonCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Commands

@@ -12,7 +12,7 @@
 namespace Chromabits\Illuminated\Queue\Interfaces;
 
 /**
- * Interface QueuePusherInterface
+ * Interface QueuePusherInterface.
  *
  * Utility class for pushing jobs into queues.
  *
@@ -29,7 +29,7 @@ interface QueuePusherInterface
      * push a job into it, you just provide the name of the queue connection
      * as set in the configuration file.
      *
-     * @param $job
+     * @param mixed $job
      * @param array $data
      * @param string $connection Name of the connection
      * @param string $queue

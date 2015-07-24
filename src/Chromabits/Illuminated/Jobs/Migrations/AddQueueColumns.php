@@ -16,7 +16,7 @@ use Chromabits\Illuminated\Jobs\Job;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class AddQueueColumns
+ * Class AddQueueColumns.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Migrations

@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Database\Migrations;
 use InvalidArgumentException;
 
 /**
- * Class Batch
+ * Class Batch.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Migrations
@@ -127,7 +127,7 @@ abstract class Batch
     /**
      * Resolve any aliases for a migration.
      *
-     * @param $name
+     * @param string $name
      *
      * @return mixed
      */

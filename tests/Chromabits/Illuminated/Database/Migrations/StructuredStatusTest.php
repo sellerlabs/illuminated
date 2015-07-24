@@ -20,7 +20,7 @@ use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Mockery\MockInterface;
 
 /**
- * Class StructuredStatusTest
+ * Class StructuredStatusTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Database\Migrations
@@ -35,10 +35,12 @@ class StructuredStatusTest extends TestCase
             MigrationRepositoryInterface::class,
             function (MockInterface $mock) {
                 $mock->shouldReceive('getRan')->once()
-                    ->andReturn([
-                        'omgdoge',
-                        'goobypls',
-                    ]);
+                    ->andReturn(
+                        [
+                            'omgdoge',
+                            'goobypls',
+                        ]
+                    );
 
                 $mock->shouldReceive('repositoryExists')->once()
                     ->andReturn(true);
@@ -50,9 +52,11 @@ class StructuredStatusTest extends TestCase
             function (MockInterface $mock) {
                 $mock->shouldReceive('getMigrations')
                     ->once()
-                    ->andReturn([
-                        'omgdoge',
-                    ]);
+                    ->andReturn(
+                        [
+                            'omgdoge',
+                        ]
+                    );
             }
         );
 
@@ -75,10 +79,12 @@ class StructuredStatusTest extends TestCase
             function (MockInterface $mock) {
                 $mock->shouldReceive('getMigrations')
                     ->once()
-                    ->andReturn([
-                        'omgdoge',
-                        'goobypls',
-                    ]);
+                    ->andReturn(
+                        [
+                            'omgdoge',
+                            'goobypls',
+                        ]
+                    );
 
                 $mock->shouldReceive('resolve')->with('omgdoge')->once()
                     ->andReturn('wowwow');
@@ -91,9 +97,12 @@ class StructuredStatusTest extends TestCase
         $status = $imp->make(StructuredStatus::class);
 
         $result = $status->getResolvedMap();
-        $this->assertEquals([
-            'omgdoge' => 'wowwow',
-            'goobypls' => 'dolanpls',
-        ], $result);
+        $this->assertEquals(
+            [
+                'omgdoge' => 'wowwow',
+                'goobypls' => 'dolanpls',
+            ],
+            $result
+        );
     }
 }

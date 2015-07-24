@@ -18,7 +18,7 @@ use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 /**
- * Class AlertManager
+ * Class AlertManager.
  *
  * A service for handling the display of alerts through an application
  *
@@ -28,7 +28,7 @@ use Illuminate\View\View;
 class AlertManager implements ManagerContract
 {
     /**
-     * Session
+     * Session.
      *
      * A reference to the session store of the application
      *
@@ -37,7 +37,7 @@ class AlertManager implements ManagerContract
     protected $session;
 
     /**
-     * Top-level alert view
+     * Top-level alert view.
      *
      * This View object will be used to render each alert, a data context
      * will be provided to the view with the alert's content, type, and title.
@@ -47,10 +47,10 @@ class AlertManager implements ManagerContract
     protected $view;
 
     /**
-     * Construct an instance of an AlertManager
+     * Construct an instance of an AlertManager.
      *
-     * @param \Illuminate\Session\Store $session
-     * @param \Illuminate\View\View $view
+     * @param Store $session
+     * @param View $view
      */
     public function __construct(Store $session, View $view)
     {
@@ -60,12 +60,12 @@ class AlertManager implements ManagerContract
     }
 
     /**
-     * Creates and adds a new alert into the store
+     * Creates and adds a new alert into the store.
      *
      * This is factory function that will create a new Alert object and
      * add it to the session collection so that it may be accessed later
      *
-     * @param $content
+     * @param mixed $content
      * @param string $type
      * @param string|null $title
      * @param string|null $view
@@ -89,7 +89,7 @@ class AlertManager implements ManagerContract
     }
 
     /**
-     * Prepare and get the alert collection
+     * Prepare and get the alert collection.
      *
      * Here we make sure that the alerts collection is in the session
      * store. If it's not, then we will go ahead an create a new one
@@ -106,11 +106,11 @@ class AlertManager implements ManagerContract
     }
 
     /**
-     * Creates an alert from the result of validator
+     * Creates an alert from the result of validator.
      *
      * The type of the alert will be TYPE_VALIDATION
      *
-     * @param \Illuminate\Contracts\Validation\Validator $validator
+     * @param Validator $validator
      * @param null $title
      * @param null $view
      */
@@ -125,7 +125,7 @@ class AlertManager implements ManagerContract
     }
 
     /**
-     * Take a look at the oldest alert in the collection
+     * Take a look at the oldest alert in the collection.
      *
      * @return Alert|null
      */
@@ -135,7 +135,7 @@ class AlertManager implements ManagerContract
     }
 
     /**
-     * Get all the alerts currently in the store
+     * Get all the alerts currently in the store.
      *
      * @return Alert[]
      */
@@ -145,7 +145,7 @@ class AlertManager implements ManagerContract
     }
 
     /**
-     * Take the oldest alert out of the collection and render it
+     * Take the oldest alert out of the collection and render it.
      *
      * @return null|string
      */
@@ -161,7 +161,7 @@ class AlertManager implements ManagerContract
     }
 
     /**
-     * Take the oldest alert out of the collection
+     * Take the oldest alert out of the collection.
      *
      * @return Alert|null
      */
@@ -177,7 +177,7 @@ class AlertManager implements ManagerContract
     }
 
     /**
-     * Clear the collection and return all the alerts
+     * Clear the collection and return all the alerts.
      *
      * @return array
      */
@@ -191,7 +191,7 @@ class AlertManager implements ManagerContract
     }
 
     /**
-     * Render all the alerts and then clear the collection
+     * Render all the alerts and then clear the collection.
      *
      * @return array
      */

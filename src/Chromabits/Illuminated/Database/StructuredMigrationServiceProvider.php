@@ -22,7 +22,7 @@ use Chromabits\Illuminated\Database\Migrations\StructuredStatus;
 use Chromabits\Illuminated\Support\ServiceProvider;
 
 /**
- * Class StructuredMigrationServiceProvider
+ * Class StructuredMigrationServiceProvider.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database
@@ -33,8 +33,6 @@ class StructuredMigrationServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {

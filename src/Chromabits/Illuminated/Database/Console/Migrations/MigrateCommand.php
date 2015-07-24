@@ -16,7 +16,7 @@ use Illuminate\Database\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class MigrateCommand
+ * Class MigrateCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Console\Migrations
@@ -47,9 +47,9 @@ class MigrateCommand extends BaseCommand
     protected $migrator;
 
     /**
-     * Construct an instance of a MigrateCommand
+     * Construct an instance of a MigrateCommand.
      *
-     * @param  \Illuminate\Database\Migrations\Migrator $migrator
+     * @param Migrator $migrator
      */
     public function __construct(Migrator $migrator)
     {
@@ -61,7 +61,6 @@ class MigrateCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
      */
     public function fire()
     {
@@ -101,7 +100,6 @@ class MigrateCommand extends BaseCommand
     /**
      * Prepare the migration database for running.
      *
-     * @return void
      */
     protected function prepareDatabase()
     {

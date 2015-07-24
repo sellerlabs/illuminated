@@ -17,7 +17,7 @@ use Illuminate\Console\ConfirmableTrait;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class StructuredMigrateCommand
+ * Class StructuredMigrateCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Commands
@@ -48,7 +48,7 @@ class StructuredMigrateCommand extends Command
     protected $migrator;
 
     /**
-     * Construct an instance of a MigrateCommand
+     * Construct an instance of a MigrateCommand.
      *
      * @param StructuredMigratorInterface $migrator
      */
@@ -62,7 +62,6 @@ class StructuredMigrateCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return void
      */
     public function fire()
     {
@@ -100,7 +99,6 @@ class StructuredMigrateCommand extends Command
     /**
      * Prepare the migration database for running.
      *
-     * @return void
      */
     protected function prepareDatabase()
     {

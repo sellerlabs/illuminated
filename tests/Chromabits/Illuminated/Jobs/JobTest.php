@@ -18,7 +18,7 @@ use Chromabits\Nucleus\Support\Str;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class JobTest
+ * Class JobTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs
@@ -27,6 +27,9 @@ class JobTest extends HelpersTestCase
 {
     use JobsDatabaseTrait;
 
+    /**
+     * Setup the test.
+     */
     protected function setUp()
     {
         parent::setUp();
@@ -122,9 +125,12 @@ class JobTest extends HelpersTestCase
 
         $job->data = "{\n    \"doge\": true\n}";
 
-        $this->assertEquals([
-            'doge' => true,
-        ], $job->getData());
+        $this->assertEquals(
+            [
+                'doge' => true,
+            ],
+            $job->getData()
+        );
     }
 
     public function testIsCancellable()

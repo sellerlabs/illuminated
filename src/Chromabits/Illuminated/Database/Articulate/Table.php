@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Database\Articulate;
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
 
 /**
- * Class Table
+ * Class Table.
  *
  * A barebones abstraction of a database table.
  *
@@ -45,7 +45,7 @@ class Table
     /**
      * Construct an instance of a Table.
      *
-     * @param $name
+     * @param string $name
      */
     public function __construct($name)
     {
@@ -65,7 +65,7 @@ class Table
     /**
      * Get the full name of a table field (for joins, etc).
      *
-     * @param $name
+     * @param string $name
      *
      * @return string
      */
@@ -80,12 +80,12 @@ class Table
      * Right now this check is limited to string values. Future versions might
      * support binary data and numbers as well.
      *
-     * @param $content
-     * @param $type
+     * @param mixed $content
+     * @param string $type
      * @param null $length
      *
-     * @return bool
      * @throws \Chromabits\Nucleus\Exceptions\LackOfCoffeeException
+     * @return bool
      */
     public static function fits($content, $type, $length = null)
     {

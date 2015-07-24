@@ -15,7 +15,7 @@ use Chromabits\Illuminated\Database\Interfaces\StructuredStatusInterface;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 
 /**
- * Class StructuredStatus
+ * Class StructuredStatus.
  *
  * Provides status information about migrations in general. Specifically which
  * ones have been ran, are defined, need to be ran, and are unknown to the

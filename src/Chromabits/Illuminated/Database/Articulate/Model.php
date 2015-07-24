@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Database\Articulate;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
- * Class Model
+ * Class Model.
  *
  * A simple overlay over Laravel's Eloquent models with some utilities.
  *

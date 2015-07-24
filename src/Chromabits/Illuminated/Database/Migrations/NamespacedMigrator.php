@@ -11,14 +11,13 @@
 
 namespace Chromabits\Illuminated\Database\Migrations;
 
-use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\Filesystem;
 
 /**
- * Class NamespacedMigrator
+ * Class NamespacedMigrator.
  *
  * A migrator that supports namespaces
  *
@@ -28,18 +27,18 @@ use Illuminate\Filesystem\Filesystem;
 class NamespacedMigrator extends Migrator
 {
     /**
-     * Namespace containing migrations
+     * Namespace containing migrations.
      *
      * @var string
      */
     protected $namespace;
 
     /**
-     * Construct an instance of a NamespacedMigrator
+     * Construct an instance of a NamespacedMigrator.
      *
      * @param MigrationRepositoryInterface $repository
-     * @param ConnectionResolverInterface $resolver
-     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param Resolver $resolver
+     * @param Filesystem $files
      * @param string $namespace
      */
     public function __construct(
@@ -69,7 +68,7 @@ class NamespacedMigrator extends Migrator
         // Here we append the migrations namespace if it was
         // setup in the class constructor
         if (!is_null($this->namespace)) {
-            $class = trim($this->namespace, "\\") . '\\' . $class;
+            $class = trim($this->namespace, '\\') . '\\' . $class;
         }
 
         return new $class();

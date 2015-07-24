@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Jobs\Interfaces;
 use Chromabits\Illuminated\Jobs\Job;
 
 /**
- * Interface JobFactoryInterface
+ * Interface JobFactoryInterface.
  *
  * Builds jobs.
  *
@@ -26,7 +26,7 @@ interface JobFactoryInterface
     /**
      * Build a job.
      *
-     * @param $task
+     * @param string $task
      * @param string $data
      * @param int $retries
      *
@@ -35,7 +35,7 @@ interface JobFactoryInterface
     public function make($task, $data = '{}', $retries = 0);
 
     /**
-     * Copies basic parameters of a job into a new one:
+     * Copies basic parameters of a job into a new one:.
      *
      * - Task
      * - Data

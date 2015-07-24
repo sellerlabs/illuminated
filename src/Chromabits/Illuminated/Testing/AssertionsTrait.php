@@ -16,7 +16,7 @@ use Illuminate\View\View;
 use PHPUnit_Framework_Assert as PHPUnit;
 
 /**
- * Class AssertionsTrait
+ * Class AssertionsTrait.
  *
  * @author Laravel/Lumen
  * @author Eduardo Trujillo <ed@chromabits.com>
@@ -27,7 +27,6 @@ trait AssertionsTrait
     /**
      * Assert that the client response has an OK status code.
      *
-     * @return void
      */
     public function assertResponseOk()
     {
@@ -44,7 +43,6 @@ trait AssertionsTrait
      *
      * @param  int $code
      *
-     * @return void
      */
     public function assertResponseStatus($code)
     {
@@ -63,7 +61,6 @@ trait AssertionsTrait
      * @param  string|array $key
      * @param  mixed $value
      *
-     * @return void
      */
     public function assertViewHas($key, $value = null)
     {
@@ -95,7 +92,6 @@ trait AssertionsTrait
      *
      * @param  array $bindings
      *
-     * @return void
      */
     public function assertViewHasAll(array $bindings)
     {
@@ -113,7 +109,6 @@ trait AssertionsTrait
      *
      * @param  string $key
      *
-     * @return void
      */
     public function assertViewMissing($key)
     {
@@ -140,7 +135,6 @@ trait AssertionsTrait
      * @param  string $uri
      * @param  array $with
      *
-     * @return void
      */
     public function assertRedirectedTo($uri, $with = [])
     {
@@ -164,7 +158,6 @@ trait AssertionsTrait
      * @param  array $parameters
      * @param  array $with
      *
-     * @return void
      */
     public function assertRedirectedToRoute($name, $parameters = [], $with = [])
     {
@@ -180,7 +173,6 @@ trait AssertionsTrait
      * @param  string|array $key
      * @param  mixed $value
      *
-     * @return void
      */
     public function assertSessionHas($key, $value = null)
     {
@@ -207,7 +199,6 @@ trait AssertionsTrait
      *
      * @param  array $bindings
      *
-     * @return void
      */
     public function assertSessionHasAll(array $bindings)
     {
@@ -226,7 +217,6 @@ trait AssertionsTrait
      * @param  string|array $bindings
      * @param  mixed $format
      *
-     * @return void
      */
     public function assertSessionHasErrors($bindings = [], $format = null)
     {
@@ -248,7 +238,6 @@ trait AssertionsTrait
     /**
      * Assert that the session has old input.
      *
-     * @return void
      */
     public function assertHasOldInput()
     {

@@ -17,7 +17,7 @@ use Chromabits\Illuminated\Jobs\Migrations\CreateJobsTable;
 use Chromabits\Illuminated\Jobs\Migrations\CreateJobTagsTable;
 
 /**
- * Class JobsMigrationBatch
+ * Class JobsMigrationBatch.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs

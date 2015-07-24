@@ -16,8 +16,9 @@ use Illuminate\Config\Repository;
 use Illuminate\Foundation\Application;
 
 /**
- * Class InlinerServiceProviderTest
+ * Class InlinerServiceProviderTest.
  *
+ * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Inliner
  */
 class InlinerServiceProviderTest extends TestCase
@@ -27,29 +28,37 @@ class InlinerServiceProviderTest extends TestCase
      */
     protected $app;
 
+    /**
+     * Setup the test.
+     */
     protected function setUp()
     {
         parent::setUp();
 
         $this->app = new Application();
 
-        $this->app->bind('config', function () {
-            return new Repository([
-                'inliner' => [
-                    'paths' => [
-                        'stylesheets' => [
-                            'some/path/n/stuff',
+        $this->app->bind(
+            'config',
+            function () {
+                return new Repository(
+                    [
+                        'inliner' => [
+                            'paths' => [
+                                'stylesheets' => [
+                                    'some/path/n/stuff',
+                                ],
+                            ],
+                            'options' => [
+                                'cleanup' => false,
+                                'use_inline_styles_block' => false,
+                                'strip_original_tags' => false,
+                                'exclude_media_queries' => false,
+                            ],
                         ],
-                    ],
-                    'options' => [
-                        'cleanup' => false,
-                        'use_inline_styles_block' => false,
-                        'strip_original_tags' => false,
-                        'exclude_media_queries' => false,
-                    ],
-                ],
-            ]);
-        });
+                    ]
+                );
+            }
+        );
     }
 
     public function testRegister()
@@ -58,12 +67,18 @@ class InlinerServiceProviderTest extends TestCase
 
         $provider->register();
 
-        $this->assertTrue($this->app->bound('Chromabits\Illuminated\Contracts\Inliner\StyleInliner'));
+        $this->assertTrue(
+            $this->app->bound(
+                'Chromabits\Illuminated\Contracts\Inliner\StyleInliner'
+            )
+        );
 
         $this->assertInstanceOf(
             'Chromabits\Illuminated\Contracts\Inliner\StyleInliner',
-            $this->app->make('Chromabits\Illuminated\Contracts\Inliner\StyleInliner')
-            );
+            $this->app->make(
+                'Chromabits\Illuminated\Contracts\Inliner\StyleInliner'
+            )
+        );
     }
 
     public function testProvides()

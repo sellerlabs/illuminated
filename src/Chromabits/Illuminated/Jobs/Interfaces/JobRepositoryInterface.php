@@ -13,9 +13,10 @@ namespace Chromabits\Illuminated\Jobs\Interfaces;
 
 use Chromabits\Illuminated\Jobs\Job;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Pagination\Paginator;
 
 /**
- * Interface JobRepositoryInterface
+ * Interface JobRepositoryInterface.
  *
  * Handles common operations on Jobs.
  *
@@ -29,24 +30,24 @@ interface JobRepositoryInterface
      *
      * @param int $take
      *
-     * @return \Illuminate\Pagination\Paginator
+     * @return Paginator
      */
     public function getPaginated($take = 25);
 
     /**
      * Find a specific job.
      *
-     * @param $jobId
+     * @param mixed $jobId
      *
-     * @return Job
      * @throws ModelNotFoundException
+     * @return Job
      */
     public function find($jobId);
 
     /**
      * Delete a specific job.
      *
-     * @param $jobId
+     * @param mixed $jobId
      *
      * @return mixed
      */
@@ -103,7 +104,7 @@ interface JobRepositoryInterface
      *
      * @param int $take
      *
-     * @return \Illuminate\Pagination\Paginator
+     * @return Paginator
      */
     public function getScheduledPaginated($take = 25);
 
@@ -112,7 +113,7 @@ interface JobRepositoryInterface
      *
      * @param int $take
      *
-     * @return \Illuminate\Pagination\Paginator
+     * @return Paginator
      */
     public function getFailedPaginated($take = 25);
 }

@@ -15,7 +15,7 @@ use Chromabits\Illuminated\Queue\Interfaces\QueuePusherInterface;
 use Chromabits\Illuminated\Support\ServiceMapProvider;
 
 /**
- * Class QueueServiceProvider
+ * Class QueueServiceProvider.
  *
  * Provides queue utility services.
  *

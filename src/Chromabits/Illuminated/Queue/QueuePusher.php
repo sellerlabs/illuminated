@@ -15,7 +15,7 @@ use Chromabits\Illuminated\Queue\Interfaces\QueuePusherInterface;
 use Illuminate\Queue\QueueManager;
 
 /**
- * Class QueuePusher
+ * Class QueuePusher.
  *
  * Utility class for pushing jobs into queues.
  *
@@ -30,7 +30,7 @@ class QueuePusher implements QueuePusherInterface
     protected $manager;
 
     /**
-     * Instantiate a QueuePusher
+     * Instantiate a QueuePusher.
      *
      * @param QueueManager $manager
      */
@@ -47,7 +47,7 @@ class QueuePusher implements QueuePusherInterface
      * push a job into it, you just provide the name of the queue connection
      * as set in the configuration file.
      *
-     * @param $job
+     * @param mixed $job
      * @param array $data
      * @param string $connection Name of the connection
      * @param string $queue

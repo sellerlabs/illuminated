@@ -16,7 +16,7 @@ use Chromabits\Illuminated\Jobs\JobsMigrationBatch;
 use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 
 /**
- * Trait JobsDatabaseTrait
+ * Trait JobsDatabaseTrait.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs
@@ -28,6 +28,9 @@ trait JobsDatabaseTrait
      */
     protected $migrationsRepository;
 
+    /**
+     * Migrate the jobs database for testing.
+     */
     public function migrateJobsDatabase()
     {
         $this->migrationsRepository = $this->app->make('migration.repository');

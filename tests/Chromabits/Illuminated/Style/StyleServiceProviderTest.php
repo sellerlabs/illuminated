@@ -18,9 +18,10 @@ use Chromabits\Standards\Console\FormatCommand;
 use Chromabits\Standards\Console\InitCommand;
 use Chromabits\Standards\Console\ValidateCommand;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
 
 /**
- * Class StyleServiceProviderTest
+ * Class StyleServiceProviderTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Style
@@ -36,11 +37,11 @@ class StyleServiceProviderTest extends ServiceProviderTestCase
     ];
 
     /**
-     * Make an instance of the service provider being tested
+     * Make an instance of the service provider being tested.
      *
      * @param Application $app
      *
-     * @return \Illuminate\Support\ServiceProvider
+     * @return ServiceProvider
      */
     public function make(Application $app)
     {

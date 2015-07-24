@@ -15,7 +15,7 @@ use Chromabits\Illuminated\Database\Migrations\TableMigration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateJobTagsTable
+ * Class CreateJobTagsTable.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Migrations

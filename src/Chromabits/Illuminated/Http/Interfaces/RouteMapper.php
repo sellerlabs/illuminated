@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Http\Interfaces;
 use Illuminate\Routing\Router;
 
 /**
- * Interface RouteMapper
+ * Interface RouteMapper.
  *
  * An object capable of mapping routes to a controller method or a Closure
  * handler.

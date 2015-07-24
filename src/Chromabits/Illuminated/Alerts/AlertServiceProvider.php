@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Alerts;
 use Chromabits\Illuminated\Support\ServiceProvider;
 
 /**
- * Class AlertServiceProvider
+ * Class AlertServiceProvider.
  *
  * Registers the alert manager service into the container
  *
@@ -24,7 +24,7 @@ use Chromabits\Illuminated\Support\ServiceProvider;
 class AlertServiceProvider extends ServiceProvider
 {
     /**
-     * Whether the service load should be deferred
+     * Whether the service load should be deferred.
      *
      * @var bool
      */
@@ -32,8 +32,6 @@ class AlertServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
@@ -49,7 +47,7 @@ class AlertServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register blade extension
+     * Register blade extension.
      */
     public function boot()
     {
@@ -71,7 +69,7 @@ class AlertServiceProvider extends ServiceProvider
     }
 
     /**
-     * Returns an array with the name of the services provided
+     * Returns an array with the name of the services provided.
      *
      * @return array
      */

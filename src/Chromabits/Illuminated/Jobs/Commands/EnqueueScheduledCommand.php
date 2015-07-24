@@ -21,7 +21,7 @@ use Illuminate\Queue\QueueManager;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class EnqueueScheduledCommand
+ * Class EnqueueScheduledCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Commands

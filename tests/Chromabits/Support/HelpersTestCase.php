@@ -19,7 +19,7 @@ use Illuminate\Foundation\Application;
 use PDO;
 
 /**
- * Class HelpersTestCase
+ * Class HelpersTestCase.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Support
@@ -32,7 +32,7 @@ abstract class HelpersTestCase extends TestCase
     protected $app;
 
     /**
-     * Setup testing environment
+     * Setup testing environment.
      */
     protected function setUp()
     {
@@ -42,7 +42,7 @@ abstract class HelpersTestCase extends TestCase
     }
 
     /**
-     * Create an barebones Laravel application
+     * Create an barebones Laravel application.
      */
     protected function createApplication()
     {
@@ -51,30 +51,36 @@ abstract class HelpersTestCase extends TestCase
         $this->app->instance('config', new Repository([]));
 
         $this->app['config']->set('session.driver', 'array');
-        $this->app['config']->set('database', [
-            'fetch' => PDO::FETCH_CLASS,
-            'default' => 'sqlite',
-            'connections' => [
-                'sqlite' => [
-                    'driver' => 'sqlite',
-                    'database' => ':memory:',
-                    'prefix' => '',
+        $this->app['config']->set(
+            'database',
+            [
+                'fetch' => PDO::FETCH_CLASS,
+                'default' => 'sqlite',
+                'connections' => [
+                    'sqlite' => [
+                        'driver' => 'sqlite',
+                        'database' => ':memory:',
+                        'prefix' => '',
+                    ],
                 ],
-            ],
-            'migrations' => 'migrations',
-        ]);
+                'migrations' => 'migrations',
+            ]
+        );
 
-        $this->app['config']->set('app', [
-            'providers' => [
-                'Illuminate\Filesystem\FilesystemServiceProvider',
-                'Illuminate\Foundation\Providers\FoundationServiceProvider',
-                'Illuminate\Pipeline\PipelineServiceProvider',
-                'Illuminate\Session\SessionServiceProvider',
-                'Illuminate\View\ViewServiceProvider',
-                DatabaseServiceProvider::class,
-                MigrationServiceProvider::class,
-            ],
-        ]);
+        $this->app['config']->set(
+            'app',
+            [
+                'providers' => [
+                    'Illuminate\Filesystem\FilesystemServiceProvider',
+                    'Illuminate\Foundation\Providers\FoundationServiceProvider',
+                    'Illuminate\Pipeline\PipelineServiceProvider',
+                    'Illuminate\Session\SessionServiceProvider',
+                    'Illuminate\View\ViewServiceProvider',
+                    DatabaseServiceProvider::class,
+                    MigrationServiceProvider::class,
+                ],
+            ]
+        );
 
         $this->app->registerConfiguredProviders();
 
@@ -82,7 +88,7 @@ abstract class HelpersTestCase extends TestCase
     }
 
     /**
-     * Tear down test case
+     * Tear down test case.
      */
     protected function tearDown()
     {

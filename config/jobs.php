@@ -11,11 +11,11 @@
 
 use Chromabits\Illuminated\Jobs\Tasks\GarbageCollectTask;
 
-/**
+/*
  * Configuration for the job component.
  */
 return [
-    /**
+    /*
      * Default queue properties for all jobs.
      *
      * Please refer to the `Job` class for assigning individual jobs to specific
@@ -33,7 +33,7 @@ return [
         'id' => null,
     ],
 
-    /**
+    /*
      * The task map is a list of task name and handler pairings.
      *
      * While the same handler can be referenced by different tasks, you may not

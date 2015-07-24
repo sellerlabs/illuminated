@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Database\Console\Migrations;
 use Illuminate\Console\Command;
 
 /**
- * Class BaseCommand
+ * Class BaseCommand.
  *
  * Base migration command with support for configurable
  * migration repository path

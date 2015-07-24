@@ -17,7 +17,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class MigrateMakeCommand
+ * Class MigrateMakeCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Console\Migrations
@@ -53,8 +53,8 @@ class MigrateMakeCommand extends BaseCommand
     /**
      * Create a new migration install command instance.
      *
-     * @param  \Illuminate\Database\Migrations\MigrationCreator $creator
-     * @param  \Illuminate\Foundation\Composer $composer
+     * @param MigrationCreator $creator
+     * @param Composer $composer
      */
     public function __construct(MigrationCreator $creator, Composer $composer)
     {
@@ -67,7 +67,6 @@ class MigrateMakeCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return void
      */
     public function fire()
     {

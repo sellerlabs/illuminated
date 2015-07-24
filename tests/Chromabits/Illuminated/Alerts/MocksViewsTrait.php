@@ -12,14 +12,20 @@
 namespace Tests\Chromabits\Illuminated\Alerts;
 
 use Mockery;
+use Mockery\MockInterface;
 
 /**
- * Trait MocksViewsTrait
+ * Trait MocksViewsTrait.
  *
  * @package Tests\Chromabits\Illuminated\Alerts\Tests
  */
 trait MocksViewsTrait
 {
+    /**
+     * Creates a view for mocking.
+     *
+     * @return MockInterface
+     */
     protected function createMockView()
     {
         $mock = Mockery::mock('Illuminate\View\View');

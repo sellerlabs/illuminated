@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;
 
 /**
- * Class JobScheduler
+ * Class JobScheduler.
  *
  * Handles job scheduling, cancelling, tracking.
  *
@@ -86,9 +86,9 @@ class JobScheduler implements JobSchedulerInterface
      * Apply a tag to an existing job.
      *
      * @param Job $job
-     * @param $tag
+     * @param string $tag
      *
-     * @return JobTag|\Illuminate\Database\Eloquent\Model|null|static
+     * @return JobTag|null
      */
     public function tag(Job $job, $tag)
     {
@@ -116,8 +116,8 @@ class JobScheduler implements JobSchedulerInterface
     /**
      * Find jobs by a tag.
      *
-     * @param $tag
-     * @param bool|true $activeOnly
+     * @param string $tag
+     * @param bool $activeOnly
      * @param int $take
      *
      * @return mixed

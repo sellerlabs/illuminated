@@ -20,7 +20,7 @@ use Mockery\MockInterface;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class QueuePusherTest
+ * Class QueuePusherTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Queue

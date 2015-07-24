@@ -19,7 +19,7 @@ use Chromabits\Standards\Console\InitCommand;
 use Chromabits\Standards\Console\ValidateCommand;
 
 /**
- * Class StyleServiceProvider
+ * Class StyleServiceProvider.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Style

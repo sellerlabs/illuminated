@@ -18,7 +18,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Tests\Chromabits\Support\HelpersTestCase;
 
 /**
- * Class JobRepositoryTest
+ * Class JobRepositoryTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs
@@ -27,6 +27,9 @@ class JobRepositoryTest extends HelpersTestCase
 {
     use JobsDatabaseTrait;
 
+    /**
+     * Setup the test.
+     */
     protected function setUp()
     {
         parent::setUp();

@@ -14,7 +14,7 @@ namespace Chromabits\Illuminated\Database\Console\Migrations;
 use Illuminate\Database\Migrations\Migrator;
 
 /**
- * Class StatusCommand
+ * Class StatusCommand.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Console\Migrations
@@ -43,9 +43,9 @@ class StatusCommand extends BaseCommand
     protected $migrator;
 
     /**
-     * Construct an instance of a StatusCommand
+     * Construct an instance of a StatusCommand.
      *
-     * @param  \Illuminate\Database\Migrations\Migrator $migrator
+     * @param Migrator $migrator
      */
     public function __construct(Migrator $migrator)
     {

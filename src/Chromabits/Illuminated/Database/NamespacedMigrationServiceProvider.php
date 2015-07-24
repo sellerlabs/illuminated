@@ -18,7 +18,7 @@ use Chromabits\Illuminated\Database\Migrations\NamespacedMigrator;
 use Illuminate\Database\MigrationServiceProvider;
 
 /**
- * Class NamespacedMigrationServiceProvider
+ * Class NamespacedMigrationServiceProvider.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database
@@ -69,7 +69,7 @@ class NamespacedMigrationServiceProvider extends MigrationServiceProvider
     }
 
     /**
-     * Register the "make" migration command
+     * Register the "make" migration command.
      */
     protected function registerMakeCommand()
     {

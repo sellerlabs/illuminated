@@ -19,7 +19,7 @@ use Illuminate\Container\BindingResolutionException;
 use Illuminate\Foundation\Application;
 
 /**
- * Class HandlerResolver
+ * Class HandlerResolver.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs
@@ -57,8 +57,8 @@ class HandlerResolver implements HandlerResolverInterface
      *
      * @param Job $job
      *
-     * @return BaseTask
      * @throws UnresolvableException
+     * @return BaseTask
      */
     public function resolve(Job $job)
     {
@@ -78,10 +78,10 @@ class HandlerResolver implements HandlerResolverInterface
     /**
      * Create an instance of the handler for the provided task.
      *
-     * @param $task
+     * @param string $task
      *
-     * @return mixed
      * @throws UnresolvableException
+     * @return mixed
      */
     public function instantiate($task)
     {

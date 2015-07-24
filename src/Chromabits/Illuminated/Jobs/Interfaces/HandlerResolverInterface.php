@@ -16,7 +16,7 @@ use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\Tasks\BaseTask;
 
 /**
- * Interface HandlerResolverInterface
+ * Interface HandlerResolverInterface.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Interfaces
@@ -28,8 +28,8 @@ interface HandlerResolverInterface
      *
      * @param Job $job
      *
-     * @return BaseTask
      * @throws UnresolvableException
+     * @return BaseTask
      */
     public function resolve(Job $job);
 
@@ -43,10 +43,10 @@ interface HandlerResolverInterface
     /**
      * Create an instance of the handler for the provided task.
      *
-     * @param $task
+     * @param string $task
      *
-     * @return BaseTask
      * @throws UnresolvableException
+     * @return BaseTask
      */
     public function instantiate($task);
 }
