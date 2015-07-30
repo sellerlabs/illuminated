@@ -2,6 +2,7 @@
 
 namespace Chromabits\Illuminated\Database\Articulate;
 
+use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,10 +16,32 @@ use Illuminate\Database\Eloquent\Model;
  */
 class JsonModel extends Model
 {
+    protected static $registered = [];
+
+    /**
+     * Create a new Eloquent model instance.
+     *
+     * @param array $attributes
+     *
+     * @throws LackOfCoffeeException
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        if (!array_key_exists(static::class, static::$registered)) {
+            throw new LackOfCoffeeException(
+                vsprintf('You forgot to call registerEvents() on %s', [
+                    static::class
+                ])
+            );
+        }
+    }
+
     /**
      * Fields that should be handled as JSON in the database.
      *
-     * @var array
+     * @var string[]
      */
     protected $json = [];
 
@@ -30,7 +53,7 @@ class JsonModel extends Model
         // Define a handler for converting the specified properties into JSON
         // before saving the model to the database
         static::saving(
-            function (static $model) {
+            function (JsonModel $model) {
                 foreach ($model->getJsonFields() as $field) {
                     $model->$field = json_encode($model->$field);
                 }
@@ -39,12 +62,14 @@ class JsonModel extends Model
 
         // Restore the specified properties back into arrays after saving
         static::saved(
-            function (static $model) {
+            function (JsonModel $model) {
                 foreach ($model->getJsonFields() as $field) {
                     $model->$field = json_decode($model->$field, true);
                 }
             }
         );
+
+        static::$registered[static::class] = true;
     }
 
     /**
