@@ -78,9 +78,9 @@ class JsonModel extends Model
     /**
      * @inheritdoc
      */
-    public function newFromBuilder($attributes = [])
+    public function newFromBuilder($attributes = [], $connection = null)
     {
-        $model = parent::newFromBuilder($attributes);
+        $model = parent::newFromBuilder($attributes, $connection = null);
 
         foreach ($this->getJsonFields() as $field) {
             $model->$field = json_decode($model->$field, true);
