@@ -31,9 +31,13 @@ class JsonModel extends Model
 
         if (!array_key_exists(static::class, static::$registered)) {
             throw new LackOfCoffeeException(
-                vsprintf('You forgot to call registerEvents() on %s', [
-                    static::class
-                ])
+                vsprintf(
+                    'You forgot to call registerEvents() on %s.'
+                    . ' The method should be called on a Service Provider.'
+                    . ' See http://laravel.com/docs/5.1/eloquent#events'
+                    . ' for more details.',
+                    [static::class]
+                )
             );
         }
     }

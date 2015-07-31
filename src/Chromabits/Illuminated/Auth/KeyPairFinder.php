@@ -22,7 +22,7 @@ class KeyPairFinder
      *
      * @return KeyPair
      */
-    public function findByPublicId($publicId, $type)
+    public function byPublicId($publicId, $type)
     {
         return KeyPair::query()
             ->where('public_id', $publicId)

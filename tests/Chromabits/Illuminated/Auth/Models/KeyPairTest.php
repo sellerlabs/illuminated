@@ -43,6 +43,8 @@ class KeyPairTest extends HelpersTestCase
             ->where('public_id', 'wowowowow')
             ->firstOrFail();
 
-        $this->assertEquals('omgomgomgomgomg', $pair2->secret_key);
+        $this->assertEquals([
+            'name' => 'dolan',
+        ], $pair2->data);
     }
 }

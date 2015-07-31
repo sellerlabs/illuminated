@@ -11,6 +11,7 @@ use Chromabits\Illuminated\Database\Articulate\JsonModel;
  * @property string public_id
  * @property string secret_key
  * @property string type
+ * @property array data
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Auth\Models
@@ -25,4 +26,44 @@ class KeyPair extends JsonModel
      * @var string[]
      */
     protected $json = ['data'];
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPublicId()
+    {
+        return $this->public_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSecretKey()
+    {
+        return $this->secret_key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
 }

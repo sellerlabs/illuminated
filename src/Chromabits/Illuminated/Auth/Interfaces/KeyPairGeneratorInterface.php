@@ -27,15 +27,4 @@ interface KeyPairGeneratorInterface
         $generateSecretLength = 512,
         $algorithm = 'sha512'
     );
-
-    /**
-     * Generate a key pair.
-     *
-     * @param string $type
-     * @param array $attributes
-     *
-     * @return KeyPair
-     * @throws CoreException
-     */
-    public function generate($type, $attributes = []);
 }

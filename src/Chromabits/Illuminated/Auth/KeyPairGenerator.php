@@ -13,7 +13,7 @@ use Chromabits\Nucleus\Support\Str;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Auth
  */
-class KeyPairGenerator implements KeyPairGeneratorInterface
+class KeyPairGenerator
 {
     /**
      * Generate an HMAC key pair.
@@ -36,30 +36,9 @@ class KeyPairGenerator implements KeyPairGeneratorInterface
             $algorithm,
             Str::random($generateSecretLength)
         );
+        $pair->type = KeyPairTypes::TYPE_HMAC;
+        $pair->data = [];
 
         return $pair;
-    }
-
-    /**
-     * Generate a key pair.
-     *
-     * @param string $type
-     * @param array $attributes
-     *
-     * @return KeyPair
-     * @throws CoreException
-     */
-    public function generate($type, $attributes = [])
-    {
-        switch ($type) {
-            case KeyPairTypes::TYPE_HMAC:
-                return $this->generateHmac(
-                    $attributes['generatePublicLength'],
-                    $attributes['generateSecretLength'],
-                    $attributes['algorithm']
-                );
-        }
-
-        throw new CoreException('Unsupported key-pair type');
     }
 }
