@@ -3,7 +3,6 @@
 namespace Chromabits\Illuminated\Database\Articulate;
 
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class JsonModel

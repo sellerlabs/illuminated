@@ -13,6 +13,7 @@ namespace Chromabits\Illuminated\Inliner;
 
 use Chromabits\Illuminated\Contracts\Inliner\StyleInliner as InlinerContract;
 use Chromabits\Illuminated\Inliner\Exceptions\StylesheetNotFoundException;
+use Chromabits\Nucleus\Foundation\BaseObject;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Mail\Message;
@@ -30,7 +31,7 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Inliner
  */
-class StyleInliner implements InlinerContract
+class StyleInliner extends BaseObject implements InlinerContract
 {
     /**
      * Internal inliner.

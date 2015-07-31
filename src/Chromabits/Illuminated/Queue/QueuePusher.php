@@ -12,6 +12,7 @@
 namespace Chromabits\Illuminated\Queue;
 
 use Chromabits\Illuminated\Queue\Interfaces\QueuePusherInterface;
+use Chromabits\Nucleus\Foundation\BaseObject;
 use Illuminate\Queue\QueueManager;
 
 /**
@@ -22,7 +23,7 @@ use Illuminate\Queue\QueueManager;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Queue
  */
-class QueuePusher implements QueuePusherInterface
+class QueuePusher extends BaseObject implements QueuePusherInterface
 {
     /**
      * @var QueueManager
@@ -36,6 +37,8 @@ class QueuePusher implements QueuePusherInterface
      */
     public function __construct(QueueManager $manager)
     {
+        parent::__construct();
+
         $this->manager = $manager;
     }
 

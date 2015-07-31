@@ -4,7 +4,7 @@ namespace Chromabits\Illuminated\Auth;
 
 use Chromabits\Illuminated\Auth\Interfaces\KeyPairGeneratorInterface;
 use Chromabits\Illuminated\Auth\Models\KeyPair;
-use Chromabits\Nucleus\Exceptions\CoreException;
+use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Support\Str;
 
 /**
@@ -13,7 +13,7 @@ use Chromabits\Nucleus\Support\Str;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Auth
  */
-class KeyPairGenerator
+class KeyPairGenerator extends BaseObject implements KeyPairGeneratorInterface
 {
     /**
      * Generate an HMAC key pair.

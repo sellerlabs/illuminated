@@ -13,6 +13,7 @@ namespace Chromabits\Illuminated\Jobs;
 
 use Chromabits\Illuminated\Database\Articulate\Table;
 use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
+use Chromabits\Nucleus\Foundation\BaseObject;
 use InvalidArgumentException;
 
 /**
@@ -23,7 +24,7 @@ use InvalidArgumentException;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs
  */
-class JobFactory implements JobFactoryInterface
+class JobFactory extends BaseObject implements JobFactoryInterface
 {
     /**
      * Build a job.

@@ -3,6 +3,7 @@
 namespace Chromabits\Illuminated\Http;
 
 use Chromabits\Illuminated\Http\Interfaces\RouteMapper;
+use Chromabits\Nucleus\Foundation\BaseObject;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Routing\Router;
 
@@ -12,7 +13,7 @@ use Illuminate\Routing\Router;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Http
  */
-class RouteAggregator implements RouteMapper
+class RouteAggregator extends BaseObject implements RouteMapper
 {
     /**
      * List of mappers to use.

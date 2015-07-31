@@ -3,6 +3,7 @@
 namespace Chromabits\Illuminated\Auth;
 
 use Chromabits\Illuminated\Auth\Models\KeyPair;
+use Chromabits\Nucleus\Foundation\BaseObject;
 
 /**
  * Class KeyPairFinder
@@ -12,7 +13,7 @@ use Chromabits\Illuminated\Auth\Models\KeyPair;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Auth
  */
-class KeyPairFinder
+class KeyPairFinder extends BaseObject
 {
     /**
      * Find a key pair by its public id.

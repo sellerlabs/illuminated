@@ -11,6 +11,7 @@
 
 namespace Chromabits\Illuminated\Database\Migrations;
 
+use Chromabits\Nucleus\Foundation\BaseObject;
 use InvalidArgumentException;
 
 /**
@@ -19,7 +20,7 @@ use InvalidArgumentException;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Migrations
  */
-abstract class Batch
+abstract class Batch extends BaseObject
 {
     /**
      * Return a string array of the class names of migrations to run.

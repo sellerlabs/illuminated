@@ -13,6 +13,7 @@ namespace Chromabits\Illuminated\Jobs\Tasks;
 
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
+use Chromabits\Nucleus\Foundation\BaseObject;
 
 /**
  * Class BaseTask.
@@ -22,7 +23,7 @@ use Chromabits\Illuminated\Jobs\Job;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Tasks
  */
-abstract class BaseTask
+abstract class BaseTask extends BaseObject
 {
     /**
      * Description of the task.

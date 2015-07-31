@@ -12,6 +12,7 @@
 namespace Chromabits\Illuminated\Database\Articulate;
 
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
+use Chromabits\Nucleus\Foundation\BaseObject;
 
 /**
  * Class Table.
@@ -21,7 +22,7 @@ use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Articulate
  */
-class Table
+class Table extends BaseObject
 {
     const TYPE_CHAR = 'CHAR';
     const TYPE_BINARY = 'BINARY';

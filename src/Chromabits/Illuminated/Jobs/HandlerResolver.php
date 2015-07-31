@@ -14,6 +14,7 @@ namespace Chromabits\Illuminated\Jobs;
 use Chromabits\Illuminated\Jobs\Exceptions\UnresolvableException;
 use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
 use Chromabits\Illuminated\Jobs\Tasks\BaseTask;
+use Chromabits\Nucleus\Foundation\BaseObject;
 use Illuminate\Config\Repository;
 use Illuminate\Container\BindingResolutionException;
 use Illuminate\Foundation\Application;
@@ -24,7 +25,7 @@ use Illuminate\Foundation\Application;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs
  */
-class HandlerResolver implements HandlerResolverInterface
+class HandlerResolver extends BaseObject implements HandlerResolverInterface
 {
     /**
      * Current Laravel application.
@@ -48,6 +49,8 @@ class HandlerResolver implements HandlerResolverInterface
      */
     public function __construct(Application $app, Repository $config)
     {
+        parent::__construct();
+
         $this->app = $app;
         $this->config = $config;
     }

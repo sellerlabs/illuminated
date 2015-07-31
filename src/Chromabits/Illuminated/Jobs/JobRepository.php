@@ -13,6 +13,7 @@ namespace Chromabits\Illuminated\Jobs;
 
 use Carbon\Carbon;
 use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
+use Chromabits\Nucleus\Foundation\BaseObject;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\Paginator;
 
@@ -24,7 +25,7 @@ use Illuminate\Pagination\Paginator;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs
  */
-class JobRepository implements JobRepositoryInterface
+class JobRepository extends BaseObject implements JobRepositoryInterface
 {
     /**
      * Get a paginated list of jobs.

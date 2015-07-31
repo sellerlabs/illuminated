@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
+use Chromabits\Nucleus\Foundation\BaseObject;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;
@@ -27,7 +28,7 @@ use InvalidArgumentException;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs
  */
-class JobScheduler implements JobSchedulerInterface
+class JobScheduler extends BaseObject implements JobSchedulerInterface
 {
     /**
      * Implementation of the job repository.
@@ -53,6 +54,8 @@ class JobScheduler implements JobSchedulerInterface
         JobRepositoryInterface $jobs,
         JobFactoryInterface $factory
     ) {
+        parent::__construct();
+
         $this->jobs = $jobs;
         $this->factory = $factory;
     }
