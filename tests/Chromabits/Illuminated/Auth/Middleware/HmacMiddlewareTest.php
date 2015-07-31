@@ -80,6 +80,10 @@ class HmacMiddlewareTest extends TestCase
 
         $this->assertEquals($validRequest, $called);
         $this->assertEquals('ok', $response);
+        $this->assertEquals(
+            $pair,
+            $called->attributes->get(HmacMiddleware::ATTRIBUTE_KEYPAIR)
+        );
     }
 
     public function testHandleWithWrongHash()

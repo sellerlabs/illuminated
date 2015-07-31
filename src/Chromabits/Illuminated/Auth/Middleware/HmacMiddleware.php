@@ -23,6 +23,8 @@ use Illuminate\Http\Request;
  */
 class HmacMiddleware extends BaseObject implements Middleware
 {
+    const ATTRIBUTE_KEYPAIR = 'illuminated_hmac_keypair';
+
     protected $finder;
 
     /**
@@ -85,6 +87,8 @@ class HmacMiddleware extends BaseObject implements Middleware
             );
 
             if ($verificationResult) {
+                $request->attributes->set(static::ATTRIBUTE_KEYPAIR, $pair);
+
                 return $next($request);
             }
 
