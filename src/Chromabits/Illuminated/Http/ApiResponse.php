@@ -256,10 +256,10 @@ class ApiResponse extends BaseObject
     {
         $code = $this->getHttpStatusCode();
 
-        return Response::create(array_merge([
+        return Response::create(json_encode(array_merge([
             'code' => $code,
             'status' => $this->status,
             'messages' => $this->messages,
-        ], $this->content), $code, $headers);
+        ], $this->content)), $code, $headers);
     }
 }

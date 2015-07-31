@@ -49,23 +49,25 @@ class HmacMiddleware extends BaseObject implements Middleware
     {
         $validationResult = Spec::define(
             [
-                'Content-Hash' => PrimitiveTypeConstraint::forType(
+                'content-hash' => PrimitiveTypeConstraint::forType(
                     ScalarTypes::SCALAR_STRING
                 ),
-                'Authorization' => PrimitiveTypeConstraint::forType(
+                'authorization' => PrimitiveTypeConstraint::forType(
                     ScalarTypes::SCALAR_STRING
                 ),
-            ]
-        )->check($request->headers->all());
+            ], [], ['content-hash', 'authorization']
+        )->check(array_map(function ($entry) {
+            return $entry[0];
+        }, $request->headers->all()));
 
         if ($validationResult->failed()) {
-            return ApiResponse::makeFromSpec($validationResult);
+            return ApiResponse::makeFromSpec($validationResult)->toResponse();
         }
 
         $authorization = str_replace(
             'Hash ',
             '',
-            $request->header('Authorization')
+            $request->headers->get('Authorization')
         );
         $content = $request->getContent();
 
@@ -76,8 +78,8 @@ class HmacMiddleware extends BaseObject implements Middleware
             );
 
             $hasher = new HmacHasher();
-            $verificationResult = $$hasher->verify(
-                $request->header('Content-Hash'),
+            $verificationResult = $hasher->verify(
+                $request->headers->get('Content-Hash'),
                 $content,
                 $pair->getSecretKey()
             );
@@ -88,11 +90,11 @@ class HmacMiddleware extends BaseObject implements Middleware
 
             return ApiResponse::create([], ApiResponse::STATUS_ERROR, [
                 'HMAC content hash does not match the expected hash.'
-            ]);
+            ])->toResponse();
         } catch (ModelNotFoundException $ex) {
             return ApiResponse::create([], ApiResponse::STATUS_ERROR, [
                 'Unable to locate public ID. Check your credentials'
-            ]);
+            ])->toResponse();
         }
     }
 }
