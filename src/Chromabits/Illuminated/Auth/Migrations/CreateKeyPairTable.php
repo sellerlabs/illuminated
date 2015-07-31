@@ -29,7 +29,7 @@ class CreateKeyPairTable extends TableMigration
         $table->text('public_id');
         $table->text('secret_key');
         $table->string('type');
-        $table->text('data')->default('{}');
+        $table->text('data');
 
         $table->timestamps();
     }
