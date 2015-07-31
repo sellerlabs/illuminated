@@ -12,3 +12,4 @@ vendor/
 
 ### Laravel-specific
 storage/
+bootstrap/cache/

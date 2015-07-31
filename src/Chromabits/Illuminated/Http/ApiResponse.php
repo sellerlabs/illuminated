@@ -258,6 +258,8 @@ class ApiResponse extends BaseObject
     {
         $code = $this->getHttpStatusCode();
 
+        $headers['Content-Type'] = 'application/json';
+
         return Response::create(json_encode(array_merge([
             'code' => $code,
             'status' => $this->status,
