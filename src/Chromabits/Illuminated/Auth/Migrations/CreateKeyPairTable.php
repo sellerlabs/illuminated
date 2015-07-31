@@ -26,8 +26,8 @@ class CreateKeyPairTable extends TableMigration
     {
         $table->increments('id');
 
-        $table->string('public_id');
-        $table->string('secret_key');
+        $table->text('public_id');
+        $table->text('secret_key');
         $table->string('type');
         $table->text('data')->default('{}');
 
