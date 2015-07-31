@@ -44,6 +44,8 @@ class ApiResponse extends BaseObject
      */
     public function __construct($content, $status = 'success', $messages = [])
     {
+        parent::__construct();
+
         Arguments::contain(
             PrimitiveTypeConstraint::forType(CompoundTypes::COMPOUND_ARRAY),
             new InArrayConstraint($this->getValidStatuses()),
