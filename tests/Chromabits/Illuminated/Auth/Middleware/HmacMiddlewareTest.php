@@ -2,6 +2,7 @@
 
 namespace Chromabits\Illuminated\Auth\Middleware;
 
+use Carbon\Carbon;
 use Chromabits\Illuminated\Auth\Interfaces\KeyPairFinderInterface;
 use Chromabits\Illuminated\Auth\KeyPairGenerator;
 use Chromabits\Illuminated\Auth\KeyPairTypes;
@@ -53,7 +54,10 @@ class HmacMiddlewareTest extends TestCase
 
         $validRequest->headers->set(
             'Content-Hash',
-            $hasher->hash($content, $pair->getSecretKey())
+            $hasher->hash(
+                $content . Carbon::now()->format('Y-m-d H:i'),
+                $pair->getSecretKey()
+            )
         );
         $validRequest->headers->set(
             'Authorization',

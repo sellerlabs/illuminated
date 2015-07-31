@@ -2,6 +2,7 @@
 
 namespace Chromabits\Illuminated\Auth\Middleware;
 
+use Carbon\Carbon;
 use Chromabits\Illuminated\Auth\Interfaces\KeyPairFinderInterface;
 use Chromabits\Illuminated\Auth\KeyPairTypes;
 use Chromabits\Illuminated\Http\ApiResponse;
@@ -27,6 +28,8 @@ class HmacMiddleware extends BaseObject implements Middleware
 
     protected $finder;
 
+    protected $format;
+
     /**
      * Construct an instance of a HmacMiddleware.
      *
@@ -37,6 +40,19 @@ class HmacMiddleware extends BaseObject implements Middleware
         parent::__construct();
 
         $this->finder = $finder;
+        $this->format = 'Y-m-d H:i';
+    }
+
+    /**
+     * Set format for the date/time used in the hash computation.
+     *
+     * Use DateTime::format() formatting.
+     *
+     * @param string $format
+     */
+    public function setFormat($format)
+    {
+        $this->format = $format;
     }
 
     /**
@@ -82,7 +98,7 @@ class HmacMiddleware extends BaseObject implements Middleware
             $hasher = new HmacHasher();
             $verificationResult = $hasher->verify(
                 $request->headers->get('Content-Hash'),
-                $content,
+                $content . Carbon::now()->format($this->format),
                 $pair->getSecretKey()
             );
 
