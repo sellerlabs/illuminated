@@ -109,12 +109,12 @@ class HmacMiddleware extends BaseObject implements Middleware
                 return $next($request);
             }
 
-            return ApiResponse::create([], ApiResponse::STATUS_ERROR, [
+            return ApiResponse::create([], ApiResponse::STATUS_INVALID, [
                 'HMAC content hash does not match the expected hash.'
             ])->toResponse();
         } catch (ModelNotFoundException $ex) {
             if ($ex->getModel() === KeyPair::class) {
-                return ApiResponse::create([], ApiResponse::STATUS_ERROR, [
+                return ApiResponse::create([], ApiResponse::STATUS_INVALID, [
                     'Unable to locate public ID. Check your credentials'
                 ])->toResponse();
             }
