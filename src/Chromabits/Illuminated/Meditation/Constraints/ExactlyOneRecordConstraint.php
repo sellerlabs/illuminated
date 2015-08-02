@@ -45,7 +45,7 @@ class ExactlyOneRecordConstraint extends AbstractConstraint
             $query = clone $this->query;
 
             foreach ($this->where as $field => $value) {
-                $query->where($field, '=', $field);
+                $query->where($field, '=', $context[$value]);
             }
 
             return $query->count() === 1;
