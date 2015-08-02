@@ -5,6 +5,7 @@ namespace Chromabits\Illuminated\Auth\Middleware;
 use Carbon\Carbon;
 use Chromabits\Illuminated\Auth\Interfaces\KeyPairFinderInterface;
 use Chromabits\Illuminated\Auth\KeyPairTypes;
+use Chromabits\Illuminated\Auth\Models\KeyPair;
 use Chromabits\Illuminated\Http\ApiResponse;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Hashing\HmacHasher;
@@ -112,9 +113,13 @@ class HmacMiddleware extends BaseObject implements Middleware
                 'HMAC content hash does not match the expected hash.'
             ])->toResponse();
         } catch (ModelNotFoundException $ex) {
-            return ApiResponse::create([], ApiResponse::STATUS_ERROR, [
-                'Unable to locate public ID. Check your credentials'
-            ])->toResponse();
+            if ($ex->getModel() === KeyPair::class) {
+                return ApiResponse::create([], ApiResponse::STATUS_ERROR, [
+                    'Unable to locate public ID. Check your credentials'
+                ])->toResponse();
+            }
+
+            throw $ex;
         }
     }
 }
