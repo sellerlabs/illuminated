@@ -19,8 +19,6 @@ interface SubscriberInterface
      * Subscribe to events.
      *
      * @param Dispatcher $events
-     *
-     * @return mixed
      */
     public function subscribe(Dispatcher $events);
 }
