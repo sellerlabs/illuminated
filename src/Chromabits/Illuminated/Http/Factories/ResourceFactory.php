@@ -62,6 +62,16 @@ class ResourceFactory extends BaseObject
     }
 
     /**
+     * @param string $controller
+     *
+     * @return static
+     */
+    public static function create($controller)
+    {
+        return new static($controller);
+    }
+
+    /**
      * Add middleware to use.
      *
      * @param array $middleware
