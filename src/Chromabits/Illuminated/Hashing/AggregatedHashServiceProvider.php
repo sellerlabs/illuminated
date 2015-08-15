@@ -30,7 +30,7 @@ class AggregatedHashServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(['hash', Hasher::class], function () {
-            new AggregatedHasher();
+            return new AggregatedHasher();
         });
     }
 
