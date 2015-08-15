@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Auth\Middleware;
 
 use Carbon\Carbon;
@@ -18,7 +27,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 /**
- * Class HmacMiddleware
+ * Class HmacMiddleware.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Auth\Middleware
@@ -110,12 +119,12 @@ class HmacMiddleware extends BaseObject implements Middleware
             }
 
             return ApiResponse::create([], ApiResponse::STATUS_INVALID, [
-                'HMAC content hash does not match the expected hash.'
+                'HMAC content hash does not match the expected hash.',
             ])->toResponse();
         } catch (ModelNotFoundException $ex) {
             if ($ex->getModel() === KeyPair::class) {
                 return ApiResponse::create([], ApiResponse::STATUS_INVALID, [
-                    'Unable to locate public ID. Check your credentials'
+                    'Unable to locate public ID. Check your credentials',
                 ])->toResponse();
             }
 

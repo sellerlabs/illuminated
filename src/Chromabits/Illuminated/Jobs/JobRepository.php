@@ -72,7 +72,7 @@ class JobRepository extends BaseObject implements JobRepositoryInterface
     /**
      * Find a specific job.
      *
-     * @param string|integer $jobId
+     * @param string|int $jobId
      *
      * @throws ModelNotFoundException
      * @return Job

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Http;
 
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
@@ -15,7 +24,7 @@ use Chromabits\Nucleus\Meditation\SpecResult;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class ApiResponse
+ * Class ApiResponse.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Http
@@ -66,7 +75,7 @@ class ApiResponse extends BaseObject
      *
      * @return static
      */
-    public static function create (
+    public static function create(
         $content,
         $status = 'success',
         $messages = []
@@ -83,7 +92,7 @@ class ApiResponse extends BaseObject
      *
      * @return Response
      */
-    public static function send (
+    public static function send(
         $content,
         $status = 'success',
         $messages = []
@@ -95,7 +104,7 @@ class ApiResponse extends BaseObject
      * Create a resource not found response.
      *
      * @param string $name
-     * @param integer|string $identifier
+     * @param int|string $identifier
      *
      * @return static
      */
@@ -109,7 +118,7 @@ class ApiResponse extends BaseObject
                 'The resource \'%s\' with the identifier \'%s\' could not be'
                 . ' found.',
                 [$name, $identifier]
-            )
+            ),
         ]);
     }
 
@@ -118,8 +127,8 @@ class ApiResponse extends BaseObject
      *
      * @param SpecResult $result
      *
-     * @return static
      * @throws LackOfCoffeeException
+     * @return static
      */
     public static function makeFromSpec(SpecResult $result)
     {
@@ -134,7 +143,7 @@ class ApiResponse extends BaseObject
             'missing' => $result->getMissing(),
             'validation' => $result->getFailed(),
         ], static::STATUS_INVALID, [
-            'One or more fields are invalid. Please check your input.'
+            'One or more fields are invalid. Please check your input.',
         ]);
     }
 

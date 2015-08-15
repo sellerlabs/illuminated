@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Hashing;
 
 use Chromabits\Nucleus\Foundation\BaseObject;
@@ -8,7 +17,25 @@ use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Hashing\BcryptHasher;
 
 /**
- * Class AggregatedHasher
+ * Class AggregatedHasher.
+ *
+ * A hasher that combines other hashers together. It is intended to be used for
+ * applications where there is a pre-existing database with different kinds of
+ * password hashes.
+ *
+ * The aggregator has a main (target) hasher, and a bunch of supported hashers.
+ * While checking a hasher, the hasher will attempt to first check against the
+ * target hasher, and then fallback to the others.
+ *
+ * The target hasher will be used for checking if a hash needs a rehash, and
+ * while creating new hashes. The Bcrypt hasher conveniently will detect hashes
+ * that are not valid Bcrypt hashes. If you replace the target hasher, make sure
+ * it does the same.
+ *
+ * IMPORTANT: This implementation uses just two hashers: MD5 and Bcrypt. If you
+ * are considering adding another hasher, carefully review that the output of
+ * the hashers will always be different (string size, format, etc). Otherwise,
+ * you may run into collisions and other undesirable effects.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Hashing
@@ -16,11 +43,16 @@ use Illuminate\Hashing\BcryptHasher;
 class AggregatedHasher extends BaseObject implements Hasher
 {
     /**
+     * The preferred hasher to use.
+     *
      * @var Hasher
      */
     protected $targetHasher;
 
     /**
+     * An array of hasher to fallback to. These should be the less-secure
+     * options. There is no need to add the target hasher to this list.
+     *
      * @var Hasher[]
      */
     protected $supportedHashers;

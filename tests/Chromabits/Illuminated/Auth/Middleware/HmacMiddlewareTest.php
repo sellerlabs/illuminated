@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Auth\Middleware;
 
 use Carbon\Carbon;
@@ -10,11 +19,11 @@ use Chromabits\Illuminated\Auth\Models\KeyPair;
 use Chromabits\Nucleus\Hashing\HmacHasher;
 use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\Testing\TestCase;
-use Symfony\Component\HttpFoundation\Request;
 use Mockery as m;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class HmacMiddlewareTest
+ * Class HmacMiddlewareTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Auth\Middleware
@@ -134,8 +143,8 @@ class HmacMiddlewareTest extends TestCase
         $this->assertEqualsMatrix([
             [
                 'HMAC content hash does not match the expected hash.',
-                $body['messages'][0]
-            ]
+                $body['messages'][0],
+            ],
         ]);
     }
 
@@ -179,9 +188,9 @@ class HmacMiddlewareTest extends TestCase
         $this->assertEqualsMatrix([
             [
                 'One or more fields are invalid. Please check your input.',
-                $body['messages'][0]
+                $body['messages'][0],
             ],
-            [['content-hash'], $body['missing']]
+            [['content-hash'], $body['missing']],
         ]);
     }
 
@@ -226,9 +235,9 @@ class HmacMiddlewareTest extends TestCase
         $this->assertEqualsMatrix([
             [
                 'One or more fields are invalid. Please check your input.',
-                $body['messages'][0]
+                $body['messages'][0],
             ],
-            [['authorization'], $body['missing']]
+            [['authorization'], $body['missing']],
         ]);
     }
 }

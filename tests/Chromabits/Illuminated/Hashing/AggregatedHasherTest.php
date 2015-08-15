@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Tests\Chromabits\Illuminated\Hashing;
 
 use Chromabits\Illuminated\Hashing\AggregatedHasher;
 use Chromabits\Nucleus\Testing\TestCase;
 
 /**
- * Class AggregatedHasherTest
+ * Class AggregatedHasherTest.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Hashing
@@ -56,7 +65,7 @@ class AggregatedHasherTest extends TestCase
             [true, $hasher->needsRehash(md5('anything'))],
             [true, $hasher->needsRehash(sha1('anything'))],
             [true, $hasher->needsRehash($hasher->make('hi', ['rounds' => 5]))],
-            [false, $hasher->needsRehash($hasher->make('hi'))]
+            [false, $hasher->needsRehash($hasher->make('hi'))],
         ]);
     }
 }

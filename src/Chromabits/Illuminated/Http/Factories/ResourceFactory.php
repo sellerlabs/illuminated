@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Http\Factories;
 
 use Chromabits\Illuminated\Http\Entities\ResourceMethod;
@@ -14,7 +23,7 @@ use Chromabits\Nucleus\Support\Std;
 use Illuminate\Routing\Router;
 
 /**
- * Class ResourceFactory
+ * Class ResourceFactory.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Http\Factories
@@ -76,8 +85,8 @@ class ResourceFactory extends BaseObject
      *
      * @param array $middleware
      *
-     * @return $this
      * @throws InvalidArgumentException
+     * @return $this
      */
     public function withMiddleware(array $middleware)
     {
@@ -162,7 +171,7 @@ class ResourceFactory extends BaseObject
             Std::each(function ($key, ResourceMethod $method) use ($router) {
                 $handler = vsprintf('%s@%s', [
                     $this->controller,
-                    $method->getMethod()
+                    $method->getMethod(),
                 ]);
 
                 $router->match(
