@@ -1,26 +1,17 @@
 <?php
 
-/**
- * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This file is part of the Illuminated package
- */
-
 namespace Chromabits\Illuminated\Meditation\Constraints;
 
 use Chromabits\Nucleus\Meditation\Constraints\AbstractConstraint;
 use Illuminate\Database\Query\Builder;
 
 /**
- * Class ExactlyOneRecordConstraint.
+ * Class NoPreviousRecordConstraint
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Meditation\Constraints
  */
-class ExactlyOneRecordConstraint extends AbstractConstraint
+class NoPreviousRecordConstraint extends AbstractConstraint
 {
     /**
      * @var Builder
@@ -63,10 +54,10 @@ class ExactlyOneRecordConstraint extends AbstractConstraint
                 $query->where($field, '=', $context[$value]);
             }
 
-            return $query->count() === 1;
+            return $query->count() === 0;
         }
 
-        return $this->query->count() === 1;
+        return $this->query->count() === 0;
     }
 
     /**
@@ -76,7 +67,7 @@ class ExactlyOneRecordConstraint extends AbstractConstraint
      */
     public function toString()
     {
-        return '{0 < $query->count() < 2}';
+        return '{$query->count() === 0}';
     }
 
     /**
@@ -84,9 +75,7 @@ class ExactlyOneRecordConstraint extends AbstractConstraint
      */
     public function getDescription()
     {
-        return 'The value is expected to constraint a query result to exactly'
-            . ' a single record (queryResult == 1). If the query result is 0'
-            . ' or greater than 1, then the value is considered to be unable'
-            . ' to meet this constraint.';
+        return 'The value is expected to constraint a query to exactly 0'
+            . ' records.';
     }
 }
