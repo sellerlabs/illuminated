@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d4f4fa9944cf48b305fe8353c2f7aef6",
+    "hash": "68de26f512eb2ffa882eebd54b532c43",
     "packages": [
         {
             "name": "chromabits/nucleus",
-            "version": "v0.3.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/etcinit/nucleus.git",
-                "reference": "58381c3d9746e0a16acdfb4b1f084a0434fe79fd"
+                "reference": "942475ad53d97e2c61882b177c5968aa12f858ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/etcinit/nucleus/zipball/58381c3d9746e0a16acdfb4b1f084a0434fe79fd",
-                "reference": "58381c3d9746e0a16acdfb4b1f084a0434fe79fd",
+                "url": "https://api.github.com/repos/etcinit/nucleus/zipball/942475ad53d97e2c61882b177c5968aa12f858ff",
+                "reference": "942475ad53d97e2c61882b177c5968aa12f858ff",
                 "shasum": ""
             },
             "require": {
@@ -30,7 +30,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.3-dev"
+                    "dev-master": "0.4-dev"
                 }
             },
             "autoload": {
@@ -53,7 +53,7 @@
                 }
             ],
             "description": "Some core PHP utilities",
-            "time": "2015-08-18 15:42:19"
+            "time": "2015-08-23 13:38:53"
         },
         {
             "name": "chromabits/standards",
@@ -3241,12 +3241,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "650f482841ac845c165e47758617e773e471bbe0"
+                "reference": "a7df5a5b2d68fcf5ba36a223bde077157ef88fc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/650f482841ac845c165e47758617e773e471bbe0",
-                "reference": "650f482841ac845c165e47758617e773e471bbe0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a7df5a5b2d68fcf5ba36a223bde077157ef88fc7",
+                "reference": "a7df5a5b2d68fcf5ba36a223bde077157ef88fc7",
                 "shasum": ""
             },
             "require": {
@@ -3305,24 +3305,24 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-08-18 03:58:29"
+            "time": "2015-08-20 05:16:08"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "2.3.6",
+            "version": "2.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "18dfbcb81d05e2296c0bcddd4db96cade75e6f42"
+                "reference": "5e2645ad49d196e020b85598d7c97e482725786a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/18dfbcb81d05e2296c0bcddd4db96cade75e6f42",
-                "reference": "18dfbcb81d05e2296c0bcddd4db96cade75e6f42",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/5e2645ad49d196e020b85598d7c97e482725786a",
+                "reference": "5e2645ad49d196e020b85598d7c97e482725786a",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "~1.0,>=1.0.2",
+                "doctrine/instantiator": "^1.0.2",
                 "php": ">=5.3.3",
                 "phpunit/php-text-template": "~1.2",
                 "sebastian/exporter": "~1.2"
@@ -3361,7 +3361,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-07-10 06:54:24"
+            "time": "2015-08-19 09:14:08"
         },
         {
             "name": "sebastian/comparator",
@@ -3687,12 +3687,13 @@
         {
             "alias": "0.2.4",
             "alias_normalized": "0.2.4.0",
-            "version": "0.3.0.0",
+            "version": "0.4.9999999.9999999-dev",
             "package": "chromabits/nucleus"
         }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "chromabits/nucleus": 20,
         "phpunit/phpunit": 20,
         "mockery/mockery": 20
     },
