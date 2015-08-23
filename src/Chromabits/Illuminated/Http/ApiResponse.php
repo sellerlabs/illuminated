@@ -200,7 +200,7 @@ class ApiResponse extends BaseObject
      */
     public static function getValidStatuses()
     {
-        return array_values(static::getStatusMap());
+        return array_keys(static::getStatusMap());
     }
 
     /**
