@@ -188,8 +188,8 @@ class ApiResponse extends BaseObject
 
         return new static(
             Arr::except($body, static::getReservedKeys()),
-            $result['status'],
-            $result['messages']
+            $body['status'],
+            $body['messages']
         );
     }
 
