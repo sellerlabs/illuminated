@@ -318,4 +318,31 @@ class ApiResponse extends BaseObject
             'messages' => $this->messages,
         ], $this->content)), $code, $headers);
     }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed|null $default
+     *
+     * @return mixed
+     */
+    public function get($key, $default = null)
+    {
+        return Arr::dotGet($this->content, $key, $default);
+    }
 }
