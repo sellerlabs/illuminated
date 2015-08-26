@@ -27,7 +27,7 @@ displaying alerts to users of your application.
     - ServiceProviderTestCase
 - **Queue**: Helpers for pushing queue jobs into SQS by the queue name, not its address.
 - **Style**:
-    - [**CSS Inliner Service**]((https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Inliner/README.md): Write your email templates using blade and do not worry about whether or not they will display correctly. The inliner service is capable of inlining a specified CSS file into a view.
+    - [**CSS Inliner Service**](https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Inliner/README.md): Write your email templates using blade and do not worry about whether or not they will display correctly. The inliner service is capable of inlining a specified CSS file into a view.
 - **Support**:
     - **ServiceProvider**: Exactly like a regular Laravel service provider but it explicitly requires the developer to define `$defer`.
     - **ServiceMapProvider**: A shortcut for creating service providers with fewer lines of code.
