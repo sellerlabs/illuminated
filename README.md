@@ -1,8 +1,6 @@
-# [illuminated](http://phabricator.chromabits.com/diffusion/LLMNTD/)
+# [illuminated](http://phabricator.chromabits.com/diffusion/LLMNTD/) [![Build Status](https://travis-ci.org/etcinit/illuminated.svg?branch=master)](https://travis-ci.org/etcinit/illuminated) ![](https://img.shields.io/packagist/v/chromabits/illuminated.svg) [![](https://img.shields.io/badge/ApiGen-reference-blue.svg)](http://etcinit.github.io/illuminated)
 
-A collection of Laravel 5 utilities and components. Ranging from stable, experimental to even controversial.
-
-These are being used extensively by [@etcinit](https://github.com/etcinit) and  [@sellerlabs](https://github.com/sellerlabs).
+Modular Laravel 5 overlay with many utilities and components (Ranging from stable, experimental to even controversial).
 
 ## Components
 
@@ -22,7 +20,7 @@ of the `routes.php` file. TestCase included.
     - LaravelTestCase
     - ModelTestCase
     - RouteMapperTestCase
-    - ServiceProviderTestCase 
+    - ServiceProviderTestCase
 
 ## Setup
 
@@ -34,9 +32,23 @@ return [
     // ...
     'providers' => [
         // Third-party service providers...
-        'Chromabits\Illuminated\Inliner\InlinerServiceProvider'
+        Chromabits\Illuminated\Inliner\InlinerServiceProvider::class
     ];
 ];
 ```
 
 Some modules might have specific exceptions or additional instructions. Make sure to read the corresponding README file.
+
+## Contributing
+
+Pull requests are accepted on GitHub. Bug fixes and small improvements are welcome. Big ideas will be reviewed and discussed.
+
+Code Standard: PSR-2 with some additions. See https://github.com/etcinit/php-coding-standard for more details.
+
+## Security
+
+If you discover any security related issues, please email ed+security@chromabits.com instead of using the issue tracker.
+
+## License
+
+This code is licensed under the MIT license. See LICENSE for more information.
