@@ -11,7 +11,7 @@ git config --global user.name "Travis"
 
 # Add branch
 git init
-git remote add origin https://${GH_TOKEN}@github.com/etcinit/nucleus.git > /dev/null
+git remote add origin https://${GH_TOKEN}@github.com/etcinit/illuminated.git > /dev/null
 git checkout -B gh-pages
 
 # Push generated files
