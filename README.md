@@ -4,23 +4,33 @@ Modular Laravel 5 overlay with many utilities and components (Ranging from stabl
 
 ## Components
 
+- **Alerts**: A more formal interface for flashing and
+displaying alerts to users of your application.
+- **Auth**: Authentication, registration and key pair storage utilities:
+    - **HmacMiddleware**: HMAC auth for APIs
+    - **KeyPair**: Storage for pairs of public and private keys.
 - [**Database**](https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Database/README.md):
     - Structured Migrator
-    - Namespaced Migrator
     - Utility migration classes
-- **Alerts Service (WIP)**: A more formal interface for flashing and
-displaying alerts to users of your application.
-- [**CSS Inliner Service**]((https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Inliner/README.md)): Write your email templates using blade and
-do not worry about whether or not they will display correctly. The
-inliner service is capable of inlining a specified CSS file into a view.
-- **Route Mapper Interface**: A simple interface for defining class versions
-of the `routes.php` file. TestCase included.
-- **Jobs (WIP)**: A job scheduling and management framework.
-- [**Testing**](https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Testing/README.md):
+    - **JsonModels**: Models that automatically serialize and de-serialize JSON on specified fields as they come and go to the database.
+- **Hashing**: Aggregated hasher for automatically upgrading legacy hashes (MD5) to more secure ones on projects working existing databases or user data.
+- **Http**: HTTP and routing utilities
+    - **Route Mapper Interface**: A simple interface for defining class versions of the `routes.php` file. TestCase included.
+    - **Route Aggregator**: Aggregates routes defined in classes implemeting the RouteMapper interface.
+    - **ApiResponse**: An opinionated API response generator.
+    - **ResourceFactory**: Build groups of routes faster and with fewer lines.
+- **Jobs**: A task scheduling and management framework.
+- [**Testing**](https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Testing/README.md): A collection of PHPUnit test cases for testing general and specific kinds of classes:
     - LaravelTestCase
     - ModelTestCase
     - RouteMapperTestCase
     - ServiceProviderTestCase
+- **Queue**: Helpers for pushing queue jobs into SQS by the queue name, not its address.
+- **Style**:
+    - [**CSS Inliner Service**]((https://github.com/etcinit/laravel-helpers/blob/master/src/Chromabits/Illuminated/Inliner/README.md): Write your email templates using blade and do not worry about whether or not they will display correctly. The inliner service is capable of inlining a specified CSS file into a view.
+- **Support**:
+    - **ServiceProvider**: Exactly like a regular Laravel service provider but it explicitly requires the developer to define `$defer`.
+    - **ServiceMapProvider**: A shortcut for creating service providers with fewer lines of code.
 
 ## Setup
 
