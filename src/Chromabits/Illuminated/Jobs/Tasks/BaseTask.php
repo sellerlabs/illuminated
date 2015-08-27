@@ -13,6 +13,7 @@ namespace Chromabits\Illuminated\Jobs\Tasks;
 
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
+use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Meditation\Constraints\AbstractConstraint;
 use Chromabits\Nucleus\Meditation\Spec;
@@ -41,6 +42,18 @@ abstract class BaseTask extends BaseObject
      * @var Spec|null
      */
     protected $spec = null;
+
+    /**
+     * Construct an instance of a BaseTask.
+     *
+     * @throws LackOfCoffeeException
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->spec = $this->getSpec();
+    }
 
     /**
      * Process a job.
