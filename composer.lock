@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/etcinit/nucleus.git",
-                "reference": "942475ad53d97e2c61882b177c5968aa12f858ff"
+                "reference": "9e1e58ce9484fbd56cff1ce9bba0740fbed7e6ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/etcinit/nucleus/zipball/942475ad53d97e2c61882b177c5968aa12f858ff",
-                "reference": "942475ad53d97e2c61882b177c5968aa12f858ff",
+                "url": "https://api.github.com/repos/etcinit/nucleus/zipball/9e1e58ce9484fbd56cff1ce9bba0740fbed7e6ba",
+                "reference": "9e1e58ce9484fbd56cff1ce9bba0740fbed7e6ba",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 }
             ],
             "description": "Some core PHP utilities",
-            "time": "2015-08-23 13:38:53"
+            "time": "2015-08-27 17:46:37"
         },
         {
             "name": "chromabits/standards",
@@ -3241,12 +3241,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a7df5a5b2d68fcf5ba36a223bde077157ef88fc7"
+                "reference": "2246830f4a1a551c67933e4171bf2126dc29d357"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a7df5a5b2d68fcf5ba36a223bde077157ef88fc7",
-                "reference": "a7df5a5b2d68fcf5ba36a223bde077157ef88fc7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2246830f4a1a551c67933e4171bf2126dc29d357",
+                "reference": "2246830f4a1a551c67933e4171bf2126dc29d357",
                 "shasum": ""
             },
             "require": {
@@ -3305,7 +3305,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-08-20 05:16:08"
+            "time": "2015-08-24 04:09:38"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

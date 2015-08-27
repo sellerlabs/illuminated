@@ -14,6 +14,9 @@ namespace Chromabits\Illuminated\Jobs\Tasks;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Nucleus\Foundation\BaseObject;
+use Chromabits\Nucleus\Meditation\Constraints\AbstractConstraint;
+use Chromabits\Nucleus\Meditation\Spec;
+use Chromabits\Nucleus\Support\Std;
 
 /**
  * Class BaseTask.
@@ -30,7 +33,14 @@ abstract class BaseTask extends BaseObject
      *
      * @var string
      */
-    protected $description = 'No description available';
+    protected $description = 'No description available.';
+
+    /**
+     * Spec to use for input validation.
+     *
+     * @var Spec|null
+     */
+    protected $spec = null;
 
     /**
      * Process a job.
@@ -45,6 +55,16 @@ abstract class BaseTask extends BaseObject
      * @return
      */
     abstract public function fire(Job $job, JobSchedulerInterface $scheduler);
+
+    /**
+     * Get the Spec to use for input validation.
+     *
+     * @return Spec|null
+     */
+    protected function getSpec()
+    {
+        return null;
+    }
 
     /**
      * Get a simple array mapping accepted data keys with a description for
@@ -64,6 +84,24 @@ abstract class BaseTask extends BaseObject
      */
     public function getTypes()
     {
+        if ($this->spec instanceof Spec) {
+            return Std::map(function ($field) {
+                if ($field instanceof AbstractConstraint) {
+                    return $field->toString();
+                }
+
+                return implode(' ^ ', Std::map(function ($innerField) {
+                    if ($innerField instanceof Spec) {
+                        return '{spec}';
+                    } elseif ($innerField instanceof AbstractConstraint) {
+                        return $innerField->toString();
+                    }
+
+                    return '{???}';
+                }, $field));
+            }, $this->spec->getConstraints());
+        }
+
         return [];
     }
 
@@ -74,6 +112,10 @@ abstract class BaseTask extends BaseObject
      */
     public function getDefaults()
     {
+        if ($this->spec instanceof Spec) {
+            return $this->spec->getDefaults();
+        }
+
         return [];
     }
 
