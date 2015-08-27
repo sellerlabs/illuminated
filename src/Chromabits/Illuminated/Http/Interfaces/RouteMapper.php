@@ -37,8 +37,6 @@ interface RouteMapper
      * Map routes.
      *
      * @param Router $router
-     *
-     * @return mixed
      */
     public function map(Router $router);
 }

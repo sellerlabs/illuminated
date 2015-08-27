@@ -15,6 +15,7 @@ use Chromabits\Illuminated\Jobs\Exceptions\UnresolvableException;
 use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
+use Chromabits\Nucleus\Meditation\Spec;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -93,6 +94,16 @@ class RunTaskCommand extends Command implements SelfHandling, ShouldBeQueued
 
             // Look for a task handler
             $handler = $this->resolver->resolve($job);
+
+            if ($handler->getSpec() instanceof Spec) {
+                if ($handler->getSpec()->check($job->data)->failed()) {
+                    $laravelJob->delete();
+
+                    $this->jobs->giveUp($job, 'Task data does not pass Spec.');
+
+                    return;
+                }
+            }
 
             // Execute the handler
             $this->jobs->started($job, "Task handler started.\n");

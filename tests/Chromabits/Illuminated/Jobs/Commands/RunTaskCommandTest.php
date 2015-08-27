@@ -66,6 +66,7 @@ class RunTaskCommandTest extends HelpersTestCase
             $job,
             m::type(JobSchedulerInterface::class)
         )->atLeast()->once();
+        $handler->shouldReceive('getSpec')->andReturnNull();
 
         $impersonator = new Impersonator();
 
@@ -167,6 +168,7 @@ class RunTaskCommandTest extends HelpersTestCase
         $handler = m::mock(BaseTask::class);
         $handler->shouldReceive('fire')->with($job)->atLeast()->once()
             ->andThrow('Exception');
+        $handler->shouldReceive('getSpec')->andReturnNull();
 
         $impersonator = new Impersonator();
 

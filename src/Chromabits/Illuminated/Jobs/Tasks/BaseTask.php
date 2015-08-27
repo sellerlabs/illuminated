@@ -64,8 +64,6 @@ abstract class BaseTask extends BaseObject
      *
      * @param Job $job
      * @param JobSchedulerInterface $scheduler
-     *
-     * @return
      */
     abstract public function fire(Job $job, JobSchedulerInterface $scheduler);
 
@@ -74,7 +72,7 @@ abstract class BaseTask extends BaseObject
      *
      * @return Spec|null
      */
-    protected function getSpec()
+    public function getSpec()
     {
         return null;
     }
