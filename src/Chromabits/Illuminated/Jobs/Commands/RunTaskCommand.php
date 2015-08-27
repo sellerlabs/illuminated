@@ -96,7 +96,9 @@ class RunTaskCommand extends Command implements SelfHandling, ShouldBeQueued
             $handler = $this->resolver->resolve($job);
 
             if ($handler->getSpec() instanceof Spec) {
-                if ($handler->getSpec()->check($job->data)->failed()) {
+                $result = $handler->getSpec()->check($job->getData());
+
+                if ($result->failed()) {
                     $laravelJob->delete();
 
                     $this->jobs->giveUp($job, 'Task data does not pass Spec.');

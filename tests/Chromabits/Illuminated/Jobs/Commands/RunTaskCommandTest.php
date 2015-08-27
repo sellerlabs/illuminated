@@ -19,6 +19,8 @@ use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobState;
 use Chromabits\Illuminated\Jobs\Tasks\BaseTask;
+use Chromabits\Nucleus\Meditation\Boa;
+use Chromabits\Nucleus\Meditation\Spec;
 use Chromabits\Nucleus\Testing\Impersonator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Queue\Jobs\Job as LaravelJob;
@@ -166,8 +168,10 @@ class RunTaskCommandTest extends HelpersTestCase
         $job->state = JobState::QUEUED;
 
         $handler = m::mock(BaseTask::class);
-        $handler->shouldReceive('fire')->with($job)->atLeast()->once()
-            ->andThrow('Exception');
+        $handler->shouldReceive('fire')->with(
+            $job,
+            m::type(JobSchedulerInterface::class)
+        )->atLeast()->once()->andThrow('Exception');
         $handler->shouldReceive('getSpec')->andReturnNull();
 
         $impersonator = new Impersonator();
@@ -182,6 +186,108 @@ class RunTaskCommandTest extends HelpersTestCase
                     ->atLeast()->once();
 
                 $mock->shouldReceive('fail')->with($job, m::type('string'))
+                    ->atLeast()->once();
+            }
+        );
+
+        $impersonator->mock(
+            HandlerResolverInterface::class,
+            function (MockInterface $mock) use ($job, $handler) {
+                $mock->shouldReceive('resolve')->with($job)->atLeast()->once()
+                    ->andReturn($handler);
+            }
+        );
+
+        /** @var RunTaskCommand $command */
+        $command = $impersonator->make(RunTaskCommand::class);
+
+        $command->fire($laravelJob, ['job_id' => 1337]);
+    }
+
+    public function testFireWithInvalidSpec()
+    {
+        $laravelJob = m::mock(LaravelJob::class);
+        $laravelJob->shouldReceive('delete')->atLeast()->once();
+
+        $job = new Job();
+        $job->state = JobState::QUEUED;
+
+        $handler = m::mock(BaseTask::class);
+        $handler->shouldReceive('fire')->with(
+            $job,
+            m::type(JobSchedulerInterface::class)
+        )->atLeast()->once();
+        $handler->shouldReceive('getSpec')->andReturn(Spec::define([
+            'omg' => Boa::boolean(),
+        ], [
+            'yes' => 'please',
+        ], ['why_not']));
+
+        $impersonator = new Impersonator();
+
+        $impersonator->mock(
+            JobRepositoryInterface::class,
+            function (MockInterface $mock) use ($job) {
+                $mock->shouldReceive('find')->with(1337)->atLeast()->once()
+                    ->andReturn($job);
+
+                $mock->shouldReceive('started')->with($job, m::type('string'))
+                    ->atLeast()->once();
+
+                $mock->shouldReceive('giveUp')->with($job, m::type('string'))
+                    ->atLeast()->once();
+            }
+        );
+
+        $impersonator->mock(
+            HandlerResolverInterface::class,
+            function (MockInterface $mock) use ($job, $handler) {
+                $mock->shouldReceive('resolve')->with($job)->atLeast()->once()
+                    ->andReturn($handler);
+            }
+        );
+
+        /** @var RunTaskCommand $command */
+        $command = $impersonator->make(RunTaskCommand::class);
+
+        $command->fire($laravelJob, ['job_id' => 1337]);
+    }
+
+    public function testFireWithValidSpec()
+    {
+        $laravelJob = m::mock(LaravelJob::class);
+        $laravelJob->shouldReceive('delete')->atLeast()->once();
+
+        $job = new Job();
+        $job->state = JobState::QUEUED;
+        $job->data = json_encode([
+            'omg' => false,
+            'why_not' => 'because',
+        ]);
+
+        $handler = m::mock(BaseTask::class);
+        $handler->shouldReceive('fire')->with(
+            $job,
+            m::type(JobSchedulerInterface::class)
+        )->atLeast()->once();
+        $handler->shouldReceive('getSpec')->andReturn(Spec::define([
+            'omg' => Boa::boolean(),
+        ], [
+            'yes' => 'please',
+        ], ['why_not']));
+
+        $impersonator = new Impersonator();
+
+        $impersonator->mock(
+            JobRepositoryInterface::class,
+            function (MockInterface $mock) use ($job) {
+                $mock->shouldReceive('find')->with(1337)->atLeast()->once()
+                    ->andReturn($job);
+
+                $mock->shouldReceive('started')->with($job, m::type('string'))
+                    ->atLeast()->once();
+
+                $mock->shouldReceive('complete')->with($job)
                     ->atLeast()->once();
             }
         );
