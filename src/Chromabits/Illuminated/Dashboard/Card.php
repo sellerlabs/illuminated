@@ -12,7 +12,7 @@
 namespace Chromabits\Illuminated\Dashboard;
 
 /**
- * Class Card
+ * Class Card.
  *
  * @todo
  * @author Eduardo Trujillo <ed@chromabits.com>

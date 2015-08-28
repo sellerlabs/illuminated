@@ -12,7 +12,7 @@
 namespace Chromabits\Illuminated\Dashboard;
 
 /**
- * Class Sidebar
+ * Class Sidebar.
  *
  * @todo
  * @author Eduardo Trujillo <ed@chromabits.com>

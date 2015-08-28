@@ -164,8 +164,8 @@ class ApiResponse extends BaseObject
      *
      * @param Response $response
      *
-     * @return static
      * @throws CoreException
+     * @return static
      */
     public static function fromResponse(Response $response)
     {
