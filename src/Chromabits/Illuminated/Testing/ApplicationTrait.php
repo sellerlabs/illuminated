@@ -37,7 +37,7 @@ trait ApplicationTrait
     /**
      * The last response returned by the application.
      *
-     * @var \Illuminate\Http\Response
+     * @var Response
      */
     protected $response;
 
@@ -137,13 +137,13 @@ trait ApplicationTrait
     /**
      * Call a named route and return the Response.
      *
-     * @param  string $method
-     * @param  string $name
-     * @param  array $routeParameters
-     * @param  array $parameters
-     * @param  array $cookies
-     * @param  array $files
-     * @param  array $server
+     * @param string $method
+     * @param string $name
+     * @param array $routeParameters
+     * @param array $parameters
+     * @param array $cookies
+     * @param array $files
+     * @param array $server
      * @param  string $content
      *
      * @return Response
@@ -211,8 +211,8 @@ trait ApplicationTrait
     /**
      * Set the currently logged in user for the application.
      *
-     * @param  Authenticatable $user
-     * @param  string $driver
+     * @param UserContract $user
+     * @param string $driver
      *
      */
     public function be(UserContract $user, $driver = null)

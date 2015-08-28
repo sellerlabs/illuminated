@@ -11,6 +11,14 @@
 
 namespace Chromabits\Illuminated\Dashboard;
 
+/**
+ * Class Card
+ *
+ * @todo
+ * @author Eduardo Trujillo <ed@chromabits.com>
+ * @package Chromabits\Illuminated\Dashboard
+ */
 class Card
 {
+    //
 }
