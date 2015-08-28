@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/etcinit/nucleus.git",
-                "reference": "9e1e58ce9484fbd56cff1ce9bba0740fbed7e6ba"
+                "reference": "51d7274da8f6b7a6a36d92be2df14e3b10b17a25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/etcinit/nucleus/zipball/9e1e58ce9484fbd56cff1ce9bba0740fbed7e6ba",
-                "reference": "9e1e58ce9484fbd56cff1ce9bba0740fbed7e6ba",
+                "url": "https://api.github.com/repos/etcinit/nucleus/zipball/51d7274da8f6b7a6a36d92be2df14e3b10b17a25",
+                "reference": "51d7274da8f6b7a6a36d92be2df14e3b10b17a25",
                 "shasum": ""
             },
             "require": {
@@ -53,20 +53,20 @@
                 }
             ],
             "description": "Some core PHP utilities",
-            "time": "2015-08-27 17:46:37"
+            "time": "2015-08-28 05:02:35"
         },
         {
             "name": "chromabits/standards",
-            "version": "v0.1.7",
+            "version": "v0.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/etcinit/php-coding-standard.git",
-                "reference": "4387aca664950b6a0dc804995588b8b122db1728"
+                "reference": "06ae3ab5183649f6513380e14314b2d950f8cef5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/etcinit/php-coding-standard/zipball/4387aca664950b6a0dc804995588b8b122db1728",
-                "reference": "4387aca664950b6a0dc804995588b8b122db1728",
+                "url": "https://api.github.com/repos/etcinit/php-coding-standard/zipball/06ae3ab5183649f6513380e14314b2d950f8cef5",
+                "reference": "06ae3ab5183649f6513380e14314b2d950f8cef5",
                 "shasum": ""
             },
             "require": {
@@ -74,7 +74,8 @@
                 "fabpot/php-cs-fixer": "^1.9",
                 "mmoreram/php-formatter": "1.0.5",
                 "squizlabs/php_codesniffer": "^2.3",
-                "symfony/console": "~2.7"
+                "symfony/console": "~2.7",
+                "symfony/finder": "^2.7"
             },
             "bin": [
                 "phpstd"
@@ -96,7 +97,7 @@
                 }
             ],
             "description": "An opinionated PHP standard",
-            "time": "2015-07-24 19:40:20"
+            "time": "2015-08-28 04:31:41"
         },
         {
             "name": "classpreloader/classpreloader",

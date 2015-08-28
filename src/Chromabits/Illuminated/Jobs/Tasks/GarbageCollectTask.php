@@ -15,7 +15,8 @@ use Carbon\Carbon;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobState;
-use Chromabits\Nucleus\Support\PrimitiveType;
+use Chromabits\Nucleus\Meditation\Boa;
+use Chromabits\Nucleus\Meditation\Spec;
 
 /**
  * Class GarbageCollectTask.
@@ -106,30 +107,18 @@ class GarbageCollectTask extends BaseTask
     }
 
     /**
-     * Get data field types.
-     *
-     * @return array
+     * @inheritDoc
      */
-    public function getTypes()
+    public function getSpec()
     {
-        return [
-            'days' => PrimitiveType::INTEGER,
-            'repeatIn' => PrimitiveType::INTEGER,
-            'expireAfter' => PrimitiveType::INTEGER,
-        ];
-    }
-
-    /**
-     * Get default data field values.
-     *
-     * @return array
-     */
-    public function getDefaults()
-    {
-        return [
+        return Spec::define([
+            'days' => Boa::integer(),
+            'repeat_in' => Boa::integer(),
+            'expire_after' => Boa::integer(),
+        ], [
             'days' => 30,
-            'repeatIn' => -1,
-            'expireAfter' => 1440,
-        ];
+            'repeat_in' => -1,
+            'expire_after' => 1440,
+        ]);
     }
 }

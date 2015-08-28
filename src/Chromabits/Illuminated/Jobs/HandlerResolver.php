@@ -16,7 +16,7 @@ use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
 use Chromabits\Illuminated\Jobs\Tasks\BaseTask;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Illuminate\Config\Repository;
-use Illuminate\Container\BindingResolutionException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Application;
 
 /**

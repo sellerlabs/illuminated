@@ -19,7 +19,7 @@ use Chromabits\Nucleus\Meditation\Spec;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Queue\Jobs\Job as LaravelJob;
 
@@ -29,7 +29,7 @@ use Illuminate\Queue\Jobs\Job as LaravelJob;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Commands
  */
-class RunTaskCommand extends Command implements SelfHandling, ShouldBeQueued
+class RunTaskCommand extends Command implements SelfHandling, ShouldQueue
 {
     /**
      * Implementation of the job repository.

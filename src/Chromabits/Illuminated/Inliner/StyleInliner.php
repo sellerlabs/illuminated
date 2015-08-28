@@ -62,6 +62,8 @@ class StyleInliner extends BaseObject implements InlinerContract
      */
     public function __construct(array $stylesheets, array $options = null)
     {
+        parent::__construct();
+
         $this->stylesheetPaths = $stylesheets;
         $this->options = $options;
 

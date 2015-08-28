@@ -14,10 +14,10 @@ namespace Chromabits\Illuminated\Jobs\Commands;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Queue\Interfaces\QueuePusherInterface;
+use Chromabits\Nucleus\Support\Std;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Config\Repository;
-use Illuminate\Queue\QueueManager;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
@@ -117,8 +117,8 @@ class EnqueueScheduledCommand extends Command implements SelfHandling
                 [
                     'job_id' => $job->id,
                 ],
-                coalesce($job->queue_connection, $defaultConnection),
-                coalesce($job->queue_name, $defaultQueue)
+                Std::coalesce($job->queue_connection, $defaultConnection),
+                Std::coalesce($job->queue_name, $defaultQueue)
             );
 
             $this->line('Queued Job ID: ' . $job->id . ' ' . $job->task);

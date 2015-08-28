@@ -168,7 +168,7 @@ class ResourceFactory extends BaseObject
             'middleware' => $this->middleware,
             'prefix' => $this->prefix,
         ]), function (Router $router) {
-            Std::each(function ($key, ResourceMethod $method) use ($router) {
+            Std::each(function (ResourceMethod $method) use ($router) {
                 $handler = vsprintf('%s@%s', [
                     $this->controller,
                     $method->getMethod(),

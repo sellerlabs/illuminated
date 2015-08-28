@@ -104,7 +104,7 @@ class AggregatedHasher extends BaseObject implements Hasher
         $match = false;
 
         Std::each(
-            function ($index, Hasher $hasher) use (
+            function (Hasher $hasher) use (
                 $value,
                 $hashedValue,
                 $options,

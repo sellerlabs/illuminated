@@ -11,7 +11,7 @@
 
 namespace Chromabits\Illuminated\Testing;
 
-use Chromabits\Nucleus\Support\PrimitiveType;
+use Chromabits\Nucleus\Meditation\Primitives\CompoundTypes;
 use Chromabits\Nucleus\Testing\TestCase;
 use Illuminate\Console\Application as ConsoleApplication;
 use Illuminate\Events\Dispatcher;
@@ -136,7 +136,7 @@ abstract class ServiceProviderTestCase extends TestCase
 
         $result = $instance->provides();
 
-        $this->assertInternalType(PrimitiveType::COLLECTION, $result);
+        $this->assertInternalType(CompoundTypes::COMPOUND_ARRAY, $result);
 
         if ($instance->isDeferred()) {
             foreach ($this->getExpectedBindings() as $abstract) {

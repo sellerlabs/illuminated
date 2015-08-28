@@ -45,6 +45,8 @@ class RouteAggregator extends BaseObject implements RouteMapper
      */
     public function __construct(Application $app)
     {
+        parent::__construct();
+
         $this->app = $app;
     }
 
