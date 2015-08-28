@@ -16,13 +16,13 @@ use Chromabits\Illuminated\Auth\Interfaces\KeyPairFinderInterface;
 use Chromabits\Illuminated\Auth\KeyPairTypes;
 use Chromabits\Illuminated\Auth\Models\KeyPair;
 use Chromabits\Illuminated\Http\ApiResponse;
+use Chromabits\Illuminated\Http\Interfaces\Middleware;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Hashing\HmacHasher;
 use Chromabits\Nucleus\Meditation\Constraints\PrimitiveTypeConstraint;
 use Chromabits\Nucleus\Meditation\Primitives\ScalarTypes;
 use Chromabits\Nucleus\Meditation\Spec;
 use Closure;
-use Chromabits\Illuminated\Http\Interfaces\Middleware;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
