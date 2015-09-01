@@ -11,7 +11,7 @@ script:
 - phpunit --coverage-text
 after_success:
 - if  [ $TRAVIS_PHP_VERSION = '5.6' ] && [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST
-  = 'false' ]; then sh generate-api.sh; fi
+  = 'false' ]; then sh apigen.sh; fi
 env:
   global:
     secure: cg+EdJWZ6FkqlgcV0hCMciLylr9fjEgJ9SWXp9c6G+oXAwMDCNT/7WO46iSulGEFckpS4srqVyW1kiOguXZO43ICoJdIcCe9imThZXwHtftQDsuA/uT8w/56yZKwOq6pHTKaBBKRetsjg8HFhW5ETY4uuIVismpm9SPpylVBpq4=

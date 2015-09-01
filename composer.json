@@ -10,8 +10,7 @@
     "illuminate/view": "^5.0",
     "illuminate/database": "^5.0",
     "tijsverkoyen/css-to-inline-styles": "~1.5",
-    "chromabits/nucleus": "0.4.x-dev as 0.2.4",
-    "chromabits/standards": "^0.1.3"
+    "chromabits/nucleus": "0.4.x-dev"
   },
   "authors": [
     {
@@ -35,7 +34,8 @@
     "laravel/framework": "^5.0",
     "phpunit/phpunit": "~4.6@dev",
     "mockery/mockery": "0.9.*@dev",
-    "doctrine/dbal": "~2.3"
+    "doctrine/dbal": "~2.3",
+    "chromabits/standards": "^0.1.3"
   },
   "extra": {
     "branch-alias": {
