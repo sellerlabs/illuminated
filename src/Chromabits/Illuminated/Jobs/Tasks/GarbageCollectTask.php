@@ -72,7 +72,7 @@ class GarbageCollectTask extends BaseTask
         $total = $jobs->count();
         $processed = 0;
 
-        $jobs->chunk(25, function ($jobs) use ($processed, $total, $job) {
+        $jobs->chunk(25, function ($jobs) use (&$processed, $total, $job) {
             $processed += count($jobs);
 
             foreach ($jobs as $staleJob) {
