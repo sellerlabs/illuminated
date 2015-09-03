@@ -122,8 +122,16 @@ class EnqueueScheduledCommand extends Command implements SelfHandling
                 Std::coalesce($job->queue_name, $defaultQueue)
             );
 
-            $job->state = JobState::QUEUED;
-            $job->save();
+            $job = $job->fresh();
+
+            // Sometimes, a developer might be running a sync queue. This means
+            // we have to check if the jobs is still in a scheduled state.
+            // Only then, we will update the status to queued. Otherwise, the
+            // job gets stuck in a queued state.
+            if ($job->state === JobState::SCHEDULED) {
+                $job->state = JobState::QUEUED;
+                $job->save();
+            }
 
             $this->line('Queued Job ID: ' . $job->id . ' ' . $job->task);
         }
