@@ -60,6 +60,7 @@ class EnqueueScheduledCommandTest extends HelpersTestCase
 
         $job->state = JobState::SCHEDULED;
         $job->run_at = Carbon::now()->subMinute();
+        $job->task = 'sometask';
 
         $impersonator = new Impersonator();
 
@@ -97,6 +98,8 @@ class EnqueueScheduledCommandTest extends HelpersTestCase
 
         $command->setLaravel($this->app);
         $command->run($input, $output);
+
+        $this->assertEquals(JobState::QUEUED, $job->state);
     }
 
     public function testFireWithNone()
@@ -137,6 +140,7 @@ class EnqueueScheduledCommandTest extends HelpersTestCase
         $job->run_at = Carbon::now()->subMinute();
         $job->queue_connection = 'dogemq';
         $job->queue_name = 'food';
+        $job->task = 'sometask';
 
         $impersonator = new Impersonator();
 

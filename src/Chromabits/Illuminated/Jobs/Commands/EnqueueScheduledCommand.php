@@ -13,6 +13,7 @@ namespace Chromabits\Illuminated\Jobs\Commands;
 
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
+use Chromabits\Illuminated\Jobs\JobState;
 use Chromabits\Illuminated\Queue\Interfaces\QueuePusherInterface;
 use Chromabits\Nucleus\Support\Std;
 use Illuminate\Console\Command;
@@ -120,6 +121,9 @@ class EnqueueScheduledCommand extends Command implements SelfHandling
                 Std::coalesce($job->queue_connection, $defaultConnection),
                 Std::coalesce($job->queue_name, $defaultQueue)
             );
+
+            $job->state = JobState::QUEUED;
+            $job->save();
 
             $this->line('Queued Job ID: ' . $job->id . ' ' . $job->task);
         }
