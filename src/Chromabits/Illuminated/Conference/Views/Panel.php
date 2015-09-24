@@ -9,16 +9,16 @@
  * This file is part of the Illuminated package
  */
 
-namespace Chromabits\Illuminated\Dashboard;
+namespace Chromabits\Illuminated\Conference\Views;
 
 /**
- * Class Module.
+ * Class Panel.
  *
  * @todo
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Chromabits\Illuminated\Dashboard
+ * @package Chromabits\Illuminated\Conference
  */
-class Module
+class Panel
 {
     //
 }

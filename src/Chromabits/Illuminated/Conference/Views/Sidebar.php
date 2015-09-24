@@ -9,14 +9,14 @@
  * This file is part of the Illuminated package
  */
 
-namespace Chromabits\Illuminated\Dashboard;
+namespace Chromabits\Illuminated\Conference\Views;
 
 /**
  * Class Sidebar.
  *
  * @todo
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Chromabits\Illuminated\Dashboard
+ * @package Chromabits\Illuminated\Conference
  */
 class Sidebar
 {
