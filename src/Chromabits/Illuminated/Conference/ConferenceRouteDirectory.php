@@ -24,6 +24,8 @@ class ConferenceRouteDirectory implements RouteMapper
     {
         ResourceFactory::create(ConferenceController::class)
             ->get('/', 'anyIndex')
+            ->get('/{moduleName}', 'anyModule')
+            ->get('/{moduleName}/{methodName}', 'anyMethod')
             ->inject($router);
     }
 }

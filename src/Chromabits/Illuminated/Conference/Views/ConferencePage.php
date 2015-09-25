@@ -2,14 +2,17 @@
 
 namespace Chromabits\Illuminated\Conference\Views;
 
+use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
 use Chromabits\Nucleus\Support\Html;
 use Chromabits\Nucleus\View\Bootstrap\Column;
 use Chromabits\Nucleus\View\Bootstrap\Container;
 use Chromabits\Nucleus\View\Bootstrap\Row;
 use Chromabits\Nucleus\View\Common\Anchor;
+use Chromabits\Nucleus\View\Common\ListItem;
 use Chromabits\Nucleus\View\Common\Navigation;
 use Chromabits\Nucleus\View\Common\Paragraph;
 use Chromabits\Nucleus\View\Common\Small;
+use Chromabits\Nucleus\View\Common\UnorderedList;
 use Chromabits\Nucleus\View\Head\Link;
 use Chromabits\Nucleus\View\Head\Meta;
 use Chromabits\Nucleus\View\Head\Title;
@@ -36,46 +39,35 @@ class ConferencePage implements RenderableInterface, SafeHtmlProducerInterface
     protected $panel;
 
     /**
+     * @var ConferenceContext
+     */
+    protected $context;
+
+    /**
      * Construct an instance of a ConferencePage.
+     *
+     * @param ConferenceContext $context
      * @param string $panel
      * @param null $sidebar
      */
-    public function __construct($panel = 'Empty.', $sidebar = null)
-    {
+    public function __construct(
+        ConferenceContext $context,
+        $panel = 'Empty.',
+        $sidebar = null
+    ) {
         $this->sidebar = $sidebar;
         $this->panel = $panel;
+        $this->context = $context;
     }
 
     /**
-     * Render the content of the panel.
+     * Get a safe HTML version of the contents of this object.
      *
-     * @return Container
+     * @return SafeHtmlWrapper
      */
-    protected function renderContent()
+    public function getSafeHtml()
     {
-        if ($this->sidebar === null) {
-            return new Container([], [
-                new Row([], [
-                    new Column(
-                        ['medium' => 12],
-                        $this->panel
-                    )
-                ]),
-            ]);
-        }
-
-        return new Container([], [
-            new Row([], [
-                new Column(
-                    ['medium' => 4],
-                    $this->sidebar
-                ),
-                new Column(
-                    ['medium' => 8],
-                    $this->panel
-                )
-            ]),
-        ]);
+        return Html::safe($this->render());
     }
 
     /**
@@ -89,10 +81,40 @@ class ConferencePage implements RenderableInterface, SafeHtmlProducerInterface
             new Container(['class' => 'p-t p-b'], [
                 new Navigation(
                     ['class' => 'navbar navbar-dark bg-inverse'],
-                    [new Anchor(
-                        ['class' => 'navbar-brand', 'href' => '#'],
-                        'Illuminated'
-                    )]
+                    [
+                        new Anchor(
+                            [
+                                'class' => 'navbar-brand',
+                                'href' => $this->context->url(),
+                            ],
+                            'Illuminated'
+                        ),
+                        new UnorderedList(['class' => 'nav navbar-nav'], [
+                            new ListItem(
+                                ['class' => 'nav-item'],
+                                new Anchor(
+                                    [
+                                        'href' => $this->context->url(),
+                                        'class' => 'nav-link',
+                                    ],
+                                    'Home'
+                                )
+                            ),
+                            new ListItem(
+                                ['class' => 'nav-item'],
+                                new Anchor(
+                                    [
+                                        'href' => $this->context->method(
+                                            'illuminated.conference.front',
+                                            'modules'
+                                        ),
+                                        'class' => 'nav-link',
+                                    ],
+                                    'Modules'
+                                )
+                            )
+                        ])
+                    ]
                 ),
             ]),
             $this->renderContent(),
@@ -121,12 +143,34 @@ class ConferencePage implements RenderableInterface, SafeHtmlProducerInterface
     }
 
     /**
-     * Get a safe HTML version of the contents of this object.
+     * Render the content of the panel.
      *
-     * @return SafeHtmlWrapper
+     * @return Container
      */
-    public function getSafeHtml()
+    protected function renderContent()
     {
-        return Html::safe($this->render());
+        if ($this->sidebar === null) {
+            return new Container([], [
+                new Row([], [
+                    new Column(
+                        ['medium' => 12],
+                        $this->panel
+                    )
+                ]),
+            ]);
+        }
+
+        return new Container([], [
+            new Row([], [
+                new Column(
+                    ['medium' => 3],
+                    $this->sidebar
+                ),
+                new Column(
+                    ['medium' => 9],
+                    $this->panel
+                )
+            ]),
+        ]);
     }
 }

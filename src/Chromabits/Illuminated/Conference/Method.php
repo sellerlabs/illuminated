@@ -25,6 +25,38 @@ class Method extends BaseObject
     protected $label;
 
     /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getControllerClassName()
+    {
+        return $this->controllerClassName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getControllerMethodName()
+    {
+        return $this->controllerMethodName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVerb()
+    {
+        return $this->verb;
+    }
+
+    /**
      * @var Container
      */
     protected $container;
@@ -50,6 +82,7 @@ class Method extends BaseObject
         $this->verb = $verb;
         $this->controllerClassName = $controllerClassName;
         $this->controllerMethodName = $controllerMethodName;
+        $this->label = null;
     }
 
     /**

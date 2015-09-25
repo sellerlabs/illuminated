@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: etcinit
- * Date: 9/24/15
- * Time: 1:24 AM
- */
 
 namespace Chromabits\Illuminated\Conference\Views;
 

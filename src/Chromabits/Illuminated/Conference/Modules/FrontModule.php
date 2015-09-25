@@ -20,7 +20,19 @@ class FrontModule extends Module
     {
         parent::__construct();
 
-        $this->register('index', FrontModuleController::class, 'getIndex');
+        $this->register(
+            'index',
+            FrontModuleController::class,
+            'getIndex',
+            'Home'
+        );
+
+        $this->register(
+            'modules',
+            FrontModuleController::class,
+            'getModules',
+            'Modules'
+        );
     }
 
     /**
@@ -37,5 +49,21 @@ class FrontModule extends Module
     public function getDefaultMethodName()
     {
         return 'index';
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return 'Home';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return 'Provides an overview panel for Conference.';
     }
 }

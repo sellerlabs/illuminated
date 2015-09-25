@@ -51,6 +51,14 @@ class Dashboard extends BaseObject implements DashboardInterface
     }
 
     /**
+     * @return Module[]
+     */
+    public function getModules()
+    {
+        return $this->modules;
+    }
+
+    /**
      * Register a module with this dashboard.
      *
      * @param $moduleClassName

@@ -51,6 +51,16 @@ abstract class Module extends BaseObject
     abstract public function getName();
 
     /**
+     * @return string
+     */
+    abstract public function getLabel();
+
+    /**
+     * @return string
+     */
+    abstract public function getDescription();
+
+    /**
      * Get the name of the default method.
      *
      * @return string|null
@@ -113,7 +123,7 @@ abstract class Module extends BaseObject
                             $methodName
                         ),
                         'class' => 'nav-link'
-                    ], $methodName)
+                    ], Std::coalesce($method->getLabel(), $methodName))
                 ]);
             }, $this->getMethods())
         ))->render());
@@ -125,19 +135,27 @@ abstract class Module extends BaseObject
      * @param $name
      * @param $controllerClassName
      * @param $controllerMethodName
+     * @param null $label
      * @param string $verb
      */
     protected function register(
         $name,
         $controllerClassName,
         $controllerMethodName,
+        $label = null,
         $verb = 'GET'
     ) {
-        $this->methods[$name] = new Method(
+        $method = new Method(
             $name,
             $controllerClassName,
             $controllerMethodName,
             $verb
         );
+
+        if ($label !== null) {
+            $method->setLabel($label);
+        }
+
+        $this->methods[$name] = $method;
     }
 }

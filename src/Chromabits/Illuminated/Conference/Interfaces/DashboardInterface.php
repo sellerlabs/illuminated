@@ -4,6 +4,7 @@ namespace Chromabits\Illuminated\Conference\Interfaces;
 
 use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
 use Chromabits\Illuminated\Conference\Entities\SidebarPanelPair;
+use Chromabits\Illuminated\Conference\Module;
 use Chromabits\Nucleus\Exceptions\CoreException;
 use Chromabits\Nucleus\Meditation\Exceptions\InvalidArgumentException;
 use Illuminate\Http\Request;
@@ -48,4 +49,9 @@ interface DashboardInterface
         $module = null,
         $method = null
     );
+
+    /**
+     * @return Module[]
+     */
+    public function getModules();
 }
