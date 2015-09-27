@@ -11,6 +11,7 @@ use Chromabits\Nucleus\View\Common\Anchor;
 use Chromabits\Nucleus\View\Common\ListItem;
 use Chromabits\Nucleus\View\Common\Navigation;
 use Chromabits\Nucleus\View\Common\Paragraph;
+use Chromabits\Nucleus\View\Common\Script;
 use Chromabits\Nucleus\View\Common\Small;
 use Chromabits\Nucleus\View\Common\UnorderedList;
 use Chromabits\Nucleus\View\Head\Link;
@@ -77,69 +78,111 @@ class ConferencePage implements RenderableInterface, SafeHtmlProducerInterface
      */
     public function render()
     {
-        return (new Page([
-            new Container(['class' => 'p-t p-b'], [
-                new Navigation(
-                    ['class' => 'navbar navbar-dark bg-inverse'],
-                    [
-                        new Anchor(
+        $dashboardUrl = $this->context->url();
+        $modulesUrl = $this->context->method(
+            'illuminated.conference.front',
+            'modules'
+        );
+
+        $innerPage = new Page(
+            [
+                new Container(
+                    ['class' => 'p-t p-b'], [
+                        new Navigation(
+                            ['class' => 'navbar navbar-dark bg-inverse'],
                             [
-                                'class' => 'navbar-brand',
-                                'href' => $this->context->url(),
-                            ],
-                            'Illuminated'
-                        ),
-                        new UnorderedList(['class' => 'nav navbar-nav'], [
-                            new ListItem(
-                                ['class' => 'nav-item'],
                                 new Anchor(
                                     [
-                                        'href' => $this->context->url(),
-                                        'class' => 'nav-link',
+                                        'class' => 'navbar-brand',
+                                        'href' => $dashboardUrl,
                                     ],
-                                    'Home'
-                                )
-                            ),
-                            new ListItem(
-                                ['class' => 'nav-item'],
-                                new Anchor(
-                                    [
-                                        'href' => $this->context->method(
-                                            'illuminated.conference.front',
-                                            'modules'
+                                    'Illuminated'
+                                ),
+                                new UnorderedList(
+                                    ['class' => 'nav navbar-nav'], [
+                                        new ListItem(
+                                            ['class' => 'nav-item'],
+                                            new Anchor(
+                                                [
+                                                    'href' => $dashboardUrl(),
+                                                    'class' => 'nav-link',
+                                                ],
+                                                'Home'
+                                            )
                                         ),
-                                        'class' => 'nav-link',
-                                    ],
-                                    'Modules'
-                                )
-                            )
-                        ])
+                                        new ListItem(
+                                            ['class' => 'nav-item'],
+                                            new Anchor(
+                                                [
+                                                    'href' => $modulesUrl,
+                                                    'class' => 'nav-link',
+                                                ],
+                                                'Modules'
+                                            )
+                                        ),
+                                    ]
+                                ),
+                            ]
+                        ),
                     ]
                 ),
-            ]),
-            $this->renderContent(),
-            new Container(['class' => 'p-t p-b'], [
-                new Paragraph([], [
-                    new Small([], 'Keep building awesome stuff. 👍 ')
-                ])
-            ]),
-        ], [
-            new Meta(['charset' => 'utf-8']),
-            new Meta([
-                'name' => 'viewport',
-                'content' => 'width=device-width, initial-scale=1',
-            ]),
-            new Meta([
-                'http-equiv' => 'x-ua-compatible',
-                'content' => 'ie=edge',
-            ]),
-            new Title([], 'Illuminated - Conference'),
-            new Link([
-                'rel' => 'stylesheet',
-                'href' => 'https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist'
-                    . '/css/bootstrap.css'
-            ])
-        ]))->render();
+                $this->renderContent(),
+                new Container(
+                    ['class' => 'p-t p-b'], [
+                        new Paragraph(
+                            [], [
+                                new Small(
+                                    [], 'Keep building awesome stuff. 👍 '
+                                ),
+                            ]
+                        ),
+                    ]
+                ),
+                new Script(
+                    [
+                        'src' => 'https://ajax.googleapis.com/ajax/libs/jquery/'
+                            . '2.1.4/jquery.min.js',
+                    ]
+                ),
+                new Script(
+                    [
+                        'src' => 'https://cdn.rawgit.com/twbs/bootstrap/v4-dev/'
+                            . 'dist/js/bootstrap.js',
+                    ]
+                ),
+            ], [
+                new Meta(['charset' => 'utf-8']),
+                new Meta(
+                    [
+                        'name' => 'viewport',
+                        'content' => 'width=device-width, initial-scale=1',
+                    ]
+                ),
+                new Meta(
+                    [
+                        'http-equiv' => 'x-ua-compatible',
+                        'content' => 'ie=edge',
+                    ]
+                ),
+                new Title([], 'Illuminated - Conference'),
+                new Link(
+                    [
+                        'rel' => 'stylesheet',
+                        'href' => 'https://cdn.rawgit.com/twbs/bootstrap/v4-dev'
+                            . '/dist/css/bootstrap.css',
+                    ]
+                ),
+                new Link(
+                    [
+                        'rel' => 'stylesheet',
+                        'href' => 'https://maxcdn.bootstrapcdn.com/font-awesome'
+                            . '/4.4.0/css/font-awesome.min.css',
+                    ]
+                ),
+            ]
+        );
+
+        return $innerPage->render();
     }
 
     /**
@@ -150,27 +193,35 @@ class ConferencePage implements RenderableInterface, SafeHtmlProducerInterface
     protected function renderContent()
     {
         if ($this->sidebar === null) {
-            return new Container([], [
-                new Row([], [
-                    new Column(
-                        ['medium' => 12],
-                        $this->panel
-                    )
-                ]),
-            ]);
+            return new Container(
+                [], [
+                    new Row(
+                        [], [
+                            new Column(
+                                ['medium' => 12],
+                                $this->panel
+                            ),
+                        ]
+                    ),
+                ]
+            );
         }
 
-        return new Container([], [
-            new Row([], [
-                new Column(
-                    ['medium' => 3],
-                    $this->sidebar
+        return new Container(
+            [], [
+                new Row(
+                    [], [
+                        new Column(
+                            ['medium' => 3],
+                            $this->sidebar
+                        ),
+                        new Column(
+                            ['medium' => 9],
+                            $this->panel
+                        ),
+                    ]
                 ),
-                new Column(
-                    ['medium' => 9],
-                    $this->panel
-                )
-            ]),
-        ]);
+            ]
+        );
     }
 }

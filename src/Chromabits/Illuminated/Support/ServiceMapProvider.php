@@ -23,6 +23,8 @@ abstract class ServiceMapProvider extends ServiceProvider
 {
     protected $map = [];
 
+    protected $singletons = [];
+
     protected $commands = [];
 
     /**
@@ -64,6 +66,10 @@ abstract class ServiceMapProvider extends ServiceProvider
             $this->app->bind($abstract, $concrete);
         }
 
+        foreach ($this->getSingletons() as $abstract => $concrete) {
+            $this->app->singleton($abstract, $concrete);
+        }
+
         $this->commands($this->getCommands());
     }
 
@@ -76,5 +82,13 @@ abstract class ServiceMapProvider extends ServiceProvider
     public function provides()
     {
         return array_keys($this->getServiceMap());
+    }
+
+    /**
+     * @return array
+     */
+    public function getSingletons()
+    {
+        return $this->singletons;
     }
 }

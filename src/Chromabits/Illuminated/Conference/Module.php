@@ -46,6 +46,14 @@ abstract class Module extends BaseObject
     }
 
     /**
+     * Boot the module.
+     */
+    public function boot()
+    {
+        //
+    }
+
+    /**
      * @return string
      */
     abstract public function getName();
@@ -70,7 +78,7 @@ abstract class Module extends BaseObject
     /**
      * Return whether or not a method exists in this module.
      *
-     * @param $methodName
+     * @param string $methodName
      *
      * @return bool
      */
@@ -92,7 +100,7 @@ abstract class Module extends BaseObject
     /**
      * Get a method in this module by its name.
      *
-     * @param $methodName
+     * @param string $methodName
      *
      * @return mixed
      */
@@ -107,6 +115,7 @@ abstract class Module extends BaseObject
      * If null is returned, we won't display one.
      *
      * @param ConferenceContext $context
+     *
      * @return SafeHtmlWrapper
      */
     public function renderSidebar(ConferenceContext $context)
@@ -132,10 +141,10 @@ abstract class Module extends BaseObject
     /**
      * Register a method on this module.
      *
-     * @param $name
-     * @param $controllerClassName
-     * @param $controllerMethodName
-     * @param null $label
+     * @param string $name
+     * @param string $controllerClassName
+     * @param string $controllerMethodName
+     * @param null|string $label
      * @param string $verb
      */
     protected function register(

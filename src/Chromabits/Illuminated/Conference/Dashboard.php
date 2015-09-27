@@ -13,6 +13,7 @@ use Chromabits\Nucleus\Meditation\Arguments;
 use Chromabits\Nucleus\Meditation\Boa;
 use Chromabits\Nucleus\Meditation\Exceptions\InvalidArgumentException;
 use Chromabits\Nucleus\Support\Arr;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,9 @@ use Illuminate\Http\Request;
  */
 class Dashboard extends BaseObject implements DashboardInterface
 {
+    /**
+     * The default module used by the dashboard.
+     */
     const DEFAULT_MODULE = 'illuminated.conference.front';
 
     /**
@@ -37,6 +41,11 @@ class Dashboard extends BaseObject implements DashboardInterface
     protected $modules;
 
     /**
+     * @var Exception[]
+     */
+    protected $failedModules;
+
+    /**
      * Construct an instance of a Dashboard.
      *
      * @param Application $application
@@ -48,6 +57,7 @@ class Dashboard extends BaseObject implements DashboardInterface
         $this->application = $application;
 
         $this->modules = [];
+        $this->failedModules = [];
     }
 
     /**
@@ -61,7 +71,7 @@ class Dashboard extends BaseObject implements DashboardInterface
     /**
      * Register a module with this dashboard.
      *
-     * @param $moduleClassName
+     * @param string $moduleClassName
      *
      * @throws CoreException
      * @throws InvalidArgumentException
@@ -78,7 +88,13 @@ class Dashboard extends BaseObject implements DashboardInterface
             );
         }
 
-        $this->modules[$instance->getName()] = $instance;
+        try {
+            $instance->boot();
+
+            $this->modules[$instance->getName()] = $instance;
+        } catch (Exception $e) {
+            $this->failedModules[$instance->getName()] = $e;
+        }
     }
 
     /**
@@ -98,6 +114,7 @@ class Dashboard extends BaseObject implements DashboardInterface
      * @param ConferenceContext $context
      * @param null|string $module
      * @param null|string $method
+     *
      * @return SidebarPanelPair
      * @throws MethodNotFoundException
      * @throws ModuleNotFoundException
@@ -163,5 +180,13 @@ class Dashboard extends BaseObject implements DashboardInterface
         }
 
         return $module->getMethod($selected);
+    }
+
+    /**
+     * @return Exception[]
+     */
+    public function getFailedModules()
+    {
+        return $this->failedModules;
     }
 }

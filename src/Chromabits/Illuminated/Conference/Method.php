@@ -8,21 +8,87 @@ use Illuminate\Container\Container;
 use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteDependencyResolverTrait;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class Method
+ *
+ * @author Eduardo Trujillo <ed@chromabits.com>
+ * @package Chromabits\Illuminated\Conference
+ */
 class Method extends BaseObject
 {
     use RouteDependencyResolverTrait;
 
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var string
+     */
     protected $controllerClassName;
 
+    /**
+     * @var string
+     */
     protected $controllerMethodName;
 
+    /**
+     * @var string
+     */
     protected $verb;
 
+    /**
+     * @var null|String
+     */
     protected $label;
+
+    /**
+     * @var bool
+     */
+    protected $hidden;
+
+    /**
+     * @var Container
+     */
+    protected $container;
+
+    /**
+     * Construct an instance of a Method.
+     *
+     * @param string $name
+     * @param string $controllerClassName
+     * @param string $controllerMethodName
+     * @param string $verb
+     *
+     * @throws LackOfCoffeeException
+     */
+    public function __construct(
+        $name,
+        $controllerClassName,
+        $controllerMethodName,
+        $verb = 'GET'
+    ) {
+        parent::__construct();
+
+        $this->name = $name;
+        $this->verb = $verb;
+        $this->controllerClassName = $controllerClassName;
+        $this->controllerMethodName = $controllerMethodName;
+        $this->label = null;
+        $this->hidden = false;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isHidden()
+    {
+        return $this->hidden;
+    }
 
     /**
      * @return string
@@ -57,35 +123,6 @@ class Method extends BaseObject
     }
 
     /**
-     * @var Container
-     */
-    protected $container;
-
-    /**
-     * Construct an instance of a Method.
-     *
-     * @param $name
-     * @param $controllerClassName
-     * @param $controllerMethodName
-     * @param string $verb
-     * @throws LackOfCoffeeException
-     */
-    public function __construct(
-        $name,
-        $controllerClassName,
-        $controllerMethodName,
-        $verb = 'GET'
-    ) {
-        parent::__construct();
-
-        $this->name = $name;
-        $this->verb = $verb;
-        $this->controllerClassName = $controllerClassName;
-        $this->controllerMethodName = $controllerMethodName;
-        $this->label = null;
-    }
-
-    /**
      * @return mixed
      */
     public function getLabel()
@@ -105,6 +142,7 @@ class Method extends BaseObject
      * Set the instance of a container to use.
      *
      * @param Container $container
+     *
      * @return $this
      */
     public function setContainer(Container $container)
@@ -114,6 +152,13 @@ class Method extends BaseObject
         return $this;
     }
 
+    /**
+     * Run the method.
+     *
+     * @param Request $request
+     *
+     * @return mixed|Response
+     */
     public function run(Request $request)
     {
         $this->container = $this->container ?: new Container();
@@ -125,6 +170,13 @@ class Method extends BaseObject
         }
     }
 
+    /**
+     * Process this method through a controller.
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
     protected function runController(Request $request)
     {
         $class = $this->controllerClassName;

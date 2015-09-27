@@ -29,6 +29,12 @@ class Page implements RenderableInterface, SafeHtmlProducerInterface
      */
     protected $headerChildren;
 
+    /**
+     * Construct an instance of a Page.
+     *
+     * @param array $children
+     * @param array $headerChildren
+     */
     public function __construct($children = [], $headerChildren = [])
     {
         $this->children = $children;

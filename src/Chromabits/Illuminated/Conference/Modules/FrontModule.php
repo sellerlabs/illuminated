@@ -33,6 +33,13 @@ class FrontModule extends Module
             'getModules',
             'Modules'
         );
+
+        $this->register(
+            'issues',
+            FrontModuleController::class,
+            'getIssues',
+            'Module issues'
+        );
     }
 
     /**

@@ -43,7 +43,7 @@ class ConferenceContext extends BaseObject
      * Note: If the module does not have a default method, then the user will
      * see an error page.
      *
-     * @param $moduleName
+     * @param string $moduleName
      * @param array $parameters
      * @param null|bool $secure
      *
@@ -57,7 +57,7 @@ class ConferenceContext extends BaseObject
     /**
      * Generate a URL for a path inside the dashboard.
      *
-     * @param $path
+     * @param string $path
      * @param array $parameters
      * @param null|bool $secure
      *
@@ -71,8 +71,8 @@ class ConferenceContext extends BaseObject
     /**
      * Generate a URL for a dashboard module method.
      *
-     * @param $moduleName
-     * @param $methodName
+     * @param string $moduleName
+     * @param string $methodName
      * @param array $parameters
      * @param null|bool $secure
      *

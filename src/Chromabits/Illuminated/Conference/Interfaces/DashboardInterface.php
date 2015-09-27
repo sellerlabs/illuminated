@@ -7,20 +7,21 @@ use Chromabits\Illuminated\Conference\Entities\SidebarPanelPair;
 use Chromabits\Illuminated\Conference\Module;
 use Chromabits\Nucleus\Exceptions\CoreException;
 use Chromabits\Nucleus\Meditation\Exceptions\InvalidArgumentException;
+use Exception;
 use Illuminate\Http\Request;
 
 /**
- * Class Dashboard
+ * Interface DashboardInterface
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Chromabits\Illuminated\Conference
+ * @package Chromabits\Illuminated\Conference\Interfaces
  */
 interface DashboardInterface
 {
     /**
      * Register a module with this dashboard.
      *
-     * @param $moduleClassName
+     * @param string $moduleClassName
      *
      * @throws CoreException
      * @throws InvalidArgumentException
@@ -41,6 +42,7 @@ interface DashboardInterface
      * @param ConferenceContext $context
      * @param null|string $module
      * @param null|string $method
+     *
      * @return SidebarPanelPair
      */
     public function run(
@@ -54,4 +56,9 @@ interface DashboardInterface
      * @return Module[]
      */
     public function getModules();
+
+    /**
+     * @return Exception[]
+     */
+    public function getFailedModules();
 }

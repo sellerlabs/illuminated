@@ -49,19 +49,69 @@ class ConferenceController extends BaseController
         $this->context = $context;
     }
 
-    public function anyIndex() {
+    /**
+     * Handle the default panel.
+     *
+     * @return mixed
+     */
+    public function anyIndex()
+    {
         return $this->renderDashboard(
             $this->dashboard->run($this->request, $this->context)
         );
     }
 
-    public function anyModule($moduleName) {
+    /**
+     * Render the dashboard.
+     *
+     * @param SidebarPanelPair $result
+     *
+     * @return mixed
+     */
+    protected function renderDashboard(SidebarPanelPair $result)
+    {
+        if ($result->hasSidebar()) {
+            return (
+            new ConferencePage(
+                $this->context,
+                $result->getPanel(),
+                $result->getSidebar()
+            )
+            )->render();
+        }
+
+        return (
+        new ConferencePage(
+            $this->context,
+            $result->getPanel()
+        )
+        )->render();
+    }
+
+    /**
+     * Handle a module call.
+     *
+     * @param string $moduleName
+     *
+     * @return mixed
+     */
+    public function anyModule($moduleName)
+    {
         return $this->renderDashboard(
             $this->dashboard->run($this->request, $this->context, $moduleName)
         );
     }
 
-    public function anyMethod($moduleName, $methodName) {
+    /**
+     * Handle a module+method call.
+     *
+     * @param string $moduleName
+     * @param string $methodName
+     *
+     * @return mixed
+     */
+    public function anyMethod($moduleName, $methodName)
+    {
         return $this->renderDashboard(
             $this->dashboard->run(
                 $this->request,
@@ -70,21 +120,5 @@ class ConferenceController extends BaseController
                 $methodName
             )
         );
-    }
-
-    protected function renderDashboard(SidebarPanelPair $result)
-    {
-        if ($result->hasSidebar()) {
-            return (new ConferencePage(
-                $this->context,
-                $result->getPanel(),
-                $result->getSidebar()
-            ))->render();
-        }
-
-        return (new ConferencePage(
-            $this->context,
-            $result->getPanel()
-        ))->render();
     }
 }

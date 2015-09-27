@@ -16,7 +16,7 @@ namespace Chromabits\Illuminated\Conference\Views;
  *
  * @todo
  * @author Eduardo Trujillo <ed@chromabits.com>
- * @package Chromabits\Illuminated\Conference
+ * @package Chromabits\Illuminated\Conference\Views
  */
 class SidebarSeparator
 {

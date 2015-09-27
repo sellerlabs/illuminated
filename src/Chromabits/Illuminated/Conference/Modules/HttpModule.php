@@ -13,6 +13,9 @@ use Chromabits\Illuminated\Conference\ModuleControllers\HttpModuleController;
  */
 class HttpModule extends Module
 {
+    /**
+     * Construct an instance of a HttpModule.
+     */
     public function __construct()
     {
         parent::__construct();

@@ -8,17 +8,29 @@ use Chromabits\Illuminated\Conference\Method;
 use Chromabits\Illuminated\Conference\Module;
 use Chromabits\Illuminated\Http\BaseController;
 use Chromabits\Nucleus\Support\Std;
+use Chromabits\Nucleus\View\Bootstrap\Card;
+use Chromabits\Nucleus\View\Bootstrap\CardBlock;
+use Chromabits\Nucleus\View\Bootstrap\Column;
+use Chromabits\Nucleus\View\Bootstrap\Row;
 use Chromabits\Nucleus\View\Common\Bold;
+use Chromabits\Nucleus\View\Common\Button;
+use Chromabits\Nucleus\View\Common\DefinitionDescription;
+use Chromabits\Nucleus\View\Common\DefinitionList;
+use Chromabits\Nucleus\View\Common\DefinitionTerm;
 use Chromabits\Nucleus\View\Common\Div;
 use Chromabits\Nucleus\View\Common\HeaderFive;
 use Chromabits\Nucleus\View\Common\HeaderFour;
 use Chromabits\Nucleus\View\Common\HeaderSix;
+use Chromabits\Nucleus\View\Common\HorizontalLine;
 use Chromabits\Nucleus\View\Common\LineBreak;
 use Chromabits\Nucleus\View\Common\ListItem;
 use Chromabits\Nucleus\View\Common\Paragraph;
+use Chromabits\Nucleus\View\Common\PreformattedText;
 use Chromabits\Nucleus\View\Common\Small;
+use Chromabits\Nucleus\View\Common\Span;
 use Chromabits\Nucleus\View\Common\UnorderedList;
 use Chromabits\Nucleus\View\Common\Anchor;
+use Exception;
 
 /**
  * Class FrontModuleController
@@ -28,6 +40,14 @@ use Chromabits\Nucleus\View\Common\Anchor;
  */
 class FrontModuleController extends BaseController
 {
+    /**
+     * Get the homepage.
+     *
+     * @param DashboardInterface $dashboard
+     * @param ConferenceContext $context
+     *
+     * @return Div
+     */
     public function getIndex(
         DashboardInterface $dashboard,
         ConferenceContext $context
@@ -55,6 +75,14 @@ class FrontModuleController extends BaseController
         ]));
     }
 
+    /**
+     * Render the launch bar.
+     *
+     * @param DashboardInterface $dashboard
+     * @param ConferenceContext $context
+     *
+     * @return Div
+     */
     protected function renderLaunchpad(
         DashboardInterface $dashboard,
         ConferenceContext $context
@@ -95,6 +123,13 @@ class FrontModuleController extends BaseController
         ]);
     }
 
+    /**
+     * Get information about loaded modules.
+     *
+     * @param DashboardInterface $dashboard
+     *
+     * @return Div
+     */
     public function getModules(DashboardInterface $dashboard)
     {
         return (new Div([], [
@@ -129,6 +164,90 @@ class FrontModuleController extends BaseController
                     }, $dashboard->getModules())
                 )
             ])
+        ]));
+    }
+
+    /**
+     * Get problematic modules.
+     *
+     * @param DashboardInterface $dashboard
+     *
+     * @return Div
+     */
+    public function getIssues(DashboardInterface $dashboard)
+    {
+        $exceptions = Std::map(function (Exception $exception, $moduleName) {
+            return new Div([], [
+                new Div(['class' => 'card card-inverted',], [
+                    new CardBlock([], [
+                        new HeaderSix(['class' => 'text-muted'], $moduleName),
+                        new Bold([], get_class($exception) . ': '),
+                        $exception->getMessage(),
+                        new Div(
+                            ['class' => 'collapse p-t', 'id' => 'stack'],
+                            new PreformattedText(
+                                ['class' => 'pre-scrollable'],
+                                $exception->getTraceAsString()
+                            )
+                        )
+                    ]),
+                    new Div(['class' => 'card-footer text-muted'], [
+                        new Row([], [
+                            new Column(['medium' => 6], [
+                                basename($exception->getFile()) . ':'
+                                . $exception->getLine(),
+                            ]),
+                            new Column(
+                                ['medium' => 6, 'class' => 'text-right'],
+                                new Button(
+                                    [
+                                        'href' => '#',
+                                        'class' => [
+                                            'btn',
+                                            'btn-sm',
+                                            'btn-primary-outline'
+                                        ],
+                                        'data-toggle' => 'collapse',
+                                        'data-target' => '#stack',
+                                        'aria-expanded' => 'false',
+                                        'aria-controls' => '#stack',
+                                    ],
+                                    'Toggle stacktrace'
+                                )
+                            )
+                        ])
+
+
+                    ])
+                ])
+            ]);
+        }, $dashboard->getFailedModules());
+
+        return (new Div([], [
+            new Div(['class' => 'card'], [
+                new Div(['class' => 'card-header'], 'Module issues'),
+                new Div(
+                    ['class' => 'card-block'],
+                    [
+                        'Below you will find a list of all the modules that ',
+                        'failed to load. If one or more failed to load, it is ',
+                        'not necessarily a bad thing. If you do not intend to ',
+                        'use the component covered by the module, you may ',
+                        'safely ignore it.'
+                    ]
+                )
+            ]),
+            new HorizontalLine([]),
+            new Div([], Std::firstBias(
+                count($dashboard->getFailedModules()) > 0,
+                $exceptions,
+                function () {
+                    return new Card(
+                        ['class' => 'card card-block text-center'],
+                        ['All modules seem fine!']
+                    );
+                }
+            ))
         ]));
     }
 }

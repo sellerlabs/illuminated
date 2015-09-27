@@ -23,6 +23,13 @@ use Illuminate\Routing\Router;
  */
 class HttpModuleController extends BaseController
 {
+    /**
+     * Get all routes.
+     *
+     * @param Router $router
+     *
+     * @return Div
+     */
     public function getIndex(Router $router)
     {
         return (new Div([], [
@@ -36,6 +43,13 @@ class HttpModuleController extends BaseController
         ]));
     }
 
+    /**
+     * Get router middleware.
+     *
+     * @param Router $router
+     *
+     * @return Div
+     */
     public function getRouterMiddleware(Router $router)
     {
         return (new Div([], [
@@ -50,6 +64,13 @@ class HttpModuleController extends BaseController
         ]));
     }
 
+    /**
+     * Get all router patterns.
+     *
+     * @param Router $router
+     *
+     * @return Div
+     */
     public function getPatterns(Router $router)
     {
         return (new Div([], [
@@ -63,6 +84,13 @@ class HttpModuleController extends BaseController
         ]));
     }
 
+    /**
+     * Render routes table.
+     *
+     * @param Router $router
+     *
+     * @return Table
+     */
     protected function renderRoutes(Router $router)
     {
         return new Table(['class' => 'table'], [
@@ -82,6 +110,13 @@ class HttpModuleController extends BaseController
         ]);
     }
 
+    /**
+     * Render middleware table.
+     *
+     * @param Router $router
+     *
+     * @return Table
+     */
     protected function renderMiddleware(Router $router)
     {
         return new Table(['class' => 'table'], [
@@ -101,6 +136,13 @@ class HttpModuleController extends BaseController
         ]);
     }
 
+    /**
+     * Render all router patterns.
+     *
+     * @param Router $router
+     *
+     * @return Table
+     */
     protected function renderPatterns(Router $router)
     {
         return new Table(['class' => 'table'], [
