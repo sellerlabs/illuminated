@@ -5,8 +5,13 @@ namespace Chromabits\Illuminated\Conference\Controllers;
 use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
 use Chromabits\Illuminated\Conference\Entities\SidebarPanelPair;
 use Chromabits\Illuminated\Conference\Interfaces\DashboardInterface;
+use Chromabits\Illuminated\Conference\Views\AlertPresenter;
 use Chromabits\Illuminated\Conference\Views\ConferencePage;
+use Chromabits\Illuminated\Contracts\Alerts\AlertManager;
 use Chromabits\Illuminated\Http\BaseController;
+use Chromabits\Nucleus\Support\Html;
+use Chromabits\Nucleus\View\Common\Div;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -34,20 +39,28 @@ class ConferenceController extends BaseController
     protected $context;
 
     /**
+     * @var AlertManager
+     */
+    protected $alerts;
+
+    /**
      * Construct an instance of a ConferenceController.
      *
      * @param DashboardInterface $dashboard
      * @param Request $request
      * @param ConferenceContext $context
+     * @param AlertManager $alerts
      */
     public function __construct(
         DashboardInterface $dashboard,
         Request $request,
-        ConferenceContext $context
+        ConferenceContext $context,
+        AlertManager $alerts
     ) {
         $this->dashboard = $dashboard;
         $this->request = $request;
         $this->context = $context;
+        $this->alerts = $alerts;
     }
 
     /**
@@ -71,18 +84,31 @@ class ConferenceController extends BaseController
      */
     protected function renderDashboard(SidebarPanelPair $result)
     {
+        $panel = $result->getPanel();
+
+        // Redirect the user if we actually get a redirect response instead of
+        // a panel.
+        if ($panel instanceof RedirectResponse) {
+            return $panel;
+        }
+
+        // Show any alerts on the top of the panel (if any).
+        if (count($this->alerts->peekAll()) > 0) {
+            $panel = new Div([], [
+                new AlertPresenter($this->alerts),
+                $panel
+            ]);
+        }
+
         if ($result->hasSidebar()) {
             return (new ConferencePage(
                 $this->context,
-                $result->getPanel(),
+                $panel,
                 $result->getSidebar()
             ))->render();
         }
 
-        return (new ConferencePage(
-            $this->context,
-            $result->getPanel()
-        ))->render();
+        return (new ConferencePage($this->context, $panel))->render();
     }
 
     /**
