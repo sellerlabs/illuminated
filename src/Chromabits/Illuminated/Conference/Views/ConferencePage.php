@@ -104,7 +104,7 @@ class ConferencePage implements RenderableInterface, SafeHtmlProducerInterface
                                             ['class' => 'nav-item'],
                                             new Anchor(
                                                 [
-                                                    'href' => $dashboardUrl(),
+                                                    'href' => $dashboardUrl,
                                                     'class' => 'nav-link',
                                                 ],
                                                 'Home'
