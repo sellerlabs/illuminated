@@ -20,6 +20,7 @@ use Chromabits\Nucleus\View\Common\Anchor;
 use Chromabits\Nucleus\View\Common\ListItem;
 use Chromabits\Nucleus\View\Common\UnorderedList;
 use Chromabits\Nucleus\View\SafeHtmlWrapper;
+use Chromabits\Illuminated\Conference\Method;
 
 /**
  * Class Module.
@@ -134,7 +135,9 @@ abstract class Module extends BaseObject
                         'class' => 'nav-link'
                     ], Std::coalesce($method->getLabel(), $methodName))
                 ]);
-            }, $this->getMethods())
+            }, Std::filter(function (Method $method) {
+                return !$method->isHidden();
+            }, $this->getMethods()))
         ))->render());
     }
 
@@ -146,13 +149,15 @@ abstract class Module extends BaseObject
      * @param string $controllerMethodName
      * @param null|string $label
      * @param string $verb
+     * @param bool $hidden
      */
     protected function register(
         $name,
         $controllerClassName,
         $controllerMethodName,
         $label = null,
-        $verb = 'GET'
+        $verb = 'GET',
+        $hidden = false
     ) {
         $method = new Method(
             $name,
@@ -163,6 +168,10 @@ abstract class Module extends BaseObject
 
         if ($label !== null) {
             $method->setLabel($label);
+        }
+
+        if ($hidden) {
+            $method->setHidden(true);
         }
 
         $this->methods[$name] = $method;

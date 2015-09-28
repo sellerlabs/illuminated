@@ -196,4 +196,14 @@ class Method extends BaseObject
 
         return call_user_func_array([$instance, $method], $parameters);
     }
+
+    /**
+     * Set whether or not the method should be hidden.
+     *
+     * @param boolean $hidden
+     */
+    public function setHidden($hidden)
+    {
+        $this->hidden = $hidden;
+    }
 }
