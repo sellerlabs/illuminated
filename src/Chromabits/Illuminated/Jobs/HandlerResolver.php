@@ -14,6 +14,7 @@ namespace Chromabits\Illuminated\Jobs;
 use Chromabits\Illuminated\Jobs\Exceptions\UnresolvableException;
 use Chromabits\Illuminated\Jobs\Interfaces\HandlerResolverInterface;
 use Chromabits\Illuminated\Jobs\Tasks\BaseTask;
+use Chromabits\Illuminated\Jobs\Tasks\GarbageCollectTask;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -75,7 +76,9 @@ class HandlerResolver extends BaseObject implements HandlerResolverInterface
      */
     protected function getMap()
     {
-        return $this->config->get('jobs.map', []);
+        return $this->config->get('jobs.map', [
+            'jobs.gc' => GarbageCollectTask::class,
+        ]);
     }
 
     /**

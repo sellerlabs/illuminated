@@ -8,6 +8,7 @@ use Chromabits\Illuminated\Conference\Interfaces\DashboardInterface;
 use Chromabits\Illuminated\Conference\Views\ConferencePage;
 use Chromabits\Illuminated\Http\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 /**
  * Class ConferenceController
@@ -71,21 +72,17 @@ class ConferenceController extends BaseController
     protected function renderDashboard(SidebarPanelPair $result)
     {
         if ($result->hasSidebar()) {
-            return (
-            new ConferencePage(
+            return (new ConferencePage(
                 $this->context,
                 $result->getPanel(),
                 $result->getSidebar()
-            )
-            )->render();
+            ))->render();
         }
 
-        return (
-        new ConferencePage(
+        return (new ConferencePage(
             $this->context,
             $result->getPanel()
-        )
-        )->render();
+        ))->render();
     }
 
     /**
@@ -119,6 +116,23 @@ class ConferenceController extends BaseController
                 $moduleName,
                 $methodName
             )
+        );
+    }
+
+    /**
+     * Get some very basic custom CSS that is not included in Bootstrap.
+     *
+     * @return string
+     */
+    public function getCss()
+    {
+        return Response::create(
+            implode("\n", [
+                '.btn-y-align { padding-top: 3px; }',
+                '.text-light { color: #ddd; }'
+            ]),
+            Response::HTTP_OK,
+            ['Content-Type' => 'text/css']
         );
     }
 }

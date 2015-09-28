@@ -70,6 +70,21 @@ class JobRepository extends BaseObject implements JobRepositoryInterface
     }
 
     /**
+     * Get a paginated list of queued jobs.
+     *
+     * @param int $take
+     *
+     * @return Paginator
+     */
+    public function getQueuedPaginated($take = 25)
+    {
+        return Job::query()
+            ->where('state', JobState::QUEUED)
+            ->orderBy('updated_at', 'desc')
+            ->paginate($take);
+    }
+
+    /**
      * Find a specific job.
      *
      * @param string|int $jobId

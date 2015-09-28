@@ -3,6 +3,8 @@
 namespace Chromabits\Illuminated\Conference\Entities;
 
 use Chromabits\Nucleus\Foundation\BaseObject;
+use Chromabits\Nucleus\Support\Std;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class ConferenceContext
@@ -65,7 +67,18 @@ class ConferenceContext extends BaseObject
      */
     public function url($path = '', $parameters = [], $secure = null)
     {
-        return url($this->basePath . $path, $parameters, $secure);
+        $queryString = '';
+
+        if (count($parameters)) {
+            $queryString = '?' . implode('&', Std::map(
+                    function ($value, $name) {
+                        return urlencode($name) . '=' . urlencode($value);
+                    }
+                    , $parameters
+                ));
+        }
+
+        return url($this->basePath . $path, [], $secure) . $queryString;
     }
 
     /**
@@ -85,7 +98,7 @@ class ConferenceContext extends BaseObject
         $secure = null
     ) {
         return $this->url(
-            '/' . $moduleName . '/' . $methodName,
+            '/' . $moduleName . '/' . $methodName . '/',
             $parameters,
             $secure
         );

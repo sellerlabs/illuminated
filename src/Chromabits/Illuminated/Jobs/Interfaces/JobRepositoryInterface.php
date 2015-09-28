@@ -12,6 +12,7 @@
 namespace Chromabits\Illuminated\Jobs\Interfaces;
 
 use Chromabits\Illuminated\Jobs\Job;
+use Chromabits\Illuminated\Jobs\JobState;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\Paginator;
 
@@ -116,4 +117,13 @@ interface JobRepositoryInterface
      * @return Paginator
      */
     public function getFailedPaginated($take = 25);
+
+    /**
+     * Get a paginated list of queued jobs.
+     *
+     * @param int $take
+     *
+     * @return Paginator
+     */
+    public function getQueuedPaginated($take = 25);
 }

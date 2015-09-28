@@ -179,6 +179,13 @@ class ConferencePage implements RenderableInterface, SafeHtmlProducerInterface
                             . '/4.4.0/css/font-awesome.min.css',
                     ]
                 ),
+                new Link(
+                    [
+                        'rel' => 'stylesheet',
+                        'href' => $dashboardUrl
+                            . '/css/main.css',
+                    ]
+                ),
             ]
         );
 
