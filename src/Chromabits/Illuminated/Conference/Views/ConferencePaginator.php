@@ -3,9 +3,12 @@
 namespace Chromabits\Illuminated\Conference\Views;
 
 use Chromabits\Nucleus\Foundation\BaseObject;
+use Chromabits\Nucleus\Support\Html;
 use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\View\Bootstrap\CardBlock;
 use Chromabits\Nucleus\View\Interfaces\RenderableInterface;
+use Chromabits\Nucleus\View\Interfaces\SafeHtmlProducerInterface;
+use Chromabits\Nucleus\View\SafeHtmlWrapper;
 use Illuminate\Contracts\Pagination\Paginator;
 
 /**
@@ -46,7 +49,7 @@ class ConferencePaginator extends BaseObject implements
             function () {
                 return new CardBlock(
                     ['class' => 'card-block text-center'],
-                    [$this->paginator->render(),]
+                    [Html::safe($this->paginator->render()),]
                 );
             },
             ''
