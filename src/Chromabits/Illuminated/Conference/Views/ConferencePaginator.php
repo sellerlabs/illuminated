@@ -7,8 +7,6 @@ use Chromabits\Nucleus\Support\Html;
 use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\View\Bootstrap\CardBlock;
 use Chromabits\Nucleus\View\Interfaces\RenderableInterface;
-use Chromabits\Nucleus\View\Interfaces\SafeHtmlProducerInterface;
-use Chromabits\Nucleus\View\SafeHtmlWrapper;
 use Illuminate\Contracts\Pagination\Paginator;
 
 /**

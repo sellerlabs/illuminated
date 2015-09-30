@@ -21,6 +21,7 @@ use Chromabits\Nucleus\Meditation\Spec;
 use Chromabits\Nucleus\Meditation\SpecResult;
 use Chromabits\Nucleus\Support\Arr;
 use Chromabits\Nucleus\Support\Std;
+use Closure;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -190,6 +191,27 @@ class ApiResponse extends BaseObject
             Arr::except($body, static::getReservedKeys()),
             $body['status'],
             $body['messages']
+        );
+    }
+
+    /**
+     * A shortcut for fast-and-easy API calls: If the provided Spec result is
+     * invalid, then a validation response is sent, otherwise the result of
+     * the provided callback is sent.
+     *
+     * @param SpecResult $result
+     * @param Closure $onSuccess
+     *
+     * @return mixed
+     */
+    public static function flow(SpecResult $result, Closure $onSuccess)
+    {
+        return Std::firstBias(
+            $result->failed(),
+            function () use ($result) {
+                return self::makeFromSpec($result)->toResponse();
+            },
+            $onSuccess
         );
     }
 
