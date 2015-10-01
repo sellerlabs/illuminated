@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Testing
  */
-abstract class ModelTestCase extends LaravelTestCase
+abstract class ModelTestCase extends FrameworkTestCase
 {
     const HAS_ONE = 'hasOne';
     const HAS_MANY = 'hasMany';

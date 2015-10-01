@@ -34,13 +34,6 @@ trait ApplicationTrait
     protected $app;
 
     /**
-     * The last response returned by the application.
-     *
-     * @var Response
-     */
-    protected $response;
-
-    /**
      * The last code returned by artisan cli.
      *
      * @var int
@@ -54,122 +47,22 @@ trait ApplicationTrait
     protected function refreshApplication()
     {
         putenv('APP_ENV=testing');
+
         $this->app = $this->createApplication();
     }
 
     /**
-     * Call the given URI and return the Response.
+     * Register an instance of an object in the container.
      *
-     * @param  string $method
-     * @param  string $uri
-     * @param  array $parameters
-     * @param  array $cookies
-     * @param  array $files
-     * @param  array $server
-     * @param  string $content
-     *
-     * @return Response
+     * @param string $abstract
+     * @param object $instance
+     * @return object
      */
-    public function call(
-        $method,
-        $uri,
-        $parameters = [],
-        $cookies = [],
-        $files = [],
-        $server = [],
-        $content = null
-    ) {
-        $request = Request::create(
-            $uri,
-            $method,
-            $parameters,
-            $cookies,
-            $files,
-            $server,
-            $content
-        );
+    protected function instance($abstract, $instance)
+    {
+        $this->app->instance($abstract, $instance);
 
-        $this->response = $this->app->prepareResponse(
-            $this->app->handle($request)
-        );
-
-        return $this->response;
-    }
-
-    /**
-     * Call the given HTTPS URI and return the Response.
-     *
-     * @param  string $method
-     * @param  string $uri
-     * @param  array $parameters
-     * @param  array $cookies
-     * @param  array $files
-     * @param  array $server
-     * @param  string $content
-     *
-     * @return Response
-     */
-    public function callSecure(
-        $method,
-        $uri,
-        $parameters = [],
-        $cookies = [],
-        $files = [],
-        $server = [],
-        $content = null
-    ) {
-        $uri = 'https://localhost/' . ltrim($uri, '/');
-
-        $this->response = $this->call(
-            $method,
-            $uri,
-            $parameters,
-            $cookies,
-            $files,
-            $server,
-            $content
-        );
-
-        return $this->response;
-    }
-
-    /**
-     * Call a named route and return the Response.
-     *
-     * @param string $method
-     * @param string $name
-     * @param array $routeParameters
-     * @param array $parameters
-     * @param array $cookies
-     * @param array $files
-     * @param array $server
-     * @param  string $content
-     *
-     * @return Response
-     */
-    public function route(
-        $method,
-        $name,
-        $routeParameters = [],
-        $parameters = [],
-        $cookies = [],
-        $files = [],
-        $server = [],
-        $content = null
-    ) {
-        $uri = $this->app['url']->route($name, $routeParameters);
-
-        $this->response = $this->call(
-            $method,
-            $uri,
-            $parameters,
-            $cookies,
-            $files,
-            $server,
-            $content
-        );
-
-        return $this->response;
+        return $instance;
     }
 
     /**

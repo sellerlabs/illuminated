@@ -23,19 +23,23 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Testing
  */
-abstract class LaravelTestCase extends TestCase
+abstract class FrameworkTestCase extends TestCase
 {
-    use ApplicationTrait, AssertionsTrait;
+    use ApplicationTrait, AssertionsTrait, CrawlerTrait;
+
+    /**
+     * The callbacks that should be run before the application is destroyed.
+     *
+     * @var array
+     */
+    protected $beforeDestroyCallbacks = [];
 
     /**
      * Creates the application.
      *
      * @return HttpKernelInterface
      */
-    public function createApplication()
-    {
-        return require HELPERS_BASE_PATH . '/bootstrap/start.php';
-    }
+    abstract public function createApplication();
 
     /**
      * Setup the testing environment.
@@ -45,25 +49,6 @@ abstract class LaravelTestCase extends TestCase
         if (!$this->app) {
             $this->refreshApplication();
         }
-
-        $this->app->make('artisan')->call('migrate');
-    }
-
-    /**
-     * Assert that an object has all attributes in an array.
-     *
-     * @param array $attributes
-     * @param mixed $object
-     * @param string $message
-     */
-    public function assertObjectHasAttributes(
-        array $attributes,
-        $object,
-        $message = ''
-    ) {
-        foreach ($attributes as $attr) {
-            $this->assertObjectHasAttribute($attr, $object, $message);
-        }
     }
 
     /**
@@ -71,10 +56,33 @@ abstract class LaravelTestCase extends TestCase
      */
     public function tearDown()
     {
-        if ($this->app) {
-            $this->app->flush();
+        if (class_exists('Mockery')) {
+            Mockery::close();
         }
 
-        Mockery::close();
+        if ($this->app) {
+            foreach ($this->beforeDestroyCallbacks as $callback) {
+                call_user_func($callback);
+            }
+
+            $this->app->flush();
+
+            $this->app = null;
+        }
+
+        if (property_exists($this, 'serverVariables')) {
+            $this->serverVariables = [];
+        }
+    }
+
+    /**
+     * Register a callback to be run before the application is destroyed.
+     *
+     * @param callable $callback
+     * @return void
+     */
+    protected function beforeDestroyingApplication(callable $callback)
+    {
+        $this->beforeDestroyCallbacks[] = $callback;
     }
 }
