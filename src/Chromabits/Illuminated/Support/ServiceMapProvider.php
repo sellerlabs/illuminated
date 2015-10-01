@@ -12,6 +12,8 @@
 namespace Chromabits\Illuminated\Support;
 
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
+use Chromabits\Nucleus\Support\Arr;
+use Chromabits\Nucleus\Support\Std;
 
 /**
  * Class ServiceMapProvider.
@@ -38,11 +40,6 @@ abstract class ServiceMapProvider extends ServiceProvider
      */
     protected function getServiceMap()
     {
-        // Check for easy mistakes.
-        if (count($this->map) == 0 && count($this->getCommands()) == 0) {
-            throw new LackOfCoffeeException('Empty services map provided.');
-        }
-
         return $this->map;
     }
 
@@ -81,7 +78,10 @@ abstract class ServiceMapProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array_keys($this->getServiceMap());
+        return Std::concat(
+            Arr::keys($this->getServiceMap()),
+            Arr::keys($this->getSingletons())
+        );
     }
 
     /**
