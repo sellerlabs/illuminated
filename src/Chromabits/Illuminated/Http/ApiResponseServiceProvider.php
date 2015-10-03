@@ -14,6 +14,8 @@ use Chromabits\Illuminated\Support\ServiceMapProvider;
  */
 class ApiResponseServiceProvider extends ServiceMapProvider
 {
+    protected $defer = true;
+
     protected $map = [
         ApiResponseFactoryInterface::class => ApiResponseFactory::class,
     ];
