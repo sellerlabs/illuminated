@@ -84,15 +84,13 @@ abstract class CheckableRequest extends BaseObject implements
     abstract public function getCheckable();
 
     /**
-     * Prepare the
+     * Prepare the input for the check.
      *
-     * @param Request $request
-     *
-     * @return array|null|object
+     * @return array
      */
-    protected function assemble(Request $request)
+    protected function assemble()
     {
-        return $request->all();
+        return $this->request->all();
     }
 
     /**
