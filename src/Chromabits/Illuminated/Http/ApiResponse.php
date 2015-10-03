@@ -11,14 +11,13 @@
 
 namespace Chromabits\Illuminated\Http;
 
-use Chromabits\Illuminated\Http\Interfaces\ApiResponseFactoryInterface;
+use Chromabits\Illuminated\Http\Factories\ApiResponseFactory;
 use Chromabits\Nucleus\Exceptions\CoreException;
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Meditation\Arguments;
 use Chromabits\Nucleus\Meditation\Boa;
 use Chromabits\Nucleus\Meditation\Exceptions\InvalidArgumentException;
-use Chromabits\Nucleus\Meditation\Interfaces\CheckResultInterface;
 use Chromabits\Nucleus\Meditation\Spec;
 use Chromabits\Nucleus\Meditation\SpecResult;
 use Chromabits\Nucleus\Support\Arr;
@@ -32,7 +31,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Http
  */
-class ApiResponse extends BaseObject implements ApiResponseFactoryInterface
+class ApiResponse extends BaseObject
 {
     const STATUS_SUCCESS = 'success';
     const STATUS_ERROR = 'error';
@@ -145,32 +144,7 @@ class ApiResponse extends BaseObject implements ApiResponseFactoryInterface
      */
     public static function makeFromSpec(SpecResult $result)
     {
-        return static::fromCheckable($result);
-    }
-
-    /**
-     * Create an API validation response from a CheckResultInterface.
-     *
-     * @param CheckResultInterface $result
-     *
-     * @return static
-     * @throws LackOfCoffeeException
-     */
-    public static function fromCheckable(CheckResultInterface $result)
-    {
-        if ($result->passed()) {
-            throw new LackOfCoffeeException(
-                'You are trying to send a validation error response,'
-                . ' but your check actually passed!'
-            );
-        }
-
-        return new static([
-            'missing' => $result->getMissing(),
-            'validation' => $result->getFailed(),
-        ], static::STATUS_INVALID, [
-            'One or more fields are invalid. Please check your input.',
-        ]);
+        return (new ApiResponseFactory())->fromCheckable($result);
     }
 
     /**
@@ -218,6 +192,7 @@ class ApiResponse extends BaseObject implements ApiResponseFactoryInterface
      * @param SpecResult $result
      * @param Closure $onSuccess
      *
+     * @deprecated Use ApiCheckableRequests
      * @return mixed
      */
     public static function flow(SpecResult $result, Closure $onSuccess)

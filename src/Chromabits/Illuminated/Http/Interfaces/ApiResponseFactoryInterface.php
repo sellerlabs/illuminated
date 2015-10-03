@@ -22,5 +22,5 @@ interface ApiResponseFactoryInterface
      * @return ApiResponse
      * @throws LackOfCoffeeException
      */
-    public static function fromCheckable(CheckResultInterface $result);
+    public function fromCheckable(CheckResultInterface $result);
 }
