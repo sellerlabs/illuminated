@@ -2,12 +2,14 @@
 
 namespace Chromabits\Illuminated\Http;
 
+use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Meditation\Exceptions\FailedCheckException;
 use Chromabits\Nucleus\Meditation\Interfaces\CheckableInterface;
 use Chromabits\Nucleus\Meditation\Interfaces\CheckResultInterface;
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;
-use Psr\Http\Message\ServerRequestInterface;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 /**
  * Class CheckableRequest
@@ -33,20 +35,29 @@ abstract class CheckableRequest extends BaseObject implements
     ValidatesWhenResolved
 {
     /**
-     * @var ServerRequestInterface
+     * @var Request
      */
     protected $request;
 
     /**
+     * @var Route
+     */
+    protected $route;
+
+    /**
      * Construct an instance of a SpecRequest.
      *
-     * @param ServerRequestInterface $request
+     * @param Request $request
+     * @param Route $route
+     *
+     * @throws LackOfCoffeeException
      */
-    public function __construct(ServerRequestInterface $request)
+    public function __construct(Request $request, Route $route)
     {
         parent::__construct();
 
         $this->request = $request;
+        $this->route = $route;
     }
 
     /**
@@ -75,19 +86,13 @@ abstract class CheckableRequest extends BaseObject implements
     /**
      * Prepare the
      *
-     * @param ServerRequestInterface $request
+     * @param Request $request
      *
      * @return array|null|object
      */
-    protected function assemble(ServerRequestInterface $request)
+    protected function assemble(Request $request)
     {
-        $result = $request->getParsedBody();
-
-        if ($result === null) {
-            return [];
-        }
-
-        return (array) $result;
+        return $request->all();
     }
 
     /**
@@ -110,7 +115,7 @@ abstract class CheckableRequest extends BaseObject implements
     /**
      * Get the current request.
      *
-     * @return ServerRequestInterface
+     * @return Request
      */
     public function getRequest()
     {
