@@ -47,7 +47,7 @@ class ValidatingObserver extends BaseObject
         $result = $checkable->check($attributes);
 
         if ($result->failed()) {
-            new FailedCheckException($checkable, $result);
+            throw new FailedCheckException($checkable, $result);
         }
     }
 }
