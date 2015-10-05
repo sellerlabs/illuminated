@@ -11,6 +11,7 @@
 
 namespace Chromabits\Illuminated\Database\Articulate;
 
+use Chromabits\Nucleus\Meditation\Interfaces\CheckableInterface;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
@@ -23,6 +24,8 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
  */
 class Model extends BaseModel
 {
+    protected static $registered = [];
+
     /**
      * Get the table of this model (statically).
      *
@@ -33,5 +36,33 @@ class Model extends BaseModel
         $instance = new static();
 
         return new Table($instance->getTable());
+    }
+
+    /**
+     * Get the checkable/model/validator for this model.
+     *
+     * @return null|CheckableInterface
+     */
+    public function getCheckable()
+    {
+        return null;
+    }
+
+    /**
+     * Register model events.
+     */
+    public static function registerEvents()
+    {
+        // Define a handler for converting the specified properties into JSON
+        // before saving the model to the database
+        static::saving(
+            function (JsonModel $model) {
+                foreach ($model->getJsonFields() as $field) {
+                    $model->$field = json_encode($model->$field);
+                }
+            }
+        );
+
+        static::$registered[static::class] = true;
     }
 }
