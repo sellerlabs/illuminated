@@ -40,7 +40,7 @@ class ApiResponseFactory extends BaseObject implements
             );
         }
 
-        return new static([
+        return new ApiResponse([
             'missing' => $result->getMissing(),
             'validation' => $result->getFailed(),
         ], ApiResponse::STATUS_INVALID, [
