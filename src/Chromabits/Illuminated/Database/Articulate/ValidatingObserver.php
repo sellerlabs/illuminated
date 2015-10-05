@@ -37,7 +37,7 @@ class ValidatingObserver extends BaseObject
 
     protected function validate(Model $model)
     {
-        $attributes = $model->getAttributes();
+        $attributes = $model->attributesToArray();
         $checkable = $model->getCheckable();
 
         if ($checkable === null) {
