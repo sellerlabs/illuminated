@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Conference\Views;
 
 use Chromabits\Nucleus\Foundation\BaseObject;
@@ -10,7 +19,7 @@ use Chromabits\Nucleus\View\Interfaces\RenderableInterface;
 use Illuminate\Contracts\Pagination\Paginator;
 
 /**
- * Class ConferencePaginator
+ * Class ConferencePaginator.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Conference\Views
@@ -47,7 +56,7 @@ class ConferencePaginator extends BaseObject implements
             function () {
                 return new CardBlock(
                     ['class' => 'card-block text-center'],
-                    [Html::safe($this->paginator->render()),]
+                    [Html::safe($this->paginator->render())]
                 );
             },
             ''

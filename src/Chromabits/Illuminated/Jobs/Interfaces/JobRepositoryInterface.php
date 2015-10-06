@@ -12,7 +12,6 @@
 namespace Chromabits\Illuminated\Jobs\Interfaces;
 
 use Chromabits\Illuminated\Jobs\Job;
-use Chromabits\Illuminated\Jobs\JobState;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\Paginator;
 

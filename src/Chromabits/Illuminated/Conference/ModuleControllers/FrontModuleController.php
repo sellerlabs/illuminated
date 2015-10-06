@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Conference\ModuleControllers;
 
 use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
@@ -12,11 +21,9 @@ use Chromabits\Nucleus\View\Bootstrap\Card;
 use Chromabits\Nucleus\View\Bootstrap\CardBlock;
 use Chromabits\Nucleus\View\Bootstrap\Column;
 use Chromabits\Nucleus\View\Bootstrap\Row;
+use Chromabits\Nucleus\View\Common\Anchor;
 use Chromabits\Nucleus\View\Common\Bold;
 use Chromabits\Nucleus\View\Common\Button;
-use Chromabits\Nucleus\View\Common\DefinitionDescription;
-use Chromabits\Nucleus\View\Common\DefinitionList;
-use Chromabits\Nucleus\View\Common\DefinitionTerm;
 use Chromabits\Nucleus\View\Common\Div;
 use Chromabits\Nucleus\View\Common\HeaderFive;
 use Chromabits\Nucleus\View\Common\HeaderFour;
@@ -27,13 +34,11 @@ use Chromabits\Nucleus\View\Common\ListItem;
 use Chromabits\Nucleus\View\Common\Paragraph;
 use Chromabits\Nucleus\View\Common\PreformattedText;
 use Chromabits\Nucleus\View\Common\Small;
-use Chromabits\Nucleus\View\Common\Span;
 use Chromabits\Nucleus\View\Common\UnorderedList;
-use Chromabits\Nucleus\View\Common\Anchor;
 use Exception;
 
 /**
- * Class FrontModuleController
+ * Class FrontModuleController.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Conference\ModuleControllers
@@ -58,18 +63,18 @@ class FrontModuleController extends BaseController
                 new Div(['class' => 'card-block'], [
                     new Bold([], [
                         'Hi there! This is the Illuminated Conference ',
-                        'component.'
+                        'component.',
                     ]),
                     ' Here you will find a couple of built-in modules which ',
                     'you can use to debug and understand your application. ',
                     'However, you can also add your own modules for more ',
-                    'specific tools!'
-                ])
+                    'specific tools!',
+                ]),
             ]),
             new Div(['class' => 'row'], [
                 new Div(['class' => 'col-sm-12'], [
                     new HeaderFive(['class' => 'p-b p-t'], 'Launchpad:'),
-                ])
+                ]),
             ]),
             $this->renderLaunchpad($dashboard, $context),
         ]));
@@ -102,7 +107,7 @@ class FrontModuleController extends BaseController
                                     new HeaderFour(
                                         ['class' => 'card-title'],
                                         $module->getLabel()
-                                    )
+                                    ),
                                 ]
                             ),
                             new Paragraph(
@@ -112,14 +117,14 @@ class FrontModuleController extends BaseController
                             new Paragraph(
                                 ['class' => 'card-text'],
                                 new Small(['class' => 'text-muted'], [
-                                    $module->getName()
+                                    $module->getName(),
                                 ])
-                            )
-                        ])
+                            ),
+                        ]),
                     ]);
                 },
                 $dashboard->getModules()
-            ))
+            )),
         ]);
     }
 
@@ -155,15 +160,15 @@ class FrontModuleController extends BaseController
                                         ') -> ',
                                         $method->getControllerClassName(),
                                         '@',
-                                        $method->getControllerMethodName()
+                                        $method->getControllerMethodName(),
                                     ]);
                                 },
                                 $module->getMethods()
-                            ))
+                            )),
                         ]);
                     }, $dashboard->getModules())
-                )
-            ])
+                ),
+            ]),
         ]));
     }
 
@@ -178,7 +183,7 @@ class FrontModuleController extends BaseController
     {
         $exceptions = Std::map(function (Exception $exception, $moduleName) {
             return new Div([], [
-                new Div(['class' => 'card card-inverted',], [
+                new Div(['class' => 'card card-inverted'], [
                     new CardBlock([], [
                         new HeaderSix(['class' => 'text-muted'], $moduleName),
                         new Bold([], get_class($exception) . ': '),
@@ -189,7 +194,7 @@ class FrontModuleController extends BaseController
                                 ['class' => 'pre-scrollable'],
                                 $exception->getTraceAsString()
                             )
-                        )
+                        ),
                     ]),
                     new Div(['class' => 'card-footer text-muted'], [
                         new Row([], [
@@ -205,7 +210,7 @@ class FrontModuleController extends BaseController
                                         'class' => [
                                             'btn',
                                             'btn-sm',
-                                            'btn-primary-outline'
+                                            'btn-primary-outline',
                                         ],
                                         'data-toggle' => 'collapse',
                                         'data-target' => '#stack',
@@ -214,12 +219,11 @@ class FrontModuleController extends BaseController
                                     ],
                                     'Toggle stacktrace'
                                 )
-                            )
-                        ])
+                            ),
+                        ]),
 
-
-                    ])
-                ])
+                    ]),
+                ]),
             ]);
         }, $dashboard->getFailedModules());
 
@@ -233,9 +237,9 @@ class FrontModuleController extends BaseController
                         'failed to load. If one or more failed to load, it is ',
                         'not necessarily a bad thing. If you do not intend to ',
                         'use the component covered by the module, you may ',
-                        'safely ignore it.'
+                        'safely ignore it.',
                     ]
-                )
+                ),
             ]),
             new HorizontalLine([]),
             new Div([], Std::firstBias(
@@ -247,7 +251,7 @@ class FrontModuleController extends BaseController
                         ['All modules seem fine!']
                     );
                 }
-            ))
+            )),
         ]));
     }
 }

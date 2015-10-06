@@ -1,18 +1,25 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Database\Interfaces;
 
 use Chromabits\Illuminated\Meditation\Constraints\ExactlyOneRecordConstraint;
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
-use Chromabits\Nucleus\Meditation\Arguments;
-use Chromabits\Nucleus\Meditation\Boa;
 use Chromabits\Nucleus\Meditation\Exceptions\InvalidArgumentException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Interface BaseRepositoryInterface
+ * Interface BaseRepositoryInterface.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Interfaces
@@ -26,22 +33,22 @@ interface BaseRepositoryInterface
      *
      * @param string $idField
      *
-     * @return ExactlyOneRecordConstraint
      * @throws LackOfCoffeeException
      * @throws InvalidArgumentException
+     * @return ExactlyOneRecordConstraint
      */
     public function makeExistsConstraint($idField = 'id');
 
     /**
      * Get a model by its id.
      *
-     * @param integer $id
+     * @param int $id
      * @param array $columns
      * @param array $with
      *
-     * @return Model
      * @throws InvalidArgumentException
      * @throws LackOfCoffeeException
+     * @return Model
      */
     public function getById($id, array $columns = ['*'], array $with = []);
 
@@ -70,7 +77,7 @@ interface BaseRepositoryInterface
      * @param array $with
      * @param int $take
      * @param string $pageName
-     * @param null|integer $page
+     * @param null|int $page
      *
      * @return LengthAwarePaginator
      */
@@ -92,8 +99,8 @@ interface BaseRepositoryInterface
      * @param array $columns
      * @param array $with
      *
-     * @return Collection
      * @throws LackOfCoffeeException
+     * @return Collection
      */
     public function getAll($columns = ['*'], $with = []);
 
@@ -104,10 +111,10 @@ interface BaseRepositoryInterface
      * @param array $with
      * @param int $take
      * @param string $pageName
-     * @param null|integer $page
+     * @param null|int $page
      *
-     * @return LengthAwarePaginator
      * @throws LackOfCoffeeException
+     * @return LengthAwarePaginator
      */
     public function getAllPaginated(
         $columns = ['*'],
@@ -120,7 +127,7 @@ interface BaseRepositoryInterface
     /**
      * Find a model by its id and then update its contents.
      *
-     * @param integer $id
+     * @param int $id
      * @param array $fill
      *
      * @return Model
@@ -146,11 +153,11 @@ interface BaseRepositoryInterface
     /**
      * Check whether or not the model with the specified ID exists.
      *
-     * @param integer $id
+     * @param int $id
      *
-     * @return bool
      * @throws InvalidArgumentException
      * @throws LackOfCoffeeException
+     * @return bool
      */
     public function exists($id);
 }

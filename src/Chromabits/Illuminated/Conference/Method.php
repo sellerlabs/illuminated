@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Conference;
 
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
@@ -12,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class Method
+ * Class Method.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Conference
@@ -83,7 +92,7 @@ class Method extends BaseObject
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isHidden()
     {
@@ -200,7 +209,7 @@ class Method extends BaseObject
     /**
      * Set whether or not the method should be hidden.
      *
-     * @param boolean $hidden
+     * @param bool $hidden
      */
     public function setHidden($hidden)
     {

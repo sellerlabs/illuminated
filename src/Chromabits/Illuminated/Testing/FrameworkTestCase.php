@@ -79,7 +79,6 @@ abstract class FrameworkTestCase extends TestCase
      * Register a callback to be run before the application is destroyed.
      *
      * @param callable $callback
-     * @return void
      */
     protected function beforeDestroyingApplication(callable $callback)
     {

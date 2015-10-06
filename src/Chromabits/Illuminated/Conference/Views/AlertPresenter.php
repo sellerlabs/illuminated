@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Conference\Views;
 
 use Chromabits\Illuminated\Alerts\Alert;
@@ -10,7 +19,7 @@ use Chromabits\Nucleus\View\Common\Div;
 use Chromabits\Nucleus\View\Interfaces\RenderableInterface;
 
 /**
- * Class AlertPresenter
+ * Class AlertPresenter.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Conference\Views

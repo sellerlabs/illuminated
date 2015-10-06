@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Jobs\Controllers;
 
 use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
@@ -10,7 +19,6 @@ use Chromabits\Illuminated\Jobs\Interfaces\JobFactoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobRepositoryInterface;
 use Chromabits\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use Chromabits\Illuminated\Jobs\Job;
-use Chromabits\Illuminated\Jobs\Tasks\BaseTask;
 use Chromabits\Nucleus\Support\Arr;
 use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\View\Bootstrap\Card;
@@ -23,16 +31,14 @@ use Chromabits\Nucleus\View\Common\Anchor;
 use Chromabits\Nucleus\View\Common\Button;
 use Chromabits\Nucleus\View\Common\HeaderOne;
 use Chromabits\Nucleus\View\Common\HeaderSix;
-use Chromabits\Nucleus\View\Common\HorizontalLine;
 use Chromabits\Nucleus\View\Common\Italic;
-use Chromabits\Nucleus\View\Common\LineBreak;
 use Chromabits\Nucleus\View\Common\Paragraph;
 use Chromabits\Nucleus\View\Common\PreformattedText;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
 
 /**
- * Class JobsModuleController
+ * Class JobsModuleController.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs\Controllers
@@ -100,18 +106,18 @@ class JobsModuleController extends BaseController
             new CardHeader([], [
                 new Row([], [
                     new Column(['medium' => 6, 'class' => 'btn-y-align'], [
-                        'All Jobs'
+                        'All Jobs',
                     ]),
                     new Column(['medium' => 6, 'class' => 'text-right'], [
                         new Button(
                             ['class' => 'btn btn-sm btn-primary-outline'],
                             'Create new job'
-                        )
-                    ])
-                ])
+                        ),
+                    ]),
+                ]),
             ]),
             $this->renderJobsTable($jobs),
-            new ConferencePaginator($jobs)
+            new ConferencePaginator($jobs),
         ]);
     }
 
@@ -123,18 +129,18 @@ class JobsModuleController extends BaseController
             new CardHeader([], [
                 new Row([], [
                     new Column(['medium' => 6, 'class' => 'btn-y-align'], [
-                        'Scheduled Jobs'
+                        'Scheduled Jobs',
                     ]),
                     new Column(['medium' => 6, 'class' => 'text-right'], [
                         new Button(
                             ['class' => 'btn btn-sm btn-primary-outline'],
                             'Create new job'
-                        )
-                    ])
-                ])
+                        ),
+                    ]),
+                ]),
             ]),
             $this->renderJobsTable($jobs),
-            new ConferencePaginator($jobs)
+            new ConferencePaginator($jobs),
         ]);
     }
 
@@ -146,18 +152,18 @@ class JobsModuleController extends BaseController
             new CardHeader([], [
                 new Row([], [
                     new Column(['medium' => 6, 'class' => 'btn-y-align'], [
-                        'Queued Jobs'
+                        'Queued Jobs',
                     ]),
                     new Column(['medium' => 6, 'class' => 'text-right'], [
                         new Button(
                             ['class' => 'btn btn-sm btn-primary-outline'],
                             'Create new job'
-                        )
-                    ])
-                ])
+                        ),
+                    ]),
+                ]),
             ]),
             $this->renderJobsTable($jobs),
-            new ConferencePaginator($jobs)
+            new ConferencePaginator($jobs),
         ]);
     }
 
@@ -169,18 +175,18 @@ class JobsModuleController extends BaseController
             new CardHeader([], [
                 new Row([], [
                     new Column(['medium' => 6, 'class' => 'btn-y-align'], [
-                        'Failed Jobs'
+                        'Failed Jobs',
                     ]),
                     new Column(['medium' => 6, 'class' => 'text-right'], [
                         new Button(
                             ['class' => 'btn btn-sm btn-primary-outline'],
                             'Create new job'
-                        )
-                    ])
-                ])
+                        ),
+                    ]),
+                ]),
             ]),
             $this->renderJobsTable($jobs),
-            new ConferencePaginator($jobs)
+            new ConferencePaginator($jobs),
         ]);
     }
 
@@ -201,12 +207,12 @@ class JobsModuleController extends BaseController
                                 'illuminated.jobs',
                                 'reference.single',
                                 ['id' => $taskName]
-                            )
+                            ),
                         ], $taskName),
-                        $instance->getDescription()
+                        $instance->getDescription(),
                     ];
                 }, $resolver->getAvailableTasks())
-            )
+            ),
         ]);
     }
 
@@ -224,7 +230,7 @@ class JobsModuleController extends BaseController
             new CardHeader([], 'Reference for task:'),
             new CardBlock([], [
                 new HeaderOne(['class' => 'display-one'], $taskName),
-                new Paragraph(['class' => 'lead'], $handler->getDescription())
+                new Paragraph(['class' => 'lead'], $handler->getDescription()),
             ]),
             new SimpleTable(
                 ['Field Name', 'Type', 'Default', 'Description'],
@@ -233,7 +239,7 @@ class JobsModuleController extends BaseController
                         $field,
                         Arr::dotGet($types, $field, '-'),
                         (string) Arr::dotGet($defaults, $field, '-'),
-                        $description
+                        $description,
                     ];
                 }, $handler->getReference())
             ),
@@ -242,8 +248,8 @@ class JobsModuleController extends BaseController
                 new PreformattedText(
                     [],
                     json_encode($defaults, JSON_PRETTY_PRINT)
-                )
-            ])
+                ),
+            ]),
         ]);
     }
 
@@ -288,7 +294,7 @@ class JobsModuleController extends BaseController
                                 ['class' => 'fa fa-4x fa-search text-light']
                             ),
                         ]),
-                        'No jobs found matching the specified criteria.'
+                        'No jobs found matching the specified criteria.',
                     ]
                 );
             }

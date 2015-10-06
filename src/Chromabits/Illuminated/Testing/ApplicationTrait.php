@@ -14,8 +14,6 @@ namespace Chromabits\Illuminated\Testing;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 /**
  * Class ApplicationTrait.

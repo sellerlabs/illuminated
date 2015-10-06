@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Conference\ModuleControllers;
 
 use Chromabits\Illuminated\Http\BaseController;
@@ -16,7 +25,7 @@ use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 
 /**
- * Class HttpModuleController
+ * Class HttpModuleController.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Conference\ModuleControllers
@@ -36,7 +45,7 @@ class HttpModuleController extends BaseController
             new Div(['class' => 'card'], [
                 new Div(['class' => 'card-header'], 'All Routes'),
                 new Div(['class' => 'card-block'], [
-                    'Here are all the routes defined within this application:'
+                    'Here are all the routes defined within this application:',
                 ]),
                 $this->renderRoutes($router),
             ]),
@@ -57,7 +66,7 @@ class HttpModuleController extends BaseController
                 new Div(['class' => 'card-header'], 'Middleware'),
                 new Div(['class' => 'card-block'], [
                     'Here is the top-level middleware stack for this ',
-                    'application.'
+                    'application.',
                 ]),
                 $this->renderMiddleware($router),
             ]),
@@ -77,7 +86,7 @@ class HttpModuleController extends BaseController
             new Div(['class' => 'card'], [
                 new Div(['class' => 'card-header'], 'Patterns'),
                 new Div(['class' => 'card-block'], [
-                    'Here is the top-level patterns for this application.'
+                    'Here is the top-level patterns for this application.',
                 ]),
                 $this->renderPatterns($router),
             ]),
@@ -106,7 +115,7 @@ class HttpModuleController extends BaseController
                         $route->getActionName()
                     )),
                 ]);
-            }, $router->getRoutes()))
+            }, $router->getRoutes())),
         ]);
     }
 
@@ -132,7 +141,7 @@ class HttpModuleController extends BaseController
                         $class
                     )),
                 ]);
-            }, $router->getMiddleware()))
+            }, $router->getMiddleware())),
         ]);
     }
 
@@ -158,7 +167,7 @@ class HttpModuleController extends BaseController
                         $pattern
                     )),
                 ]);
-            }, $router->getPatterns()))
+            }, $router->getPatterns())),
         ]);
     }
 }

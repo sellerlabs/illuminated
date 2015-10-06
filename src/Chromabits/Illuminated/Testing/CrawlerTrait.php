@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Testing;
 
 use Exception;
@@ -13,7 +22,7 @@ use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class CrawlerTrait
+ * Class CrawlerTrait.
  *
  * @author Laravel
  * @author Eduardo Trujillo <ed@chromabits.com>
@@ -408,9 +417,9 @@ trait CrawlerTrait
      *
      * @param  string $selector
      *
+     * @throws \Exception
      * @return string
      *
-     * @throws \Exception
      */
     protected function getInputOrTextAreaValue($selector)
     {
@@ -498,9 +507,9 @@ trait CrawlerTrait
      *
      * @param  string $selector
      *
+     * @throws \Exception
      * @return bool
      *
-     * @throws \Exception
      */
     protected function isChecked($selector)
     {
@@ -555,9 +564,9 @@ trait CrawlerTrait
      *
      * @param  string $selector
      *
+     * @throws \Exception
      * @return string|null
      *
-     * @throws \Exception
      */
     protected function getSelectedValue($selector)
     {
@@ -585,9 +594,9 @@ trait CrawlerTrait
      *
      * @param  Crawler $field
      *
+     * @throws \Exception
      * @return string|null
      *
-     * @throws \Exception
      */
     protected function getSelectedValueFromSelect(Crawler $field)
     {
@@ -609,9 +618,9 @@ trait CrawlerTrait
      *
      * @param  Crawler $radioGroup
      *
+     * @throws \Exception
      * @return string|null
      *
-     * @throws \Exception
      */
     protected function getCheckedValueFromRadioGroup(Crawler $radioGroup)
     {
@@ -798,7 +807,6 @@ trait CrawlerTrait
     /**
      * Dump the content from the last response.
      *
-     * @return void
      */
     public function dump()
     {
@@ -1145,7 +1153,6 @@ trait CrawlerTrait
      *
      * @param  string $filter
      *
-     * @return void
      */
     protected function assertFilterProducesResults($filter)
     {
@@ -1343,7 +1350,6 @@ trait CrawlerTrait
      * @param  string $uri
      * @param  string|null $message
      *
-     * @return void
      */
     protected function assertPageLoaded($uri, $message = null)
     {

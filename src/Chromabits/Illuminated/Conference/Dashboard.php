@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Conference;
 
 use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
@@ -18,7 +27,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 
 /**
- * Class Dashboard
+ * Class Dashboard.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Conference
@@ -115,9 +124,9 @@ class Dashboard extends BaseObject implements DashboardInterface
      * @param null|string $module
      * @param null|string $method
      *
-     * @return SidebarPanelPair
      * @throws MethodNotFoundException
      * @throws ModuleNotFoundException
+     * @return SidebarPanelPair
      */
     public function run(
         Request $request,
@@ -140,8 +149,8 @@ class Dashboard extends BaseObject implements DashboardInterface
      *
      * @param null $moduleName
      *
-     * @return Module
      * @throws ModuleNotFoundException
+     * @return Module
      */
     protected function resolveModule($moduleName = null)
     {
@@ -164,8 +173,8 @@ class Dashboard extends BaseObject implements DashboardInterface
      * @param Module $module
      * @param null $methodName
      *
-     * @return mixed
      * @throws MethodNotFoundException
+     * @return mixed
      */
     protected function resolveMethod(Module $module, $methodName = null)
     {

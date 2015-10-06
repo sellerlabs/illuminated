@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Http;
 
 use Chromabits\Nucleus\Foundation\BaseObject;
@@ -11,7 +20,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
 /**
- * Class RequestFactory
+ * Class RequestFactory.
  *
  * This is a small factory class for building Laravel/Symfony requests by hand.
  * Its main purpose is to simplify testing by not having to run everything
@@ -104,8 +113,8 @@ class RequestFactory extends BaseObject
      *
      * @param $uri
      *
-     * @return $this
      * @throws InvalidArgumentException
+     * @return $this
      */
     public function onUri($uri)
     {
@@ -122,8 +131,8 @@ class RequestFactory extends BaseObject
      * @param $key
      * @param $value
      *
-     * @return $this
      * @throws InvalidArgumentException
+     * @return $this
      */
     public function withHeader($key, $value)
     {
@@ -142,8 +151,8 @@ class RequestFactory extends BaseObject
      *
      * @param $method
      *
-     * @return $this
      * @throws InvalidArgumentException
+     * @return $this
      */
     public function usingMethod($method)
     {

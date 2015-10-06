@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Conference\Controllers;
 
 use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
@@ -9,14 +18,13 @@ use Chromabits\Illuminated\Conference\Views\AlertPresenter;
 use Chromabits\Illuminated\Conference\Views\ConferencePage;
 use Chromabits\Illuminated\Contracts\Alerts\AlertManager;
 use Chromabits\Illuminated\Http\BaseController;
-use Chromabits\Nucleus\Support\Html;
 use Chromabits\Nucleus\View\Common\Div;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
- * Class ConferenceController
+ * Class ConferenceController.
  *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Conference\Controllers
@@ -96,7 +104,7 @@ class ConferenceController extends BaseController
         if (count($this->alerts->peekAll()) > 0) {
             $panel = new Div([], [
                 new AlertPresenter($this->alerts),
-                $panel
+                $panel,
             ]);
         }
 
@@ -155,7 +163,7 @@ class ConferenceController extends BaseController
         return Response::create(
             implode("\n", [
                 '.btn-y-align { padding-top: 3px; }',
-                '.text-light { color: #ddd; }'
+                '.text-light { color: #ddd; }',
             ]),
             Response::HTTP_OK,
             ['Content-Type' => 'text/css']

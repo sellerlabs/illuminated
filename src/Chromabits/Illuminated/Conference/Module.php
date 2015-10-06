@@ -20,7 +20,6 @@ use Chromabits\Nucleus\View\Common\Anchor;
 use Chromabits\Nucleus\View\Common\ListItem;
 use Chromabits\Nucleus\View\Common\UnorderedList;
 use Chromabits\Nucleus\View\SafeHtmlWrapper;
-use Chromabits\Illuminated\Conference\Method;
 
 /**
  * Class Module.
@@ -132,8 +131,8 @@ abstract class Module extends BaseObject
                             $this->getName(),
                             $methodName
                         ),
-                        'class' => 'nav-link'
-                    ], Std::coalesce($method->getLabel(), $methodName))
+                        'class' => 'nav-link',
+                    ], Std::coalesce($method->getLabel(), $methodName)),
                 ]);
             }, Std::filter(function (Method $method) {
                 return !$method->isHidden();

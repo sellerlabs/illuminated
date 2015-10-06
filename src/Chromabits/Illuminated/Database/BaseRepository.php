@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Database;
 
 use Chromabits\Illuminated\Database\Interfaces\BaseRepositoryInterface;
@@ -15,7 +24,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class BaseRepository
+ * Class BaseRepository.
  *
  * A base repository class for manipulating models.
  *
@@ -36,9 +45,9 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
      *
      * @param string $idField
      *
-     * @return ExactlyOneRecordConstraint
      * @throws LackOfCoffeeException
      * @throws InvalidArgumentException
+     * @return ExactlyOneRecordConstraint
      */
     public function makeExistsConstraint($idField = 'id')
     {
@@ -53,12 +62,12 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
     /**
      * Make an instance of a the model for this repository.
      *
-     * @return Model
      * @throws LackOfCoffeeException
+     * @return Model
      */
     protected function makeModelInstance()
     {
-        $instance = new $this->model;
+        $instance = new $this->model();
 
         if (!$instance instanceof Model) {
             throw new LackOfCoffeeException(
@@ -72,11 +81,11 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
     /**
      * Check whether or not the model with the specified ID exists.
      *
-     * @param integer $id
+     * @param int $id
      *
-     * @return bool
      * @throws InvalidArgumentException
      * @throws LackOfCoffeeException
+     * @return bool
      */
     public function exists($id)
     {
@@ -90,13 +99,13 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
     /**
      * Get a model by its id.
      *
-     * @param integer $id
+     * @param int $id
      * @param array $columns
      * @param array $with
      *
-     * @return Model
      * @throws InvalidArgumentException
      * @throws LackOfCoffeeException
+     * @return Model
      */
     public function getById($id, array $columns = ['*'], array $with = [])
     {
@@ -172,9 +181,9 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
      * @param array $columns
      * @param array $with
      *
-     * @return Builder
      * @throws InvalidArgumentException
      * @throws LackOfCoffeeException
+     * @return Builder
      */
     protected function makeWhereQuery(
         array $fieldConditions,
@@ -204,7 +213,7 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
      * @param array $with
      * @param int $take
      * @param string $pageName
-     * @param null|integer $page
+     * @param null|int $page
      *
      * @return LengthAwarePaginator
      */
@@ -229,8 +238,8 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
      * @param array $columns
      * @param array $with
      *
-     * @return Collection
      * @throws LackOfCoffeeException
+     * @return Collection
      */
     public function getAll($columns = ['*'], $with = [])
     {
@@ -253,10 +262,10 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
      * @param array $with
      * @param int $take
      * @param string $pageName
-     * @param null|integer $page
+     * @param null|int $page
      *
-     * @return LengthAwarePaginator
      * @throws LackOfCoffeeException
+     * @return LengthAwarePaginator
      */
     public function getAllPaginated(
         $columns = ['*'],
@@ -283,7 +292,7 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
     /**
      * Find a model by its id and then update its contents.
      *
-     * @param integer $id
+     * @param int $id
      * @param array $fill
      *
      * @return Model
