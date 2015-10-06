@@ -19,6 +19,7 @@ use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
  * An extension of Eloquent capable of saving some fields as JSON arrays in the
  * database.
  *
+ * @deprecated L5.1 supports attribute type-casting
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Articulate
  */
