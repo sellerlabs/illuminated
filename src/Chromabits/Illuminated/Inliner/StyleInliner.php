@@ -18,6 +18,7 @@ use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Mail\Message;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 /**
@@ -136,19 +137,17 @@ class StyleInliner extends BaseObject implements InlinerContract
     {
         $finder = new Finder();
 
-        $files = $finder
+        $finder
             ->files()
             ->in($this->stylesheetPaths)
             ->name($name . $extension);
 
-        if (iterator_count($files) < 1) {
-            throw new StylesheetNotFoundException();
+        /** @var SplFileInfo $file */
+        foreach ($finder as $file) {
+            return $file;
         }
 
-        $iterator = $files->getIterator();
-        $iterator->next();
-
-        return $iterator->current();
+        throw new StylesheetNotFoundException();
     }
 
     /**
