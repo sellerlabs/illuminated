@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: etcinit
- * Date: 10/3/15
- * Time: 6:57 PM
- */
 
 namespace Chromabits\Illuminated\Http\Factories;
 

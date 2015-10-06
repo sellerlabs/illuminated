@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: etcinit
- * Date: 9/27/15
- * Time: 10:59 PM
- */
 
 namespace Chromabits\Illuminated\Jobs\Controllers;
 
