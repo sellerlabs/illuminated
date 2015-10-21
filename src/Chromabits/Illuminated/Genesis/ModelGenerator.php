@@ -190,12 +190,14 @@ abstract class ModelGenerator extends BaseObject
      * Note: The instance will be cached after being created for the first
      * time.
      *
+     * @param bool $flush Remove old instance
+     *
      * @return Model
      * @throws LackOfCoffeeException
      */
-    protected function getModelInstance()
+    protected function getModelInstance($flush = false)
     {
-        if ($this->modelInstance !== null) {
+        if ($this->modelInstance !== null && $flush === false) {
             return $this->modelInstance;
         }
 
@@ -233,7 +235,7 @@ abstract class ModelGenerator extends BaseObject
     public function make()
     {
         // Make model instance
-        $model = $this->getModelInstance();
+        $model = $this->getModelInstance(true);
 
         $filling = TransformPipeline::define()
             ->inline(function ($input) {
