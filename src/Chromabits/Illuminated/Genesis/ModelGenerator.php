@@ -150,7 +150,8 @@ abstract class ModelGenerator extends BaseObject
             ));
         }
 
-        $this->relations[$relationName] = $generator;
+        $this->relations[$relationName] = $relation;
+        $this->relationsGenerators[$relationName] = $generator;
 
         if ($count > 1
             && in_array(get_class($generator), $this->multipleRelations)
@@ -223,6 +224,12 @@ abstract class ModelGenerator extends BaseObject
         return $this->model;
     }
 
+    /**
+     * Generate the model.
+     *
+     * @return Model
+     * @throws LackOfCoffeeException
+     */
     public function make()
     {
         // Make model instance
@@ -237,26 +244,52 @@ abstract class ModelGenerator extends BaseObject
                     return Std::value($value);
                 }, $input);
             })
-            ->inline(function ($input) {
-                Std::each(function ($relation, $name) use (&$input) {
-                    $input[$name] = $this->generateRelation($name);
-                }, $this->relations);
-
-                return $input;
-            })
             ->run($this->getMapping());
 
         Std::each(function ($value, $key) use (&$model) {
             $model->$key = $value;
         }, $filling);
 
+        Std::each(function ($relation, $name) use (&$model) {
+            $related = $this->generateRelation($name);
+
+            if ($relation instanceof BelongsTo) {
+                $model->$name()->associate($related);
+            } elseif (is_array($related)) {
+                $model->$name()->saveMany($related);
+            } else {
+                $model->$name()->save($related);
+            }
+
+        }, $this->relations);
+
+        $model->save();
+
         return $model;
+    }
+
+    /**
+     * Generate multiple models.
+     *
+     * @param integer $count
+     *
+     * @return Model[]
+     */
+    public function makeMany($count)
+    {
+        $models = [];
+
+        for ($ii = 0; $ii < $count; $ii++) {
+            $models[] = $this->make();
+        }
+
+        return $models;
     }
 
     /**
      * Build out the models for a relation.
      *
-     * @param $name
+     * @param string $name
      *
      * @return Model|Collection
      */
@@ -268,15 +301,7 @@ abstract class ModelGenerator extends BaseObject
             return $this->relationsGenerators[$name]->make();
         }
 
-        $collection = new Collection();
-
-        for ($ii = 0; $ii < $count; $ii++) {
-            $collection->add(
-                $this->relationsGenerators[$name]->make()
-            );
-        }
-
-        return $collection;
+        return $this->relationsGenerators[$name]->makeMany($count);
     }
 
     /**
