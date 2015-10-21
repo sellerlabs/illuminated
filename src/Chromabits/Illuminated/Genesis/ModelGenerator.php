@@ -6,6 +6,9 @@ use Chromabits\Illuminated\Database\Articulate\Model;
 use Chromabits\Illuminated\Meditation\ModelInspector;
 use Chromabits\Nucleus\Exceptions\LackOfCoffeeException;
 use Chromabits\Nucleus\Foundation\BaseObject;
+use Chromabits\Nucleus\Meditation\Arguments;
+use Chromabits\Nucleus\Meditation\Boa;
+use Chromabits\Nucleus\Meditation\Exceptions\InvalidArgumentException;
 use Chromabits\Nucleus\Meditation\TypeHound;
 use Chromabits\Nucleus\Support\Arr;
 use Chromabits\Nucleus\Support\Std;
@@ -163,6 +166,37 @@ abstract class ModelGenerator extends BaseObject
     }
 
     /**
+     * Set a relationship of the model explicitly.
+     *
+     * @param string $relationName
+     * @param Model|Model[] $related
+     *
+     * @return $this
+     * @throws LackOfCoffeeException
+     * @throws InvalidArgumentException
+     */
+    public function withFixed($relationName, $related)
+    {
+        $inspector = $this->getInspector($this->getModelInstance());
+
+        $relation = $inspector->getRelation($relationName);
+        $relationModelClass = get_class($relation->getRelated());
+
+        Arguments::contain(
+            Boa::string(),
+            Boa::either(
+                Boa::instance($relationModelClass),
+                Boa::arrOf(Boa::instance($relationModelClass))
+            )
+        )->check($relationName, $related);
+
+        $this->relations[$relationName] = $relation;
+        $this->relationsGenerators[$relationName] = $related;
+
+        return $this;
+    }
+
+    /**
      * Get an instance of an inspector for the model being generated.
      *
      * The inspector is used to get useful information on the model, which can
@@ -298,6 +332,10 @@ abstract class ModelGenerator extends BaseObject
     protected function generateRelation($name)
     {
         $count = Arr::dotGet($this->relationsCount, $name, 1);
+
+        if (!$this->relationsGenerators[$name] instanceof ModelGenerator) {
+            return $this->relationsGenerators[$name];
+        }
 
         if ($count === 1) {
             return $this->relationsGenerators[$name]->make();
