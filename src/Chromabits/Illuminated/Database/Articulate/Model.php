@@ -27,6 +27,23 @@ class Model extends BaseModel
     protected static $registered = [];
 
     /**
+     * Name of each relationship this model has.
+     *
+     * @var string
+     */
+    protected $related = [];
+
+    /**
+     * Get the name of every relation this model has.
+     *
+     * @return string
+     */
+    public function getRelated()
+    {
+        return $this->related;
+    }
+
+    /**
      * Get the table of this model (statically).
      *
      * @return Table
