@@ -24,8 +24,6 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
  */
 class Model extends BaseModel
 {
-    protected static $registered = [];
-
     /**
      * Name of each relationship this model has.
      *
@@ -63,23 +61,5 @@ class Model extends BaseModel
     public function getCheckable()
     {
         return null;
-    }
-
-    /**
-     * Register model events.
-     */
-    public static function registerEvents()
-    {
-        // Define a handler for converting the specified properties into JSON
-        // before saving the model to the database
-        static::saving(
-            function (JsonModel $model) {
-                foreach ($model->getJsonFields() as $field) {
-                    $model->$field = json_encode($model->$field);
-                }
-            }
-        );
-
-        static::$registered[static::class] = true;
     }
 }

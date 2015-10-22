@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aca421d6c6addd4164135075c9aaf8bf",
+    "hash": "d114141b09936af9e6ddd3b60fcefd71",
     "packages": [
         {
             "name": "chromabits/nucleus",
-            "version": "v0.4.2-beta1",
+            "version": "v0.4.2-beta2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chromabits/nucleus.git",
-                "reference": "7282b17d7bf717a5ae7ed45c8da1a8c2cdebba68"
+                "reference": "a4eb3e9192c09da9a9e77911f7a22a81fef879df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chromabits/nucleus/zipball/7282b17d7bf717a5ae7ed45c8da1a8c2cdebba68",
-                "reference": "7282b17d7bf717a5ae7ed45c8da1a8c2cdebba68",
+                "url": "https://api.github.com/repos/chromabits/nucleus/zipball/a4eb3e9192c09da9a9e77911f7a22a81fef879df",
+                "reference": "a4eb3e9192c09da9a9e77911f7a22a81fef879df",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 }
             ],
             "description": "Some core PHP utilities",
-            "time": "2015-10-22 01:52:19"
+            "time": "2015-10-22 02:22:13"
         },
         {
             "name": "classpreloader/classpreloader",
