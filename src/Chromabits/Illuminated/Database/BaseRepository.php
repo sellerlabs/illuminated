@@ -31,7 +31,8 @@ use Illuminate\Database\Eloquent\Model;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database
  */
-class BaseRepository extends BaseObject implements BaseRepositoryInterface
+abstract class BaseRepository extends BaseObject implements
+    BaseRepositoryInterface
 {
     /**
      * @var string
@@ -97,46 +98,6 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
     }
 
     /**
-     * Get a model by its id.
-     *
-     * @param int $id
-     * @param array $columns
-     * @param array $with
-     *
-     * @throws InvalidArgumentException
-     * @throws LackOfCoffeeException
-     * @return Model
-     */
-    public function getById($id, array $columns = ['*'], array $with = [])
-    {
-        Arguments::contain(
-            Boa::integer(),
-            Boa::arrOf(Boa::string()),
-            Boa::arrOf(Boa::string())
-        )->check($id, $columns, $with);
-
-        $query = $this->makeModelInstance()->query()
-            ->where('id', $id);
-
-        $this->applyWith($query, $with);
-
-        return $query->firstOrFail($columns);
-    }
-
-    /**
-     * Apply a with condition to the query.
-     *
-     * @param Builder $query
-     * @param array $with
-     */
-    protected function applyWith(Builder $query, $with = [])
-    {
-        if (count($with)) {
-            $query->with($with);
-        }
-    }
-
-    /**
      * Perform a simple where query and return a collection of the matching
      * models.
      *
@@ -153,25 +114,6 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
     ) {
         return $this->makeWhereQuery($fieldConditions, $columns, $with)
             ->get($columns);
-    }
-
-    /**
-     * Perform a simple where query and return a single element matching the
-     * query, or fail.
-     *
-     * @param array $fieldConditions
-     * @param array $columns
-     * @param array $with
-     *
-     * @return Collection
-     */
-    public function whereFirstOrFail(
-        array $fieldConditions,
-        array $columns = ['*'],
-        array $with = []
-    ) {
-        return $this->makeWhereQuery($fieldConditions, $columns, $with)
-            ->firstOrFail($columns);
     }
 
     /**
@@ -202,6 +144,38 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
         $this->applyWith($query, $with);
 
         return $query;
+    }
+
+    /**
+     * Apply a with condition to the query.
+     *
+     * @param Builder $query
+     * @param array $with
+     */
+    protected function applyWith(Builder $query, $with = [])
+    {
+        if (count($with)) {
+            $query->with($with);
+        }
+    }
+
+    /**
+     * Perform a simple where query and return a single element matching the
+     * query, or fail.
+     *
+     * @param array $fieldConditions
+     * @param array $columns
+     * @param array $with
+     *
+     * @return Collection
+     */
+    public function whereFirstOrFail(
+        array $fieldConditions,
+        array $columns = ['*'],
+        array $with = []
+    ) {
+        return $this->makeWhereQuery($fieldConditions, $columns, $with)
+            ->firstOrFail($columns);
     }
 
     /**
@@ -306,5 +280,32 @@ class BaseRepository extends BaseObject implements BaseRepositoryInterface
         $instance->update($fill);
 
         return $instance;
+    }
+
+    /**
+     * Get a model by its id.
+     *
+     * @param int $id
+     * @param array $columns
+     * @param array $with
+     *
+     * @throws InvalidArgumentException
+     * @throws LackOfCoffeeException
+     * @return Model
+     */
+    public function getById($id, array $columns = ['*'], array $with = [])
+    {
+        Arguments::contain(
+            Boa::integer(),
+            Boa::arrOf(Boa::string()),
+            Boa::arrOf(Boa::string())
+        )->check($id, $columns, $with);
+
+        $query = $this->makeModelInstance()->query()
+            ->where('id', $id);
+
+        $this->applyWith($query, $with);
+
+        return $query->firstOrFail($columns);
     }
 }

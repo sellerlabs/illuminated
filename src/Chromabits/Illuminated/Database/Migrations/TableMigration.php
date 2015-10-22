@@ -46,8 +46,6 @@ abstract class TableMigration extends BaseMigration
      * Create the table schema.
      *
      * @param Blueprint $table
-     *
-     * @return mixed
      */
     abstract protected function create(Blueprint $table);
 

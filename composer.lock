@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1acf53264d2d3c8edf590bf4034537eb",
+    "hash": "aca421d6c6addd4164135075c9aaf8bf",
     "packages": [
         {
             "name": "chromabits/nucleus",
-            "version": "v0.4.1",
+            "version": "v0.4.2-beta1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chromabits/nucleus.git",
-                "reference": "3cb2f1de00b06c0fc3a9e943ae53c89f427967b3"
+                "reference": "7282b17d7bf717a5ae7ed45c8da1a8c2cdebba68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chromabits/nucleus/zipball/3cb2f1de00b06c0fc3a9e943ae53c89f427967b3",
-                "reference": "3cb2f1de00b06c0fc3a9e943ae53c89f427967b3",
+                "url": "https://api.github.com/repos/chromabits/nucleus/zipball/7282b17d7bf717a5ae7ed45c8da1a8c2cdebba68",
+                "reference": "7282b17d7bf717a5ae7ed45c8da1a8c2cdebba68",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 }
             ],
             "description": "Some core PHP utilities",
-            "time": "2015-10-08 04:27:08"
+            "time": "2015-10-22 01:52:19"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -2379,16 +2379,16 @@
         },
         {
             "name": "fabpot/php-cs-fixer",
-            "version": "v1.10.1",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "12dbcd1462f1e3a5a96c6c7398af26b28e092a8a"
+                "reference": "e8b3c4e41dc1484210fdc45363c41af6c2d56f20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/12dbcd1462f1e3a5a96c6c7398af26b28e092a8a",
-                "reference": "12dbcd1462f1e3a5a96c6c7398af26b28e092a8a",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/e8b3c4e41dc1484210fdc45363c41af6c2d56f20",
+                "reference": "e8b3c4e41dc1484210fdc45363c41af6c2d56f20",
                 "shasum": ""
             },
             "require": {
@@ -2429,7 +2429,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2015-10-12 20:13:46"
+            "time": "2015-10-21 19:19:43"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -2954,12 +2954,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b65f288d1496a7402fd155f9eeff5b07ef38bcc3"
+                "reference": "a4513c4864856627b0193bdc0b2e00f0b7a70331"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b65f288d1496a7402fd155f9eeff5b07ef38bcc3",
-                "reference": "b65f288d1496a7402fd155f9eeff5b07ef38bcc3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a4513c4864856627b0193bdc0b2e00f0b7a70331",
+                "reference": "a4513c4864856627b0193bdc0b2e00f0b7a70331",
                 "shasum": ""
             },
             "require": {
@@ -3018,7 +3018,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-20 10:56:28"
+            "time": "2015-10-21 08:48:49"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3732,6 +3732,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "chromabits/nucleus": 10,
         "phpunit/phpunit": 20,
         "mockery/mockery": 20
     },
