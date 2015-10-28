@@ -10,7 +10,7 @@
     "illuminate/view": "^5.0",
     "illuminate/database": "^5.0",
     "tijsverkoyen/css-to-inline-styles": "~1.5",
-    "chromabits/nucleus": "0.4.3"
+    "chromabits/nucleus": "~0.4.4"
   },
   "authors": [
     {
