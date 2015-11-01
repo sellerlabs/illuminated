@@ -11,7 +11,8 @@
 
 namespace Tests\Chromabits\Illuminated\Jobs\Tasks;
 
-use Tests\Chromabits\Support\HelpersTestCase;
+use Chromabits\Illuminated\Jobs\Testing\TaskTestTrait;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class TaskTestCase.
@@ -21,14 +22,9 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs\Tasks
  */
-abstract class TaskTestCase extends HelpersTestCase
+abstract class TaskTestCase extends IlluminatedTestCase
 {
-    public function testGetReference()
-    {
-        $task = $this->make();
-
-        $this->assertInternalType('array', $task->getReference());
-    }
+    use TaskTestTrait;
 
     /**
      * Make an instance of the task being tested.
@@ -36,25 +32,4 @@ abstract class TaskTestCase extends HelpersTestCase
      * @return mixed
      */
     abstract public function make();
-
-    public function testGetTypes()
-    {
-        $task = $this->make();
-
-        $this->assertInternalType('array', $task->getTypes());
-    }
-
-    public function testGetDefaults()
-    {
-        $task = $this->make();
-
-        $this->assertInternalType('array', $task->getDefaults());
-    }
-
-    public function testGetDescription()
-    {
-        $task = $this->make();
-
-        $this->assertInternalType('string', $task->getDescription());
-    }
 }

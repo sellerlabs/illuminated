@@ -11,7 +11,7 @@
 
 namespace Chromabits\Illuminated\Database\Articulate;
 
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class TableTest.
@@ -19,7 +19,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Database\Articulate
  */
-class TableTest extends HelpersTestCase
+class TableTest extends IlluminatedTestCase
 {
     public function testFits()
     {

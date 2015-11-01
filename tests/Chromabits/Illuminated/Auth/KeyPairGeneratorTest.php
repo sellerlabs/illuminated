@@ -13,7 +13,7 @@ namespace Chromabits\Illuminated\Auth;
 
 use Chromabits\Illuminated\Auth\Models\KeyPair;
 use Tests\Chromabits\Illuminated\Auth\AuthDatabaseTrait;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class KeyPairGeneratorTest.
@@ -21,7 +21,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Auth
  */
-class KeyPairGeneratorTest extends HelpersTestCase
+class KeyPairGeneratorTest extends IlluminatedTestCase
 {
     use AuthDatabaseTrait;
 

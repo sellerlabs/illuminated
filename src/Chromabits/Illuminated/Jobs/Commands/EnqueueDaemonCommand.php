@@ -57,7 +57,7 @@ class EnqueueDaemonCommand extends Command implements SelfHandling
             's',
             InputOption::VALUE_OPTIONAL,
             'Minutes to sleep between enqueues',
-            60
+            15
         );
     }
 

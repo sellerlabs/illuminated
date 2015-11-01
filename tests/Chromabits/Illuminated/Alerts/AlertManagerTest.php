@@ -13,7 +13,7 @@ namespace Tests\Chromabits\Illuminated\Alerts;
 
 use Chromabits\Illuminated\Alerts\AlertManager;
 use Chromabits\Nucleus\Testing\Traits\ConstructorTesterTrait;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class AlertManagerTestInternal.
@@ -21,7 +21,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Alerts
  */
-class AlertManagerTestInternal extends HelpersTestCase
+class AlertManagerTestInternal extends IlluminatedTestCase
 {
     use ConstructorTesterTrait;
     use MocksViewsTrait;

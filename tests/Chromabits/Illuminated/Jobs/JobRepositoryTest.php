@@ -15,7 +15,7 @@ use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobRepository;
 use Chromabits\Illuminated\Jobs\JobState;
 use Illuminate\Contracts\Pagination\Paginator;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class JobRepositoryTest.
@@ -23,7 +23,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs
  */
-class JobRepositoryTest extends HelpersTestCase
+class JobRepositoryTest extends IlluminatedTestCase
 {
     use JobsDatabaseTrait;
 

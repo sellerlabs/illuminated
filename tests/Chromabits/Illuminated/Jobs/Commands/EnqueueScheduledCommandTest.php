@@ -25,7 +25,7 @@ use Mockery\MockInterface;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Tests\Chromabits\Illuminated\Jobs\JobsDatabaseTrait;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class EnqueueScheduledCommandTest.
@@ -33,7 +33,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs\Commands
  */
-class EnqueueScheduledCommandTest extends HelpersTestCase
+class EnqueueScheduledCommandTest extends IlluminatedTestCase
 {
     use JobsDatabaseTrait;
 

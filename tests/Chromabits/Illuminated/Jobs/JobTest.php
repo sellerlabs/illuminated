@@ -15,7 +15,7 @@ use Carbon\Carbon;
 use Chromabits\Illuminated\Jobs\Job;
 use Chromabits\Illuminated\Jobs\JobState;
 use Chromabits\Nucleus\Support\Str;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class JobTest.
@@ -23,7 +23,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs
  */
-class JobTest extends HelpersTestCase
+class JobTest extends IlluminatedTestCase
 {
     use JobsDatabaseTrait;
 

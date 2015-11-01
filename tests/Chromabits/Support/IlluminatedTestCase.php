@@ -15,7 +15,12 @@ use Chromabits\Nucleus\Testing\TestCase;
 use Illuminate\Config\Repository;
 use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Database\MigrationServiceProvider;
+use Illuminate\Filesystem\FilesystemServiceProvider;
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Providers\FoundationServiceProvider;
+use Illuminate\Pipeline\PipelineServiceProvider;
+use Illuminate\Session\SessionServiceProvider;
+use Illuminate\View\ViewServiceProvider;
 use PDO;
 
 /**
@@ -24,7 +29,7 @@ use PDO;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Support
  */
-abstract class HelpersTestCase extends TestCase
+abstract class IlluminatedTestCase extends TestCase
 {
     /**
      * @var Application
@@ -71,11 +76,11 @@ abstract class HelpersTestCase extends TestCase
             'app',
             [
                 'providers' => [
-                    'Illuminate\Filesystem\FilesystemServiceProvider',
-                    'Illuminate\Foundation\Providers\FoundationServiceProvider',
-                    'Illuminate\Pipeline\PipelineServiceProvider',
-                    'Illuminate\Session\SessionServiceProvider',
-                    'Illuminate\View\ViewServiceProvider',
+                    FilesystemServiceProvider::class,
+                    FoundationServiceProvider::class,
+                    PipelineServiceProvider::class,
+                    SessionServiceProvider::class,
+                    ViewServiceProvider::class,
                     DatabaseServiceProvider::class,
                     MigrationServiceProvider::class,
                 ],

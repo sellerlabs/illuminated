@@ -12,7 +12,7 @@
 namespace Tests\Chromabits\Illuminated\Alerts;
 
 use Chromabits\Illuminated\Alerts\AlertServiceProvider;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class AlertServiceProviderTestInternal.
@@ -20,7 +20,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Alerts
  */
-class AlertServiceProviderTestInternal extends HelpersTestCase
+class AlertServiceProviderTestInternal extends IlluminatedTestCase
 {
     public function testRegister()
     {

@@ -16,7 +16,7 @@ use Chromabits\Illuminated\Jobs\JobFactory;
 use Chromabits\Illuminated\Jobs\JobState;
 use Chromabits\Nucleus\Support\Str;
 use InvalidArgumentException;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class JobFactoryTest.
@@ -24,7 +24,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs
  */
-class JobFactoryTest extends HelpersTestCase
+class JobFactoryTest extends IlluminatedTestCase
 {
     public function testMake()
     {

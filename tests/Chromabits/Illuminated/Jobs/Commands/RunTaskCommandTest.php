@@ -27,7 +27,7 @@ use Illuminate\Queue\Jobs\Job as LaravelJob;
 use Mockery as m;
 use Mockery\MockInterface;
 use Tests\Chromabits\Illuminated\Jobs\JobsDatabaseTrait;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class RunTaskCommandTest.
@@ -35,7 +35,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs\Commands
  */
-class RunTaskCommandTest extends HelpersTestCase
+class RunTaskCommandTest extends IlluminatedTestCase
 {
     use JobsDatabaseTrait;
 

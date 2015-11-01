@@ -17,7 +17,7 @@ use Illuminate\Contracts\Queue\Queue;
 use Illuminate\Queue\QueueManager;
 use Mockery as m;
 use Mockery\MockInterface;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class QueuePusherTest.
@@ -25,7 +25,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Queue
  */
-class QueuePusherTest extends HelpersTestCase
+class QueuePusherTest extends IlluminatedTestCase
 {
     public function testPush()
     {

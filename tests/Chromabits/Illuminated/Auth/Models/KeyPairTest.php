@@ -12,7 +12,7 @@
 namespace Chromabits\Illuminated\Auth\Models;
 
 use Tests\Chromabits\Illuminated\Auth\AuthDatabaseTrait;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class KeyPairTest.
@@ -20,7 +20,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Auth\Models
  */
-class KeyPairTest extends HelpersTestCase
+class KeyPairTest extends IlluminatedTestCase
 {
     use AuthDatabaseTrait;
 

@@ -13,7 +13,7 @@ namespace Chromabits\Illuminated\Jobs;
 
 use Chromabits\Illuminated\Database\Migrations\StructuredMigrator;
 use Tests\Chromabits\Illuminated\Jobs\JobsDatabaseTrait;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class MigrationsTest.
@@ -21,7 +21,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Jobs
  */
-class MigrationsTest extends HelpersTestCase
+class MigrationsTest extends IlluminatedTestCase
 {
     use JobsDatabaseTrait;
 

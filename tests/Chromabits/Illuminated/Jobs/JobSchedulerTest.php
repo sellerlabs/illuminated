@@ -20,7 +20,7 @@ use Chromabits\Illuminated\Jobs\JobTag;
 use Chromabits\Nucleus\Testing\Impersonator;
 use InvalidArgumentException;
 use Mockery\MockInterface;
-use Tests\Chromabits\Support\HelpersTestCase;
+use Tests\Chromabits\Support\IlluminatedTestCase;
 
 /**
  * Class JobSchedulerTest.
@@ -28,7 +28,7 @@ use Tests\Chromabits\Support\HelpersTestCase;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Tests\Chromabits\Illuminated\Jobs
  */
-class JobSchedulerTest extends HelpersTestCase
+class JobSchedulerTest extends IlluminatedTestCase
 {
     use JobsDatabaseTrait;
 
