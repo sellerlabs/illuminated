@@ -161,6 +161,7 @@ class ResourceFactory extends BaseObject
      * Inject routes into the provided router.
      *
      * @param Router $router
+     * @return Router
      */
     public function inject(Router $router)
     {
@@ -181,6 +182,8 @@ class ResourceFactory extends BaseObject
                 );
             }, $this->methods);
         });
+
+        return $router;
     }
 
     /**
@@ -195,5 +198,37 @@ class ResourceFactory extends BaseObject
         $this->prefix = $prefix;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getController()
+    {
+        return $this->controller;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMiddleware()
+    {
+        return $this->middleware;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMethods()
+    {
+        return $this->methods;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPrefix()
+    {
+        return $this->prefix;
     }
 }

@@ -185,7 +185,7 @@ class ConferencePage implements RenderableInterface, SafeHtmlProducerInterface
                     [
                         'rel' => 'stylesheet',
                         'href' => 'https://maxcdn.bootstrapcdn.com/font-awesome'
-                            . '/4.4.0/css/font-awesome.min.css',
+                            . '/4.5.0/css/font-awesome.min.css',
                     ]
                 ),
                 new Link(
