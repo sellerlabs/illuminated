@@ -173,6 +173,12 @@ class StructuredMigrator implements StructuredMigratorInterface
      */
     public function rollback($pretend = false)
     {
+        if (!$this->repository->repositoryExists()) {
+            $this->note('<info>Nothing to rollback.</info>');
+
+            return 0;
+        }
+
         $this->notes = [];
 
         $this->batch->validate();
@@ -184,7 +190,7 @@ class StructuredMigrator implements StructuredMigratorInterface
         // which ran.
         $migrations = $this->repository->getLast();
 
-        if (count($migrations) == 0) {
+        if (count($migrations) === 0) {
             $this->note('<info>Nothing to rollback.</info>');
 
             return count($migrations);
