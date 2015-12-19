@@ -83,4 +83,12 @@ abstract class ApplicationManifest extends BaseObject
     {
         return $this->currentVersion;
     }
+
+    /**
+     * @return string[]
+     */
+    public function getProse()
+    {
+        return [];
+    }
 }
