@@ -73,23 +73,30 @@ class SpecSchemaEncoder extends BaseObject
     public function encodeConstraints(Spec $spec, $input, $title)
     {
         if ($input instanceof AbstractConstraint) {
+            $schema = [
+                'description' => $input->getDescription(),
+            ];
+
             if ($input instanceof PrimitiveTypeConstraint) {
-                return [
-                    'type' => $input->toString(),
-                ];
+                $schema['type'] = $input->toString();
             }
 
-            return [];
+            return $schema;
         } elseif (is_array($input)) {
+            $schema = [];
+            $descriptions = [];
+
             foreach ($input as $constraint) {
                 if ($constraint instanceof PrimitiveTypeConstraint) {
-                    return [
-                        'type' => $input->toString(),
-                    ];
+                    $descriptions[] = $constraint->getDescription();
+
+                    $schema['type'] = $constraint->toString();
                 }
             }
 
-            return [];
+            $schema['description'] = implode('. ', $descriptions);
+
+            return $schema;
         } elseif ($input instanceof Spec) {
             return (new static())->encode($input, $title);
         }

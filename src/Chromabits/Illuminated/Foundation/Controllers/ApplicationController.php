@@ -3,13 +3,12 @@
 namespace Chromabits\Illuminated\Foundation\Controllers;
 
 use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
-use Chromabits\Illuminated\Conference\Interfaces\DashboardInterface;
 use Chromabits\Illuminated\Foundation\ApplicationManifest;
 use Chromabits\Illuminated\Http\ApiCheckableRequest;
 use Chromabits\Illuminated\Http\BaseController;
 use Chromabits\Illuminated\Http\Entities\ResourceMethod;
-use Chromabits\Illuminated\Http\Factories\ApiResponseFactory;
 use Chromabits\Illuminated\Http\Factories\ResourceFactory;
+use Chromabits\Illuminated\Http\ResourceReflector;
 use Chromabits\Nucleus\Meditation\Constraints\AbstractConstraint;
 use Chromabits\Nucleus\Meditation\Spec;
 use Chromabits\Nucleus\Support\Std;
@@ -34,8 +33,6 @@ use Chromabits\Nucleus\View\Node;
 use Exception;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-use ReflectionParameter;
 
 /**
  * Class ApplicationController.
@@ -159,8 +156,10 @@ class ApplicationController extends BaseController
         ResourceMethod $method
     ) {
         try {
-            $request = $this->getRequest(
-                $this->getMethodArgumentTypes($factory, $method)
+            $reflector = new ResourceReflector($this->container);
+
+            $request = $reflector->getRequest(
+                $reflector->getMethodArgumentTypes($factory, $method)
             );
 
             if ($request instanceof ApiCheckableRequest) {
@@ -269,55 +268,6 @@ class ApplicationController extends BaseController
             ' ',
             $method->getMethod(),
         ]);
-    }
-
-    /**
-     * @param ResourceFactory $factory
-     * @param ResourceMethod $method
-     *
-     * @return ReflectionParameter[]
-     */
-    protected function getMethodArgumentTypes(
-        ResourceFactory $factory,
-        ResourceMethod $method
-    ) {
-        $classReflector = new \ReflectionClass($factory->getController());
-
-        $methodReflector = $classReflector->getMethod($method->getMethod());
-
-        return $methodReflector->getParameters();
-    }
-
-    /**
-     * @param ReflectionParameter[] $arguments
-     *
-     * @return Request|null
-     */
-    protected function getRequest(array $arguments)
-    {
-        foreach ($arguments as $argument) {
-            if ($argument->getClass() === null) {
-                continue;
-            }
-
-            $type = $argument->getClass()->getName();
-
-            if ($type === ApiCheckableRequest::class
-                || in_array(ApiCheckableRequest::class, class_parents($type))
-            ) {
-                $instance = new $type(
-                    new Request(),
-                    new Route('', '', []),
-                    new ApiResponseFactory()
-                );
-
-                if ($instance instanceof ApiCheckableRequest) {
-                    return $instance;
-                }
-            }
-        }
-
-        return null;
     }
 
     public function getSingle(Request $request, ConferenceContext $context)
