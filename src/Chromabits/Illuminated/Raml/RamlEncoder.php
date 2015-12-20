@@ -68,7 +68,7 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
             }
         }
 
-        foreach ($manifest->getResources() as $resource) {
+        foreach ($manifest->getApiResources() as $resource) {
             $path = $resource->getPrefix();
 
             if ($path == '') {
@@ -108,6 +108,7 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
             $reflector = new ResourceReflector($this->app);
             $request = $reflector->getMethodRequest($resource, $method);
             $uriParameters = [];
+            $queryParameters = [];
 
             if ($request instanceof ApiCheckableRequest) {
                 $spec = $request->getCheckable();
@@ -131,11 +132,27 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
                             $method
                         );
 
-                        foreach ($parameters as $parameter) {
-                            $uriParameters[$parameter]
+                        $fields = array_unique(array_merge(
+                            array_keys($spec->getConstraints()),
+                            array_keys($spec->getDefaults()),
+                            $spec->getRequired()
+                        ));
+
+                        foreach ($fields as $field) {
+                            if (in_array($field, $parameters)) {
+                                $uriParameters[$field]
+                                    = $this->specFieldToParameter(
+                                    $spec,
+                                    $field
+                                );
+
+                                continue;
+                            }
+
+                            $queryParameters[$field]
                                 = $this->specFieldToParameter(
                                 $spec,
-                                $parameter
+                                $field
                             );
                         }
                     }
@@ -149,6 +166,10 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
             if (count($uriParameters)) {
                 $ramlResource[$method->getPath()]['uriParameters']
                     = $uriParameters;
+            }
+
+            if (count($queryParameters)) {
+                $ramlAction['queryParameters'] = $queryParameters;
             }
 
             $verb = strtolower($method->getVerb());

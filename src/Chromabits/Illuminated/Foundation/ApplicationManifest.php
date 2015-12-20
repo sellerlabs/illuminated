@@ -7,6 +7,7 @@ use Chromabits\Illuminated\Http\ResourceAggregator;
 use Chromabits\Illuminated\Http\RouteAggregator;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Support\Std;
+use Chromabits\Nucleus\Support\Str;
 
 /**
  * Class ApplicationManifest.
@@ -61,6 +62,24 @@ abstract class ApplicationManifest extends BaseObject
     }
 
     /**
+     * Get all the API ResourceFactories for this application.
+     *
+     * @return ResourceFactory[]
+     */
+    public function getApiResources()
+    {
+        return Std::filter(function (ResourceFactory $resource) {
+            foreach ($this->getApiPrefixes() as $prefix) {
+                if (Str::beginsWith($resource->getPrefix(), $prefix)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }, $this->getResources());
+    }
+
+    /**
      * @return string
      */
     public function getName()
@@ -88,6 +107,14 @@ abstract class ApplicationManifest extends BaseObject
      * @return string[]
      */
     public function getProse()
+    {
+        return [];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getApiPrefixes()
     {
         return [];
     }
