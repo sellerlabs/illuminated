@@ -46,9 +46,11 @@ class RamlBody extends BaseObject implements ArrayableInterface
      */
     public function setExample($example)
     {
-        $this->example = $example;
+        $new = clone $this;
 
-        return $this;
+        $new->example = $example;
+
+        return $new;
     }
 
     /**
@@ -66,9 +68,11 @@ class RamlBody extends BaseObject implements ArrayableInterface
      */
     public function setSchema($schema)
     {
-        $this->schema = $schema;
+        $new = clone $this;
 
-        return $this;
+        $new->schema = $schema;
+
+        return $new;
     }
 
     /**
@@ -89,9 +93,11 @@ class RamlBody extends BaseObject implements ArrayableInterface
         Arguments::define(Boa::arrOf(Boa::instance(RamlParameter::class)))
             ->check($formParameters);
 
-        $this->formParameters = $formParameters;
+        $new = clone $this;
 
-        return $this;
+        $new->formParameters = $formParameters;
+
+        return $new;
     }
 
     /**

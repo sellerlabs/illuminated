@@ -22,7 +22,6 @@ class RamlParameter extends BaseObject implements ArrayableInterface
     protected $displayName;
 
     /**
-     *
      * @var string
      */
     protected $description;
@@ -97,9 +96,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setDisplayName($displayName)
     {
-        $this->displayName = $displayName;
+        $new = clone $this;
 
-        return $this;
+        $new->displayName = $displayName;
+
+        return $new;
     }
 
     /**
@@ -117,9 +118,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $new = clone $this;
 
-        return $this;
+        $new->description = $description;
+
+        return $new;
     }
 
     /**
@@ -139,9 +142,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
     {
         Arguments::define(Boa::in(RamlTypes::getValues()))->check($type);
 
-        $this->type = $type;
+        $new = clone $this;
 
-        return $this;
+        $new->type = $type;
+
+        return $new;
     }
 
     /**
@@ -159,9 +164,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setEnum($enum)
     {
-        $this->enum = $enum;
+        $new = clone $this;
 
-        return $this;
+        $new->enum = $enum;
+
+        return $new;
     }
 
     /**
@@ -179,9 +186,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setPattern($pattern)
     {
-        $this->pattern = $pattern;
+        $new = clone $this;
 
-        return $this;
+        $new->pattern = $pattern;
+
+        return $new;
     }
 
     /**
@@ -199,9 +208,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setMinLength($minLength)
     {
-        $this->minLength = $minLength;
+        $new = clone $this;
 
-        return $this;
+        $new->minLength = $minLength;
+
+        return $new;
     }
 
     /**
@@ -219,9 +230,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setMaxLength($maxLength)
     {
-        $this->maxLength = $maxLength;
+        $new = clone $this;
 
-        return $this;
+        $new->maxLength = $maxLength;
+
+        return $new;
     }
 
     /**
@@ -239,9 +252,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setMinimum($minimum)
     {
-        $this->minimum = $minimum;
+        $new = clone $this;
 
-        return $this;
+        $new->minimum = $minimum;
+
+        return $new;
     }
 
     /**
@@ -259,9 +274,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setMaximum($maximum)
     {
-        $this->maximum = $maximum;
+        $new = clone $this;
 
-        return $this;
+        $new->maximum = $maximum;
+
+        return $new;
     }
 
     /**
@@ -279,9 +296,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setExample($example)
     {
-        $this->example = $example;
+        $new = clone $this;
 
-        return $this;
+        $new->example = $example;
+
+        return $new;
     }
 
     /**
@@ -299,9 +318,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setRepeat($repeat)
     {
-        $this->repeat = $repeat;
+        $new = clone $this;
 
-        return $this;
+        $new->repeat = $repeat;
+
+        return $new;
     }
 
     /**
@@ -319,9 +340,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setRequired($required)
     {
-        $this->required = $required;
+        $new = clone $this;
 
-        return $this;
+        $new->required = $required;
+
+        return $new;
     }
 
     /**
@@ -339,9 +362,11 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setDefault($default)
     {
-        $this->default = $default;
+        $new = clone $this;
 
-        return $this;
+        $new->default = $default;
+
+        return $new;
     }
 
     /**

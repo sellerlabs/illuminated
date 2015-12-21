@@ -2,6 +2,7 @@
 
 namespace Chromabits\Illuminated\Raml;
 
+use Chromabits\Nucleus\Data\Interfaces\SemigroupInterface;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Foundation\Interfaces\ArrayableInterface;
 
@@ -11,7 +12,8 @@ use Chromabits\Nucleus\Foundation\Interfaces\ArrayableInterface;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Raml
  */
-class RamlResponse extends BaseObject implements ArrayableInterface
+class RamlResponse extends BaseObject implements
+    ArrayableInterface, SemigroupInterface
 {
     /**
      * @var string
@@ -22,6 +24,16 @@ class RamlResponse extends BaseObject implements ArrayableInterface
      * @var RamlResponseBody
      */
     protected $body;
+
+    /**
+     * Construct an instance of a RamlResponse.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->body = new RamlResponseBody();
+    }
 
     /**
      * @return string
@@ -38,9 +50,11 @@ class RamlResponse extends BaseObject implements ArrayableInterface
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $new = clone $this;
 
-        return $this;
+        $new->description = $description;
+
+        return $new;
     }
 
     /**
@@ -58,9 +72,11 @@ class RamlResponse extends BaseObject implements ArrayableInterface
      */
     public function setBody($body)
     {
-        $this->body = $body;
+        $new = clone $this;
 
-        return $this;
+        $new->body = $body;
+
+        return $new;
     }
 
     /**
@@ -74,5 +90,26 @@ class RamlResponse extends BaseObject implements ArrayableInterface
             'description' => $this->description,
             'body' => $this->body ? $this->body->toArray() : null,
         ]);
+    }
+
+    /**
+     * Append another semigroup and return the result.
+     *
+     * @param RamlResponse|SemigroupInterface $other
+     *
+     * @return SemigroupInterface
+     */
+    public function append(SemigroupInterface $other)
+    {
+        $new = clone $this;
+
+        $new->description = implode('. ', [
+            $this->description,
+            $other->description,
+        ]);
+
+        $new->body = $this->body->append($other->body);
+
+        return $new;
     }
 }

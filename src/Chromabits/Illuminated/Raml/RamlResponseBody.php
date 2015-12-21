@@ -2,6 +2,7 @@
 
 namespace Chromabits\Illuminated\Raml;
 
+use Chromabits\Nucleus\Data\Interfaces\SemigroupInterface;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Foundation\Interfaces\ArrayableInterface;
 use Chromabits\Nucleus\Support\Std;
@@ -12,7 +13,8 @@ use Chromabits\Nucleus\Support\Std;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Raml
  */
-class RamlResponseBody extends BaseObject implements ArrayableInterface
+class RamlResponseBody extends BaseObject implements
+    ArrayableInterface, SemigroupInterface
 {
     /**
      * @var RamlBody[]
@@ -30,16 +32,18 @@ class RamlResponseBody extends BaseObject implements ArrayableInterface
     }
 
     /**
-     * @param $mimeType
+     * @param string $mimeType
      * @param RamlBody $body
      *
      * @return RamlResponseBody
      */
     public function addType($mimeType, RamlBody $body)
     {
-        $this->bodyTypes[$mimeType] = $body;
+        $new = clone $this;
 
-        return $this;
+        $new->bodyTypes[$mimeType] = $body;
+
+        return $new;
     }
 
     /**
@@ -48,6 +52,22 @@ class RamlResponseBody extends BaseObject implements ArrayableInterface
     public function getBodyTypes()
     {
         return $this->bodyTypes;
+    }
+
+    /**
+     * @param RamlResponseBody|SemigroupInterface $other
+     *
+     * @return RamlResponseBody
+     */
+    public function append(SemigroupInterface $other)
+    {
+        $new = clone $this;
+
+        foreach ($other->getBodyTypes() as $mimeType => $body) {
+            $new = $new->addType($mimeType, $body);
+        }
+
+        return $new;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace Chromabits\Illuminated\Raml;
 
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Foundation\Interfaces\ArrayableInterface;
+use Chromabits\Nucleus\Support\Arr;
 use Chromabits\Nucleus\Support\Std;
 
 /**
@@ -37,9 +38,17 @@ class RamlResponseGroup extends BaseObject implements ArrayableInterface
      */
     public function addResponse($code, RamlResponse $response)
     {
-        $this->responses[$code] = $response;
+        $new = clone $this;
 
-        return $this;
+        if (Arr::has($this->responses, $code)) {
+            $new->responses[$code] = $this->responses[$code]->append($response);
+
+            return $new;
+        }
+
+        $new->responses[$code] = $response;
+
+        return $new;
     }
 
     /**

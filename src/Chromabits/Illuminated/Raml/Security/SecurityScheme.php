@@ -62,9 +62,11 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $new = clone $this;
 
-        return $this;
+        $new->description = $description;
+
+        return $new;
     }
 
     /**
@@ -82,9 +84,11 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
      */
     public function setType($type)
     {
-        $this->type = $type;
+        $new = clone $this;
 
-        return $this;
+        $new->type = $type;
+
+        return $new;
     }
 
     /**
@@ -102,9 +106,11 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
      */
     public function setHeaders($headers)
     {
-        $this->headers = $headers;
+        $new = clone $this;
 
-        return $this;
+        $new->headers = $headers;
+
+        return $new;
     }
 
     /**
@@ -122,9 +128,11 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
      */
     public function setQueryParameters($queryParameters)
     {
-        $this->queryParameters = $queryParameters;
+        $new = clone $this;
 
-        return $this;
+        $new->queryParameters = $queryParameters;
+
+        return $new;
     }
 
     /**
@@ -142,9 +150,11 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
      */
     public function setResponses($responses)
     {
-        $this->responses = $responses;
+        $new = clone $this;
 
-        return $this;
+        $new->responses = $responses;
+
+        return $new;
     }
 
     /**
@@ -162,9 +172,11 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
      */
     public function setSettings($settings)
     {
-        $this->settings = $settings;
+        $new = clone $this;
 
-        return $this;
+        $new->settings = $settings;
+
+        return $new;
     }
 
     /**

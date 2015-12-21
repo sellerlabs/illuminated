@@ -18,6 +18,7 @@ use Chromabits\Nucleus\Support\Arr;
 use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\Validation\Validator;
 use Illuminate\Contracts\Container\Container;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class RamlEncoder.
@@ -131,6 +132,11 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
                 $ramlAction['description'] = $controller->getMethodDescription(
                     $method->getMethod()
                 );
+                $ramlAction['responses'] = $this->responsesToGroup(
+                    $controller->getMethodExampleResponses(
+                        $method->getMethod()
+                    )
+                )->toArray();
             } else {
                 $ramlAction['description']
                     = 'This method does not provide a description';
@@ -285,5 +291,32 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
         $parameter['required'] = in_array($field, $required);
 
         return $parameter;
+    }
+
+    /**
+     * @param Response[] $responses
+     *
+     * @return RamlResponseGroup
+     */
+    protected function responsesToGroup($responses)
+    {
+        return Std::foldl(
+            function (RamlResponseGroup $group, Response $response) {
+                return $group->addResponse(
+                    $response->getStatusCode(),
+                    (new RamlResponse())->setBody(
+                        (new RamlResponseBody())
+                            ->addType(
+                                $response->headers->get('content-type'),
+                                (new RamlBody())->setExample(
+                                    $response->getContent()
+                                )
+                            )
+                    )
+                );
+            },
+            new RamlResponseGroup(),
+            $responses
+        );
     }
 }

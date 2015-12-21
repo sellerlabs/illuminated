@@ -51,9 +51,11 @@ class RamlEncoderOptions extends BaseObject
      */
     public function setSecuritySchemes($securitySchemes)
     {
-        $this->securitySchemes = $securitySchemes;
+        $new = clone $this;
 
-        return $this;
+        $new->securitySchemes = $securitySchemes;
+
+        return $new;
     }
 
     /**
@@ -71,8 +73,10 @@ class RamlEncoderOptions extends BaseObject
      */
     public function setMiddlewareToSchemeMapping($middlewareToSchemeMapping)
     {
-        $this->middlewareToSchemeMapping = $middlewareToSchemeMapping;
+        $new = clone $this;
 
-        return $this;
+        $new->middlewareToSchemeMapping = $middlewareToSchemeMapping;
+
+        return $new;
     }
 }
