@@ -2,15 +2,13 @@
 
 namespace Chromabits\Illuminated\Raml;
 
-use Chromabits\Illuminated\Foundation\ApplicationManifest;
+use Chromabits\Illuminated\Foundation\Interfaces\ApplicationManifestInterface;
 use Chromabits\Illuminated\Http\ApiCheckableRequest;
 use Chromabits\Illuminated\Http\Factories\ResourceFactory;
 use Chromabits\Illuminated\Http\Interfaces\AnnotatedControllerInterface;
 use Chromabits\Illuminated\Http\ResourceReflector;
 use Chromabits\Illuminated\Json\SpecSchemaEncoder;
 use Chromabits\Illuminated\Raml\Interfaces\RamlEncoderInterface;
-use Chromabits\Illuminated\Raml\Security\OAuth2Scheme;
-use Chromabits\Illuminated\Raml\Security\SecurityScheme;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Http\Enums\HttpMethods;
 use Chromabits\Nucleus\Meditation\Constraints\PrimitiveTypeConstraint;
@@ -49,16 +47,20 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
     /**
      * Generate a raml file describing the application.
      *
-     * @param ApplicationManifest $manifest
+     * @param ApplicationManifestInterface $manifest
      * @param RamlEncoderOptions $options
      *
      * @return string
      */
     public function encode(
-        ApplicationManifest $manifest,
+        ApplicationManifestInterface $manifest,
         RamlEncoderOptions $options = null
     ) {
-        $options = Std::coalesceThunk($options, function () {
+        $options = Std::coalesceThunk($options, function () use ($manifest) {
+            if ($manifest->hasProperty('ramlEncoderOptions')) {
+                return $manifest->getProperty('ramlEncoderOptions');
+            }
+
             return RamlEncoderOptions::defaultOptions();
         });
 
@@ -66,6 +68,7 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
             'title' => $manifest->getName(),
             'version' => $manifest->getCurrentVersion(),
             'mediaType' => 'application/json',
+            'baseUri' => $manifest->getBaseUri(),
         ];
 
         if (count($manifest->getProse())) {
@@ -85,7 +88,7 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
             }
 
             $root[$path] = $this
-                ->encodeResource($resource);
+                ->encodeResource($resource, $options);
         }
 
         if ($options !== null) {
@@ -105,8 +108,10 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
         return str_replace("---\n", "#%RAML 0.8\n", $yaml);
     }
 
-    protected function encodeResource(ResourceFactory $resource)
-    {
+    protected function encodeResource(
+        ResourceFactory $resource,
+        RamlEncoderOptions $options
+    ) {
         $controller = $this->app->make($resource->getController());
 
         $ramlResource  = [
@@ -115,7 +120,12 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
         ];
 
         foreach ($resource->getMethods() as $method) {
-            $ramlAction  = [];
+            $ramlAction  = [
+                'securedBy' => $this->middlewareToSecuritySchemes(
+                    $options,
+                    $resource->getMiddleware()
+                ),
+            ];
 
             if ($controller instanceof AnnotatedControllerInterface) {
                 $ramlAction['description'] = $controller->getMethodDescription(
@@ -180,24 +190,49 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
                 }
             }
 
-            if (!Arr::has($ramlResource, $method->getVerb())) {
+            if (!Arr::has($ramlResource, $method->getPath())) {
                 $ramlResource[$method->getPath()] = [];
             }
 
-            if (count($uriParameters)) {
-                $ramlResource[$method->getPath()]['uriParameters']
-                    = $uriParameters;
-            }
+            $ramlResource[$method->getPath()]['uriParameters'] = $uriParameters;
 
-            if (count($queryParameters)) {
-                $ramlAction['queryParameters'] = $queryParameters;
-            }
+            $ramlAction['queryParameters'] = $queryParameters;
 
             $verb = strtolower($method->getVerb());
-            $ramlResource[$method->getPath()][$verb] = $ramlAction;
+            $ramlResource[$method->getPath()][$verb]
+                = RamlUtils::filterEmptyValues($ramlAction);
+
+            $ramlResource[$method->getPath()] = RamlUtils::filterEmptyValues(
+                $ramlResource[$method->getPath()]
+            );
         }
 
-        return $ramlResource;
+        return RamlUtils::filterEmptyValues($ramlResource);
+    }
+
+    /**
+     * Translate middleware to Raml security schemes.
+     *
+     * @param RamlEncoderOptions $options
+     * @param array $middleware
+     *
+     * @return array
+     */
+    protected function middlewareToSecuritySchemes(
+        RamlEncoderOptions $options,
+        $middleware
+    ) {
+        $mapping = $options->getMiddlewareToSchemeMapping();
+
+        return array_unique(
+            Std::foldl(function ($acc, $current) use ($mapping) {
+                if (Arr::has($mapping, $current)) {
+                    return $acc + [$mapping[$current]];
+                }
+
+                return $acc;
+            }, [], $middleware)
+        );
     }
 
     /**

@@ -2,12 +2,15 @@
 
 namespace Chromabits\Illuminated\Foundation;
 
+use Chromabits\Illuminated\Foundation\Interfaces\ApplicationManifestInterface;
 use Chromabits\Illuminated\Http\Factories\ResourceFactory;
 use Chromabits\Illuminated\Http\ResourceAggregator;
 use Chromabits\Illuminated\Http\RouteAggregator;
 use Chromabits\Nucleus\Foundation\BaseObject;
+use Chromabits\Nucleus\Support\Arr;
 use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\Support\Str;
+use Illuminate\Contracts\Routing\UrlGenerator;
 
 /**
  * Class ApplicationManifest.
@@ -17,7 +20,8 @@ use Chromabits\Nucleus\Support\Str;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Foundation
  */
-abstract class ApplicationManifest extends BaseObject
+abstract class ApplicationManifest extends BaseObject implements
+    ApplicationManifestInterface
 {
     /**
      * @var string
@@ -33,6 +37,23 @@ abstract class ApplicationManifest extends BaseObject
      * @var string
      */
     protected $currentVersion;
+
+    /**
+     * @var UrlGenerator
+     */
+    protected $urlGenerator;
+
+    /**
+     * Construct an instance of a ApplicationManifest.
+     *
+     * @param UrlGenerator $urlGenerator
+     */
+    public function __construct(UrlGenerator $urlGenerator)
+    {
+        parent::__construct();
+
+        $this->urlGenerator = $urlGenerator;
+    }
 
     /**
      * @return RouteAggregator
@@ -117,5 +138,41 @@ abstract class ApplicationManifest extends BaseObject
     public function getApiPrefixes()
     {
         return [];
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUri()
+    {
+        return $this->urlGenerator->to('/');
+    }
+
+    /**
+     * @return array
+     */
+    public function getProperties()
+    {
+        return [];
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function hasProperty($key)
+    {
+        return Arr::has($this->getProperties(), $key);
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return mixed
+     */
+    public function getProperty($key)
+    {
+        return Arr::dotGet($this->getProperties(), $key);
     }
 }

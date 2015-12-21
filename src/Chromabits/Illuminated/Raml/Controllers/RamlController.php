@@ -2,7 +2,7 @@
 
 namespace Chromabits\Illuminated\Raml\Controllers;
 
-use Chromabits\Illuminated\Foundation\ApplicationManifest;
+use Chromabits\Illuminated\Foundation\Interfaces\ApplicationManifestInterface;
 use Chromabits\Illuminated\Http\BaseController;
 use Chromabits\Illuminated\Raml\Interfaces\RamlEncoderInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,13 +20,13 @@ class RamlController extends BaseController
      * manifest.
      *
      * @param RamlEncoderInterface $ramlEncoder
-     * @param ApplicationManifest $manifest
+     * @param ApplicationManifestInterface $manifest
      *
      * @return Response
      */
     public function getIndex(
         RamlEncoderInterface $ramlEncoder,
-        ApplicationManifest $manifest
+        ApplicationManifestInterface $manifest
     ) {
         return Response::create(
             $ramlEncoder->encode($manifest),

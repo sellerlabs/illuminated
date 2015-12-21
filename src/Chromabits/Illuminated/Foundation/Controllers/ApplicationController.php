@@ -4,6 +4,7 @@ namespace Chromabits\Illuminated\Foundation\Controllers;
 
 use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
 use Chromabits\Illuminated\Foundation\ApplicationManifest;
+use Chromabits\Illuminated\Foundation\Interfaces\ApplicationManifestInterface;
 use Chromabits\Illuminated\Http\ApiCheckableRequest;
 use Chromabits\Illuminated\Http\BaseController;
 use Chromabits\Illuminated\Http\Entities\ResourceMethod;
@@ -55,11 +56,11 @@ class ApplicationController extends BaseController
     /**
      * Construct an instance of a ApplicationController.
      *
-     * @param ApplicationManifest $manifest
+     * @param ApplicationManifestInterface $manifest
      * @param Container $container
      */
     public function __construct(
-        ApplicationManifest $manifest,
+        ApplicationManifestInterface $manifest,
         Container $container
     ) {
         $this->manifest = $manifest;
@@ -68,6 +69,8 @@ class ApplicationController extends BaseController
 
     /**
      * Show basic application information.
+     *
+     * @param ConferenceContext $context
      *
      * @return Div
      */

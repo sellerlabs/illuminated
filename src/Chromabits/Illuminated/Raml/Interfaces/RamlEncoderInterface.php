@@ -2,7 +2,7 @@
 
 namespace Chromabits\Illuminated\Raml\Interfaces;
 
-use Chromabits\Illuminated\Foundation\ApplicationManifest;
+use Chromabits\Illuminated\Foundation\Interfaces\ApplicationManifestInterface;
 use Chromabits\Illuminated\Raml\RamlEncoderOptions;
 
 /**
@@ -16,13 +16,13 @@ interface RamlEncoderInterface
     /**
      * Generate a raml file describing the application.
      *
-     * @param ApplicationManifest $manifest
+     * @param ApplicationManifestInterface $manifest
      * @param RamlEncoderOptions $options
      *
      * @return string
      */
     public function encode(
-        ApplicationManifest $manifest,
-        RamlEncoderOptions $options
+        ApplicationManifestInterface $manifest,
+        RamlEncoderOptions $options = null
     );
 }

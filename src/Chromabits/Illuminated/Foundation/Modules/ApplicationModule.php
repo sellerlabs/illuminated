@@ -3,8 +3,8 @@
 namespace Chromabits\Illuminated\Foundation\Modules;
 
 use Chromabits\Illuminated\Conference\Module;
-use Chromabits\Illuminated\Foundation\ApplicationManifest;
 use Chromabits\Illuminated\Foundation\Controllers\ApplicationController;
+use Chromabits\Illuminated\Foundation\Interfaces\ApplicationManifestInterface;
 use Chromabits\Nucleus\Exceptions\CoreException;
 use Chromabits\Nucleus\Http\Enums\HttpMethods;
 use Illuminate\Contracts\Container\Container;
@@ -59,7 +59,7 @@ class ApplicationModule extends Module
     {
         parent::boot();
 
-        if (!$this->container->bound(ApplicationManifest::class)) {
+        if (!$this->container->bound(ApplicationManifestInterface::class)) {
             throw new CoreException(
                 'An instance of ApplicationManifest must be bound to in the ' .
                 'container in order to provide application reflection data.'

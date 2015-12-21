@@ -27,10 +27,10 @@ class HmacScheme extends SecurityScheme
         $this->headers = [
             'Authorization' => (new RamlParameter())
                 ->setDescription(
-                    'Used to send a valid signature hash of the request body.' .
-                    'Expected format: `Hash <hash>`'
+                    'Used to send a valid signature hash of the request ' .
+                    'body. Expected format: `Hash <hash>`'
                 )
-                ->setType(RamlTypes::TYPE_STRING);
+                ->setType(RamlTypes::TYPE_STRING),
         ];
     }
 }
