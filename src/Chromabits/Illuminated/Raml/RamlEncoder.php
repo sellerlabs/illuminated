@@ -9,13 +9,15 @@ use Chromabits\Illuminated\Http\Interfaces\AnnotatedControllerInterface;
 use Chromabits\Illuminated\Http\ResourceReflector;
 use Chromabits\Illuminated\Json\SpecSchemaEncoder;
 use Chromabits\Illuminated\Raml\Interfaces\RamlEncoderInterface;
+use Chromabits\Illuminated\Raml\Security\OAuth2Scheme;
+use Chromabits\Illuminated\Raml\Security\SecurityScheme;
 use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Http\Enums\HttpMethods;
-use Chromabits\Nucleus\Meditation\Constraints\InArrayConstraint;
 use Chromabits\Nucleus\Meditation\Constraints\PrimitiveTypeConstraint;
 use Chromabits\Nucleus\Meditation\Primitives\ScalarTypes;
 use Chromabits\Nucleus\Meditation\Spec;
 use Chromabits\Nucleus\Support\Arr;
+use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\Validation\Validator;
 use Illuminate\Contracts\Container\Container;
 
@@ -48,11 +50,18 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
      * Generate a raml file describing the application.
      *
      * @param ApplicationManifest $manifest
+     * @param RamlEncoderOptions $options
      *
-     * @return mixed
+     * @return string
      */
-    public function encode(ApplicationManifest $manifest)
-    {
+    public function encode(
+        ApplicationManifest $manifest,
+        RamlEncoderOptions $options = null
+    ) {
+        $options = Std::coalesceThunk($options, function () {
+            return RamlEncoderOptions::defaultOptions();
+        });
+
         $root = [
             'title' => $manifest->getName(),
             'version' => $manifest->getCurrentVersion(),
@@ -79,7 +88,19 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
                 ->encodeResource($resource);
         }
 
-        $yaml = yaml_emit($root);
+        if ($options !== null) {
+            $root['securitySchemes'] = Std::map(function ($scheme) {
+                $result = [];
+
+                foreach ($scheme as $key => $property) {
+                    $result[$key] = $property->toArray();
+                }
+
+                return $result;
+            }, $options->getSecuritySchemes());
+        }
+
+        $yaml = yaml_emit(RamlUtils::filterEmptyValues($root));
 
         return str_replace("---\n", "#%RAML 0.8\n", $yaml);
     }
