@@ -5,7 +5,7 @@ use Chromabits\Illuminated\Raml\Enums\RamlTypes;
 use Chromabits\Illuminated\Raml\RamlBody;
 use Chromabits\Illuminated\Raml\RamlParameter;
 use Chromabits\Illuminated\Raml\RamlResponse;
-use Chromabits\Illuminated\Raml\RamlResponseBody;
+use Chromabits\Illuminated\Raml\RamlMessageBody;
 use Chromabits\Illuminated\Raml\RamlResponseGroup;
 
 /**
@@ -50,7 +50,7 @@ class OAuth2Scheme extends SecurityScheme
                         'expired timestamp...). Unfortunately, ' .
                         're-authenticating the user won\'t help here.'
                     )
-                    ->setBody((new RamlResponseBody())
+                    ->setBody((new RamlMessageBody())
                         ->addType('application/json', (new RamlBody())
                             ->setExample(json_encode([
                                 'code' => '403',

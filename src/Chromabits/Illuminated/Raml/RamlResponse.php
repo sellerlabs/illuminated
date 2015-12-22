@@ -21,7 +21,7 @@ class RamlResponse extends BaseObject implements
     protected $description;
 
     /**
-     * @var RamlResponseBody
+     * @var RamlMessageBody
      */
     protected $body;
 
@@ -32,7 +32,7 @@ class RamlResponse extends BaseObject implements
     {
         parent::__construct();
 
-        $this->body = new RamlResponseBody();
+        $this->body = new RamlMessageBody();
     }
 
     /**
@@ -58,7 +58,7 @@ class RamlResponse extends BaseObject implements
     }
 
     /**
-     * @return RamlResponseBody
+     * @return RamlMessageBody
      */
     public function getBody()
     {
@@ -66,7 +66,7 @@ class RamlResponse extends BaseObject implements
     }
 
     /**
-     * @param RamlResponseBody $body
+     * @param RamlMessageBody $body
      *
      * @return RamlResponse
      */

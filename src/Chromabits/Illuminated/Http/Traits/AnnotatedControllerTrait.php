@@ -144,4 +144,35 @@ trait AnnotatedControllerTrait
 
         return [];
     }
+
+    /**
+     * A helper method for creating mock requests with just a body.
+     *
+     * @param mixed $contents
+     *
+     * @return Request
+     */
+    protected function simpleRequest($mimeType, $contents)
+    {
+        $request = Request::create('/', 'GET', [], [], [], [], $contents);
+
+        $request->headers->set('content-type', $mimeType);
+
+        return $request;
+    }
+
+    /**
+     * A helper method for creating mock JSON requests with just a body.
+     *
+     * @param mixed $contents
+     *
+     * @return Request
+     */
+    protected function simpleJsonRequest($contents)
+    {
+        return $this->simpleRequest(
+            'application/json',
+            json_encode($contents, JSON_PRETTY_PRINT)
+        );
+    }
 }

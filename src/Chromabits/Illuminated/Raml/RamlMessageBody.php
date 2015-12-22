@@ -13,7 +13,7 @@ use Chromabits\Nucleus\Support\Std;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Raml
  */
-class RamlResponseBody extends BaseObject implements
+class RamlMessageBody extends BaseObject implements
     ArrayableInterface, SemigroupInterface
 {
     /**
@@ -35,7 +35,7 @@ class RamlResponseBody extends BaseObject implements
      * @param string $mimeType
      * @param RamlBody $body
      *
-     * @return RamlResponseBody
+     * @return RamlMessageBody
      */
     public function addType($mimeType, RamlBody $body)
     {
@@ -55,9 +55,9 @@ class RamlResponseBody extends BaseObject implements
     }
 
     /**
-     * @param RamlResponseBody|SemigroupInterface $other
+     * @param RamlMessageBody|SemigroupInterface $other
      *
-     * @return RamlResponseBody
+     * @return RamlMessageBody
      */
     public function append(SemigroupInterface $other)
     {

@@ -18,6 +18,7 @@ use Chromabits\Nucleus\Support\Arr;
 use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\Validation\Validator;
 use Illuminate\Contracts\Container\Container;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -132,6 +133,11 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
                 $ramlAction['description'] = $controller->getMethodDescription(
                     $method->getMethod()
                 );
+                $ramlAction['body'] = $this->requestsToBody(
+                    $controller->getMethodExampleRequests(
+                        $method->getMethod()
+                    )
+                )->toArray();
                 $ramlAction['responses'] = $this->responsesToGroup(
                     $controller->getMethodExampleResponses(
                         $method->getMethod()
@@ -294,6 +300,8 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
     }
 
     /**
+     * Turn response examples to a RAML response group.
+     *
      * @param Response[] $responses
      *
      * @return RamlResponseGroup
@@ -302,10 +310,16 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
     {
         return Std::foldl(
             function (RamlResponseGroup $group, Response $response) {
+                if ($response->headers->get('content-type')
+                        == 'application/json'
+                ) {
+                    $response = $this->prettyPrintJsonResponse($response);
+                }
+
                 return $group->addResponse(
                     $response->getStatusCode(),
                     (new RamlResponse())->setBody(
-                        (new RamlResponseBody())
+                        (new RamlMessageBody())
                             ->addType(
                                 $response->headers->get('content-type'),
                                 (new RamlBody())->setExample(
@@ -318,5 +332,46 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
             new RamlResponseGroup(),
             $responses
         );
+    }
+
+    /**
+     * Turn request examples to a RAML message body
+     *
+     * @param Request[] $requests
+     *
+     * @return RamlMessageBody
+     */
+    protected function requestsToBody($requests)
+    {
+        return Std::foldl(
+            function (RamlMessageBody $messageBody, Request $request) {
+                return $messageBody->addType(
+                    $request->headers->get('content-type'),
+                    (new RamlBody())->setExample(
+                        $request->getContent()
+                    )
+                );
+            },
+            new RamlMessageBody(),
+            $requests
+        );
+    }
+
+    /**
+     * Pretty print a JSON response so that it easier to read on API consoles.
+     *
+     * @param Response $response
+     *
+     * @return Response
+     */
+    protected function prettyPrintJsonResponse(Response $response) {
+        $new = clone $response;
+
+        $new->setContent(json_encode(
+            json_decode($response->getContent()),
+            JSON_PRETTY_PRINT
+        ));
+
+        return $new;
     }
 }
