@@ -1,14 +1,20 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Http;
 
 use Chromabits\Illuminated\Http\Entities\ResourceMethod;
-use Chromabits\Illuminated\Http\Factories\ApiResponseFactory;
 use Chromabits\Illuminated\Http\Factories\ResourceFactory;
 use Chromabits\Nucleus\Foundation\BaseObject;
-use Chromabits\Nucleus\Testing\Impersonator;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use ReflectionClass;
@@ -108,7 +114,6 @@ class ResourceReflector extends BaseObject
             }
 
             $type = $argument->getClass()->getName();
-
 
             if ($type === ApiCheckableRequest::class
                 || in_array(ApiCheckableRequest::class, class_parents($type))

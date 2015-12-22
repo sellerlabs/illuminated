@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Raml;
 
 use Chromabits\Nucleus\Data\Interfaces\SemigroupInterface;
@@ -31,7 +40,7 @@ class RamlResponse extends BaseObject implements
      */
     public function __construct()
     {
-        parent::__construct ();
+        parent::__construct();
 
         $this->body = new RamlMessageBody();
     }
@@ -87,10 +96,10 @@ class RamlResponse extends BaseObject implements
      */
     public function toArray()
     {
-        return RamlUtils::filterEmptyValues (
+        return RamlUtils::filterEmptyValues(
             [
                 'description' => $this->description,
-                'body' => $this->body ? $this->body->toArray () : null,
+                'body' => $this->body ? $this->body->toArray() : null,
             ]
         );
     }
@@ -106,7 +115,7 @@ class RamlResponse extends BaseObject implements
     {
         $new = clone $this;
 
-        $new->description = implode (
+        $new->description = implode(
             '. ',
             [
                 $this->description,
@@ -114,7 +123,7 @@ class RamlResponse extends BaseObject implements
             ]
         );
 
-        $new->body = $this->body->append ($other->body);
+        $new->body = $this->body->append($other->body);
 
         return $new;
     }

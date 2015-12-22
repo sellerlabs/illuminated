@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Raml;
 
 use Chromabits\Nucleus\Data\Interfaces\SemigroupInterface;
@@ -27,7 +36,7 @@ class RamlMessageBody extends BaseObject implements
      */
     public function __construct()
     {
-        parent::__construct ();
+        parent::__construct();
 
         $this->bodyTypes = [];
     }
@@ -64,8 +73,8 @@ class RamlMessageBody extends BaseObject implements
     {
         $new = clone $this;
 
-        foreach ($other->getBodyTypes () as $mimeType => $body) {
-            $new = $new->addType ($mimeType, $body);
+        foreach ($other->getBodyTypes() as $mimeType => $body) {
+            $new = $new->addType($mimeType, $body);
         }
 
         return $new;
@@ -78,9 +87,9 @@ class RamlMessageBody extends BaseObject implements
      */
     public function toArray()
     {
-        return Std::map (
+        return Std::map(
             function (RamlBody $body) {
-                return $body->toArray ();
+                return $body->toArray();
             },
             $this->bodyTypes
         );

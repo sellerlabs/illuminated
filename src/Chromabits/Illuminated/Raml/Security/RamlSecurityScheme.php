@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Raml\Security;
 
 use Chromabits\Illuminated\Raml\RamlParameter;
@@ -187,26 +196,26 @@ abstract class RamlSecurityScheme extends BaseObject implements
      */
     public function toArray()
     {
-        return RamlUtils::filterEmptyValues (
+        return RamlUtils::filterEmptyValues(
             [
                 'description' => $this->description,
                 'type' => $this->type,
-                'describedBy' => RamlUtils::filterEmptyValues (
+                'describedBy' => RamlUtils::filterEmptyValues(
                     [
-                        'headers' => Std::map (
+                        'headers' => Std::map(
                             function (RamlParameter $header) {
-                                return $header->toArray ();
+                                return $header->toArray();
                             },
                             $this->headers
                         ),
-                        'queryParameters' => Std::map (
+                        'queryParameters' => Std::map(
                             function (RamlParameter $query) {
-                                return $query->toArray ();
+                                return $query->toArray();
                             },
                             $this->queryParameters
                         ),
                         'responses' => $this->responses ?
-                            $this->responses->toArray () : null,
+                            $this->responses->toArray() : null,
                     ]
                 ),
                 'settings' => $this->settings,

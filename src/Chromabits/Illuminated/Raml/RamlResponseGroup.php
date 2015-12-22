@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Raml;
 
 use Chromabits\Nucleus\Foundation\BaseObject;
@@ -25,7 +34,7 @@ class RamlResponseGroup extends BaseObject implements ArrayableInterface
      */
     public function __construct()
     {
-        parent::__construct ();
+        parent::__construct();
 
         $this->responses = [];
     }
@@ -40,9 +49,9 @@ class RamlResponseGroup extends BaseObject implements ArrayableInterface
     {
         $new = clone $this;
 
-        if (Arr::has ($this->responses, $code)) {
+        if (Arr::has($this->responses, $code)) {
             $new->responses[$code]
-                = $this->responses[$code]->append ($response);
+                = $this->responses[$code]->append($response);
 
             return $new;
         }
@@ -67,9 +76,9 @@ class RamlResponseGroup extends BaseObject implements ArrayableInterface
      */
     public function toArray()
     {
-        return Std::map (
+        return Std::map(
             function (RamlResponse $response) {
-                return $response->toArray ();
+                return $response->toArray();
             },
             $this->responses
         );

@@ -268,6 +268,7 @@ class ResourceFactory extends BaseObject
     public function name($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -279,6 +280,7 @@ class ResourceFactory extends BaseObject
     public function description($description)
     {
         $this->description = $description;
+
         return $this;
     }
 }

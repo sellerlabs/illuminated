@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Http\Traits;
 
 use Chromabits\Nucleus\Support\Arr;
@@ -50,8 +59,6 @@ trait AnnotatedControllerTrait
             return $this->$propertyName;
         }
 
-
-
         if (property_exists($this, 'methodDescriptions')
             && Arr::has($this->methodDescriptions, $methodName)
         ) {
@@ -95,7 +102,7 @@ trait AnnotatedControllerTrait
     public function getMethodHeaders($methodName)
     {
         $getterName = vsprintf('get%sHeaders', [
-            Str::studly($methodName)
+            Str::studly($methodName),
         ]);
 
         if (method_exists($this, $getterName)) {
@@ -115,7 +122,7 @@ trait AnnotatedControllerTrait
     public function getMethodExampleRequests($methodName)
     {
         $getterName = vsprintf('get%sExampleRequests', [
-            Str::studly($methodName)
+            Str::studly($methodName),
         ]);
 
         if (method_exists($this, $getterName)) {
@@ -135,7 +142,7 @@ trait AnnotatedControllerTrait
     public function getMethodExampleResponses($methodName)
     {
         $getterName = vsprintf('get%sExampleResponses', [
-            Str::studly($methodName)
+            Str::studly($methodName),
         ]);
 
         if (method_exists($this, $getterName)) {

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Json;
 
 use Chromabits\Nucleus\Exceptions\CoreException;
@@ -26,8 +35,8 @@ class SpecSchemaEncoder extends BaseObject
      * @param Spec $spec
      * @param string $title
      *
-     * @return string
      * @throws CoreException
+     * @return string
      */
     public function encode(Spec $spec, $title = 'root')
     {
@@ -67,8 +76,8 @@ class SpecSchemaEncoder extends BaseObject
      * @param AbstractConstraint|AbstractConstraint[]|Spec $input
      * @param string $title
      *
-     * @return array
      * @throws CoreException
+     * @return array
      */
     public function encodeConstraints(Spec $spec, $input, $title)
     {

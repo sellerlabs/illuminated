@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Raml;
 
 use Chromabits\Illuminated\Foundation\Interfaces\ApplicationManifestInterface;
@@ -41,7 +50,7 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
      */
     public function __construct(Container $container)
     {
-        parent::__construct ();
+        parent::__construct();
 
         $this->app = $container;
     }
@@ -58,26 +67,26 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
         ApplicationManifestInterface $manifest,
         RamlEncoderOptions $options = null
     ) {
-        $options = Std::coalesceThunk (
+        $options = Std::coalesceThunk(
             $options,
             function () use ($manifest) {
-                if ($manifest->hasProperty ('ramlEncoderOptions')) {
-                    return $manifest->getProperty ('ramlEncoderOptions');
+                if ($manifest->hasProperty('ramlEncoderOptions')) {
+                    return $manifest->getProperty('ramlEncoderOptions');
                 }
 
-                return RamlEncoderOptions::defaultOptions ();
+                return RamlEncoderOptions::defaultOptions();
             }
         );
 
         $root = [
-            'title' => $manifest->getName (),
-            'version' => $manifest->getCurrentVersion (),
+            'title' => $manifest->getName(),
+            'version' => $manifest->getCurrentVersion(),
             'mediaType' => 'application/json',
-            'baseUri' => $manifest->getBaseUri (),
+            'baseUri' => $manifest->getBaseUri(),
         ];
 
-        if (count ($manifest->getProse ())) {
-            foreach ($manifest->getProse () as $title => $content) {
+        if (count($manifest->getProse())) {
+            foreach ($manifest->getProse() as $title => $content) {
                 $root['documentation'][] = [
                     'title' => $title,
                     'content' => $content,
@@ -85,114 +94,114 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
             }
         }
 
-        foreach ($manifest->getApiResources () as $resource) {
-            $path = $resource->getPrefix ();
+        foreach ($manifest->getApiResources() as $resource) {
+            $path = $resource->getPrefix();
 
             if ($path == '') {
                 $path = '/';
             }
 
             $root[$path] = $this
-                ->encodeResource ($resource, $options);
+                ->encodeResource($resource, $options);
         }
 
         if ($options !== null) {
-            $root['securitySchemes'] = Std::map (
+            $root['securitySchemes'] = Std::map(
                 function ($scheme) {
                     $result = [];
 
                     foreach ($scheme as $key => $property) {
-                        $result[$key] = $property->toArray ();
+                        $result[$key] = $property->toArray();
                     }
 
                     return $result;
                 },
-                $options->getSecuritySchemes ()
+                $options->getSecuritySchemes()
             );
         }
 
-        $yaml = yaml_emit (RamlUtils::filterEmptyValues ($root));
+        $yaml = yaml_emit(RamlUtils::filterEmptyValues($root));
 
-        return str_replace ("---\n", "#%RAML 0.8\n", $yaml);
+        return str_replace("---\n", "#%RAML 0.8\n", $yaml);
     }
 
     protected function encodeResource(
         ResourceFactory $resource,
         RamlEncoderOptions $options
     ) {
-        $controller = $this->app->make ($resource->getController ());
+        $controller = $this->app->make($resource->getController());
 
         $ramlResource = [
-            'displayName' => $resource->getName (),
-            'description' => $resource->getDescription (),
+            'displayName' => $resource->getName(),
+            'description' => $resource->getDescription(),
         ];
 
-        foreach ($resource->getMethods () as $method) {
+        foreach ($resource->getMethods() as $method) {
             $ramlAction = [
-                'securedBy' => $this->middlewareToSecuritySchemes (
+                'securedBy' => $this->middlewareToSecuritySchemes(
                     $options,
-                    $resource->getMiddleware ()
+                    $resource->getMiddleware()
                 ),
             ];
 
             if ($controller instanceof AnnotatedControllerInterface) {
-                $ramlAction['description'] = $controller->getMethodDescription (
-                    $method->getMethod ()
+                $ramlAction['description'] = $controller->getMethodDescription(
+                    $method->getMethod()
                 );
-                $ramlAction['body'] = $this->requestsToBody (
-                    $controller->getMethodExampleRequests (
-                        $method->getMethod ()
+                $ramlAction['body'] = $this->requestsToBody(
+                    $controller->getMethodExampleRequests(
+                        $method->getMethod()
                     )
-                )->toArray ();
-                $ramlAction['responses'] = $this->responsesToGroup (
-                    $controller->getMethodExampleResponses (
-                        $method->getMethod ()
+                )->toArray();
+                $ramlAction['responses'] = $this->responsesToGroup(
+                    $controller->getMethodExampleResponses(
+                        $method->getMethod()
                     )
-                )->toArray ();
+                )->toArray();
             } else {
                 $ramlAction['description']
                     = 'This method does not provide a description';
             }
 
             $reflector = new ResourceReflector($this->app);
-            $request = $reflector->getMethodRequest ($resource, $method);
+            $request = $reflector->getMethodRequest($resource, $method);
             $uriParameters = [];
             $queryParameters = [];
 
             if ($request instanceof ApiCheckableRequest) {
-                $spec = $request->getCheckable ();
+                $spec = $request->getCheckable();
 
                 if ($spec instanceof Validator) {
-                    $spec = $spec->getSpec ();
+                    $spec = $spec->getSpec();
                 }
 
                 if ($spec instanceof Spec) {
-                    if ($method->getVerb () == HttpMethods::POST
-                        || $method->getVerb () == HttpMethods::PUT
-                        || $method->getVerb () == HttpMethods::DELETE
+                    if ($method->getVerb() == HttpMethods::POST
+                        || $method->getVerb() == HttpMethods::PUT
+                        || $method->getVerb() == HttpMethods::DELETE
                     ) {
                         $ramlAction['body'] = [
                             'schema' => (new SpecSchemaEncoder())
-                                ->encode ($spec),
+                                ->encode($spec),
                         ];
                     } else {
-                        $parameters = $reflector->getMethodParameters (
+                        $parameters = $reflector->getMethodParameters(
                             $resource,
                             $method
                         );
 
-                        $fields = array_unique (
-                            array_merge (
-                                array_keys ($spec->getConstraints ()),
-                                array_keys ($spec->getDefaults ()),
-                                $spec->getRequired ()
+                        $fields = array_unique(
+                            array_merge(
+                                array_keys($spec->getConstraints()),
+                                array_keys($spec->getDefaults()),
+                                $spec->getRequired()
                             )
                         );
 
                         foreach ($fields as $field) {
-                            if (in_array ($field, $parameters)) {
+                            if (in_array($field, $parameters)) {
                                 $uriParameters[$field]
-                                    = $this->specFieldToParameter (
+                                    = $this->specFieldToParameter(
                                     $spec,
                                     $field
                                 );
@@ -201,7 +210,7 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
                             }
 
                             $queryParameters[$field]
-                                = $this->specFieldToParameter (
+                                = $this->specFieldToParameter(
                                 $spec,
                                 $field
                             );
@@ -210,25 +219,25 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
                 }
             }
 
-            if (!Arr::has ($ramlResource, $method->getPath ())) {
-                $ramlResource[$method->getPath ()] = [];
+            if (!Arr::has($ramlResource, $method->getPath())) {
+                $ramlResource[$method->getPath()] = [];
             }
 
-            $ramlResource[$method->getPath ()]['uriParameters'] =
+            $ramlResource[$method->getPath()]['uriParameters'] =
                 $uriParameters;
 
             $ramlAction['queryParameters'] = $queryParameters;
 
-            $verb = strtolower ($method->getVerb ());
-            $ramlResource[$method->getPath ()][$verb]
-                = RamlUtils::filterEmptyValues ($ramlAction);
+            $verb = strtolower($method->getVerb());
+            $ramlResource[$method->getPath()][$verb]
+                = RamlUtils::filterEmptyValues($ramlAction);
 
-            $ramlResource[$method->getPath ()] = RamlUtils::filterEmptyValues (
-                $ramlResource[$method->getPath ()]
+            $ramlResource[$method->getPath()] = RamlUtils::filterEmptyValues(
+                $ramlResource[$method->getPath()]
             );
         }
 
-        return RamlUtils::filterEmptyValues ($ramlResource);
+        return RamlUtils::filterEmptyValues($ramlResource);
     }
 
     /**
@@ -243,12 +252,12 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
         RamlEncoderOptions $options,
         $middleware
     ) {
-        $mapping = $options->getMiddlewareToSchemeMapping ();
+        $mapping = $options->getMiddlewareToSchemeMapping();
 
-        return array_unique (
-            Std::foldl (
+        return array_unique(
+            Std::foldl(
                 function ($acc, $current) use ($mapping) {
-                    if (Arr::has ($mapping, $current)) {
+                    if (Arr::has($mapping, $current)) {
                         return $acc + [$mapping[$current]];
                     }
 
@@ -270,23 +279,23 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
      */
     protected function specFieldToParameter(Spec $spec, $field)
     {
-        $constraints = $spec->getConstraints ();
-        $defaults = $spec->getDefaults ();
-        $required = $spec->getRequired ();
+        $constraints = $spec->getConstraints();
+        $defaults = $spec->getDefaults();
+        $required = $spec->getRequired();
 
         $parameter = [];
 
-        if (Arr::has ($constraints, $field)) {
+        if (Arr::has($constraints, $field)) {
             $input = $constraints[$field];
 
-            if (is_array ($input) || $input instanceof Spec) {
+            if (is_array($input) || $input instanceof Spec) {
                 if ($input instanceof Spec) {
                     $input = [$input];
                 }
 
                 foreach ($input as $constraint) {
                     if ($constraint instanceof PrimitiveTypeConstraint) {
-                        switch ($constraint->toString ()) {
+                        switch ($constraint->toString()) {
                             case ScalarTypes::SCALAR_STRING:
                                 $parameter['type'] = 'string';
                                 break;
@@ -303,11 +312,11 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
             }
         }
 
-        if (Arr::has ($defaults, $field)) {
+        if (Arr::has($defaults, $field)) {
             $parameter['default'] = $defaults[$field];
         }
 
-        $parameter['required'] = in_array ($field, $required);
+        $parameter['required'] = in_array($field, $required);
 
         return $parameter;
     }
@@ -321,22 +330,22 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
      */
     protected function responsesToGroup($responses)
     {
-        return Std::foldl (
+        return Std::foldl(
             function (RamlResponseGroup $group, Response $response) {
-                if ($response->headers->get ('content-type')
+                if ($response->headers->get('content-type')
                     == 'application/json'
                 ) {
-                    $response = $this->prettyPrintJsonResponse ($response);
+                    $response = $this->prettyPrintJsonResponse($response);
                 }
 
-                return $group->addResponse (
-                    $response->getStatusCode (),
-                    (new RamlResponse())->setBody (
+                return $group->addResponse(
+                    $response->getStatusCode(),
+                    (new RamlResponse())->setBody(
                         (new RamlMessageBody())
-                            ->addType (
-                                $response->headers->get ('content-type'),
-                                (new RamlBody())->setExample (
-                                    $response->getContent ()
+                            ->addType(
+                                $response->headers->get('content-type'),
+                                (new RamlBody())->setExample(
+                                    $response->getContent()
                                 )
                             )
                     )
@@ -348,7 +357,7 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
     }
 
     /**
-     * Turn request examples to a RAML message body
+     * Turn request examples to a RAML message body.
      *
      * @param Request[] $requests
      *
@@ -356,12 +365,12 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
      */
     protected function requestsToBody($requests)
     {
-        return Std::foldl (
+        return Std::foldl(
             function (RamlMessageBody $messageBody, Request $request) {
-                return $messageBody->addType (
-                    $request->headers->get ('content-type'),
-                    (new RamlBody())->setExample (
-                        $request->getContent ()
+                return $messageBody->addType(
+                    $request->headers->get('content-type'),
+                    (new RamlBody())->setExample(
+                        $request->getContent()
                     )
                 );
             },
@@ -381,9 +390,9 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
     {
         $new = clone $response;
 
-        $new->setContent (
-            json_encode (
-                json_decode ($response->getContent ()),
+        $new->setContent(
+            json_encode(
+                json_decode($response->getContent()),
                 JSON_PRETTY_PRINT
             )
         );

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This file is part of the Illuminated package
+ */
+
 namespace Chromabits\Illuminated\Foundation\Controllers;
 
 use Chromabits\Illuminated\Conference\Entities\ConferenceContext;
@@ -83,12 +92,12 @@ class ApplicationController extends BaseController
                 new CardHeader([], 'Application Information'),
                 new CardBlock([], [
                     new Paragraph([], [
-                        new HeaderOne([], $this->manifest->getName())
+                        new HeaderOne([], $this->manifest->getName()),
                     ]),
                     new Paragraph([], [
-                        $this->manifest->getDescription()
-                    ])
-                ])
+                        $this->manifest->getDescription(),
+                    ]),
+                ]),
             ]),
             $this->renderResources($context),
         ]);
@@ -106,8 +115,8 @@ class ApplicationController extends BaseController
                     new CardBlock([], [
                         Html::safe((new CommonMarkConverter())->convertToHtml(
                             $contents
-                        ))
-                    ])
+                        )),
+                    ]),
                 ]);
             }, $this->manifest->getProse())
         );
@@ -163,7 +172,7 @@ class ApplicationController extends BaseController
                             ['resource' => $id]
                         )],
                         new Bold([], $factory->getController())
-                    )
+                    ),
                 ]),
                 new CardBlock([], [
                     new Paragraph([], [
@@ -182,8 +191,8 @@ class ApplicationController extends BaseController
                             );
                         },
                         $factory->getMethods())
-                    )
-                ])
+                    ),
+                ]),
             ]),
         ]);
     }
@@ -219,7 +228,7 @@ class ApplicationController extends BaseController
                 return new Div([], [
                     new Div([], [
                         new Bold([], 'Required: '),
-                        implode(', ', $spec->getRequired())
+                        implode(', ', $spec->getRequired()),
                     ]),
                     new Div([], [
                         new Table(
@@ -229,7 +238,7 @@ class ApplicationController extends BaseController
                                         new TableHeaderCell([], 'Field'),
                                         new TableHeaderCell([], 'Constraints'),
                                         new TableHeaderCell([], 'Default'),
-                                    ])
+                                    ]),
                                 ]),
                                 new TableBody([], Std::map(
                                     function ($value, $key) use ($spec) {
@@ -239,10 +248,10 @@ class ApplicationController extends BaseController
                                         );
                                     },
                                     $spec->getConstraints())
-                                )
+                                ),
                             ]
-                        )
-                    ])
+                        ),
+                    ]),
                 ]);
             } else {
                 return 'Handler cannot be reflected upon.';
@@ -274,7 +283,7 @@ class ApplicationController extends BaseController
             return new TableRow([], [
                 new TableCell([], $field),
                 new TableCell([], $constraint->toString()),
-                new TableCell([], (string) $default)
+                new TableCell([], (string) $default),
             ]);
         }
 
@@ -286,7 +295,7 @@ class ApplicationController extends BaseController
                 },
                 $constraint
             )),
-            new TableCell([], (string) $default)
+            new TableCell([], (string) $default),
         ]);
     }
 
@@ -339,8 +348,8 @@ class ApplicationController extends BaseController
                 new Card([], [
                     new CardHeader([], 'Error'),
                     new CardBlock([], [
-                        'Please provide valid resource.'
-                    ])
+                        'Please provide valid resource.',
+                    ]),
                 ]),
             ]);
         }

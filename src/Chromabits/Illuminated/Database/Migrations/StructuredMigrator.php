@@ -12,7 +12,6 @@
 namespace Chromabits\Illuminated\Database\Migrations;
 
 use Chromabits\Illuminated\Database\Interfaces\StructuredMigratorInterface;
-use Chromabits\Nucleus\Support\Std;
 use Illuminate\Database\Connection;
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;

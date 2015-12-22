@@ -14,7 +14,6 @@ namespace Chromabits\Illuminated\Http;
 use Chromabits\Illuminated\Http\Interfaces\ApiResponseFactoryInterface;
 use Chromabits\Nucleus\Meditation\Interfaces\CheckableInterface;
 use Chromabits\Nucleus\Meditation\Interfaces\CheckResultInterface;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
