@@ -161,10 +161,33 @@ class ConferenceController extends BaseController
     public function getCss()
     {
         return Response::create(
-            implode("\n", [
-                '.btn-y-align { padding-top: 3px; }',
-                '.text-light { color: #ddd; }',
-            ]),
+            <<<'EOD'
+.btn-y-align { padding-top: 3px; }
+.text-light { color: #ddd; }
+
+body {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.row {
+  margin-bottom: 1rem;
+}
+.row .row {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+[class*="col-"] {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+EOD
+            ,
             Response::HTTP_OK,
             ['Content-Type' => 'text/css']
         );

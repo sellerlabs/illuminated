@@ -14,7 +14,8 @@ use Chromabits\Nucleus\Support\Std;
  * @package Chromabits\Illuminated\Raml
  */
 class RamlMessageBody extends BaseObject implements
-    ArrayableInterface, SemigroupInterface
+    ArrayableInterface,
+    SemigroupInterface
 {
     /**
      * @var RamlBody[]
@@ -26,7 +27,7 @@ class RamlMessageBody extends BaseObject implements
      */
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct ();
 
         $this->bodyTypes = [];
     }
@@ -63,8 +64,8 @@ class RamlMessageBody extends BaseObject implements
     {
         $new = clone $this;
 
-        foreach ($other->getBodyTypes() as $mimeType => $body) {
-            $new = $new->addType($mimeType, $body);
+        foreach ($other->getBodyTypes () as $mimeType => $body) {
+            $new = $new->addType ($mimeType, $body);
         }
 
         return $new;
@@ -77,8 +78,11 @@ class RamlMessageBody extends BaseObject implements
      */
     public function toArray()
     {
-        return Std::map(function (RamlBody $body) {
-            return $body->toArray();
-        }, $this->bodyTypes);
+        return Std::map (
+            function (RamlBody $body) {
+                return $body->toArray ();
+            },
+            $this->bodyTypes
+        );
     }
 }

@@ -13,7 +13,8 @@ use Chromabits\Nucleus\Foundation\Interfaces\ArrayableInterface;
  * @package Chromabits\Illuminated\Raml
  */
 class RamlResponse extends BaseObject implements
-    ArrayableInterface, SemigroupInterface
+    ArrayableInterface,
+    SemigroupInterface
 {
     /**
      * @var string
@@ -30,7 +31,7 @@ class RamlResponse extends BaseObject implements
      */
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct ();
 
         $this->body = new RamlMessageBody();
     }
@@ -86,10 +87,12 @@ class RamlResponse extends BaseObject implements
      */
     public function toArray()
     {
-        return RamlUtils::filterEmptyValues([
-            'description' => $this->description,
-            'body' => $this->body ? $this->body->toArray() : null,
-        ]);
+        return RamlUtils::filterEmptyValues (
+            [
+                'description' => $this->description,
+                'body' => $this->body ? $this->body->toArray () : null,
+            ]
+        );
     }
 
     /**
@@ -103,12 +106,15 @@ class RamlResponse extends BaseObject implements
     {
         $new = clone $this;
 
-        $new->description = implode('. ', [
-            $this->description,
-            $other->description,
-        ]);
+        $new->description = implode (
+            '. ',
+            [
+                $this->description,
+                $other->description,
+            ]
+        );
 
-        $new->body = $this->body->append($other->body);
+        $new->body = $this->body->append ($other->body);
 
         return $new;
     }

@@ -22,8 +22,8 @@ class RamlResourceAggregator extends ResourceAggregator
     public function getResources()
     {
         return [
-            ResourceFactory::create(RamlController::class)
-                ->get('/api.raml', 'getIndex'),
+            ResourceFactory::create (RamlController::class)
+                ->get ('/api.raml', 'getIndex'),
         ];
     }
 }

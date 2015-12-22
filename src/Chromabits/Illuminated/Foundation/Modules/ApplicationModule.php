@@ -41,6 +41,13 @@ class ApplicationModule extends Module
         );
 
         $this->register(
+            'prose',
+            ApplicationController::class,
+            'getProse',
+            'Documentation'
+        );
+
+        $this->register(
             'single',
             ApplicationController::class,
             'getSingle',

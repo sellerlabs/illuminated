@@ -15,7 +15,8 @@ use Chromabits\Nucleus\Support\Std;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Raml\Security
  */
-abstract class RamlSecurityScheme extends BaseObject implements ArrayableInterface
+abstract class RamlSecurityScheme extends BaseObject implements
+    ArrayableInterface
 {
     /**
      * @var string
@@ -186,20 +187,30 @@ abstract class RamlSecurityScheme extends BaseObject implements ArrayableInterfa
      */
     public function toArray()
     {
-        return RamlUtils::filterEmptyValues([
-            'description' => $this->description,
-            'type' => $this->type,
-            'describedBy' => RamlUtils::filterEmptyValues([
-                'headers' => Std::map(function (RamlParameter $header) {
-                    return $header->toArray();
-                }, $this->headers),
-                'queryParameters' => Std::map(function (RamlParameter $query) {
-                    return $query->toArray();
-                }, $this->queryParameters),
-                'responses' => $this->responses ?
-                    $this->responses->toArray() : null,
-            ]),
-            'settings' => $this->settings,
-        ]);
+        return RamlUtils::filterEmptyValues (
+            [
+                'description' => $this->description,
+                'type' => $this->type,
+                'describedBy' => RamlUtils::filterEmptyValues (
+                    [
+                        'headers' => Std::map (
+                            function (RamlParameter $header) {
+                                return $header->toArray ();
+                            },
+                            $this->headers
+                        ),
+                        'queryParameters' => Std::map (
+                            function (RamlParameter $query) {
+                                return $query->toArray ();
+                            },
+                            $this->queryParameters
+                        ),
+                        'responses' => $this->responses ?
+                            $this->responses->toArray () : null,
+                    ]
+                ),
+                'settings' => $this->settings,
+            ]
+        );
     }
 }

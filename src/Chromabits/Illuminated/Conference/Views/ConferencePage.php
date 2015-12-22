@@ -177,8 +177,8 @@ class ConferencePage implements RenderableInterface, SafeHtmlProducerInterface
                 new Link(
                     [
                         'rel' => 'stylesheet',
-                        'href' => 'https://cdn.rawgit.com/twbs/bootstrap/v4-dev'
-                            . '/dist/css/bootstrap.css',
+                        'href' => 'https://maxcdn.bootstrapcdn.com/bootstrap' .
+                            '/4.0.0-alpha.2/css/bootstrap.min.css',
                     ]
                 ),
                 new Link(

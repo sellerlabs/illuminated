@@ -87,9 +87,9 @@ class SpecSchemaEncoder extends BaseObject
             $descriptions = [];
 
             foreach ($input as $constraint) {
-                if ($constraint instanceof PrimitiveTypeConstraint) {
-                    $descriptions[] = $constraint->getDescription();
+                $descriptions[] = $constraint->getDescription();
 
+                if ($constraint instanceof PrimitiveTypeConstraint) {
                     $schema['type'] = $constraint->toString();
                 }
             }

@@ -11,14 +11,14 @@ use Chromabits\Illuminated\Raml\RamlParameter;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Raml\Security
  */
-class RamlHmacSchemeRaml extends RamlSecurityScheme
+class RamlHmacScheme extends RamlSecurityScheme
 {
     /**
      * Construct an instance of a HmacScheme.
      */
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct ();
 
         $this->description = 'This API supports HMAC for authenticating ' .
             'requests.';
@@ -26,11 +26,11 @@ class RamlHmacSchemeRaml extends RamlSecurityScheme
 
         $this->headers = [
             'Authorization' => (new RamlParameter())
-                ->setDescription(
+                ->setDescription (
                     'Used to send a valid signature hash of the request ' .
                     'body. Expected format: `Hash <hash>`'
                 )
-                ->setType(RamlTypes::TYPE_STRING),
+                ->setType (RamlTypes::TYPE_STRING),
         ];
     }
 }

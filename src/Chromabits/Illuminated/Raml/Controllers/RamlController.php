@@ -28,8 +28,8 @@ class RamlController extends BaseController
         RamlEncoderInterface $ramlEncoder,
         ApplicationManifestInterface $manifest
     ) {
-        return Response::create(
-            $ramlEncoder->encode($manifest),
+        return Response::create (
+            $ramlEncoder->encode ($manifest),
             Response::HTTP_OK,
             [
                 'content-type' => 'application/yaml',

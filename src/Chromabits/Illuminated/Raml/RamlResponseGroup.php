@@ -25,7 +25,7 @@ class RamlResponseGroup extends BaseObject implements ArrayableInterface
      */
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct ();
 
         $this->responses = [];
     }
@@ -40,8 +40,9 @@ class RamlResponseGroup extends BaseObject implements ArrayableInterface
     {
         $new = clone $this;
 
-        if (Arr::has($this->responses, $code)) {
-            $new->responses[$code] = $this->responses[$code]->append($response);
+        if (Arr::has ($this->responses, $code)) {
+            $new->responses[$code] =
+                $this->responses[$code]->append ($response);
 
             return $new;
         }
@@ -66,8 +67,11 @@ class RamlResponseGroup extends BaseObject implements ArrayableInterface
      */
     public function toArray()
     {
-        return Std::map(function (RamlResponse $response) {
-            return $response->toArray();
-        }, $this->responses);
+        return Std::map (
+            function (RamlResponse $response) {
+                return $response->toArray ();
+            },
+            $this->responses
+        );
     }
 }

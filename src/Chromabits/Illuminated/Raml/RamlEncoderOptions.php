@@ -2,7 +2,7 @@
 
 namespace Chromabits\Illuminated\Raml;
 
-use Chromabits\Illuminated\Raml\Security\RamlOAuth2SchemeRaml;
+use Chromabits\Illuminated\Raml\Security\RamlOAuth2Scheme;
 use Chromabits\Illuminated\Raml\Security\RamlSecurityScheme;
 use Chromabits\Nucleus\Foundation\BaseObject;
 
@@ -30,10 +30,12 @@ class RamlEncoderOptions extends BaseObject
     public static function defaultOptions()
     {
         return (new RamlEncoderOptions())
-            ->setMiddlewareToSchemeMapping([])
-            ->setSecuritySchemes([
-                ['oauth_2_0' => new RamlOAuth2SchemeRaml()],
-            ]);
+            ->setMiddlewareToSchemeMapping ([])
+            ->setSecuritySchemes (
+                [
+                    ['oauth_2_0' => new RamlOAuth2Scheme()],
+                ]
+            );
     }
 
     /**

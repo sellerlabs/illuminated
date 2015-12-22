@@ -140,7 +140,7 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function setType($type)
     {
-        Arguments::define(Boa::in(RamlTypes::getValues()))->check($type);
+        Arguments::define (Boa::in (RamlTypes::getValues ()))->check ($type);
 
         $new = clone $this;
 
@@ -376,20 +376,22 @@ class RamlParameter extends BaseObject implements ArrayableInterface
      */
     public function toArray()
     {
-        return RamlUtils::filterEmptyValues([
-            'displayName' => $this->displayName,
-            'description' => $this->description,
-            'type' => $this->type,
-            'enum' => $this->enum,
-            'pattern' => $this->pattern,
-            'minLength' => $this->minLength,
-            'maxLength' => $this->maxLength,
-            'minimum' => $this->minimum,
-            'maximum' => $this->maximum,
-            'example' => $this->example,
-            'repeat' => $this->repeat,
-            'required' => $this->required,
-            'default' => $this->default,
-        ]);
+        return RamlUtils::filterEmptyValues (
+            [
+                'displayName' => $this->displayName,
+                'description' => $this->description,
+                'type' => $this->type,
+                'enum' => $this->enum,
+                'pattern' => $this->pattern,
+                'minLength' => $this->minLength,
+                'maxLength' => $this->maxLength,
+                'minimum' => $this->minimum,
+                'maximum' => $this->maximum,
+                'example' => $this->example,
+                'repeat' => $this->repeat,
+                'required' => $this->required,
+                'default' => $this->default,
+            ]
+        );
     }
 }

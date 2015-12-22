@@ -12,6 +12,7 @@ use Chromabits\Illuminated\Http\Factories\ResourceFactory;
 use Chromabits\Illuminated\Http\ResourceReflector;
 use Chromabits\Nucleus\Meditation\Constraints\AbstractConstraint;
 use Chromabits\Nucleus\Meditation\Spec;
+use Chromabits\Nucleus\Support\Html;
 use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\Validation\Validator;
 use Chromabits\Nucleus\View\Bootstrap\Card;
@@ -34,6 +35,7 @@ use Chromabits\Nucleus\View\Node;
 use Exception;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Http\Request;
+use League\CommonMark\CommonMarkConverter;
 
 /**
  * Class ApplicationController.
@@ -92,6 +94,27 @@ class ApplicationController extends BaseController
         ]);
     }
 
+    public function getProse()
+    {
+        return new Div([],
+            Std::map(function ($contents, $title) {
+                return new Card([], [
+                    new CardHeader([], $title),
+                    new CardBlock([], [
+                        Html::safe((new CommonMarkConverter())->convertToHtml(
+                            $contents
+                        ))
+                    ])
+                ]);
+            }, $this->manifest->getProse())
+        );
+    }
+
+    /**
+     * @param ConferenceContext $context
+     *
+     * @return Div
+     */
     protected function renderResources(ConferenceContext $context)
     {
         return new Div([], Std::map(
@@ -102,6 +125,14 @@ class ApplicationController extends BaseController
         );
     }
 
+    /**
+     * @param ConferenceContext $context
+     * @param ResourceFactory $factory
+     * @param bool $reflect
+     * @param int $id
+     *
+     * @return Div
+     */
     protected function renderResource(
         ConferenceContext $context,
         ResourceFactory $factory,
@@ -154,6 +185,12 @@ class ApplicationController extends BaseController
         ]);
     }
 
+    /**
+     * @param ResourceFactory $factory
+     * @param ResourceMethod $method
+     *
+     * @return Div|string
+     */
     protected function reflectOnRequest(
         ResourceFactory $factory,
         ResourceMethod $method
@@ -212,6 +249,12 @@ class ApplicationController extends BaseController
         }
     }
 
+    /**
+     * @param Spec $spec
+     * @param string $field
+     *
+     * @return TableRow
+     */
     protected function renderConstraint(Spec $spec, $field)
     {
         $constraints = $spec->getConstraints();
@@ -244,6 +287,13 @@ class ApplicationController extends BaseController
         ]);
     }
 
+    /**
+     * @param ResourceFactory $factory
+     * @param ResourceMethod $method
+     * @param bool $reflect
+     *
+     * @return Div
+     */
     protected function renderRoute(
         ResourceFactory $factory,
         ResourceMethod $method,
@@ -273,6 +323,12 @@ class ApplicationController extends BaseController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param ConferenceContext $context
+     *
+     * @return Div
+     */
     public function getSingle(Request $request, ConferenceContext $context)
     {
         if (!$request->query->has('resource')) {

@@ -90,8 +90,8 @@ class RamlBody extends BaseObject implements ArrayableInterface
      */
     public function setFormParameters($formParameters)
     {
-        Arguments::define(Boa::arrOf(Boa::instance(RamlParameter::class)))
-            ->check($formParameters);
+        Arguments::define (Boa::arrOf (Boa::instance (RamlParameter::class)))
+            ->check ($formParameters);
 
         $new = clone $this;
 
@@ -107,12 +107,17 @@ class RamlBody extends BaseObject implements ArrayableInterface
      */
     public function toArray()
     {
-        return RamlUtils::filterEmptyValues([
-            'example' => $this->example,
-            'schema' => $this->schema,
-            'formParameters' => Std::map(function (RamlParameter $parameter) {
-                return $parameter->toArray();
-            }, $this->formParameters),
-        ]);
+        return RamlUtils::filterEmptyValues (
+            [
+                'example' => $this->example,
+                'schema' => $this->schema,
+                'formParameters' => Std::map (
+                    function (RamlParameter $parameter) {
+                        return $parameter->toArray ();
+                    },
+                    $this->formParameters
+                ),
+            ]
+        );
     }
 }
