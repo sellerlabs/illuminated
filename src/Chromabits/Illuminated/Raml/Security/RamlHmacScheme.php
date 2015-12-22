@@ -11,7 +11,7 @@ use Chromabits\Illuminated\Raml\RamlParameter;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Raml\Security
  */
-class HmacScheme extends SecurityScheme
+class RamlHmacSchemeRaml extends RamlSecurityScheme
 {
     /**
      * Construct an instance of a HmacScheme.

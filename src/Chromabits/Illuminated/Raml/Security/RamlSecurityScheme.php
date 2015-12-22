@@ -15,7 +15,7 @@ use Chromabits\Nucleus\Support\Std;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Raml\Security
  */
-abstract class SecurityScheme extends BaseObject implements ArrayableInterface
+abstract class RamlSecurityScheme extends BaseObject implements ArrayableInterface
 {
     /**
      * @var string
@@ -58,7 +58,7 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
     /**
      * @param string $description
      *
-     * @return SecurityScheme
+     * @return RamlSecurityScheme
      */
     public function setDescription($description)
     {
@@ -80,7 +80,7 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
     /**
      * @param string $type
      *
-     * @return SecurityScheme
+     * @return RamlSecurityScheme
      */
     public function setType($type)
     {
@@ -102,7 +102,7 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
     /**
      * @param RamlParameter[] $headers
      *
-     * @return SecurityScheme
+     * @return RamlSecurityScheme
      */
     public function setHeaders($headers)
     {
@@ -124,7 +124,7 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
     /**
      * @param RamlParameter $queryParameters
      *
-     * @return SecurityScheme
+     * @return RamlSecurityScheme
      */
     public function setQueryParameters($queryParameters)
     {
@@ -146,7 +146,7 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
     /**
      * @param RamlResponseGroup $responses
      *
-     * @return SecurityScheme
+     * @return RamlSecurityScheme
      */
     public function setResponses($responses)
     {
@@ -168,7 +168,7 @@ abstract class SecurityScheme extends BaseObject implements ArrayableInterface
     /**
      * @param array $settings
      *
-     * @return SecurityScheme
+     * @return RamlSecurityScheme
      */
     public function setSettings($settings)
     {

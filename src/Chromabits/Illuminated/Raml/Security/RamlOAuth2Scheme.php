@@ -14,7 +14,7 @@ use Chromabits\Illuminated\Raml\RamlResponseGroup;
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Raml\Security
  */
-class OAuth2Scheme extends SecurityScheme
+class RamlOAuth2SchemeRaml extends RamlSecurityScheme
 {
     /**
      * Construct an instance of a OAuth2Scheme.
