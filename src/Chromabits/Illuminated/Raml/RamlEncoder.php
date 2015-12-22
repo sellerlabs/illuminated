@@ -180,10 +180,15 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
                         || $method->getVerb() == HttpMethods::PUT
                         || $method->getVerb() == HttpMethods::DELETE
                     ) {
-                        $ramlAction['body'] = [
-                            'schema' => (new SpecSchemaEncoder())
-                                ->encode($spec),
-                        ];
+                        $this->addPostSchema(
+                            $ramlResource,
+                            $ramlAction,
+                            $uriParameters,
+                            $resource,
+                            $method,
+                            $spec,
+                            $reflector
+                        );
                     } else {
                         $parameters = $reflector->getMethodParameters(
                             $resource,
@@ -238,6 +243,69 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
         }
 
         return RamlUtils::filterEmptyValues($ramlResource);
+    }
+
+    /**
+     * @param $ramlResource
+     * @param $ramlAction
+     * @param $uriParameters
+     * @param $resource
+     * @param $method
+     * @param Spec $spec
+     * @param $reflector
+     */
+    protected function addPostSchema(
+        &$ramlResource,
+        &$ramlAction,
+        &$uriParameters,
+        $resource,
+        $method,
+        Spec $spec,
+        $reflector
+    ) {
+        if (Arr::has($ramlAction, 'body')) {
+            $ramlAction['body'] = [];
+        }
+
+        $parameters = $reflector->getMethodParameters(
+            $resource,
+            $method
+        );
+
+        $fields = array_unique(
+            array_merge(
+                array_keys($spec->getConstraints()),
+                array_keys($spec->getDefaults()),
+                $spec->getRequired()
+            )
+        );
+
+        $specFields = [];
+
+        foreach ($fields as $field) {
+            if (in_array($field, $parameters)) {
+                $uriParameters[$field]
+                    = $this->specFieldToParameter(
+                    $spec,
+                    $field
+                );
+
+                continue;
+            }
+
+            $specFields[] = $field;
+        }
+
+        $filteredSpec = new Spec(
+            Arr::only($spec->getConstraints(), $specFields),
+            Arr::only($spec->getDefaults(), $specFields),
+            Std::filter(function ($element) use ($specFields) {
+                return in_array($element, $specFields);
+            }, $spec->getRequired())
+        );
+
+        $ramlAction['body']['schema'] = (new SpecSchemaEncoder())
+            ->encode($filteredSpec);
     }
 
     /**
