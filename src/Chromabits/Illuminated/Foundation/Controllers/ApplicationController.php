@@ -94,6 +94,9 @@ class ApplicationController extends BaseController
         ]);
     }
 
+    /**
+     * @return Div
+     */
     public function getProse()
     {
         return new Div([],

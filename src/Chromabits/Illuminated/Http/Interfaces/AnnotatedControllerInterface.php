@@ -20,7 +20,7 @@ interface AnnotatedControllerInterface
     /**
      * Get a text description for a method.
      *
-     * @param $methodName
+     * @param string $methodName
      *
      * @return string
      */

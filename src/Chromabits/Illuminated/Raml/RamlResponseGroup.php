@@ -41,8 +41,8 @@ class RamlResponseGroup extends BaseObject implements ArrayableInterface
         $new = clone $this;
 
         if (Arr::has ($this->responses, $code)) {
-            $new->responses[$code] =
-                $this->responses[$code]->append ($response);
+            $new->responses[$code]
+                = $this->responses[$code]->append ($response);
 
             return $new;
         }

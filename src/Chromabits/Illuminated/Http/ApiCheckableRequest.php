@@ -37,7 +37,6 @@ abstract class ApiCheckableRequest extends CheckableRequest
      *
      * @param Request $request
      * @param Route $route
-     * @param Container $container
      * @param ApiResponseFactoryInterface $responseFactory
      */
     public function __construct(
@@ -45,6 +44,7 @@ abstract class ApiCheckableRequest extends CheckableRequest
         Route $route,
         ApiResponseFactoryInterface $responseFactory
     ) {
+        // TODO: Fix this with actual constructor injection.
         parent::__construct($request, $route, app());
 
         $this->responseFactory = $responseFactory;
