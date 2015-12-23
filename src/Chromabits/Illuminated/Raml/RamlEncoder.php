@@ -101,8 +101,16 @@ class RamlEncoder extends BaseObject implements RamlEncoderInterface
                 $path = '/';
             }
 
-            $root[$path] = $this
-                ->encodeResource($resource, $options);
+            if (Arr::has($root, $path)) {
+                $root[$path] = Arr::merge(
+                    $root[$path],
+                    $this->encodeResource($resource, $options)
+                );
+
+                continue;
+            }
+
+            $root[$path] = $this->encodeResource($resource, $options);
         }
 
         if ($options !== null) {
