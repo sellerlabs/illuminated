@@ -295,6 +295,8 @@ abstract class ModelGenerator extends BaseObject
             $model->$key = $value;
         }, $filling);
 
+        $model->save();
+
         Std::each(function ($relation, $name) use (&$model) {
             $related = $this->generateRelation($name);
 
@@ -307,8 +309,6 @@ abstract class ModelGenerator extends BaseObject
             }
 
         }, $this->relations);
-
-        $model->save();
 
         return $model;
     }
