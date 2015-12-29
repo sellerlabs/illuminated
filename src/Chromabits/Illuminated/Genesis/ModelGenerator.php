@@ -295,19 +295,30 @@ abstract class ModelGenerator extends BaseObject
             $model->$key = $value;
         }, $filling);
 
+        Std::each(function ($relation, $name) use (&$model) {
+            if (!$this->isBelongsTo($name)) {
+                return;
+            }
+
+            $model->$name()->associate(
+                $this->generateRelation($name)
+            );
+        }, $this->relations);
+
         $model->save();
 
         Std::each(function ($relation, $name) use (&$model) {
+            if ($this->isBelongsTo($name)) {
+                return;
+            }
+
             $related = $this->generateRelation($name);
 
-            if ($relation instanceof BelongsTo) {
-                $model->$name()->associate($related);
-            } elseif (is_array($related)) {
+            if (is_array($related)) {
                 $model->$name()->saveMany($related);
             } else {
                 $model->$name()->save($related);
             }
-
         }, $this->relations);
 
         return $model;
@@ -329,6 +340,18 @@ abstract class ModelGenerator extends BaseObject
         }
 
         return $models;
+    }
+
+    /**
+     * Return whether or not a relationship is a belongs to relation.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    protected function isBelongsTo($name)
+    {
+        return ($this->inspector->getRelation($name) instanceof BelongsTo);
     }
 
     /**
