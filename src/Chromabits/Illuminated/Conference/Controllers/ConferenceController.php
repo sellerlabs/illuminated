@@ -111,12 +111,13 @@ class ConferenceController extends BaseController
         if ($result->hasSidebar()) {
             return (new ConferencePage(
                 $this->context,
+                $this->dashboard,
                 $panel,
                 $result->getSidebar()
             ))->render();
         }
 
-        return (new ConferencePage($this->context, $panel))->render();
+        return (new ConferencePage($this->context, $this->dashboard, $panel))->render();
     }
 
     /**
@@ -168,18 +169,6 @@ class ConferenceController extends BaseController
 body {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.row {
-  margin-bottom: 1rem;
-}
-.row .row {
-  margin-top: 1rem;
-  margin-bottom: 0;
-}
-[class*="col-"] {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 hr {

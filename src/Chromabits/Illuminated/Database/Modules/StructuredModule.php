@@ -116,4 +116,12 @@ class StructuredModule extends Module
     {
         return 'index';
     }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return 'fa-database';
+    }
 }
