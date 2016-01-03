@@ -38,10 +38,5 @@
     "mockery/mockery": "0.9.*@dev",
     "doctrine/dbal": "~2.3",
     "chromabits/standards": "~0.1.10"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "0.5-dev"
-    }
   }
 }
