@@ -14,6 +14,8 @@ use Chromabits\Nucleus\Meditation\FormSpec;
 use Chromabits\Nucleus\Meditation\Primitives\ScalarTypes;
 use Chromabits\Nucleus\Support\Html;
 use Chromabits\Nucleus\View\Bootstrap\Row;
+use Chromabits\Nucleus\View\Common\Button;
+use Chromabits\Nucleus\View\Common\Div;
 use Chromabits\Nucleus\View\Common\Form;
 use Chromabits\Nucleus\View\Common\Input;
 use Chromabits\Nucleus\View\Common\Option;
@@ -72,7 +74,7 @@ class FormSpecPresenter extends BaseObject implements
             })
             ->bind(function (InArrayConstraint $constraint) use ($fieldName) {
                 return Maybe::just(new Select(
-                    ['id' => $fieldName],
+                    ['id' => $fieldName, 'class' => 'c-select'],
                     ArrayList::of($constraint->getAllowed())
                         ->map(function ($item) {
                             return new Option(
@@ -93,7 +95,8 @@ class FormSpecPresenter extends BaseObject implements
 
         if ($type instanceof PrimitiveTypeConstraint) {
             $attributes = ArrayMap::of([
-                'id' => $fieldName
+                'id' => $fieldName,
+                'class' => 'form-control',
             ]);
 
             switch($type->toString()) {
@@ -138,6 +141,7 @@ class FormSpecPresenter extends BaseObject implements
         // field.
         return new Input([
             'id' => $fieldName,
+            'class' => 'form-control',
             'type' => 'text',
         ]);
     }
@@ -153,13 +157,13 @@ class FormSpecPresenter extends BaseObject implements
         }
 
         if ($this->spec->getFieldDescription($fieldName)->isJust()) {
-            $nodes = $nodes->append(ArrayList::of(
+            $nodes = $nodes->append(ArrayList::of([
                 new Paragraph([], new Small(['class' => 'text-muted'], [
                     Maybe::fromJust(
                         $this->spec->getFieldDescription($fieldName)
                     )
                 ]))
-            ));
+            ]));
         }
 
         return $nodes->toArray();
@@ -173,7 +177,7 @@ class FormSpecPresenter extends BaseObject implements
     public function render()
     {
         $addColon = function ($label) {
-            return vsprintf('%s:', [$label]);
+            return Maybe::just(vsprintf('%s:', [$label]));
         };
 
         return (new Form(
@@ -192,9 +196,34 @@ class FormSpecPresenter extends BaseObject implements
                                     ->bind($addColon)
                             )
                         ),
-                        $this->renderFullField($key)
+                        new Div(
+                            ['class' => 'col-sm-8'],
+                            $this->renderFullField($key)
+                        )
                     ]);
                 })
+                ->append(ArrayMap::of([
+                    new Row(['class' => 'form-group'], [
+                        new Div(['class' => 'col-sm-offset-2 col-sm-10'], [
+                            new Div(['class' => 'btn-group'], [
+                                new Button(
+                                    [
+                                        'type' => 'reset',
+                                        'class' => 'btn btn-secondary'
+                                    ],
+                                    'Reset'
+                                ),
+                                new Button(
+                                    [
+                                        'type' => 'submit',
+                                        'class' => 'btn btn-primary'
+                                    ],
+                                    'Submit'
+                                ),
+                            ])
+                        ])
+                    ])
+                ]))
         ))->render();
     }
 
