@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "06be6a0e0a07794014b6793ef8b5bff7",
-    "content-hash": "ac747cec6fc27654936e5ae780f82917",
+    "hash": "abf621e2b7077bd2567a3067cab5e200",
+    "content-hash": "882d5cc7251cdf597ed783582fadd50d",
     "packages": [
         {
             "name": "chromabits/nucleus",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chromabits/nucleus.git",
-                "reference": "7573a805e471de5dcc6b52303d7c62f164d872a3"
+                "reference": "7648363ad1f07864e4815efe5e87761ce0115056"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chromabits/nucleus/zipball/7573a805e471de5dcc6b52303d7c62f164d872a3",
-                "reference": "7573a805e471de5dcc6b52303d7c62f164d872a3",
+                "url": "https://api.github.com/repos/chromabits/nucleus/zipball/7648363ad1f07864e4815efe5e87761ce0115056",
+                "reference": "7648363ad1f07864e4815efe5e87761ce0115056",
                 "shasum": ""
             },
             "require": {
@@ -26,6 +26,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "0.9.*",
+                "phpbench/phpbench": "@dev",
                 "phpunit/phpunit": "*"
             },
             "type": "library",
@@ -53,7 +54,7 @@
                 }
             ],
             "description": "Some core PHP utilities",
-            "time": "2016-01-03 01:39:24"
+            "time": "2016-01-03 20:05:28"
         },
         {
             "name": "classpreloader/classpreloader",
