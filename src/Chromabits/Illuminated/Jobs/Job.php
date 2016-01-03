@@ -199,6 +199,8 @@ class Job extends Model
      * Append a line to this jobs' message.
      *
      * @param string $message
+     *
+     * @return Job
      */
     public function append($message)
     {

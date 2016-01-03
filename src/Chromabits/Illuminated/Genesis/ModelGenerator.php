@@ -21,7 +21,7 @@ use Chromabits\Nucleus\Meditation\Exceptions\InvalidArgumentException;
 use Chromabits\Nucleus\Meditation\TypeHound;
 use Chromabits\Nucleus\Support\Arr;
 use Chromabits\Nucleus\Support\Std;
-use Chromabits\Nucleus\Support\TransformPipeline;
+use Chromabits\Nucleus\Transformation\TransformPipeline;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -191,7 +191,7 @@ abstract class ModelGenerator extends BaseObject
         $relation = $inspector->getRelation($relationName);
         $relationModelClass = get_class($relation->getRelated());
 
-        Arguments::contain(
+        Arguments::define(
             Boa::string(),
             Boa::either(
                 Boa::instance($relationModelClass),
@@ -286,7 +286,7 @@ abstract class ModelGenerator extends BaseObject
             })
             ->inline(function ($input) {
                 return Std::map(function ($value) {
-                    return Std::value($value);
+                    return Std::thunk($value);
                 }, $input);
             })
             ->run($this->getMapping());

@@ -52,7 +52,7 @@ abstract class BaseRepository extends BaseObject implements
      */
     public function makeExistsConstraint($idField = 'id')
     {
-        Arguments::contain(Boa::string())->check($idField);
+        Arguments::define(Boa::string())->check($idField);
 
         return new ExactlyOneRecordConstraint(
             $this->makeModelInstance()->query()->getQuery(),
@@ -90,7 +90,7 @@ abstract class BaseRepository extends BaseObject implements
      */
     public function exists($id)
     {
-        Arguments::contain(Boa::integer())->check($id);
+        Arguments::define(Boa::integer())->check($id);
 
         return $this->makeModelInstance()->query()
             ->where(['id' => $id])
@@ -132,7 +132,7 @@ abstract class BaseRepository extends BaseObject implements
         array $columns = ['*'],
         array $with = []
     ) {
-        Arguments::contain(
+        Arguments::define(
             Boa::arr(),
             Boa::arrOf(Boa::string()),
             Boa::arrOf(Boa::string())
@@ -217,7 +217,7 @@ abstract class BaseRepository extends BaseObject implements
      */
     public function getAll($columns = ['*'], $with = [])
     {
-        Arguments::contain(
+        Arguments::define(
             Boa::arrOf(Boa::string()),
             Boa::arrOf(Boa::string())
         )->check($columns, $with);
@@ -248,7 +248,7 @@ abstract class BaseRepository extends BaseObject implements
         $pageName = 'page',
         $page = null
     ) {
-        Arguments::contain(
+        Arguments::define(
             Boa::arrOf(Boa::string()),
             Boa::arrOf(Boa::string()),
             Boa::integer(),
@@ -295,7 +295,7 @@ abstract class BaseRepository extends BaseObject implements
      */
     public function getById($id, array $columns = ['*'], array $with = [])
     {
-        Arguments::contain(
+        Arguments::define(
             Boa::integer(),
             Boa::arrOf(Boa::string()),
             Boa::arrOf(Boa::string())

@@ -118,7 +118,7 @@ class RequestFactory extends BaseObject
      */
     public function onUri($uri)
     {
-        Arguments::contain(Boa::string())->check($uri);
+        Arguments::define(Boa::string())->check($uri);
 
         $this->uri = $uri;
 
@@ -136,7 +136,7 @@ class RequestFactory extends BaseObject
      */
     public function withHeader($key, $value)
     {
-        Arguments::contain(Boa::string(), Boa::string())
+        Arguments::define(Boa::string(), Boa::string())
             ->check($key, $value);
 
         $key = strtolower($key);
@@ -156,7 +156,7 @@ class RequestFactory extends BaseObject
      */
     public function usingMethod($method)
     {
-        Arguments::contain(Boa::in(HttpMethods::getValues()))->check($method);
+        Arguments::define(Boa::in(HttpMethods::getValues()))->check($method);
 
         $this->method = $method;
 

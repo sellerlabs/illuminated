@@ -12,7 +12,7 @@
 namespace Chromabits\Illuminated\Conference\Views;
 
 use Chromabits\Nucleus\Foundation\BaseObject;
-use Chromabits\Nucleus\Support\Html;
+
 use Chromabits\Nucleus\Support\Std;
 use Chromabits\Nucleus\View\Bootstrap\CardBlock;
 use Chromabits\Nucleus\View\Interfaces\RenderableInterface;

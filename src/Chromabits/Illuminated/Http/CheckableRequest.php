@@ -16,10 +16,12 @@ use Chromabits\Nucleus\Foundation\BaseObject;
 use Chromabits\Nucleus\Meditation\Exceptions\FailedCheckException;
 use Chromabits\Nucleus\Meditation\Interfaces\CheckableInterface;
 use Chromabits\Nucleus\Meditation\Interfaces\CheckResultInterface;
-use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
  * Class CheckableRequest.
@@ -38,6 +40,11 @@ use Illuminate\Routing\Route;
  * setup which will redirect the user, flash messages, display the appropriate
  * response to the user.
  *
+ * @property ParameterBag $headers
+ * @property ParameterBag $files
+ * @property ParameterBag $query
+ * @property ParameterBag $request
+ *
  * @author Eduardo Trujillo <ed@chromabits.com>
  * @package Chromabits\Illuminated\Http
  */
@@ -53,30 +60,31 @@ abstract class CheckableRequest extends BaseObject implements
      * @var Route
      */
     protected $route;
+
     /**
-     * @var Container
+     * @var Application
      */
-    private $container;
+    protected $container;
 
     /**
      * Construct an instance of a SpecRequest.
      *
      * @param Request $request
      * @param Route $route
-     * @param Container $container
+     * @param Application $application
      *
      * @throws LackOfCoffeeException
      */
     public function __construct(
         Request $request,
         Route $route,
-        Container $container
+        Application $application
     ) {
         parent::__construct();
 
         $this->request = $request;
         $this->route = $route;
-        $this->container = $container;
+        $this->container = $application;
     }
 
     /**
@@ -141,5 +149,34 @@ abstract class CheckableRequest extends BaseObject implements
     public function getRequest()
     {
         return $this->request;
+    }
+
+    /**
+     * Get a request value.
+     *
+     * @param string $key
+     * @param mixed|null $default
+     *
+     * @return mixed
+     */
+    public function get($key, $default = null)
+    {
+        return $this->request->get($key, $default);
+    }
+
+    /**
+     * Provide shortcuts to fields in the inner request.
+     *
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        if (in_array($name, ['query', 'request', 'files', 'headers'])) {
+            return $this->request->$name;
+        }
+
+        parent::__get($name);
     }
 }

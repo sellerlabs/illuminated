@@ -21,6 +21,7 @@ use Chromabits\Nucleus\Meditation\Exceptions\InvalidArgumentException;
 use Chromabits\Nucleus\Meditation\Spec;
 use Chromabits\Nucleus\Meditation\SpecResult;
 use Chromabits\Nucleus\Support\Arr;
+use Chromabits\Nucleus\Support\Json;
 use Chromabits\Nucleus\Support\Std;
 use Closure;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,7 +67,7 @@ class ApiResponse extends BaseObject
     {
         parent::__construct();
 
-        Arguments::contain(
+        Arguments::define(
             Boa::arr(),
             Boa::in($this->getValidStatuses()),
             Boa::arr()
@@ -160,7 +161,7 @@ class ApiResponse extends BaseObject
      */
     public static function fromResponse(Response $response)
     {
-        $body = Std::jsonDecode($response->getContent());
+        $body = Json::decode($response->getContent());
 
         $result = Spec::define([
             'messages' => Boa::arrOf(Boa::string()),
@@ -235,7 +236,7 @@ class ApiResponse extends BaseObject
      */
     public function addMessage($message)
     {
-        Arguments::contain(Boa::string())->check($message);
+        Arguments::define(Boa::string())->check($message);
 
         $this->messages[] = $message;
     }
@@ -250,7 +251,7 @@ class ApiResponse extends BaseObject
      */
     public function set($key, $value)
     {
-        Arguments::contain(
+        Arguments::define(
             Boa::string(),
             Boa::either(Boa::string(), Boa::arr())
         )->check($key, $value);
@@ -273,7 +274,7 @@ class ApiResponse extends BaseObject
      */
     public function setStatus($newStatus)
     {
-        Arguments::contain(Boa::in($this->getValidStatuses()))
+        Arguments::define(Boa::in($this->getValidStatuses()))
             ->check($newStatus);
 
         $this->status = $newStatus;

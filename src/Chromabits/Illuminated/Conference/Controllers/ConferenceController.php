@@ -2,10 +2,8 @@
 
 /**
  * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  * This file is part of the Illuminated package
  */
 
@@ -78,6 +76,8 @@ class ConferenceController extends BaseController
      */
     public function anyIndex()
     {
+        $this->context->clearLastUrl();
+
         return $this->renderDashboard(
             $this->dashboard->run($this->request, $this->context)
         );
@@ -102,22 +102,30 @@ class ConferenceController extends BaseController
 
         // Show any alerts on the top of the panel (if any).
         if (count($this->alerts->peekAll()) > 0) {
-            $panel = new Div([], [
+            $panel = new Div(
+                [], [
                 new AlertPresenter($this->alerts),
                 $panel,
-            ]);
+            ]
+            );
         }
 
         if ($result->hasSidebar()) {
-            return (new ConferencePage(
+            return (
+            new ConferencePage(
                 $this->context,
                 $this->dashboard,
                 $panel,
                 $result->getSidebar()
-            ))->render();
+            )
+            )->render();
         }
 
-        return (new ConferencePage($this->context, $this->dashboard, $panel))->render();
+        return (
+        new ConferencePage(
+            $this->context, $this->dashboard, $panel
+        )
+        )->render();
     }
 
     /**
@@ -129,9 +137,18 @@ class ConferenceController extends BaseController
      */
     public function anyModule($moduleName)
     {
-        return $this->renderDashboard(
+        $result = $this->renderDashboard(
             $this->dashboard->run($this->request, $this->context, $moduleName)
         );
+
+        $this->context->clearLastUrl();
+        $this->context->setLastUrl(
+            $moduleName,
+            null,
+            $this->request->query->all()
+        );
+
+        return $result;
     }
 
     /**
@@ -144,7 +161,7 @@ class ConferenceController extends BaseController
      */
     public function anyMethod($moduleName, $methodName)
     {
-        return $this->renderDashboard(
+        $result = $this->renderDashboard(
             $this->dashboard->run(
                 $this->request,
                 $this->context,
@@ -152,6 +169,15 @@ class ConferenceController extends BaseController
                 $methodName
             )
         );
+
+        $this->context->clearLastUrl();
+        $this->context->setLastUrl(
+            $moduleName,
+            $methodName,
+            $this->request->query->all()
+        );
+
+        return $result;
     }
 
     /**

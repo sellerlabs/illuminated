@@ -87,7 +87,7 @@ class Dashboard extends BaseObject implements DashboardInterface
      */
     public function register($moduleClassName)
     {
-        Arguments::contain(Boa::string())->check($moduleClassName);
+        Arguments::define(Boa::string())->check($moduleClassName);
 
         $instance = $this->application->make($moduleClassName);
 

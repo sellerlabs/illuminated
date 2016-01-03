@@ -155,6 +155,7 @@ trait AnnotatedControllerTrait
     /**
      * A helper method for creating mock requests with just a body.
      *
+     * @param string $mimeType
      * @param mixed $contents
      *
      * @return Request

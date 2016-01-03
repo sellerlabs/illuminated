@@ -64,6 +64,7 @@ class AlertPresenter extends BaseObject implements RenderableInterface
                     $classes[] = 'alert-info';
                     break;
                 case Alert::TYPE_ERROR:
+                case Alert::TYPE_VALIDATION:
                     $classes[] = 'alert-danger';
                     break;
             }

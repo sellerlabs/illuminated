@@ -11,7 +11,7 @@
 
 namespace Chromabits\Illuminated\Jobs;
 
-use Chromabits\Nucleus\Support\Enum;
+use Chromabits\Nucleus\Foundation\Enum;
 
 /**
  * Class JobState.

@@ -14,6 +14,7 @@ namespace Chromabits\Illuminated\Http;
 use Chromabits\Illuminated\Http\Interfaces\ApiResponseFactoryInterface;
 use Chromabits\Nucleus\Meditation\Interfaces\CheckableInterface;
 use Chromabits\Nucleus\Meditation\Interfaces\CheckResultInterface;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -36,15 +37,16 @@ abstract class ApiCheckableRequest extends CheckableRequest
      *
      * @param Request $request
      * @param Route $route
+     * @param Application $application
      * @param ApiResponseFactoryInterface $responseFactory
      */
     public function __construct(
         Request $request,
         Route $route,
+        Application $application,
         ApiResponseFactoryInterface $responseFactory
     ) {
-        // TODO: Fix this with actual constructor injection.
-        parent::__construct($request, $route, app());
+        parent::__construct($request, $route, $application);
 
         $this->responseFactory = $responseFactory;
     }

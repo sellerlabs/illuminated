@@ -49,7 +49,7 @@ class ResourceMethod extends BaseObject
     {
         parent::__construct();
 
-        Arguments::contain(
+        Arguments::define(
             Boa::string(),
             Boa::string(),
             Boa::string()
