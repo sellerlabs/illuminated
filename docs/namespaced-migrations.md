@@ -33,7 +33,7 @@ commands. An example of how you could write one for your app is included below:
      protected $providers = [
          'Illuminate\Auth\GeneratorServiceProvider',
          'Illuminate\Console\ScheduleServiceProvider',
-         'Chromabits\Illuminated\Database\NamespacedMigrationServiceProvider',
+         'SellerLabs\Illuminated\Database\NamespacedMigrationServiceProvider',
          'Illuminate\Database\SeedServiceProvider',
          'Illuminate\Foundation\Providers\ComposerServiceProvider',
          'Illuminate\Queue\ConsoleServiceProvider',

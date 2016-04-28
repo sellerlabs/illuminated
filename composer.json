@@ -1,6 +1,6 @@
 {
-  "name": "chromabits/illuminated",
-  "description": "Library of Laravel 5 utilities. (Formerly known as laravel-helpers)",
+  "name": "sellerlabs/illuminated",
+  "description": "Library of Laravel 5 utilities.",
   "license": "MIT",
   "require": {
     "illuminate/auth": "^5.0",
@@ -10,25 +10,25 @@
     "illuminate/view": "^5.0",
     "illuminate/database": "^5.0",
     "tijsverkoyen/css-to-inline-styles": "~1.5",
-    "chromabits/nucleus": "0.5.x-dev",
+    "sellerlabs/nucleus": "~0.5.0",
     "league/commonmark": "^0.12",
     "vlucas/phpdotenv": "~1.0"
   },
   "authors": [
     {
       "name": "Eduardo Trujillo",
-      "email": "ed@chromabits.com"
+      "email": "ed@roundsphere.com"
     }
   ],
   "autoload": {
     "psr-4": {
-      "Chromabits\\Illuminated\\": "src/Chromabits/Illuminated"
+      "SellerLabs\\Illuminated\\": "src/SellerLabs/Illuminated"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Chromabits\\Illuminated\\": "tests/Chromabits/Illuminated",
-      "Tests\\Chromabits\\Support\\": "tests/Chromabits/Support"
+      "Tests\\SellerLabs\\Illuminated\\": "tests/SellerLabs/Illuminated",
+      "Tests\\SellerLabs\\Support\\": "tests/SellerLabs/Support"
     }
   },
   "minimum-stability": "stable",
@@ -37,6 +37,6 @@
     "phpunit/phpunit": "~4.6@dev",
     "mockery/mockery": "0.9.*@dev",
     "doctrine/dbal": "~2.3",
-    "chromabits/standards": "~0.1.10"
+    "sellerlabs/php-standard": "~0.1.10"
   }
 }

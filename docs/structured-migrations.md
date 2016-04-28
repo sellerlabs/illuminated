@@ -23,7 +23,7 @@ can be aliased to `App\Database\Migrations\CreateUserTable`.
 
 namespace App\Database\Migrations;
 
-use Chromabits\Illuminated\Database\Migrations\Batch;
+use SellerLabs\Illuminated\Database\Migrations\Batch;
 use App\Database\Migrations\CreateUserTable;
 use App\Database\Migrations\CreatePagesTable;
 

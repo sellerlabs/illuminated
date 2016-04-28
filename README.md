@@ -1,4 +1,4 @@
-# [illuminated](http://phabricator.chromabits.com/diffusion/LLMNTD/) [![Build Status](https://travis-ci.org/chromabits/illuminated.svg?branch=master)](https://travis-ci.org/chromabits/illuminated) ![](https://img.shields.io/packagist/v/chromabits/illuminated.svg) [![](https://img.shields.io/badge/ApiGen-reference-blue.svg)](http://chromabits.github.io/illuminated)
+# [illuminated](https://github.com/sellerlabs/illuminated) [![Build Status](https://travis-ci.org/sellerlabs/illuminated.svg?branch=master)](https://travis-ci.org/sellerlabs/illuminated) ![](https://img.shields.io/packagist/v/sellerlabs/illuminated.svg) [![](https://img.shields.io/badge/ApiGen-reference-blue.svg)](http://sellerlabs.github.io/illuminated)
 
 Modular Laravel 5 overlay with many utilities and components (Ranging from stable, experimental to even controversial).
 
@@ -42,7 +42,7 @@ return [
     // ...
     'providers' => [
         // Third-party service providers...
-        Chromabits\Illuminated\Inliner\InlinerServiceProvider::class
+        SellerLabs\Illuminated\Inliner\InlinerServiceProvider::class
     ];
 ];
 ```
@@ -53,11 +53,7 @@ Some modules might have specific exceptions or additional instructions. Make sur
 
 Pull requests are accepted on GitHub. Bug fixes and small improvements are welcome. Big ideas will be reviewed and discussed.
 
-Code Standard: PSR-2 with some additions. See https://github.com/chromabits/standard for more details.
-
-## Security
-
-If you discover any security related issues, please email ed+security@chromabits.com instead of using the issue tracker.
+Code Standard: PSR-2 with some additions. See https://github.com/sellerlabs/php-standard for more details.
 
 ## License
 
