@@ -36,7 +36,7 @@ class FormSpecPresenterTest extends TestCase
         $presenter = new FormSpecPresenter($spec);
 
         $this->assertEquals(
-            (new Select(['id' => 'omg'], [
+            (new Select(['id' => 'omg', 'class' => 'c-select'], [
                 new Option(['value' => 'such'], 'such'),
                 new Option(['value' => 'wow'], 'wow'),
             ]))->render(),
@@ -61,6 +61,7 @@ class FormSpecPresenterTest extends TestCase
         $this->assertEquals(
             (new Input([
                 'id' => 'first_name',
+                'class' => 'form-control',
                 'type' => 'text',
                 'value' => 'Bob',
             ]))->render(),
@@ -69,6 +70,7 @@ class FormSpecPresenterTest extends TestCase
         $this->assertEquals(
             (new Input([
                 'id' => 'last_name',
+                'class' => 'form-control',
                 'type' => 'text',
             ]))->render(),
             $presenter->renderField('last_name')->render()
@@ -76,6 +78,7 @@ class FormSpecPresenterTest extends TestCase
         $this->assertEquals(
             (new Input([
                 'id' => 'age',
+                'class' => 'form-control',
                 'type' => 'number',
             ]))->render(),
             $presenter->renderField('age')->render()
@@ -83,6 +86,7 @@ class FormSpecPresenterTest extends TestCase
         $this->assertEquals(
             (new Input([
                 'id' => 'focus',
+                'class' => 'form-control',
                 'type' => 'checkbox',
             ]))->render(),
             $presenter->renderField('focus')->render()
@@ -90,6 +94,7 @@ class FormSpecPresenterTest extends TestCase
         $this->assertEquals(
             (new Input([
                 'id' => 'awesome',
+                'class' => 'form-control',
                 'type' => 'checkbox',
                 'checked' => null,
             ]))->render(),
@@ -98,6 +103,7 @@ class FormSpecPresenterTest extends TestCase
         $this->assertEquals(
             (new Input([
                 'id' => 'price',
+                'class' => 'form-control',
                 'type' => 'number',
             ]))->render(),
             $presenter->renderField('price')->render()
@@ -114,6 +120,7 @@ class FormSpecPresenterTest extends TestCase
         $this->assertEquals(
             (new Input([
                 'id' => 'expire_at',
+                'class' => 'form-control',
                 'type' => 'text',
             ]))->render(),
             $presenter->renderField('expire_at')->render()
