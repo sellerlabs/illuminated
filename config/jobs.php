@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2015, Eduardo Trujillo <ed@chromabits.com>
+ * Copyright 2016, Seller Labs <engineering@sellerlabs.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,7 +9,7 @@
  * This file is part of the Illuminated package
  */
 
-use Chromabits\Illuminated\Jobs\Tasks\GarbageCollectTask;
+use SellerLabs\Illuminated\Jobs\Tasks\GarbageCollectTask;
 
 /*
  * Configuration for the job component.

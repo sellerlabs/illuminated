@@ -16,7 +16,7 @@ public function getShowEmail(StyleInliner $inliner, Mailer $mailer)
         view('mail.signup.verification'),
         'ink',
         function (Message $message) {
-            $message->to('ed+contact@chromabits.com', 'Ed')
+            $message->to('ed+contact@roundsphere.com', 'Ed')
                 ->subject('Welcome!');
 
             $message->from('no-reply@myapp.com', 'MyApp Account');
