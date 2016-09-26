@@ -12,6 +12,7 @@
 namespace SellerLabs\Illuminated\Testing;
 
 use Illuminate\Console\Application as ConsoleApplication;
+use Illuminate\Console\Events\ArtisanStarting;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -123,7 +124,7 @@ abstract class ServiceProviderTestCase extends TestCase
 
         /** @var Dispatcher $events */
         $events = $app['events'];
-        $events->fire('artisan.start', [
+        $events->fire(new ArtisanStarting($artisan), [
             'artisan' => $artisan,
         ]);
 

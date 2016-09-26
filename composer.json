@@ -1,23 +1,8 @@
 {
-  "name": "sellerlabs/illuminated",
-  "description": "Library of Laravel 5 utilities.",
-  "license": "MIT",
-  "require": {
-    "illuminate/auth": "^5.0",
-    "illuminate/support": "^5.0",
-    "illuminate/session": "^5.0",
-    "illuminate/contracts": "^5.0",
-    "illuminate/view": "^5.0",
-    "illuminate/database": "^5.0",
-    "tijsverkoyen/css-to-inline-styles": "~1.5",
-    "sellerlabs/nucleus": "~0.5.0",
-    "league/commonmark": "^0.12",
-    "vlucas/phpdotenv": "~1.0"
-  },
   "authors": [
     {
-      "name": "Eduardo Trujillo",
-      "email": "ed@roundsphere.com"
+      "email": "ed@sellerlabs.com",
+      "name": "Eduardo Trujillo"
     }
   ],
   "autoload": {
@@ -31,12 +16,27 @@
       "Tests\\SellerLabs\\Support\\": "tests/SellerLabs/Support"
     }
   },
+  "description": "Library of Laravel 5 utilities.",
+  "license": "MIT",
   "minimum-stability": "stable",
+  "name": "sellerlabs/illuminated",
+  "require": {
+    "illuminate/auth": "^5.2",
+    "illuminate/contracts": "^5.2",
+    "illuminate/database": "^5.2",
+    "illuminate/session": "^5.2",
+    "illuminate/support": "^5.2",
+    "illuminate/view": "^5.2",
+    "league/commonmark": "^0.12",
+    "sellerlabs/nucleus": "~0.5.0",
+    "tijsverkoyen/css-to-inline-styles": "~1.5",
+    "vlucas/phpdotenv": "~2.0"
+  },
   "require-dev": {
-    "laravel/framework": "^5.0",
-    "phpunit/phpunit": "~4.6@dev",
-    "mockery/mockery": "0.9.*@dev",
     "doctrine/dbal": "~2.3",
+    "laravel/framework": "^5.0",
+    "mockery/mockery": "0.9.*@dev",
+    "phpunit/phpunit": "~4.6@dev",
     "sellerlabs/php-standard": "~0.1.10"
   }
 }
