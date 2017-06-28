@@ -11,7 +11,7 @@
 
 namespace SellerLabs\Illuminated\Bootstrap;
 
-use Dotenv;
+use Dotenv\Dotenv;
 use Illuminate\Contracts\Foundation\Application;
 use InvalidArgumentException;
 use SellerLabs\Illuminated\Bootstrap\Interfaces\BootstrapperInterface;
@@ -35,16 +35,19 @@ class EnvironmentBootstrapper implements BootstrapperInterface
     {
         // Attempt to load the default .env
         try {
-            Dotenv::load($app->environmentPath(), $app->environmentFile());
+
+            $dotenv = new DotEnv($app->environmentPath(), $app->environmentFile());
+            $dotenv->load();
         } catch (InvalidArgumentException $e) {
             //
         }
 
         // Attempt to load the environment-specific .env
         try {
-            Dotenv::load($app->environmentPath(), vsprintf('.%s.env', [
+            $dotenv = new DotEnv($app->environmentPath(), vsprintf('.%s.env', [
                 env('APP_ENV', static::DEFAULT_ENVIRONMENT),
             ]));
+            $dotenv->load();
         } catch (InvalidArgumentException $e) {
             //
         }
