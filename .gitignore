@@ -1,0 +1,15 @@
+### JetBrains template
+*.iml
+.idea/
+*.ipr
+*.iws
+out/
+atlassian-ide-plugin.xml
+
+### Composer template
+composer.phar
+vendor/
+
+### Laravel-specific
+storage/
+bootstrap/cache/

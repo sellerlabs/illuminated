@@ -1,0 +1,42 @@
+{
+  "authors": [
+    {
+      "email": "ed@sellerlabs.com",
+      "name": "Eduardo Trujillo"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "SellerLabs\\Illuminated\\": "src/SellerLabs/Illuminated"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\SellerLabs\\Illuminated\\": "tests/SellerLabs/Illuminated",
+      "Tests\\SellerLabs\\Support\\": "tests/SellerLabs/Support"
+    }
+  },
+  "description": "Library of Laravel 5 utilities.",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "name": "sellerlabs/illuminated",
+  "require": {
+    "illuminate/auth": "^5.2",
+    "illuminate/contracts": "^5.2",
+    "illuminate/database": "^5.2",
+    "illuminate/session": "^5.2",
+    "illuminate/support": "^5.2",
+    "illuminate/view": "^5.2",
+    "league/commonmark": "^0.12",
+    "sellerlabs/nucleus": "~0.5.0",
+    "tijsverkoyen/css-to-inline-styles": "~1.5",
+    "vlucas/phpdotenv": "~2.0"
+  },
+  "require-dev": {
+    "doctrine/dbal": "~2.3",
+    "laravel/framework": "^5.0",
+    "mockery/mockery": "0.9.*@dev",
+    "phpunit/phpunit": "~4.6@dev",
+    "sellerlabs/php-standard": "~0.1.10"
+  }
+}
