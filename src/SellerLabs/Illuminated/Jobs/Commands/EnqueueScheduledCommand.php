@@ -12,7 +12,6 @@
 namespace SellerLabs\Illuminated\Jobs\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Config\Repository;
 use SellerLabs\Illuminated\Jobs\Interfaces\JobSchedulerInterface;
 use SellerLabs\Illuminated\Jobs\Job;
@@ -27,7 +26,7 @@ use Symfony\Component\Console\Input\InputOption;
  * @author Eduardo Trujillo <ed@roundsphere.com>
  * @package SellerLabs\Illuminated\Jobs\Commands
  */
-class EnqueueScheduledCommand extends Command implements SelfHandling
+class EnqueueScheduledCommand extends Command
 {
     /**
      * Name of the command.
