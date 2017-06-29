@@ -12,7 +12,6 @@
 namespace SellerLabs\Illuminated\Jobs\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
@@ -21,7 +20,7 @@ use Symfony\Component\Console\Input\InputOption;
  * @author Eduardo Trujillo <ed@roundsphere.com>
  * @package SellerLabs\Illuminated\Jobs\Commands
  */
-class EnqueueDaemonCommand extends Command implements SelfHandling
+class EnqueueDaemonCommand extends Command
 {
     /**
      * Name of the command.

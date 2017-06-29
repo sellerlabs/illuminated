@@ -35,7 +35,6 @@ class EnvironmentBootstrapper implements BootstrapperInterface
     {
         // Attempt to load the default .env
         try {
-
             $dotenv = new DotEnv($app->environmentPath(), $app->environmentFile());
             $dotenv->load();
         } catch (InvalidArgumentException $e) {

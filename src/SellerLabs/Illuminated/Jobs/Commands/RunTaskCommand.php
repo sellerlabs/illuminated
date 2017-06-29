@@ -13,7 +13,6 @@ namespace SellerLabs\Illuminated\Jobs\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Queue\Jobs\Job as LaravelJob;
@@ -29,7 +28,7 @@ use SellerLabs\Nucleus\Meditation\Spec;
  * @author Eduardo Trujillo <ed@roundsphere.com>
  * @package SellerLabs\Illuminated\Jobs\Commands
  */
-class RunTaskCommand extends Command implements SelfHandling, ShouldQueue
+class RunTaskCommand extends Command implements ShouldQueue
 {
     /**
      * Implementation of the job repository.
