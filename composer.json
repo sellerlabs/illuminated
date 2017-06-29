@@ -36,7 +36,6 @@
     "doctrine/dbal": "~2.3",
     "laravel/framework": "^5.3",
     "mockery/mockery": "0.9.*@dev",
-    "phpunit/phpunit": "~4.6@dev",
-    "sellerlabs/php-standard": "~0.1.10"
+    "phpunit/phpunit": "~4.6@dev"
   }
 }
