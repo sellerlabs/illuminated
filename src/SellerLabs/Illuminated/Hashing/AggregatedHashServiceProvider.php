@@ -29,9 +29,10 @@ class AggregatedHashServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(['hash', Hasher::class], function () {
-            return new AggregatedHasher();
-        });
+        $hasher = new AggregatedHasher();
+
+        $this->app->singleton('hash', $hasher);
+        $this->app->singleton(Hasher::class, $hasher);
     }
 
     /**
