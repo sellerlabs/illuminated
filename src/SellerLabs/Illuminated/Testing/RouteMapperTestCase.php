@@ -71,7 +71,7 @@ abstract class RouteMapperTestCase extends TestCase
 
         /** @var Route $route */
         foreach ($routes as $route) {
-            $name = $route->getPath();
+            $name = $route->uri();
 
             // Check that it has a controller
             if (!array_key_exists('controller', $route->getAction())) {
